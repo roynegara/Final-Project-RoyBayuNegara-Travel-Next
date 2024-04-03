@@ -17,7 +17,7 @@ export const registerUser = async (userData, token) => {
 
 export const loginUser = async (userData) => {
     try {
-        return await usePost('/authentication/login', userData)
+        return await usePost('/api/v1/login', userData)
     } catch (error) {
         throw new Error(error.message)
     }
@@ -25,7 +25,7 @@ export const loginUser = async (userData) => {
 
 export const logoutUser = async (token) => {
     try {
-        return await usePost('/authentication/logout', {}, token) 
+        return await usePost('/api/v1/logout', {}, token) 
     } catch (error) {
         throw new Error(error.message)
     }

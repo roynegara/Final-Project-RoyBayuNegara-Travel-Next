@@ -12,6 +12,40 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
+.navbar {
+  position: fixed;
+  justify-content: space-between;
+  display: flex;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.logo a {
+  text-decoration: none;
+  position: relative;
+  font-size: 24px;
+  color: #ededed;
+  font-weight: 600;
+}
+
+.navbar-toggle {
+  display: none;
+}
+
+.navbar-nav {
+  display: flex;
+}
+
+.navbar-nav a {
+  text-decoration: none;
+  color: #ededed;
+  font-size: 18px;
+  font-weight: 500;
+  margin-left: 35px;
+}
+
 /* @tailwind base;
 @tailwind components;
 @tailwind utilities;
