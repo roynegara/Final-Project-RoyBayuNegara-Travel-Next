@@ -1,12 +1,14 @@
 import { updateUserProfile } from "@/api/user";
+
 import React, { useState } from "react";
 
 const UpdateProfilePage = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    profilPictureUrl: "",
-    phoneNumber: "",
+      profilPictureUrl: "",
+      phoneNumber: "",
+    
   });
 
   const [showNotification, setShowNotification] = useState("");
@@ -23,7 +25,7 @@ const UpdateProfilePage = () => {
     try {
       const res = await updateUserProfile(formData);
       console.log(res.data);
-      setShowNotification("Successfully updated");
+      setShowNotification(data?.message);
     } catch (error) {
       console.error(error);
       setShowNotification(error?.message);
@@ -60,4 +62,4 @@ const UpdateProfilePage = () => {
   );
 };
 
-export default UpdateProfilePage;
+export default UpdateProfilePage
