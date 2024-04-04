@@ -14,7 +14,7 @@ export default function Navbar() {
     return (
         <nav className="navbar">
         <div className="logo">
-          <a href="/">Project NextJs Roy BN.</a>
+          <a href="/">Luxury Travel</a>
         </div>
         <div className={`navbar-nav ${isOpen ? "active" : ""}`}>
           <a href="/home" className={router.pathname === "/" ? "active" : ""}>Home</a>
