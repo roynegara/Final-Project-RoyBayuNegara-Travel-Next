@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import Logout from "@/pages/authentication/logout";
+// import Logout from "@/pages/authentication/logout";
 
 export default function Navbar() {
   const router = useRouter();
@@ -26,7 +26,7 @@ export default function Navbar() {
       <button className="navbar-toggle" onClick={toggleMenu}>
         <span className="toggle-icon">&#9776;</span>
       </button>
-      <Logout />
+      {/* <Logout /> */}
     </nav>
   );
 }
