@@ -29,7 +29,7 @@ export default function Navbar() {
         <span className="toggle-icon">&#9776;</span>
       </button>
       {/* <Logout /> */}
-      {/* <Logout /> */}
+      
     </nav>
   );
 }

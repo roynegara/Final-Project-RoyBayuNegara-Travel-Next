@@ -11,9 +11,12 @@ const Logout = () => {
     const handleLogout = () => {
         localStorage.removeItem("access_token");
         router.push("/authentication/login");
+        if (localStorage) {
+            localStorage.clear();
+        }
     }
     return (
-        <div className="loginout">{token ? <a onClick={handleLogout}> Logout </a> : <Link to="/login"> Login </Link>}</div>
+        <div>{localStorage ? <a onClick={handleLogout}> Logout </a> : <Link to="/login"> Login </Link>}</div>
     )
 }
 
