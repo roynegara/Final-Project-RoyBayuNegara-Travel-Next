@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { registerUser } from "@/api/authentication";
-import TravelLayout from "@/layout/TravelLayout";
+
 
 const Register = () => {
   const router = useRouter();
@@ -24,25 +24,26 @@ const Register = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await registerUser(formData);
-      console.log(res.data);
-      //   router.push("/authentication/login");
-      setShowNotification("Successfully registered");
-      setTimeout(() => {
-        router.push("/authentication/login");
-      }, 3000);
-    } catch (eror) {
-      console.error(eror);
+ 
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      try {
+        const res = await registerUser(formData);
+        console.log(res.data);
+        //   router.push("/authentication/login");
+         setShowNotification("Status : " + res?.message + " Successfully");
+        setTimeout(() => {
+          router.push("/authentication/login");
+        }, 3000);
+      } catch (eror) {
+        console.error(eror);
 
-      setShowNotification(eror?.message);
-    }
-  };
+        setShowNotification("Status : " + eror?.message);
+      }
+    };
 
   return (
-    <TravelLayout>
+    
       <div>
         <h1>Register</h1>
         <form onSubmit={handleSubmit}>
@@ -79,7 +80,7 @@ const Register = () => {
           <button type="submit">Register</button>
         </form>
       </div>
-    </TravelLayout>
+    
   );
 };
 

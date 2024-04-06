@@ -25,10 +25,10 @@ const UpdateProfilePage = () => {
     try {
       const res = await updateUserProfile(formData);
       console.log(res.data);
-      setShowNotification(data?.message);
+      setShowNotification("Status : " + data?.message);
     } catch (error) {
       console.error(error);
-      setShowNotification(error?.message);
+      setShowNotification("Status : " + error?.message);
     }
   };
 
