@@ -39,12 +39,17 @@ function ProfilePage() {
             {profileData ? (
                 <div>
                     <h1>Profil Pengguna</h1>
-                    <p>Nama: {profileData.name}</p>
-                    <p>Email: {profileData.email}</p>
+                    <img src={profileData?.data?.profilPictureUrl} alt="Profile Picture" />
+                    <p>ID: {profileData?.data?.id}</p>
+                    <p>Nama: {profileData?.data?.name}</p>
+                    <p>Email: {profileData?.data?.email}</p>
+                    <p>Role: {profileData?.data?.role}</p>
+                    <p>phoneNumber: {profileData?.data?.phoneNumber}</p>
                     {/* Tampilkan informasi profil pengguna lainnya sesuai kebutuhan */}
                 </div>
             ) : (
-                <p>Loading...</p>
+                    <p>Login First</p>
+                // <p>Loading...</p>
             )}
         </div>
     );
