@@ -46,7 +46,7 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div className="login">
       <h1>Login</h1>
       {notif &&  <p style={{ color : notif === "Status : Authentication successful" ? "green" : "red" }}>{notif}</p>}
       

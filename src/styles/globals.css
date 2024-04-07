@@ -54,8 +54,17 @@ body {
   padding : 30px;
   border-radius: 15px;
   backdrop-filter: blur(15px);
+  margin: 100px auto;  
+}
+
+.login {
+  background: yellowgreen;
+  width : 420px;
+  border: 2px solid rgba(255,255,255,0.5);
+  padding : 30px;
+  border-radius: 15px;
+  backdrop-filter: blur(15px);
   margin: 100px auto;
-  
 }
 /* Register End */
 
