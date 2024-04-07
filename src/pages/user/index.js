@@ -83,9 +83,7 @@ export default function Index() {
 
   const handleUserDetail = () => {
     router.push(`/user/profile`);
-      };
-    
-    
+  };
 
   const handleLogout = () => {
     localStorage.removeItem("access_token");
@@ -107,7 +105,17 @@ export default function Index() {
             {/* <button onClick={() => router.push(`/user/${user.id}`)}>View Profile</button> */}
             <button onClick={handleLogout}>Logout</button>
             <button onClick={() => router.push("/user/updateProfile")}>Update Profile</button>
-            <button onClick={() => router.push("/user/updateUserRole")}>Update User Role</button>
+            <div>
+              <select >
+                <option value="">Pilih peran pengguna</option>
+                <option value="admin">Admin</option>
+                <option value="user">User</option>
+              </select>
+              <button id="updateButton" >
+                Update User Role
+              </button>
+            </div>
+
             {/* <div>{token ? <button onClick={handleLogout}> Logout </button> : <a href="/authentication/login">Login</a>}</div> */}
           </div>
         ))
