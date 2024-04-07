@@ -62,14 +62,14 @@ const Register = () => {
       })
       .then((res) => {
         console.log("response", res);
-        setNotif(res?.data?.message);
+        setNotif('Status : ', res?.data?.message);
         setTimeout(() => {
           router.push("/authentication/login");
         }, 1500);
       })
       .catch((err) => {
         console.log("error", err);
-        setNotif(err?.response?.data?.error);
+        setNotif( 'Status : ', err?.response?.data?.error);
       });
   };
 
