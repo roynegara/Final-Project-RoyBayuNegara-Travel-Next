@@ -62,27 +62,33 @@ const Register = () => {
       })
       .then((res) => {
         console.log("response", res);
-        setNotif('Status : ', res?.data?.message);
+        setNotif("Status : " + res?.data?.message);
         setTimeout(() => {
-          router.push("/authentication/login");
+          router.push("/login");
         }, 1500);
       })
       .catch((err) => {
-        console.log("error", err);
-        setNotif( 'Status : ', err?.response?.data?.error);
+        console.log("error", err.response);
+        setNotif("Status : " + err?.response?.data?.errors?.[0].message);
       });
   };
 
   return (
     <div className="register">
       <h1>Register</h1>
-      {notif && <p style={{ color: "red" }}>{notif}</p>}
+      {notif &&  <p style={{ color : notif === "Status : User Created" ? "green" : "red" }}>{notif}</p>}
 
       <input type="text" name="name" value={name} onChange={handleNameChange} placeholder="Name" />
       <input type="email" name="email" value={email} onChange={handleEmailChange} placeholder="Email" />
       <input type="password" name="password" value={password} onChange={handlePasswordChange} placeholder="Password" />
-      <input type="password" name="passwordRepeat" value={passwordRepeat} onChange={handlePasswordRepeatChange} placeholder="Password Repeat" />
-      
+      <input
+        type="password"
+        name="passwordRepeat"
+        value={passwordRepeat}
+        onChange={handlePasswordRepeatChange}
+        placeholder="Password Repeat"
+      />
+
       <div>
         <label>Choose Role : </label>
         <select name="role" value={role} onChange={handleRoleChange}>
@@ -91,15 +97,22 @@ const Register = () => {
         </select>
       </div>
 
-      <input type="text" name="phoneNumber" value={phoneNumber} onChange={handlePhoneNumberChange} placeholder="Phone Number" />
-      
+      <input
+        type="text"
+        name="phoneNumber"
+        value={phoneNumber}
+        onChange={handlePhoneNumberChange}
+        placeholder="Phone Number"
+      />
+
       <div className="btn-reg">
         <button onClick={handleRegister} disabled={loading ? true : false}>
-        {loading ? "Loading..." : "Register"}
+          {loading ? "Loading..." : "Register"}
         </button>
-        <p>Already have an account? <a href="/authentication/login">Login</a></p>
+        <p>
+          Already have an account? <a href="/authentication/login">Login</a>
+        </p>
       </div>
-      
     </div>
   );
 };
