@@ -7,6 +7,7 @@ const Login = () => {
   const [notif, setNotif] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleEmailChange = (e) => {
     console.log("email", e.target.value);
@@ -48,11 +49,16 @@ const Login = () => {
   return (
     <div className="login">
       <h1>Login</h1>
-      {notif &&  <p style={{ color : notif === "Status : Authentication successful" ? "green" : "red" }}>{notif}</p>}
-      
+      {notif && <p style={{ color: notif === "Status : Authentication successful" ? "green" : "red" }}>{notif}</p>}
+
       <input type="text" name="email" placeholder="Email" value={email} onChange={handleEmailChange} />
       <input type="password" name="password" placeholder="Password" value={password} onChange={handlePasswordChange} />
-      <button onClick={handleLogin}>Login</button>
+      <button onClick={handleLogin} disabled={email === "" || password === "" || loading ? true : false}>
+        {loading ? "Loading..." : "Login"}
+      </button>
+      <p>
+        Not have an account? <a href="/register">Register</a>
+      </p>
     </div>
   );
 };

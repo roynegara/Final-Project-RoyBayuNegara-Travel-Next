@@ -76,7 +76,7 @@ const Register = () => {
   return (
     <div className="register">
       <h1>Register</h1>
-      {notif &&  <p style={{ color : notif === "Status : User Created" ? "green" : "red" }}>{notif}</p>}
+      {notif && <p style={{ color: notif === "Status : User Created" ? "green" : "red" }}>{notif}</p>}
 
       <input type="text" name="name" value={name} onChange={handleNameChange} placeholder="Name" />
       <input type="email" name="email" value={email} onChange={handleEmailChange} placeholder="Email" />
@@ -110,7 +110,7 @@ const Register = () => {
           {loading ? "Loading..." : "Register"}
         </button>
         <p>
-          Already have an account? <a href="/authentication/login">Login</a>
+          Already have an account? <a href="/login">Login</a>
         </p>
       </div>
     </div>
