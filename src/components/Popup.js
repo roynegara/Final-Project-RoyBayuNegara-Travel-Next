@@ -2,13 +2,12 @@ import { updateUserProfile } from "@/api/user";
 
 import React, { useState } from "react";
 
-const UpdateProfilePage = () => {
+const UpdateProfilePage = (props) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-      profilPictureUrl: "",
-      phoneNumber: "",
-    
+    profilPictureUrl: "",
+    phoneNumber: "",
   });
 
   const [showNotification, setShowNotification] = useState("");
@@ -32,8 +31,8 @@ const UpdateProfilePage = () => {
     }
   };
 
-  return (
-    <div>
+  return props.trigger ? (
+    <div className="popup">
       <h1>Update Profile</h1>
       <form onSubmit={handleSubmit}>
         <div>
@@ -57,10 +56,13 @@ const UpdateProfilePage = () => {
 
         {showNotification && <p style={{ color: "red" }}>{showNotification}</p>}
         <button type="submit">Update</button>
-        
+        <button className="btn-close-popup" onClick={() => props.setTrigger(false)}>Cancel</button>
+        {props.children}
       </form>
     </div>
+  ) : (
+    ""
   );
 };
 
-export default UpdateProfilePage
+export default UpdateProfilePage;
