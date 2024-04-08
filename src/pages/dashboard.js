@@ -109,9 +109,9 @@ const Dashboard = () => {
             <p>Role : {user.role}</p>
             <p>Phone Number : {user.phoneNumber}</p>
             <div>
-              <label>Choose Role : </label>
+              <label>Update Role : </label>
               <select name="role" value={role} onChange={(e) => setRole(e.target.value)}>
-                <option value="">-- Pilih Role --</option>
+                <option value="">-- Change Role --</option>
                 <option value={"admin"}>Admin</option>
                 <option value={"user"}>User</option>
               </select>
