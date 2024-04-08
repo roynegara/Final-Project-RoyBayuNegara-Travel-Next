@@ -8,11 +8,28 @@ export default function Home() {
     <div>
       <h1>Hello</h1>
       <button>
-        <a href="/authentication/login">Login</a>
+        <a href="/login">Login</a>
       </button>
       <button>
-        <a href="/authentication/register">Register</a>
+        <a href="/register">Register</a>
       </button>
     </div>
   );
 }
+
+// import React from "react";
+// import ReactDOM from "react-dom/client";
+// import { __next_app__ } from "next/dist/build/templates/app-page";
+// import { App } from "./_app";
+// import { Provider } from "react-redux";
+// import store from "../Redux/store";
+
+
+// const root = ReactDOM.createRoot(document.getElementById("root"));
+// root.render(
+//   <React.StrictMode>
+//     <Provider store={store}>
+//       <App />
+//     </Provider>
+//   </React.StrictMode>
+// );

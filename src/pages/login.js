@@ -36,7 +36,7 @@ const Login = () => {
         const token = res?.data?.token;
         localStorage.setItem("access_token", token);
         setTimeout(() => {
-          router.push("/user");
+          router.push("/dashboard");
         }, 1500);
       })
       .catch((err) => {
