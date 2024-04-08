@@ -6,15 +6,25 @@ const Dashboard = () => {
   const router = useRouter();
   const [users, setUsers] = useState([]);
   const [user, setUser] = useState({});
- 
+const [notif, setNotif] = useState("")
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem("access_token");
+    if (!accessToken) {
+      router.push("/login");
+    } else {
+      getUsers();
+      getLoggedUser();
+    }
+  }, []);
 
   const getUsers = () => {
+    const accessToken = localStorage.getItem("access_token");
     axios
       .get("https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/all-user", {
         headers: {
           apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1pZnRhaGZhcmhhbkBnbWFpbC5jb20iLCJ1c2VySWQiOiI5NWE4MDNjMy1iNTFlLTQ3YTAtOTBkYi0yYzJmM2Y0ODE1YTkiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2Nzk4NDM0NDR9.ETsN6dCiC7isPReiQyHCQxya7wzj05wz5zruiFXLx0k",
+          Authorization: `Bearer ${accessToken}`,
         },
       })
       .then((res) => {
@@ -26,24 +36,15 @@ const Dashboard = () => {
       });
   };
 
-  useEffect(() => {
-    getUsers();
-  }, []);
-
   const getLoggedUser = () => {
     const accessToken = localStorage.getItem("access_token");
-
 
     axios
       .get("https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/user", {
         headers: {
           apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
           Authorization: `Bearer ${accessToken}`,
-            
         },
-        params: {
-          token : accessToken
-        }
       })
       .then((res) => {
         console.log("res", res);
@@ -54,9 +55,13 @@ const Dashboard = () => {
       });
   };
 
-  useEffect(() => {
-    getLoggedUser();
-  }, []);
+  const handleLogout = () => {
+    localStorage.removeItem("access_token");
+    setNotif("Status : Logout Successfully");
+    setTimeout(() => {
+      router.push("/login");
+    }, 1500);
+  };
 
   return (
     <div>
@@ -68,6 +73,8 @@ const Dashboard = () => {
         <p>Email : {user.email}</p>
         <p>Role : {user.role}</p>
         <p>Phone Number : {user.phoneNumber}</p>
+        {notif &&  <p style={{ color : notif === "Status : Logout Successfully" ? "green" : "red" }}>{notif}</p>}
+        <button onClick={handleLogout}>Logout</button>
       </div>
       <div>
         {users.map((user, index) => (
