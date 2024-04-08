@@ -6,7 +6,8 @@ const Dashboard = () => {
   const router = useRouter();
   const [users, setUsers] = useState([]);
   const [user, setUser] = useState({});
-const [notif, setNotif] = useState("")
+  const [notif, setNotif] = useState("");
+  const [role, setRole] = useState("");
 
   useEffect(() => {
     const accessToken = localStorage.getItem("access_token");
@@ -63,6 +64,28 @@ const [notif, setNotif] = useState("")
     }, 1500);
   };
 
+  const handleChangeUserRole = (id, role) => {
+    const accessToken = localStorage.getItem("access_token");
+    axios
+      .post(
+        `https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/update-user-role/${id}`,
+        { role },
+        {
+          headers: {
+            apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log("res", res);
+        getUsers();
+      })
+      .catch((err) => {
+        console.log("err", err);
+      });
+  };
+
   return (
     <div>
       <h1>Dashboard</h1>
@@ -73,7 +96,7 @@ const [notif, setNotif] = useState("")
         <p>Email : {user.email}</p>
         <p>Role : {user.role}</p>
         <p>Phone Number : {user.phoneNumber}</p>
-        {notif &&  <p style={{ color : notif === "Status : Logout Successfully" ? "green" : "red" }}>{notif}</p>}
+        {notif && <p style={{ color: notif === "Status : Logout Successfully" ? "green" : "red" }}>{notif}</p>}
         <button onClick={handleLogout}>Logout</button>
       </div>
       <div>
@@ -85,6 +108,15 @@ const [notif, setNotif] = useState("")
             <p>Email : {user.email}</p>
             <p>Role : {user.role}</p>
             <p>Phone Number : {user.phoneNumber}</p>
+            <div>
+              <label>Choose Role : </label>
+              <select name="role" value={role} onChange={(e) => setRole(e.target.value)}>
+                <option value="">-- Pilih Role --</option>
+                <option value={"admin"}>Admin</option>
+                <option value={"user"}>User</option>
+              </select>
+              <button onClick={() => handleChangeUserRole(user.id, role)}>Change Role</button>
+            </div>
           </div>
         ))}
       </div>

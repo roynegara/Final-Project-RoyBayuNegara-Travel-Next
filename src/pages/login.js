@@ -53,9 +53,12 @@ const Login = () => {
 
       <input type="text" name="email" placeholder="Email" value={email} onChange={handleEmailChange} />
       <input type="password" name="password" placeholder="Password" value={password} onChange={handlePasswordChange} />
-      <button onClick={handleLogin} disabled={email === "" || password === "" || loading ? true : false}>
+      <button onClick={handleLogin} disabled={loading ? true : false}>
         {loading ? "Loading..." : "Login"}
       </button>
+      {/* <button onClick={handleLogin} disabled={email === "" || password === "" || loading ? true : false}>
+        {loading ? "Loading..." : "Login"}
+      </button> */}
       <p>
         Not have an account? <a href="/register">Register</a>
       </p>
