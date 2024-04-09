@@ -37,14 +37,34 @@ const UploadImage = (props) => {
       console.log("err", err);
       setNotif(err.response.data.message);
     });
-};
+  };
+  
+const updateProfilImage = (imageUrl) => {
+  const accessToken = localStorage.getItem("access_token");
+
+  axios.post("https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/update-profile", 
+    {image_url: imageUrl},
+    { 
+      headers: {
+        apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  ).then((res) => {
+    console.log('Avatar updated', res);
+  }).catch((err) => {
+    console.log('Failed updated avatar', err);
+  })
+}
+
+
   return props.trigger ? (
     <div className="popupImg">
       <h1>Upload Image</h1>
       <input type="file" onChange={handleFileChange} />
           
       {notif && <p style={{ color: notif === "Upload image success" ? "green" : "red" }}>{notif}</p>}
-      <button onClick={handleUpload}>Upload</button>
+      <button onClick={handleUpload} >Upload</button>
       <button className="btn-close-popupImg" onClick={() => props.setTrigger(false)}> X </button>
       {props.children}
     </div>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
-import Popup from "@/components/Popup";
+import PopupProfil from "@/components/PopupProfil";
 import PopupImg from "@/components/PopupImg";
 
 const Dashboard = () => {
@@ -103,7 +103,7 @@ const Dashboard = () => {
     <div>
       <h1>Dashboard</h1>
       <div className="profile">
-        <img className="image-profile" src={user.profilePictureUrl} alt={user.name} />
+        <img  className="image-profile" src={user.profilePictureUrl} alt={user.name} />
 
         <div>
           <main>
@@ -134,9 +134,9 @@ const Dashboard = () => {
           <main>
             <h1>Edit Your Profile</h1>
             <button onClick={() => setButtonPopup(true)}> Popup Edit Here</button>
-            <Popup trigger={buttonPopup} setTrigger={setButtonPopup}>
-              My Profile
-            </Popup>
+            <PopupProfil setUser={setUser} trigger={buttonPopup} setTrigger={setButtonPopup}>
+              
+            </PopupProfil>
 
             {/* <Popup trigger={timedPopup} setTrigger={setTimedPopup}>
               My Timed Profile
