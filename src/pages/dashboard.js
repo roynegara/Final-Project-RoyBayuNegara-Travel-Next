@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 import Popup from "@/components/Popup";
+import PopupImg from "@/components/PopupImg";
 
 const Dashboard = () => {
   const router = useRouter();
@@ -11,6 +12,7 @@ const Dashboard = () => {
   const [role, setRole] = useState("");
 
   const [buttonPopup, setButtonPopup] = useState(false);
+  const [buttonPopupImg, setButtonPopupImg] = useState(false);
 
   // const [timedPopup, setTimedPopup] = useState(false);
 
@@ -102,6 +104,24 @@ const Dashboard = () => {
       <h1>Dashboard</h1>
       <div className="profile">
         <img className="image-profile" src={user.profilePictureUrl} alt={user.name} />
+
+        <div>
+          <main>
+            <h1>Edit Avatar</h1>
+          {/* <img
+            className="image-profile"
+            src={user.profilePictureUrl}
+            alt={user.name}
+            onClick={() => setButtonPopupImg(true)}
+          /> */}
+            <button onClick={() => setButtonPopupImg(true)}>Edit Avatar</button>
+          <PopupImg trigger={buttonPopupImg} setTrigger={setButtonPopupImg}>
+            My Profile
+            </PopupImg>
+          </main>
+          
+        </div>
+
         <p>User Id : {user.id}</p>
         <p>Name : {user.name}</p>
         <p>Email : {user.email}</p>
