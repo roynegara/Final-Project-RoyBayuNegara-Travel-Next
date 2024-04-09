@@ -56,7 +56,7 @@ const UpdateProfilePage = (props) => {
 
         {showNotification && <p style={{ color: "red" }}>{showNotification}</p>}
         <button type="submit">Update</button>
-        <button className="btn-close-popup" onClick={() => props.setTrigger(false)}>Cancel</button>
+        <button className="btn-close-popup" onClick={() => props.setTrigger(false)}> X </button>
         {props.children}
       </form>
     </div>
