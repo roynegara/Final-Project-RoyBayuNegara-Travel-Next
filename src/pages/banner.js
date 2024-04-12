@@ -22,21 +22,21 @@ const Banner = () => {
       });
   };
 
-    useEffect(() => {
-        getBanner();
-    }, [])
-    
+  useEffect(() => {
+    getBanner();
+  }, []);
+
   return (
     <div>
-          <h1>Banner</h1>
-          <div>
-              {banners.map((banner,index) => (
-                  <div key={index}>
-                      <img src={banner.imageUrl} alt={banner.name} />
-                      <p>{banner.name}</p>
-                 </div>
-              ))}
+      <h1>Banner</h1>
+      <div>
+        {banners.map((banner, index) => (
+          <div className="banners" key={index}>
+            <img src={banner.imageUrl} alt={banner.name} />
+            <p>{banner.name}</p>
           </div>
+        ))}
+      </div>
     </div>
   );
 };
