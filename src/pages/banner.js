@@ -4,7 +4,7 @@ import axios from "axios";
 const Banner = () => {
   const [banners, setBanners] = useState([]);
 
-  const getBanner = () => {
+  const getBanners = () => {
     const accessToken = localStorage.getItem("access_token");
     axios
       .get("https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/banners", {
@@ -23,7 +23,7 @@ const Banner = () => {
   };
 
   useEffect(() => {
-    getBanner();
+    getBanners();
   }, []);
 
   return (
