@@ -9,7 +9,7 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordRepeat, setPasswordRepeat] = useState("");
-  const [role, setRole] = useState("");
+  const [role, setRole] = useState("admin");
   const [phoneNumber, setPhoneNumber] = useState("");
 
   const [loading, setLoading] = useState(false);
@@ -69,7 +69,7 @@ const Register = () => {
       })
       .catch((err) => {
         console.log("error", err.response);
-        setNotif("Status : " + err?.response?.data?.errors?.[0].message);
+        setNotif("Status : " + err?.response?.data?.message);
       });
   };
 
