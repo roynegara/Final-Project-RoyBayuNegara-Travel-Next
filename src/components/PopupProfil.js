@@ -171,6 +171,7 @@ const UpdateProfil = (props) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [profilePictureUrl, setProfilePictureUrl] = useState("");
 
   const [notif, setNotif] = useState("");
 
@@ -189,11 +190,17 @@ const UpdateProfil = (props) => {
     console.log("phoneNumber", e.target.value);
   };
 
+  const handleProfilePictureUrlChange = (e) => {
+    setProfilePictureUrl(e.target.value);
+    console.log("profilePictureUrl", e.target.value);
+  }
+
   const handleSubmit = () => {
     const payload = {
       name: name,
       email: email,
       phoneNumber: phoneNumber,
+      profilePictureUrl: profilePictureUrl,
     };
 
     const accessToken = localStorage.getItem("access_token");
@@ -230,6 +237,10 @@ const UpdateProfil = (props) => {
         <div>
           <label>Phone Number:</label>
           <input type="text" name="phoneNumber" value={phoneNumber} onChange={handlePhoneNumberChange} />
+        </div>
+        <div>
+          <label>Profile Picture Url:</label>
+          <input type="text" name="profilePictureUrl" value={profilePictureUrl} onChange={handleProfilePictureUrlChange} />
         </div>
         <div>
           <p>{notif}</p>

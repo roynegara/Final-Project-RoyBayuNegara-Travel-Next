@@ -1,3 +1,4 @@
+// batas
 import React, { useState } from "react";
 import axios from "axios";
 
@@ -32,10 +33,9 @@ const UploadImage = (props) => {
       .then((res) => {
         console.log("res", res);
         setNotif(res.data.message);
-        if (res.data.success) {
-          // Jika berhasil mengunggah, panggil fungsi untuk memperbarui profil gambar
-          updateProfilImage(res.data.imageUrl);
-        }
+
+        updateProfilImage(res.data.url);
+        setProfilePictureUrl(res?.data?.url);
       })
       .catch((err) => {
         console.log("err", err);
@@ -43,9 +43,9 @@ const UploadImage = (props) => {
       });
   };
 
-  const updateProfilImage = (imageUrl) => {
+  const updateProfilImage = () => {
     const payload = {
-      profilePictureUrl: imageUrl, // Menggunakan imageUrl yang didapatkan dari respons upload
+      imageUrl: profilePictureUrl,
     };
 
     const accessToken = localStorage.getItem("access_token");
@@ -70,7 +70,7 @@ const UploadImage = (props) => {
       <h1>Upload Image</h1>
 
       <input type="file" onChange={handleFileChange} />
-      
+
       {notif && <p style={{ color: notif === "Upload image success" ? "green" : "red" }}>{notif}</p>}
       <button onClick={handleUpload}>Upload</button>
       <button className="btn-close-popupImg" onClick={() => props.setTrigger(false)}>
@@ -86,7 +86,7 @@ const UploadImage = (props) => {
 
 export default UploadImage;
 
-
+//  // batas
 
 // import React, { useState } from "react";
 // import axios from "axios";
@@ -161,7 +161,6 @@ export default UploadImage;
 //       <h1>Upload Image</h1>
 
 //       <input type="file" onChange={handleFileChange} />
-      
 
 //       {notif && <p style={{ color: notif === "Upload image success" ? "green" : "red" }}>{notif}</p>}
 //       <button onClick={handleUpload}>Upload</button>
