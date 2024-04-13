@@ -138,6 +138,26 @@ button {
   width: 300px;
   height: 300px;
 }
+
+.popup-create-banner {
+  width: 420px;
+  background: rgb(5, 5, 150);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  padding: 30px;
+  border-radius: 15px;
+  backdrop-filter: blur(15px);
+
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.btn-close-popup-create-banner{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
 /* Banner End */
 
 /* Promo Start */

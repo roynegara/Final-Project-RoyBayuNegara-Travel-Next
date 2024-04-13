@@ -2,18 +2,20 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import PopupCreateBanner from "@/components/PopupCreateBanner";
 
 const Banner = () => {
-    const [banners, setBanners] = useState([]);
-    const router = useRouter();
+  const [banners, setBanners] = useState([]);
+  const router = useRouter();
 
-    const getBanners = () => {
-        const accessToken = localStorage.getItem("access_token");
-        if (!accessToken) {
-            router.push("/login");
-        }
+  const [buttonPopupCreateBanner, setButtonPopupCreateBanner] = useState(false);
 
-    
+  const getBanners = () => {
+    const accessToken = localStorage.getItem("access_token");
+    if (!accessToken) {
+      router.push("/login");
+    }
+
     axios
       .get("https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/banners", {
         headers: {
@@ -28,12 +30,8 @@ const Banner = () => {
       .catch((err) => {
         console.log("err", err);
       });
-    };
-    
+  };
 
-   
-
-   
   useEffect(() => {
     getBanners();
   }, []);
@@ -41,21 +39,27 @@ const Banner = () => {
   return (
     <div>
       <h1>Banner</h1>
+      <button onClick={() => setButtonPopupCreateBanner(true)}>Create Banner</button>
+      <PopupCreateBanner trigger={buttonPopupCreateBanner} setTrigger={setButtonPopupCreateBanner}></PopupCreateBanner>
+
       <div>
         {banners.map((banner, index) => (
           <div className="banners" key={index}>
-                <img src={banner.imageUrl} alt={banner.name} onError={(e) => { e.target.onerror = null; e.target.src="fallback-mage-url";
-                }}
-                    
-                
-                />
-                
-                <p>{banner.name}</p>
-                <div>
-                <Link href={`/banner/${banner.id}`}>
-                    <button>Detail</button>
-                  </Link>
-                </div>
+            <img
+              src={banner.imageUrl}
+              alt={banner.name}
+              // onError={(e) => {
+              //   e.target.onerror = null;
+              //   e.target.src = "fallback-mage-url";
+              // }}
+            />
+
+            <p>{banner.name}</p>
+            <div>
+              <Link href={`/banner/${banner.id}`}>
+                <button>Detail</button>
+              </Link>
+            </div>
           </div>
         ))}
       </div>
