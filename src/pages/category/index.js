@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Link from "next/link";
 
 const Category = () => {
   const [categories, setCategories] = useState([]);
@@ -34,7 +35,12 @@ const Category = () => {
           <div className="categories" key={index}>
             <img src={category.imageUrl} alt={category.name} />
             <p>{category.id}</p>
-            <p>{category.name}</p>
+                <p>{category.name}</p>
+                <div>
+                  <Link href={`/category/${category.id}`}>
+                    <button>View Details</button>
+                  </Link>
+                </div>
           </div>
         ))}
       </div>
