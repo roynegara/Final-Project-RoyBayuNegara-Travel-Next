@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-
+import PopupUpdateBanner from "@/components/PopupUpdateBanner";
 export async function getServerSideProps(context) {
+
+
+
   const resp = await axios.get(
-    `https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/banner/${context.params.id}`,
+    `https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/update-banner/${context.params.id}`,
     {
       headers: { apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c", keyWord: "Dibimbing API key" },
     }
@@ -11,16 +14,22 @@ export async function getServerSideProps(context) {
   return { props: { banner: resp.data.data } };
 }
 
+
+
 export default function BannerById({ banner }) {
+    const [buttonPopupUpdateBanner, setButtonPopupUpdateBanner] = useState(false);
   return (
     <div className="banner">
       <img src={banner.imageUrl} alt={banner.name} />
-      <h1>This is {banner.name} Banner</h1>
+          <h1>This is {banner.name} Banner</h1>
+          <button onClick={() => PopupUpdateBanner(true)}>Update/Edit </button>
+          <PopupUpdateBanner trigger={buttonPopupUpdateBanner} setTrigger={setButtonPopupUpdateBanner}>Edit</PopupUpdateBanner>
       {/* <h3>{banner.createdAt}</h3>
             <h3>{banner.updatedAt}</h3> */}
     </div>
   );
 }
+
 
 // batas
 // import React, { useEffect, useState } from 'react';

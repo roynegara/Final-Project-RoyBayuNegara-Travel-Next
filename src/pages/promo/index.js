@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Link from "next/link";
 
 const Promo = () => {
   const [promos, setPromos] = useState([]);
@@ -36,6 +37,12 @@ const Promo = () => {
             <p>{promo.id}</p>
                 <p>{promo.title}</p>
                 <p>{promo.description}</p>
+
+                <div>
+                    <Link href={`/promo/${promo.id}`}><button>Detail</button></Link>
+                    
+                </div>
+
           </div>
         ))}
       </div>
