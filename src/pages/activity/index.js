@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Link from "next/link";
 
 const Activity = () => {
   const [activities, setActivities] = useState([]);
@@ -39,6 +40,11 @@ const Activity = () => {
             {/* <img src={activity.category.imageUrl} alt={activity.category.name} />
             <p>{activity.category.id}</p>
             <p>{activity.category.name}</p> */}
+                <div>
+                  <Link href={`/activity/${activity.id}`}>
+                    <button>Detail</button>
+                  </Link>
+                </div>
           </div>
         ))}
       </div>
