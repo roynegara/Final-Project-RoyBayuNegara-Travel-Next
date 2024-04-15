@@ -15,6 +15,7 @@ const [loading, setLoading] = useState();
       },
     });
         setLoading(false);
+        
   };
 
   return { del, loading };

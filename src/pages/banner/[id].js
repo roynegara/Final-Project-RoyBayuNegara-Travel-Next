@@ -1,4 +1,4 @@
-// import React, { useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 // import PopupUpdateBanner from "@/components/PopupUpdateBanner";
 import useDeleteBanner from "@/hooks/useDeleteBanner";
@@ -6,20 +6,22 @@ import { useRouter } from "next/router";
 import FormDeleteBanner from "@/components/FormDeleteBanner";
 
 export async function getServerSideProps(context) {
-    try {
-      const resp = await axios.get(`https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/banner/${context.params.id}`, {
+  try {
+    const resp = await axios.get(
+      `https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/banner/${context.params.id}`,
+      {
         headers: {
           apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
         },
-      });
-  
-      return { props: { banner: resp.data.data } };
-    } catch (error) {
-      console.error("Error fetching banner:", error);
-      return { props: { banner: null } };
-    }
-  }
+      }
+    );
 
+    return { props: { banner: resp.data.data } };
+  } catch (error) {
+    console.error("Error fetching banner:", error);
+    return { props: { banner: null } };
+  }
+}
 
 // export async function getServerSideProps(context) {
 //     const banner = await getBannerById(context.params.id);
@@ -30,10 +32,20 @@ export default function BannerById({ banner }) {
   //   const [buttonPopupUpdateBanner, setButtonPopupUpdateBanner] = useState(false);
   const { del, loading } = useDeleteBanner();
   const router = useRouter();
+  const [notif, setNotif] = useState(null);
 
-  const handleDeleteBanner = async () => {
-    del(`/delete-banner/${banner?.id}`);
-    router.push("/banner");
+  const handleDeleteBanner = () => {
+    del(`/delete-banner/${banner?.id}`)
+        .then((res) => {
+        setNotif('Banner deleted successfully');
+        setTimeout(() => {
+          router.push("/banner");
+        }, 1000);
+      })
+        .catch((err) => {
+          console.log('resDeleteBannerErr', err)
+        setNotif(err?.response?.data?.message);
+      });
   };
 
   return (
@@ -49,6 +61,9 @@ export default function BannerById({ banner }) {
       </PopupUpdateBanner> */}
 
       <div>
+              {/* {notif && <div className={`notif ${notif.type}`}>{notif.message}</div>} */}
+              {/* {notif && <p style={{ color: "red" }}>{notif}</p>} */}
+              {notif && <p style={{ color: notif === "Banner deleted successfully" ? "green" : "red" }}>{notif}</p>}
         <FormDeleteBanner title={`Delete ${banner?.name} ?`} onDelete={handleDeleteBanner} loading={loading} />
       </div>
     </div>
