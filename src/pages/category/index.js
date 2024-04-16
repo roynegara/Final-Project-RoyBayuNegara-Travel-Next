@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
+import PopupCreateCategory from "@/components/PopupCreateCategory";
 
 const Category = () => {
   const [categories, setCategories] = useState([]);
+
+  const [buttonPopupCreateCategory, setButtonPopupCreateCategory] = useState(false);
 
   const getCategories = () => {
     const accessToken = localStorage.getItem("access_token");
@@ -30,6 +33,10 @@ const Category = () => {
   return (
     <div>
       <h1>Category</h1>
+      <button onClick={() => setButtonPopupCreateCategory(true)}>Create Category</button>
+      <PopupCreateCategory trigger={buttonPopupCreateCategory} setTrigger={setButtonPopupCreateCategory}></PopupCreateCategory>
+
+
       <div>
         {categories.map((category, index) => (
           <div className="categories" key={index}>
