@@ -17,9 +17,14 @@ export async function getServerSideProps(context) {
 }
 export default function ActivityById({ activity }) {
   return (
-    <div>
-      <h1>{activity.title}</h1>
-          <img src={  activity.imageUrls?.[0] && activity.imageUrls?.[1] ? activity.imageUrls?.[1] : activity.imageUrls?.[0]} alt={activity.name} />
+    <div className="activity">
+      <div>
+        <h1>{activity.title}</h1>
+        <img
+          src={activity.imageUrls?.[0] && activity.imageUrls?.[1] ? activity.imageUrls?.[1] : activity.imageUrls?.[0]}
+          alt={activity.name}
+        />
+      </div>
 
       {/* {activity.imageUrls.map((url, index) => (
         <img key={index} src={url} alt={`Image ${index.title}`} />

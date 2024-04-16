@@ -220,6 +220,21 @@ button {
 }
 /* Category End */
 
+/* Activity Start */
+.activity img {
+  width: 1500px;
+}
+
+.activities img {
+  width: 300px;
+  height: 300px;
+}
+
+
+
+/* Activity End */
+
+
 /* @tailwind base;
 @tailwind components;
 @tailwind utilities;

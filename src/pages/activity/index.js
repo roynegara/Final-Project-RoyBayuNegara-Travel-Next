@@ -29,12 +29,19 @@ const Activity = () => {
 
   return (
     <div>
-      <h1>Activity</h1>
+      <div>
+        <h1>Activity</h1>
+      </div>
+      
       <div>
         {activities.map((activity, index) => (
-          <div key={index}>
+          <div className="activities" key={index}>
             <h3>{activity.title}</h3>
-            <img src={activity.imageUrls} alt={activity.title} />
+            <img src={  activity.imageUrls?.[0] && activity.imageUrls?.[1] ? activity.imageUrls?.[1] : activity.imageUrls?.[0]} alt={activity.title} />
+            {/* <img src={activity.imageUrls} alt={activity.title} /> */}
+
+
+
             <h3>Activity id : {activity.id}</h3>
             {/* <p>Activity by Category Id : {activity.categoryId}</p> */}
             {/* <img src={activity.category.imageUrl} alt={activity.category.name} />
