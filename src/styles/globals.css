@@ -161,6 +161,10 @@ button {
 /* Banner End */
 
 /* Promo Start */
+.promo img {
+  width: 1500px;
+}
+
 .promos img {
   width: 300px;
   height: 300px;

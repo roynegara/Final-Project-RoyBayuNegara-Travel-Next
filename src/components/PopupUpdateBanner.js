@@ -1,73 +1,82 @@
-import React, { useState } from 'react';
-import axios from 'axios';
 
-function UpdateBanner() {
-  const [banner, setBanner] = useState({
-    id: '', // Kamu perlu mengisi id banner yang akan diupdate
-    name: '', // Nama baru untuk banner
-    imageUrl: '' // URL gambar baru untuk banner
-  });
+
+
+
+// import React, { useState } from 'react';
+// import axios from 'axios';
+
+// function UpdateBanner(props) {
+//   const [banner, setBanner] = useState({
+//     // id: '', // Kamu perlu mengisi id banner yang akan diupdate
+//     name: '', // Nama baru untuk banner
+//     imageUrl: '' // URL gambar baru untuk banner
+//   });
   
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setBanner(prevState => ({
-      ...prevState,
-      [name]: value
-    }));
-  };
+//   const handleChange = (e) => {
+//     const { name, value } = e.target;
+//     setBanner(prevState => ({
+//       ...prevState,
+//       [name]: value
+//     }));
+//   };
 
-  const handleSubmit = async (e) => {
-const accessToken = localStorage.getItem('access_token');
+//   const handleSubmit = async (e) => {
+// const accessToken = localStorage.getItem('access_token');
 
-    e.preventDefault();
-    try {
-      const response = await axios.post(`https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/update-banner/${banner?.id}`, {
-        name: banner.name,
-        imageUrl: banner.imageUrl
-      }, {
-        headers: {
-          apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
-          Authorization: `Bearer ${accessToken}`
-        }
-      });
-      console.log('Update berhasil:', response.data);
-    } catch (error) {
-      console.error('Gagal melakukan update:', error);
-    }
-  };
+//     e.preventDefault();
+//     try {
+//       const response = await axios.post(`https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/update-banner/${banner?.id}`, {
+//         name: banner.name,
+//         imageUrl: banner.imageUrl
+//       }, {
+//         headers: {
+//           apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
+//           Authorization: `Bearer ${accessToken}`
+//         }
+//       });
+//       console.log('Update berhasil:', response.data);
+//     } catch (error) {
+//       console.error('Gagal melakukan update:', error);
+//     }
+//   };
 
-  return (
-    <div>
-      <h2>Update Banner</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="nama">Nama:</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={banner.nama}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="imageUrl">URL Gambar:</label>
-          <input
-            type="text"
-            id="imageUrl"
-            name="imageUrl"
-            value={banner.imageUrl}
-            onChange={handleChange}
-          />
-        </div>
-        <button type="submit">Update</button>
-      </form>
-    </div>
-  );
-}
+//   return props.trigger ? (
+//     <div>
+//       <h2>Update Banner</h2>
+//       <form onSubmit={handleSubmit}>
+//         <div>
+//           <label htmlFor="nama">Nama:</label>
+//           <input
+//             type="text"
+//             id="name"
+//             name="name"
+//             value={banner.nama}
+//             onChange={handleChange}
+//           />
+//         </div>
+//         <div>
+//           <label htmlFor="imageUrl">URL Gambar:</label>
+//           <input
+//             type="text"
+//             id="imageUrl"
+//             name="imageUrl"
+//             value={banner.imageUrl}
+//             onChange={handleChange}
+//           />
+//         </div>
+//         <button type="submit">Update</button>
 
-export default UpdateBanner;
+//         <button className="btn-close-popup-update-promo" onClick={() => props.setTrigger(false)}>
+//         X
+//       </button>
+//       {props.children}
+//       </form>
+//     </div>
+//   ) : ('')
+// }
+
+// export default UpdateBanner;
 
 
 

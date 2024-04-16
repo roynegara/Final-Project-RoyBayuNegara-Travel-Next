@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-// import PopupUpdateBanner from "@/components/PopupUpdateBanner";
+import PopupUpdateBanner from "@/components/PopupUpdateBanner";
 import useDeleteBanner from "@/hooks/useDeleteBanner";
 import { useRouter } from "next/router";
 import FormDeleteBanner from "@/components/FormDeleteBanner";
@@ -29,7 +29,7 @@ export async function getServerSideProps(context) {
 // }
 
 export default function BannerById({ banner }) {
-  //   const [buttonPopupUpdateBanner, setButtonPopupUpdateBanner] = useState(false);
+    // const [buttonPopupUpdateBanner, setButtonPopupUpdateBanner] = useState(false);
   const { del, loading } = useDeleteBanner();
   const router = useRouter();
   const [notif, setNotif] = useState(null);
