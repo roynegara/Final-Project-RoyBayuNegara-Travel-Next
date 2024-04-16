@@ -29,9 +29,9 @@ export default function CategoryById({ category }) {
     del(`/delete-category/${category?.id}`)
       .then((res) => {
         setNotif("Category deleted successfully");
-        setTimeout(() => {
-          router.push("/category");
-        }, 1000);
+        // setTimeout(() => {
+        //   router.push("/category");
+        // }, 1000);
       })
       .catch((err) => {
         console.log("resDeleteCategoryErr", err);
