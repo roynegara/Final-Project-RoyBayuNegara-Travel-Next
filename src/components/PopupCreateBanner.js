@@ -22,7 +22,7 @@ const CreateBanner = (props) => {
     console.log("imageUrl", e.target.value);
   };
 
-  const handleUpload = () => {
+  const handleSubmit = () => {
     // if (!selectFile) {
     //   setNotif("Please Select a File ");
     //   return;
@@ -76,8 +76,8 @@ const CreateBanner = (props) => {
       />
 
       {notif && <p style={{ color: "red" }}>{notif}</p>}
-      <button type="submit" onClick={handleUpload}>
-        Upload
+      <button type="submit" onClick={handleSubmit}>
+        Submit
       </button>
 
       <button className="btn-close-popup-create-banner" onClick={() => props.setTrigger(false)}>

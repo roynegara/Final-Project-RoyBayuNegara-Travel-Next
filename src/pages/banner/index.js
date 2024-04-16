@@ -6,21 +6,21 @@ import PopupCreateBanner from "@/components/PopupCreateBanner";
 
 const Banner = () => {
   const [banners, setBanners] = useState([]);
-  const router = useRouter();
+  // const router = useRouter();
 
   const [buttonPopupCreateBanner, setButtonPopupCreateBanner] = useState(false);
 
   const getBanners = () => {
-    const accessToken = localStorage.getItem("access_token");
-    if (!accessToken) {
-      router.push("/login");
-    }
+    // const accessToken = localStorage.getItem("access_token");
+    // if (!accessToken) {
+    //   router.push("/login");
+    // }
 
     axios
       .get("https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/banners", {
         headers: {
           apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
-          Authorization: `Bearer ${accessToken}`,
+          // Authorization: `Bearer ${accessToken}`,
         },
       })
       .then((res) => {
