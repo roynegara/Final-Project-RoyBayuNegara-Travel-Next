@@ -28,9 +28,9 @@ const handleDeleteActivity = () => {
   del(`/delete-activity/${activity?.id}`)
   .then((res) => {
     setNotif("Activity deleted successfully");
-    setTimeout(() => {
-      router.push("/activity");
-    }, 1000);
+    // setTimeout(() => {
+    //   router.push("/activity");
+    // }, 1000);
   })
   .catch((err) => {
     console.log("resDeleteActivityErr", err);
@@ -38,6 +38,16 @@ const handleDeleteActivity = () => {
   })
 }
 
+  if(!activity) {
+    return (
+      <div>
+        <h1>No Activity or Destination Here</h1>
+        <button onClick={() => router.push("/activity")}>Back to Activity/Destination</button>
+      </div>
+    
+    )
+  }
+  
   return (
     <div className="activity">
       <div>
@@ -66,5 +76,5 @@ const handleDeleteActivity = () => {
         <FormDeleteActivity title={`Delete ${activity?.title} ?`} onDelete={handleDeleteActivity} loading={loading} />
       </div>
     </div>
-  );
+  ) 
 }
