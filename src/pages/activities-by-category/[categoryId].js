@@ -12,35 +12,56 @@ export async function getServerSideProps(context) {
                 },
             }
         );
+        console.log('activities by categoryId', resp.data.data);
         return { props: { activities: resp.data.data } };
     } catch (error) {
         console.error("Error fetching activities:", error);
-        return { props: { activities: null } };
+        return { props: { activities: [] } };
     }
 }
 
 
 
 export default function ActivitiesByCategoryId({ activities }) {
+
+    const firstActivity = activities[0];
     return (
         <div className="activitiesByCategoryId">
-           {/* {activities.length > 0 ? (
-               activities.map((activity, index) => (
+
+
+            {/* <h1>Activities By Category Id</h1> */}
+            <div className="activitiesByCategoryIdName">
+            {firstActivity && (
+                <div>
+                    {/* <h1>This is List Activities By Category in {firstActivity.category.name}</h1> */}
+                    <h1>Activities or Destination in {firstActivity.category.name}</h1>
+                </div>
+            )}
+            {!firstActivity && <div>No activities found</div>}
+            </div>
+            
+           {activities.length > 0 ? (
+               activities.map((activities, index) => (
                    <div key={index}>
-                       <h1>{activity.name}</h1>
-                       <p>{activity.description}</p>
+                       
+                       <h1>{activities.title}</h1>
+                       <p>{activities.description}</p>
                    </div>
                ))
            ) : (
                <div>No activities found</div>
-           )} */}
+           )}
+            
+          
 
-           {activities.map((activity, index) => (
+
+           {/* {activities.map((activity, index) => (
                <div key={index}>
+                   
                    <h1>{activity.title}</h1>
                    <p>{activity.description}</p>
                </div>
-           ))}
+           ))} */}
             
         </div>
     )
