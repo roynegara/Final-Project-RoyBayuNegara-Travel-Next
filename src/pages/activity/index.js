@@ -57,8 +57,11 @@ const Activity = () => {
             <p>{activity.category.name}</p> */}
             <div>
               <Link href={`/activity/${activity.id}`}>
-                <button>Detail</button>
-              </Link>
+                <button>Detail Activity By Id</button>
+              </Link>              
+            </div>
+            <div>
+              <Link href={`/activities-by-category/${activity.categoryId}`}><button>Detail Activities By Category Id</button></Link>
             </div>
           </div>
         ))}

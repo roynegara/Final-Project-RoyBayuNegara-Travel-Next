@@ -15,6 +15,9 @@ export async function getServerSideProps(context) {
     return { props: { activity: null } };
   }
 }
+
+
+
 export default function ActivityById({ activity }) {
   return (
     <div className="activity">
