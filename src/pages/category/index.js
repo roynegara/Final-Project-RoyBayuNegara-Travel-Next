@@ -41,8 +41,10 @@ const Category = () => {
         {categories.map((category, index) => (
           <div className="categories" key={index}>
             <img src={category.imageUrl} alt={category.name} />
+            
             <p>{category.id}</p>
-                <p>{category.name}</p>
+            <p>{category.name}</p>
+            
                 <div>
                   <Link href={`/category/${category.id}`}>
                     <button>View Details</button>
@@ -56,3 +58,6 @@ const Category = () => {
 };
 
 export default Category;
+
+
+
