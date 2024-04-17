@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import useDeleteActivity from "@/hooks/useDeleteActivity";
+import FormDeleteActivity from "@/components/FormDeleteActivity";
+import { useRouter } from "next/router";
 
 export async function getServerSideProps(context) {
   try {
@@ -11,14 +14,30 @@ export async function getServerSideProps(context) {
     );
     return { props: { activity: resp.data.data } };
   } catch (error) {
-    console.error("Error fetching promo:", error);
+    console.error("Error fetching activity:", error);
     return { props: { activity: null } };
   }
 }
 
-
-
 export default function ActivityById({ activity }) {
+  const router = useRouter();
+  const { del, loading } = useDeleteActivity();
+  const [notif, setNotif] = useState(null);
+
+const handleDeleteActivity = () => {
+  del(`/delete-activity/${activity?.id}`)
+  .then((res) => {
+    setNotif("Activity deleted successfully");
+    setTimeout(() => {
+      router.push("/activity");
+    }, 1000);
+  })
+  .catch((err) => {
+    console.log("resDeleteActivityErr", err);
+    setNotif(err?.response?.data?.message);
+  })
+}
+
   return (
     <div className="activity">
       <div>
@@ -41,6 +60,11 @@ export default function ActivityById({ activity }) {
       <h2> Proce Discount : {activity.price_discount}</h2>
       <h2> Rating : {activity.rating}</h2>
       <h2>Total Review : {activity.total_reviews}</h2>
+
+      <div>
+        { notif && <p style={{ color: notif === "Activity deleted successfully" ? "green" : "red" }}>{notif}</p>}
+        <FormDeleteActivity title={`Delete ${activity?.title} ?`} onDelete={handleDeleteActivity} loading={loading} />
+      </div>
     </div>
   );
 }
