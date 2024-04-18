@@ -21,11 +21,13 @@
 
 import "@/styles/globals.css";
 import TravelLayout from "@/layout/TravelLayout";
+import { Toaster } from "sonner";
 
 export default function App({ Component, pageProps }) {
   
   return (
     <TravelLayout>
+    <Toaster richColors position="bottom-right" />
       <Component {...pageProps} />
     </TravelLayout>
   );
