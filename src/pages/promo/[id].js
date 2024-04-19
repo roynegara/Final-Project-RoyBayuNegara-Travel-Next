@@ -3,6 +3,10 @@ import axios from "axios";
 import useDeletePromo from "@/hooks/useDeletePromo";
 import FormDeletePromo from "@/components/FormDeletePromo";
 import { useRouter } from "next/router";
+import { toast } from "sonner";
+
+import FormEditPromo from "@/components/FormEditPromo";
+import useEditPromo from "@/hooks/useEditPromo";
 
 export async function getServerSideProps(context) {
   try {
@@ -20,9 +24,11 @@ export async function getServerSideProps(context) {
 }
 
 export default function PromoById({ promo }) {
-  const router = useRouter();
   const { del, loading } = useDeletePromo();
-  const [notif, setNotif] = useState(null);
+  const { pos, loadingEditPromo } = useEditPromo();
+  // const [notif, setNotif] = useState(null);
+
+  const router = useRouter();
 
   const handleDeletePromo = () => {
     del(`/delete-promo/${promo?.id}`)
@@ -36,6 +42,58 @@ export default function PromoById({ promo }) {
         console.log("resDeletePromoErr", err);
         setNotif(err?.response?.data?.message);
       });
+  };
+
+  const handleEditPromo = ({
+    title,
+    description,
+    imageUrl,
+    terms_condition,
+    promo_code,
+    promo_discount_price,
+    minimum_claim_price,
+  }) => {
+    pos(`/update-promo/${promo?.id}`, {
+      title,
+      description,
+      imageUrl,
+      terms_condition,
+      promo_code,
+      promo_discount_price,
+      minimum_claim_price,
+    })
+      .then((res) => {
+        // setNotif("Promo updated successfully");
+        toast.success(`${promo?.title} has been edited`);
+        setTimeout(() => {
+          router.push("/promo");
+        }, 1000);
+      })
+      .catch((err) => {
+        console.log("resEditPromoErr", err);
+
+        if (
+          err?.response?.data?.errors &&
+          err?.response?.data?.errors.length > 0 &&
+          err.response.data.errors[0].message
+        ) {
+          toast.error(err.response.data.errors[0].message);
+        } else {
+          toast.error(err?.response?.data?.message);
+        }
+        // toast.error(err?.response?.data?.message);
+        // setNotifEdit(err?.response?.data?.message);
+      });
+  };
+
+  const [isPopupOpenEdit, setPopupOpenEdit] = useState(false);
+  const togglePopupEdit = () => {
+    setPopupOpenEdit(!isPopupOpenEdit);
+  };
+
+  const [isPopupOpenDelete, setPopupOpenDelete] = useState(false);
+  const togglePopupDelete = () => {
+    setPopupOpenDelete(!isPopupOpenDelete);
   };
 
   return (
@@ -58,8 +116,50 @@ export default function PromoById({ promo }) {
       </div>
 
       <div>
-        {notif && <p style={{ color: notif === "Promo deleted successfully" ? "green" : "red" }}>{notif}</p>}
-        <FormDeletePromo title={`Delete ${promo?.title} ?`} onDelete={handleDeletePromo} loading={loading} />
+        <button onClick={togglePopupEdit}> Edit Promo {promo?.title}</button>
+        {isPopupOpenEdit && (
+          <div className="popup-edit-promo">
+            <button className="btn-close-popup-edit-promo" onClick={togglePopupEdit}>
+              X
+            </button>
+            <FormEditPromo
+              title={`Edit ${promo?.title} Promo ?`}
+              defaultName={promo?.title}
+              defaultDescription={promo?.description}
+              defaultImageUrl={promo?.imageUrl}
+              defaultTerms_condition={promo?.terms_condition}
+              defaultPromo_code={promo?.promo_code}
+              defaultPromo_discount_price={promo?.promo_discount_price}
+              defaultMinimum_claim_price={promo?.minimum_claim_price}
+              onEdit={handleEditPromo}
+              loading={loadingEditPromo}
+            />
+          </div>
+        )}
+      </div>
+
+      <div>
+        <button onClick={togglePopupDelete}>Delete {promo?.title}</button>
+        {isPopupOpenDelete && (
+          <div>
+            <div className="popup-delete-promo">
+              <div>
+                <p>Are you sure you want to delete {promo?.title} ?</p>
+              </div>
+              <div className="popup-delete-promo-btn-yes">
+                <FormDeletePromo title={`Yes`} onDelete={handleDeletePromo} loading={loading} />
+              </div>
+              <div className="popup-delete-promo-btn-no">
+                <button className="btn-close-popup-delete-promo" onClick={togglePopupDelete}>
+                  Tidak
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* {notif && <p style={{ color: notif === "Promo deleted successfully" ? "green" : "red" }}>{notif}</p>} */}
+        {/* <FormDeletePromo title={`Delete ${promo?.title} ?`} onDelete={handleDeletePromo} loading={loading} /> */}
       </div>
     </div>
   );

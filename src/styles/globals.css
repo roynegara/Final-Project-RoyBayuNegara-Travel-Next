@@ -247,7 +247,7 @@ button {
   height: 300px;
 }
 
-.popup-create-promo {
+.popup-create-promo, .popup-edit-promo, .popup-delete-promo  {
   width: 420px;
   background: rgb(5, 5, 150);
   border: 2px solid rgba(255, 255, 255, 0.5);
@@ -260,11 +260,82 @@ button {
   left: 50%;
   transform: translate(-50%, -50%);}
 
-.btn-close-popup-create-promo {
+.btn-close-popup-create-promo, .btn-close-popup-edit-promo {
   position: absolute;
   top: 10px;
   right: 10px;
 }
+
+.form-edit-promo {
+  display: flex;
+  flex-direction: column; 
+  text-align: center;
+}
+
+.form-edit-promo button {
+  border-radius: 10px;
+  border: none;
+  padding: 10px;
+  margin-top: 10px;
+  background: black;
+  color:white;
+  font-weight: 600;
+}
+
+.form-edit-promo button:hover{
+  background: black;
+  color: orangered;
+}
+
+.popup-delete-promo {
+  text-align: center;
+  /* justify-content: center; */
+  display: flex;
+}
+
+.popup-delete-promo-btn-no button {
+  border-radius: 10px;
+  border: none;
+  padding: 10px;
+  /* margin-top: 10px; */
+  background: #ededed;
+  color:green;
+  font-weight: 600;
+  width: 70px;
+  height: 45px;
+  margin: 10px;
+}
+
+.popup-delete-promo-btn-no button:hover{
+  background: green;
+  color: #ededed;
+}
+
+.popup-delete-promo-btn-yes button {
+  border-radius: 10px;
+  border: none;
+  padding: 10px;
+  /* margin-top: 10px; */
+  background: #ededed;
+  color:red;
+  font-weight: 600;
+  width: 70px;
+  height: 45px;
+  margin: 10px;
+}
+
+.popup-delete-promo-btn-yes button:hover{
+  background: red;
+  color: #ededed;
+}
+
+
+.popup-delete-promo > div:first-child {
+  position: absolute; 
+  transform: translate(80%, -100%);
+}
+
+
 /* Promo End */
 
 /* Category Start */

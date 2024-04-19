@@ -39,8 +39,8 @@ export default function BannerById({ banner }) {
   const { pos, loadingEditBanner } = useEditBanner();
 
   const router = useRouter();
-  const [notifEdit, setNotifEdit] = useState(null);
-  const [notifDelete, setNotifDelete] = useState(null);
+  // const [notifEdit, setNotifEdit] = useState(null);
+  // const [notifDelete, setNotifDelete] = useState(null);
 
   const handleDeleteBanner = () => {
     del(`/delete-banner/${banner?.id}`)
@@ -49,7 +49,7 @@ export default function BannerById({ banner }) {
         // setNotifDelete("Banner deleted successfully");
         setTimeout(() => {
           router.push("/banner");
-        }, 200);
+        }, 1000);
       })
       .catch((err) => {
         console.log("resDeleteBannerErr", err);
@@ -61,14 +61,14 @@ export default function BannerById({ banner }) {
   const handleEditBanner = ({ name, imageUrl }) => {
     pos(`/update-banner/${banner?.id}`, { name, imageUrl })
       .then((res) => {
-        toast.success(`${banner?.name} has been updated`);
+        toast.success(`${banner?.name} has been edited`);
         // setNotifEdit("Banner edited successfully");
         setTimeout(() => {
           router.push("/banner");
-        }, 200);
+        }, 1000);
       })
       .catch((err) => {
-        console.log("resDeleteBannerErr", err);
+        console.log("resEditBannerErr", err);
         
         if (
           err?.response?.data?.errors &&
@@ -148,7 +148,7 @@ export default function BannerById({ banner }) {
             <p style={{ color: notifDelete === "Banner deleted successfully" ? "green" : "red" }}>{notifDelete}</p>
           )} */}
             </div>
-            <div><p>Are you sure you want to delete this banner?</p></div>
+            <div><p>Are you sure you want to delete {banner?.name} ?</p></div>
            
 
             <div className="popup-delete-banner-btn-yes">              
@@ -160,7 +160,8 @@ export default function BannerById({ banner }) {
                 Tidak
               </button>
             </div>
-          </div></div>
+            </div>
+          </div>
           
         )}
       </div>

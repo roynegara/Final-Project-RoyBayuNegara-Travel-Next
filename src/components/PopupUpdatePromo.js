@@ -2,14 +2,9 @@ import React, { useState } from "react";
 import axios from "axios";
 
 function UpdatePromo() { 
-    const [promo, setPromo] = useState({
-        title: "",
-        imageUrl: "",
-        promo_code: "",
-        minimum_claim_price: "",
-        promo_discount_price: "",
-        terms_condition: "",
-    });
+    const [name, setName] = useState("");
+    const [imageUrl, setImageUrl] = useState("");
+    
 
     const handleChange = (e) => {
         const { name, value } = e.target;
