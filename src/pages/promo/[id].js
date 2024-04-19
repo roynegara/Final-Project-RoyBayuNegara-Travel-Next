@@ -33,14 +33,16 @@ export default function PromoById({ promo }) {
   const handleDeletePromo = () => {
     del(`/delete-promo/${promo?.id}`)
       .then((res) => {
-        setNotif("Promo deleted successfully");
+        // setNotif("Promo deleted successfully");
+        toast.success(`${promo?.title} has been deleted`);
         setTimeout(() => {
           router.push("/promo");
         }, 1000);
       })
       .catch((err) => {
         console.log("resDeletePromoErr", err);
-        setNotif(err?.response?.data?.message);
+        // setNotif(err?.response?.data?.message);
+        toast.error(err?.response?.data?.message);
       });
   };
 
