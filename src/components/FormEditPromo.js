@@ -14,7 +14,7 @@ export default function FormEditPromo({
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
-    const name = formData.get("namaBanner");
+    const title = formData.get("namaBanner");
     const description = formData.get("deskripsiBanner");
     const imageUrl = formData.get("gambarBanner");
     const terms_condition = formData.get("syaratKetentuan");
@@ -22,7 +22,7 @@ export default function FormEditPromo({
     const promo_discount_price = parseFloat(formData.get("promoHargaDiskon"));
     const minimum_claim_price = parseFloat(formData.get("klaimHargaMinimum"));
 
-    onEdit({ name, description, imageUrl, terms_condition, promo_code, promo_discount_price, minimum_claim_price });
+    onEdit({ title, description, imageUrl, terms_condition, promo_code, promo_discount_price, minimum_claim_price });
   };
 
   return (
