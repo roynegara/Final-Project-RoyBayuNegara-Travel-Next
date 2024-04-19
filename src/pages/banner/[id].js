@@ -45,7 +45,7 @@ export default function BannerById({ banner }) {
   const handleDeleteBanner = () => {
     del(`/delete-banner/${banner?.id}`)
       .then((res) => {
-        toast.success("Banner deleted successfully");
+        toast.success(`${banner?.name} has been deleted`);
         // setNotifDelete("Banner deleted successfully");
         setTimeout(() => {
           router.push("/banner");
@@ -61,7 +61,7 @@ export default function BannerById({ banner }) {
   const handleEditBanner = ({ name, imageUrl }) => {
     pos(`/update-banner/${banner?.id}`, { name, imageUrl })
       .then((res) => {
-        toast.success("Banner edited successfully");
+        toast.success(`${banner?.name} has been updated`);
         // setNotifEdit("Banner edited successfully");
         setTimeout(() => {
           router.push("/banner");
