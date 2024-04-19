@@ -8,6 +8,8 @@ import FormDeleteBanner from "@/components/FormDeleteBanner";
 import FormEditBanner from "@/components/FormEditBanner";
 import useEditBanner from "@/hooks/useEditBanner";
 
+import { toast } from "sonner";
+
 export async function getServerSideProps(context) {
   try {
     const resp = await axios.get(
@@ -43,28 +45,42 @@ export default function BannerById({ banner }) {
   const handleDeleteBanner = () => {
     del(`/delete-banner/${banner?.id}`)
       .then((res) => {
-        setNotifDelete("Banner deleted successfully");
-        // setTimeout(() => {
-        //   router.push("/banner");
-        // }, 1000);
+        toast.success("Banner deleted successfully");
+        // setNotifDelete("Banner deleted successfully");
+        setTimeout(() => {
+          router.push("/banner");
+        }, 200);
       })
       .catch((err) => {
         console.log("resDeleteBannerErr", err);
-        setNotifDelete(err?.response?.data?.message);
+        // setNotifDelete(err?.response?.data?.message);
+        toast.error(err?.response?.data?.message);
       });
   };
 
   const handleEditBanner = ({ name, imageUrl }) => {
     pos(`/update-banner/${banner?.id}`, { name, imageUrl })
       .then((res) => {
-        setNotifEdit("Banner edited successfully");
-        // setTimeout(() => {
-        //   router.push("/banner");
-        // }, 1000);
+        toast.success("Banner edited successfully");
+        // setNotifEdit("Banner edited successfully");
+        setTimeout(() => {
+          router.push("/banner");
+        }, 200);
       })
       .catch((err) => {
         console.log("resDeleteBannerErr", err);
-        setNotifEdit(err?.response?.data?.message);
+        
+        if (
+          err?.response?.data?.errors &&
+          err?.response?.data?.errors.length > 0 &&
+          err.response.data.errors[0].message
+        ) {
+          toast.error(err.response.data.errors[0].message);
+        } else {
+          toast.error(err?.response?.data?.message);
+        }  
+        // toast.error(err?.response?.data?.message);
+        // setNotifEdit(err?.response?.data?.message);
       });
   };
 
@@ -101,9 +117,9 @@ export default function BannerById({ banner }) {
               <code>
                 {
                   <div>
-                    {notifEdit && (
+                    {/* {notifEdit && (
                       <p style={{ color: notifEdit === "Banner edited successfully" ? "green" : "red" }}>{notifEdit}</p>
-                    )}
+                    )} */}
                     <FormEditBanner
                       title={`Edit ${banner?.name} Banner ?`}
                       defaultName={banner?.name}
@@ -128,9 +144,9 @@ export default function BannerById({ banner }) {
             
             <div className="popup-delete-banner">
                <div>
-            {notifDelete && (
+            {/* {notifDelete && (
             <p style={{ color: notifDelete === "Banner deleted successfully" ? "green" : "red" }}>{notifDelete}</p>
-          )}
+          )} */}
             </div>
             <div><p>Are you sure you want to delete this banner?</p></div>
            
