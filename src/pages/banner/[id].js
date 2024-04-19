@@ -38,19 +38,22 @@ export default function BannerById({ banner }) {
 const { pos, loadingEditBanner } = useEditBanner();
 
   const router = useRouter();
-  const [notif, setNotif] = useState(null);
+  const [notifEdit, setNotifEdit] = useState(null);
+  const [notifDelete, setNotifDelete] = useState(null);
+
+  
 
   const handleDeleteBanner = () => {
     del(`/delete-banner/${banner?.id}`)
         .then((res) => {
-        setNotif('Banner deleted successfully');
+        setNotifDelete('Banner deleted successfully');
         setTimeout(() => {
           router.push("/banner");
         }, 1000);
       })
         .catch((err) => {
           console.log('resDeleteBannerErr', err)
-        setNotif(err?.response?.data?.message);
+        setNotifDelete(err?.response?.data?.message);
       });
   };
 
@@ -58,16 +61,23 @@ const { pos, loadingEditBanner } = useEditBanner();
   const handleEditBanner = ({name, imageUrl}) => {
     pos(`/update-banner/${banner?.id}`, {name, imageUrl})
         .then((res) => {
-        setNotif('Banner edited successfully');
-        setTimeout(() => {
-          router.push("/banner");
-        }, 1000);
+        setNotifEdit('Banner edited successfully');
+        // setTimeout(() => {
+        //   router.push("/banner");
+        // }, 1000);
       })
         .catch((err) => {
           console.log('resDeleteBannerErr', err)
-        setNotif(err?.response?.data?.message);
+        setNotifEdit(err?.response?.data?.message);
       });
   }
+
+  
+  const [isPopupOpen, setPopupOpen] = useState(false)
+  const togglePopup = () => { 
+    setPopupOpen(!isPopupOpen);
+  }
+
 
   return (
     <div className="banner">
@@ -76,16 +86,33 @@ const { pos, loadingEditBanner } = useEditBanner();
         <h1>This is {banner?.name} Banner</h1>
       </div>
 
-      <div>
-        { notif && <p style={{ color: notif === "Banner deleted successfully" ? "green" : "red" }}>{notif}</p> }
+      {/* <div>
+        { notif && <p style={{ color: notif === "Banner edited successfully" ? "green" : "red" }}>{notif}</p> }
         <FormEditBanner title={`Edit ${banner?.name} Banner ?`} defaultName={banner?.name}  defaultImageUrl={banner?.imageUrl} onEdit={handleEditBanner} loading={loadingEditBanner} />
-      </div>
+      </div> */}
+
+      <div>
+      <button onClick={togglePopup}>Edit Banner</button>
+      {isPopupOpen && (
+        <div className="popup-edit-banner">
+          <button className="btn-close-popup-edit-banner" onClick={togglePopup}>X</button>
+          <pre>
+            <code>
+              {<div>
+        { notifEdit && <p style={{ color: notifEdit === "Banner edited successfully" ? "green" : "red" }}>{notifEdit}</p> }
+        <FormEditBanner title={`Edit ${banner?.name} Banner ?`} defaultName={banner?.name}  defaultImageUrl={banner?.imageUrl} onEdit={handleEditBanner} loading={loadingEditBanner} />
+      </div>}
+            </code>
+          </pre>
+        </div>
+      )}
+    </div>
      
 
       <div>
               {/* {notif && <div className={`notif ${notif.type}`}>{notif.message}</div>} */}
               {/* {notif && <p style={{ color: "red" }}>{notif}</p>} */}
-              {notif && <p style={{ color: notif === "Banner deleted successfully" ? "green" : "red" }}>{notif}</p>}
+              {notifDelete && <p style={{ color: notifDelete === "Banner deleted successfully" ? "green" : "red" }}>{notifDelete}</p>}
         <FormDeleteBanner title={`Delete ${banner?.name} ?`} onDelete={handleDeleteBanner} loading={loading} />
       </div>
     </div>

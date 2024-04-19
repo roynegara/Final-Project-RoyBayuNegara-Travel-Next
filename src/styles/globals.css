@@ -130,7 +130,7 @@ button {
 
 /* Banner Start */
 .banner img {
-  width: 1500px;
+  width: 1000px;
   /* height: 300px; */
 }
 
@@ -139,7 +139,7 @@ button {
   height: 300px;
 }
 
-.popup-create-banner {
+.popup-create-banner, .popup-edit-banner  {
   width: 420px;
   background: rgb(5, 5, 150);
   border: 2px solid rgba(255, 255, 255, 0.5);
@@ -153,16 +153,44 @@ button {
   transform: translate(-50%, -50%);
 }
 
-.btn-close-popup-create-banner{
+.popup-edit-banner {
+  text-align: center;
+}
+
+.btn-close-popup-create-banner, .btn-close-popup-edit-banner{
   position: absolute;
   top: 10px;
   right: 10px;
 }
+
+.form-edit-banner {
+  display: flex;
+  flex-direction: column; 
+  text-align: center;
+}
+
+.form-edit-banner button {
+  border-radius: 10px;
+  border: none;
+  padding: 10px;
+  margin-top: 10px;
+  background: black;
+  color:white;
+  font-weight: 600;
+}
+
+.form-edit-banner button:hover{
+  background: black;
+  color: orangered;
+}
+
+
+
 /* Banner End */
 
 /* Promo Start */
 .promo img {
-  width: 1500px;
+  width: 1000px;
 }
 
 .promos img {
@@ -192,7 +220,7 @@ button {
 
 /* Category Start */
 .category img {
-  width: 1500px;
+  width: 1000px;
 }
 
 .categories img {
@@ -222,7 +250,7 @@ button {
 
 /* Activity Start */
 .activity img {
-  width: 1500px;
+  width: 1000px;
 }
 
 .activities img {
