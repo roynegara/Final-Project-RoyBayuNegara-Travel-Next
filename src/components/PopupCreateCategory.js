@@ -2,12 +2,15 @@ import React, { useState } from "react";
 import axios from "axios";
 // import PopupImg from "./PopupImg";
 import { toast } from "sonner";
+import { useRouter } from "next/router";
 
 const CreateCategory = (props) => {
   // const [notif, setNotif] = useState("");
   //   const [selectFile, setSelectFile] = useState(null);
   const [name, setName] = useState("");
   const [imageUrl, setImageUrl] = useState("");
+
+  const router = useRouter();
 
   //   const handleFileChange = (e) => {
   //     setSelectFile(e.target.files[0]);
@@ -24,7 +27,17 @@ const CreateCategory = (props) => {
   };
 
   const handleSubmit = () => {
-  
+    if (!name && !imageUrl) { 
+      toast.warning("Name and Image Url cannot be empty");
+      return;
+    } else if (!name) {
+      toast.warning("Name cannot be empty");
+      return;
+    } else if (!imageUrl) {
+      toast.warning("Image Url cannot be empty");
+      return;
+    }
+
 
     const payload = {
       name: name,
@@ -42,8 +55,16 @@ const CreateCategory = (props) => {
       })
       .then((res) => {
         console.log("res", res);
-        toast.success(res.data?.message);
+        toast.success(`${name} has been created`);
         // setNotif(res.data.message);
+        router.push("/category", undefined, { shallow: false }).then((success) => {
+          if (success) {
+            setTimeout(() => {
+              
+              window.location.reload(); // Refresh halaman jika perpindahan halaman berhasil
+            },1000)
+          }
+        });
 
       })
       .catch((err) => {

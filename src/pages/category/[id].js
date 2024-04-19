@@ -37,9 +37,9 @@ export default function CategoryById({ category }) {
       .then((res) => {
         // setNotif("Category deleted successfully");
         toast.success(`${category?.name} has been deleted`);
-        // setTimeout(() => {
-        //   router.push("/category");
-        // }, 1000);
+        setTimeout(() => {
+          router.push("/category");
+        }, 1000);
       })
       .catch((err) => {
         console.log("resDeleteCategoryErr", err);
@@ -119,7 +119,7 @@ export default function CategoryById({ category }) {
 
             <div className="popup-delete-category-btn-yes">
               <FormDeleteCategory
-                title={`Delete ${category?.name} ?`}
+                title={`Ya`}
                 onDelete={handleDeleteCategory}
                 loading={loading}
               />
@@ -131,7 +131,7 @@ export default function CategoryById({ category }) {
               </button>
               </div>
               
-              
+
             </div>
             </div>
         )}

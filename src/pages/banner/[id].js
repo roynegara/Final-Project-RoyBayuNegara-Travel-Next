@@ -72,10 +72,10 @@ export default function BannerById({ banner }) {
         
         if (
           err?.response?.data?.errors &&
-          err?.response?.data?.errors.length > 0 &&
+          err?.response?.data?.errors?.length > 0 &&
           err.response.data.errors[0].message
         ) {
-          toast.error(err.response.data.errors[0].message);
+          toast.error(err.response?.data?.errors[0].message);
         } else {
           toast.error(err?.response?.data?.message);
         }  
