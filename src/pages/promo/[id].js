@@ -100,8 +100,8 @@ export default function PromoById({ promo }) {
     <div className="promo">
       <div>
         <h1>{promo.title}</h1>
-        <img src={promo?.imageUrl} alt={promo?.name} />
-        <h1>This is {promo?.name} Banner</h1>
+        <img src={promo?.imageUrl} alt={promo?.title} />
+        <h1>This is {promo?.title} Promo</h1>
       </div>
 
       <div>
@@ -143,6 +143,7 @@ export default function PromoById({ promo }) {
         {isPopupOpenDelete && (
           <div>
             <div className="popup-delete-promo">
+              <div></div>
               <div>
                 <p>Are you sure you want to delete {promo?.title} ?</p>
               </div>
