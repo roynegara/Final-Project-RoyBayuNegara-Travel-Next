@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
-import PopupImg from "./PopupImg";
+// import PopupImg from "./PopupImg";
+import { toast } from "sonner";
 
-const CreateBanner = (props) => {
-  const [notif, setNotif] = useState("");
+const CreateCategory = (props) => {
+  // const [notif, setNotif] = useState("");
   //   const [selectFile, setSelectFile] = useState(null);
   const [name, setName] = useState("");
   const [imageUrl, setImageUrl] = useState("");
@@ -41,11 +42,14 @@ const CreateBanner = (props) => {
       })
       .then((res) => {
         console.log("res", res);
-        setNotif(res.data.message);
+        toast.success(res.data?.message);
+        // setNotif(res.data.message);
+
       })
       .catch((err) => {
         console.log("err", err);
-        setNotif(err.response.data.message);
+        // setNotif(err.response.data.message);
+        toast.error(err.response?.data?.message);
       });
   };
 
@@ -54,16 +58,16 @@ const CreateBanner = (props) => {
       <h1>Create Category</h1>
 
       {/* <input type="file" onChange={handleFileChange} /> */}
-      <input type="text" name="name" value={name} onChange={handleNameChange} placeholder="Banner Name" />
+      <input type="text" name="name" value={name} onChange={handleNameChange} placeholder="Category Name" />
       <input
         type="text"
         name="imageUrl"
         value={imageUrl}
         onChange={handleImageUrlChange}
-        placeholder="Banner Image Url"
+        placeholder="Category Image Url"
       />
 
-      {notif && <p style={{ color: "red" }}>{notif}</p>}
+      {/* {notif && <p style={{ color: "red" }}>{notif}</p>} */}
       <button type="submit" onClick={handleSubmit}>
         Submit
       </button>
@@ -78,7 +82,7 @@ const CreateBanner = (props) => {
   );
 };
 
-export default CreateBanner;
+export default CreateCategory;
 
 // import React, { useState } from "react";
 // import axios from "axios";

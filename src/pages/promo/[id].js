@@ -149,14 +149,19 @@ export default function PromoById({ promo }) {
               <div>
                 <p>Are you sure you want to delete {promo?.title} ?</p>
               </div>
+
               <div className="popup-delete-promo-btn-yes">
                 <FormDeletePromo title={`Yes`} onDelete={handleDeletePromo} loading={loading} />
               </div>
+
+
               <div className="popup-delete-promo-btn-no">
                 <button className="btn-close-popup-delete-promo" onClick={togglePopupDelete}>
                   Tidak
                 </button>
               </div>
+
+              
             </div>
           </div>
         )}
