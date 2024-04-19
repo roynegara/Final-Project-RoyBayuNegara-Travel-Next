@@ -1,8 +1,4 @@
-export default function FormDeleteBanner({
-    title,
-    onDelete,
-    loading,
-}) {
+export default function FormDeleteBanner({ title, onDelete, loading }) {
   const handleDeleteBanner = (e) => {
     e.preventDefault();
     onDelete();
@@ -10,7 +6,11 @@ export default function FormDeleteBanner({
 
   return (
     <form onSubmit={handleDeleteBanner}>
-      <button type="onSubmit" disabled={loading}>{loading ? "Loading..." : title}</button>
+      <div>
+        <button type="onSubmit" disabled={loading}>
+          {loading ? "Loading..." : title}
+        </button>
+      </div>
     </form>
   );
 }

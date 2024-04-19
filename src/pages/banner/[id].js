@@ -5,7 +5,6 @@ import useDeleteBanner from "@/hooks/useDeleteBanner";
 import { useRouter } from "next/router";
 import FormDeleteBanner from "@/components/FormDeleteBanner";
 
-
 import FormEditBanner from "@/components/FormEditBanner";
 import useEditBanner from "@/hooks/useEditBanner";
 
@@ -33,51 +32,51 @@ export async function getServerSideProps(context) {
 // }
 
 export default function BannerById({ banner }) {
-    // const [buttonPopupUpdateBanner, setButtonPopupUpdateBanner] = useState(false);
+  // const [buttonPopupUpdateBanner, setButtonPopupUpdateBanner] = useState(false);
   const { del, loading } = useDeleteBanner();
-const { pos, loadingEditBanner } = useEditBanner();
+  const { pos, loadingEditBanner } = useEditBanner();
 
   const router = useRouter();
   const [notifEdit, setNotifEdit] = useState(null);
   const [notifDelete, setNotifDelete] = useState(null);
 
-  
-
   const handleDeleteBanner = () => {
     del(`/delete-banner/${banner?.id}`)
-        .then((res) => {
-        setNotifDelete('Banner deleted successfully');
-        setTimeout(() => {
-          router.push("/banner");
-        }, 1000);
-      })
-        .catch((err) => {
-          console.log('resDeleteBannerErr', err)
-        setNotifDelete(err?.response?.data?.message);
-      });
-  };
-
-
-  const handleEditBanner = ({name, imageUrl}) => {
-    pos(`/update-banner/${banner?.id}`, {name, imageUrl})
-        .then((res) => {
-        setNotifEdit('Banner edited successfully');
+      .then((res) => {
+        setNotifDelete("Banner deleted successfully");
         // setTimeout(() => {
         //   router.push("/banner");
         // }, 1000);
       })
-        .catch((err) => {
-          console.log('resDeleteBannerErr', err)
+      .catch((err) => {
+        console.log("resDeleteBannerErr", err);
+        setNotifDelete(err?.response?.data?.message);
+      });
+  };
+
+  const handleEditBanner = ({ name, imageUrl }) => {
+    pos(`/update-banner/${banner?.id}`, { name, imageUrl })
+      .then((res) => {
+        setNotifEdit("Banner edited successfully");
+        // setTimeout(() => {
+        //   router.push("/banner");
+        // }, 1000);
+      })
+      .catch((err) => {
+        console.log("resDeleteBannerErr", err);
         setNotifEdit(err?.response?.data?.message);
       });
-  }
+  };
 
-  
-  const [isPopupOpen, setPopupOpen] = useState(false)
-  const togglePopup = () => { 
-    setPopupOpen(!isPopupOpen);
-  }
+  const [isPopupOpenEdit, setPopupOpenEdit] = useState(false);
+  const togglePopupEdit = () => {
+    setPopupOpenEdit(!isPopupOpenEdit);
+  };
 
+  const [isPopupOpenDelete, setPopupOpenDelete] = useState(false);
+  const togglePopupDelete = () => {
+    setPopupOpenDelete(!isPopupOpenDelete);
+  };
 
   return (
     <div className="banner">
@@ -92,28 +91,62 @@ const { pos, loadingEditBanner } = useEditBanner();
       </div> */}
 
       <div>
-      <button onClick={togglePopup}>Edit Banner</button>
-      {isPopupOpen && (
-        <div className="popup-edit-banner">
-          <button className="btn-close-popup-edit-banner" onClick={togglePopup}>X</button>
-          <pre>
-            <code>
-              {<div>
-        { notifEdit && <p style={{ color: notifEdit === "Banner edited successfully" ? "green" : "red" }}>{notifEdit}</p> }
-        <FormEditBanner title={`Edit ${banner?.name} Banner ?`} defaultName={banner?.name}  defaultImageUrl={banner?.imageUrl} onEdit={handleEditBanner} loading={loadingEditBanner} />
-      </div>}
-            </code>
-          </pre>
-        </div>
-      )}
-    </div>
-     
+        <button onClick={togglePopupEdit}>Edit Banner {banner?.name}</button>
+        {isPopupOpenEdit && (
+          <div className="popup-edit-banner">
+            <button className="btn-close-popup-edit-banner" onClick={togglePopupEdit}>
+              X
+            </button>
+            <pre>
+              <code>
+                {
+                  <div>
+                    {notifEdit && (
+                      <p style={{ color: notifEdit === "Banner edited successfully" ? "green" : "red" }}>{notifEdit}</p>
+                    )}
+                    <FormEditBanner
+                      title={`Edit ${banner?.name} Banner ?`}
+                      defaultName={banner?.name}
+                      defaultImageUrl={banner?.imageUrl}
+                      onEdit={handleEditBanner}
+                      loading={loadingEditBanner}
+                    />
+                  </div>
+                }
+              </code>
+            </pre>
+          </div>
+        )}
+      </div>
 
       <div>
-              {/* {notif && <div className={`notif ${notif.type}`}>{notif.message}</div>} */}
-              {/* {notif && <p style={{ color: "red" }}>{notif}</p>} */}
-              {notifDelete && <p style={{ color: notifDelete === "Banner deleted successfully" ? "green" : "red" }}>{notifDelete}</p>}
-        <FormDeleteBanner title={`Delete ${banner?.name} ?`} onDelete={handleDeleteBanner} loading={loading} />
+        
+        <button onClick={togglePopupDelete}>Delete {banner?.name}</button>
+        {isPopupOpenDelete && (
+          <div>
+          
+            
+            <div className="popup-delete-banner">
+               <div>
+            {notifDelete && (
+            <p style={{ color: notifDelete === "Banner deleted successfully" ? "green" : "red" }}>{notifDelete}</p>
+          )}
+            </div>
+            <div><p>Are you sure you want to delete this banner?</p></div>
+           
+
+            <div className="popup-delete-banner-btn-yes">              
+              
+              <FormDeleteBanner title={`Ya`} onDelete={handleDeleteBanner} loading={loading} />
+            </div>
+            <div className="popup-delete-banner-btn-no">
+              <button className="btn-close-popup-delete-banner" onClick={togglePopupDelete}>
+                Tidak
+              </button>
+            </div>
+          </div></div>
+          
+        )}
       </div>
     </div>
   );
@@ -179,7 +212,7 @@ const { pos, loadingEditBanner } = useEditBanner();
 
 //       <button onClick={() => setButtonPopupUpdateBanner(true)}>Edit This {banner?.name} Banner</button>
 //       <PopupUpdateBanner trigger={buttonPopupUpdateBanner} setTrigger={setButtonPopupUpdateBanner} >
-        
+
 //       </PopupUpdateBanner>
 
 //       <div>

@@ -139,7 +139,7 @@ button {
   height: 300px;
 }
 
-.popup-create-banner, .popup-edit-banner  {
+.popup-create-banner, .popup-edit-banner, .popup-delete-banner  {
   width: 420px;
   background: rgb(5, 5, 150);
   border: 2px solid rgba(255, 255, 255, 0.5);
@@ -185,6 +185,55 @@ button {
 }
 
 
+
+
+.popup-delete-banner {
+  text-align: center;
+  /* justify-content: center; */
+  display: flex;
+}
+
+.popup-delete-banner-btn-no button {
+  border-radius: 10px;
+  border: none;
+  padding: 10px;
+  /* margin-top: 10px; */
+  background: #ededed;
+  color:green;
+  font-weight: 600;
+  width: 70px;
+  height: 45px;
+  margin: 10px;
+}
+
+.popup-delete-banner-btn-no button:hover{
+  background: green;
+  color: #ededed;
+}
+
+.popup-delete-banner-btn-yes button {
+  border-radius: 10px;
+  border: none;
+  padding: 10px;
+  /* margin-top: 10px; */
+  background: #ededed;
+  color:red;
+  font-weight: 600;
+  width: 70px;
+  height: 45px;
+  margin: 10px;
+}
+
+.popup-delete-banner-btn-yes button:hover{
+  background: red;
+  color: #ededed;
+}
+
+
+.popup-delete-banner > div:first-child {
+  position: absolute; 
+  transform: translate(80%, -100%);
+}
 
 /* Banner End */
 
