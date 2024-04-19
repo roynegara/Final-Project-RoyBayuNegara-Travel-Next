@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import axios from "axios";
 import PopupImg from "./PopupImg";
+import { useRouter } from "next/router";
+import { toast } from "sonner";
 
 const CreateBanner = (props) => {
   const [notif, setNotif] = useState("");
   //   const [selectFile, setSelectFile] = useState(null);
   const [name, setName] = useState("");
   const [imageUrl, setImageUrl] = useState("");
+  const router = useRouter();
+  
 
   //   const handleFileChange = (e) => {
   //     setSelectFile(e.target.files[0]);
@@ -22,7 +26,19 @@ const CreateBanner = (props) => {
     console.log("imageUrl", e.target.value);
   };
 
-  const handleSubmit = () => {
+  const handleUpload = () => {
+    if (!name && !imageUrl) { 
+      toast.warning("Name and Image Url cannot be empty");
+      return;
+    } else if (!name) {
+      toast.warning("Name cannot be empty");
+      return;
+    } else if (!imageUrl) {
+      toast.warning("Image Url cannot be empty");
+      return;
+    }
+
+
     // if (!selectFile) {
     //   setNotif("Please Select a File ");
     //   return;
@@ -53,11 +69,23 @@ const CreateBanner = (props) => {
       })
       .then((res) => {
         console.log("res", res);
-        setNotif(res.data.message);
+        // setNotif(res.data?.message);
+        toast.success(`${name} has been created`);
+
+        router.push("/banner", undefined, { shallow: false }).then((success) => {
+          if (success) {
+            setTimeout(() => {
+              
+              window.location.reload(); // Refresh halaman jika perpindahan halaman berhasil
+            },1000)
+          }
+        });
+
       })
       .catch((err) => {
         console.log("err", err);
-        setNotif(err.response.data.message);
+        // setNotif(err.response?.data?.message);
+        toast.error(err.response?.data?.message);
       });
   };
 
@@ -76,8 +104,8 @@ const CreateBanner = (props) => {
       />
 
       {notif && <p style={{ color: "red" }}>{notif}</p>}
-      <button type="submit" onClick={handleSubmit}>
-        Submit
+      <button type="submit" onClick={handleUpload}>
+        Create Banner
       </button>
 
       <button className="btn-close-popup-create-banner" onClick={() => props.setTrigger(false)}>
@@ -91,6 +119,7 @@ const CreateBanner = (props) => {
 };
 
 export default CreateBanner;
+
 
 // import React, { useState } from "react";
 // import axios from "axios";
