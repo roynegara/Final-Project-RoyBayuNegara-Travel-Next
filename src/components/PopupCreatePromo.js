@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { toast } from "sonner";
+import { useRouter } from "next/router";
 
 const CreatePromo = (props) => {
   const [title, setTitle] = useState("");
@@ -10,7 +12,9 @@ const CreatePromo = (props) => {
   const [promo_discount_price, setPromo_discount_price] = useState("");
   const [minimum_claim_price, setMinimum_claim_price] = useState("");
 
-  const [notif, setNotif] = useState("");
+  const router = useRouter();
+
+  // const [notif, setNotif] = useState("");
 
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
@@ -72,7 +76,16 @@ const CreatePromo = (props) => {
       .then((res) => {
         console.log("res", res);
         // setNotif("Create Promo Success");
-        setNotif(res.data.message);
+        // setNotif(res.data.message);
+        toast.success(`${title} has been created`);
+
+        router.push("/promo", undefined, { shallow: true }).then((success) => {
+          if (success) {
+            setTimeout(() => {
+              window.location.reload()
+            },1000)
+          }
+        })
         // setTimeout(() => {
         //     props.onClose();
         // }, 1500);
@@ -80,7 +93,8 @@ const CreatePromo = (props) => {
       .catch((err) => {
         console.log("err", err);
         // setNotif("Create Promo Failed");
-        setNotif(err.response.data.message);
+        // setNotif(err.response.data.message);
+        toast.error(err.response?.data?.message);
       });
   };
 
@@ -125,7 +139,7 @@ const CreatePromo = (props) => {
         onChange={handleMinimum_claim_priceChange}
         placeholder="Minimum Claim Price"
       />
-      {notif && <p style={{ color: "red" }}>{notif}</p>}
+      {/* {notif && <p style={{ color: "red" }}>{notif}</p>} */}
       <button onClick={handleSubmit}>Submit</button>
 
       <button className="btn-close-popup-create-promo" onClick={() => props.setTrigger(false)}>
