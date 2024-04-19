@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
-import PopupUpdateBanner from "@/components/PopupUpdateBanner";
+// import PopupUpdateBanner from "@/components/PopupUpdateBanner";
 import useDeleteBanner from "@/hooks/useDeleteBanner";
 import { useRouter } from "next/router";
 import FormDeleteBanner from "@/components/FormDeleteBanner";
+
+
+import FormEditBanner from "@/components/FormEditBanner";
+import useEditBanner from "@/hooks/useEditBanner";
 
 export async function getServerSideProps(context) {
   try {
@@ -31,6 +35,8 @@ export async function getServerSideProps(context) {
 export default function BannerById({ banner }) {
     // const [buttonPopupUpdateBanner, setButtonPopupUpdateBanner] = useState(false);
   const { del, loading } = useDeleteBanner();
+const { pos, loadingEditBanner } = useEditBanner();
+
   const router = useRouter();
   const [notif, setNotif] = useState(null);
 
@@ -48,6 +54,21 @@ export default function BannerById({ banner }) {
       });
   };
 
+
+  const handleEditBanner = ({name, imageUrl}) => {
+    pos(`/update-banner/${banner?.id}`, {name, imageUrl})
+        .then((res) => {
+        setNotif('Banner edited successfully');
+        setTimeout(() => {
+          router.push("/banner");
+        }, 1000);
+      })
+        .catch((err) => {
+          console.log('resDeleteBannerErr', err)
+        setNotif(err?.response?.data?.message);
+      });
+  }
+
   return (
     <div className="banner">
       <div>
@@ -55,10 +76,11 @@ export default function BannerById({ banner }) {
         <h1>This is {banner?.name} Banner</h1>
       </div>
 
-      <button onClick={() => PopupUpdateBanner(true)}>Update/Edit </button>
-      {/* <PopupUpdateBanner trigger={buttonPopupUpdateBanner} setTrigger={setButtonPopupUpdateBanner}>
-        Edit
-      </PopupUpdateBanner> */}
+      <div>
+        { notif && <p style={{ color: notif === "Banner deleted successfully" ? "green" : "red" }}>{notif}</p> }
+        <FormEditBanner title={`Edit ${banner?.name} Banner ?`} defaultName={banner?.name}  defaultImageUrl={banner?.imageUrl} onEdit={handleEditBanner} loading={loadingEditBanner} />
+      </div>
+     
 
       <div>
               {/* {notif && <div className={`notif ${notif.type}`}>{notif.message}</div>} */}
@@ -69,6 +91,79 @@ export default function BannerById({ banner }) {
     </div>
   );
 }
+
+// // bias popup namun masih eror 505 ketika update banner
+// import React, { useState } from "react";
+// import axios from "axios";
+// import PopupUpdateBanner from "@/components/PopupUpdateBanner";
+// import useDeleteBanner from "@/hooks/useDeleteBanner";
+// import { useRouter } from "next/router";
+// import FormDeleteBanner from "@/components/FormDeleteBanner";
+
+// export async function getServerSideProps(context) {
+//   try {
+//     const resp = await axios.get(
+//       `https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/banner/${context.params.id}`,
+//       {
+//         headers: {
+//           apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
+//         },
+//       }
+//     );
+
+//     return { props: { banner: resp.data.data } };
+//   } catch (error) {
+//     console.error("Error fetching banner:", error);
+//     return { props: { banner: null } };
+//   }
+// }
+
+// // export async function getServerSideProps(context) {
+// //     const banner = await getBannerById(context.params.id);
+// //     return { props: { banner } };
+// // }
+
+// export default function BannerById({ banner }) {
+//     const [buttonPopupUpdateBanner, setButtonPopupUpdateBanner] = useState(false);
+//   const { del, loading } = useDeleteBanner();
+//   const router = useRouter();
+//   const [notif, setNotif] = useState(null);
+
+//   const handleDeleteBanner = () => {
+//     del(`/delete-banner/${banner?.id}`)
+//         .then((res) => {
+//         setNotif('Banner deleted successfully');
+//         setTimeout(() => {
+//           router.push("/banner");
+//         }, 1000);
+//       })
+//         .catch((err) => {
+//           console.log('resDeleteBannerErr', err)
+//         setNotif(err?.response?.data?.message);
+//       });
+//   };
+
+//   return (
+//     <div className="banner">
+//       <div>
+//         <img src={banner?.imageUrl} alt={banner?.name} />
+//         <h1>This is {banner?.name} Banner</h1>
+//       </div>
+
+//       <button onClick={() => setButtonPopupUpdateBanner(true)}>Edit This {banner?.name} Banner</button>
+//       <PopupUpdateBanner trigger={buttonPopupUpdateBanner} setTrigger={setButtonPopupUpdateBanner} >
+        
+//       </PopupUpdateBanner>
+
+//       <div>
+//               {/* {notif && <div className={`notif ${notif.type}`}>{notif.message}</div>} */}
+//               {/* {notif && <p style={{ color: "red" }}>{notif}</p>} */}
+//               {notif && <p style={{ color: notif === "Banner deleted successfully" ? "green" : "red" }}>{notif}</p>}
+//         <FormDeleteBanner title={`Delete ${banner?.name} ?`} onDelete={handleDeleteBanner} loading={loading} />
+//       </div>
+//     </div>
+//   );
+// }
 
 // batas
 // import React, { useEffect, useState } from 'react';

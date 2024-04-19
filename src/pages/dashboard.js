@@ -116,7 +116,7 @@ const Dashboard = () => {
           /> */}
             <button onClick={() => setButtonPopupImg(true)}>Edit Avatar</button>
           <PopupImg trigger={buttonPopupImg} setTrigger={setButtonPopupImg}>
-            My Profile
+            Edit Profil
             </PopupImg>
           </main>
           
