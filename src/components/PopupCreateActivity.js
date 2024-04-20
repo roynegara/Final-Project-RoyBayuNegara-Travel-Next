@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "sonner";
+import { useRouter } from "next/router";
 
 const CreateActivity = (props) => {
   const [categoryId, setCategoryId] = useState("");
@@ -18,7 +19,8 @@ const CreateActivity = (props) => {
   const [city, setCity] = useState("");
   const [location_maps, setLocation_maps] = useState("");
 
-  const [notif, setNotif] = useState("");
+  // const [notif, setNotif] = useState("");
+  const router = useRouter();
 
   const getCategories = () => {
     axios
@@ -153,7 +155,16 @@ const CreateActivity = (props) => {
       .then((res) => {
         console.log("res", res);
         // setNotif("Status : Activity Created");
-        toast.success("Activity has been Created");
+        toast.success(`${title} has been created`);
+
+        router.push("/activity", undefined, { shallow: true }).then((success) => {
+          if (success) {
+            setTimeout(() => {
+              window.location.reload()
+            },1000)
+          }
+        })
+
         // setTimeout(() => {
         //     props.setShowPopup(false);
         // }, 1500);
@@ -181,7 +192,7 @@ const CreateActivity = (props) => {
 
   return props.trigger ? (
     <div className="popup-create-activity">
-      <h1>Create Activity</h1>
+      <h1>Create a Destination</h1>
 
       <select name="categoryId" value={categoryId} onChange={handleCategoryIdChange}>
         <option value="">-- Select Category --</option>
