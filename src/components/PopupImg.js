@@ -1,26 +1,84 @@
-// batas
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { toast } from "sonner";
 
-const UploadImage = (props) => {
-  const [notif, setNotif] = useState("");
-  const [selectFile, setSelectFile] = useState(''); 
- 
+const Upload = (props) => {
+  const [file, setFile] = useState('');
+  const [imageUrl, setImageUrl] = useState("");
 
-  const handleFileChange = (e) => {
-    setSelectFile(e.target.files[0]);
+  const handleImageUrlChange = (e) => {
+    setImageUrl(e.target.value);
   };
 
+  const handleSubmit = () => {
+    if (imageUrl) {
+      const payload = { profilePictureUrl: imageUrl };
+      const accessToken = localStorage.getItem("access_token");
+      axios
+        .post(
+          "https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/update-profile",
+          payload,
+          {
+            headers: {
+              apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
+        )
+        .then((res) => {
+          console.log("res", res);
+          setImageUrl(res?.data?.url);
+        })
+        .catch((err) => {
+          console.log("err", err);
+        });
+    }
+  };
+
+  useEffect(() => {
+    handleSubmit();
+  }, [imageUrl]);
+
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
+  };
+
+  const handleUpload = () => {
+    const formData = new FormData();
+    formData.append("image", file);
+
+    const config = {
+      headers: {
+        "content-type": "multipart/form-data",
+        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1pZnRhaGZhcmhhbkBnbWFpbC5jb20iLCJ1c2VySWQiOiI5NWE4MDNjMy1iNTFlLTQ3YTAtOTBkYi0yYzJmM2Y0ODE1YTkiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2Nzk4NDM0NDR9.ETsN6dCiC7isPReiQyHCQxya7wzj05wz5zruiFXLx0k`,
+        apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
+      },
+    };
+
+    axios
+      .post(
+        "https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/upload-image",
+        formData,
+        config
+      )
+      .then((res) => {
+        console.log(res);
+        setImageUrl(res.data.url); 
+        toast.success(res?.data?.message)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return props.trigger ? (
     <div className="popupImg">
-      <h1>Upload Image</h1>
+      <h1>Upload</h1>
+      {/* <img src={imageUrl} alt="Uploaded" /> */}
+      <input onChange={handleFileChange} type="file" />
+      <button onClick={handleUpload}>Upload</button>
 
-      <input type="file" onChange={handleFileChange} />
-
-      {notif && <p style={{ color: notif === "Upload image success" ? "green" : "red" }}>{notif}</p>}
-      {/* <button onClick={()=>{props.handleUpload(selectFile)}}>Upload</button> */}
-      <button onClick={()=>{props.handleUpload(selectFile)}}>Upload</button>
+      
       <button className="btn-close-popupImg" onClick={() => props.setTrigger(false)}>
         {" "}
         X{" "}
@@ -28,11 +86,48 @@ const UploadImage = (props) => {
       {props.children}
     </div>
   ) : (
-    ""
-  );
+    ''
+  )
 };
 
-export default UploadImage;
+export default Upload;
+
+
+// // batas
+// import React, { useState } from "react";
+// import axios from "axios";
+
+
+// const UploadImage = (props) => {
+//   const [notif, setNotif] = useState("");
+//   const [selectFile, setSelectFile] = useState(''); 
+ 
+
+//   const handleFileChange = (e) => {
+//     setSelectFile(e.target.files[0]);
+//   };  
+
+//   return props.trigger ? (
+//     <div className="popupImg">
+//       <h1>Upload Image</h1>
+
+//       <input type="file" onChange={handleFileChange} />
+
+//       {notif && <p style={{ color: notif === "Upload image success" ? "green" : "red" }}>{notif}</p>}
+      
+//       <button onClick={()=>{props.handleUpload(selectFile)}}>Upload</button>
+//       <button className="btn-close-popupImg" onClick={() => props.setTrigger(false)}>
+//         {" "}
+//         X{" "}
+//       </button>
+//       {props.children}
+//     </div>
+//   ) : (
+//     ""
+//   );
+// };
+
+// export default UploadImage;
 
 //  // batas
 
