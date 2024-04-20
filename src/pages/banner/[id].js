@@ -64,7 +64,8 @@ export default function BannerById({ banner }) {
         toast.success(`${banner?.name} has been edited`);
         // setNotifEdit("Banner edited successfully");
         setTimeout(() => {
-          router.push("/banner");
+          router.push(`/banner/${banner?.id}`);
+          setPopupOpenEdit(false);
         }, 1000);
       })
       .catch((err) => {
