@@ -52,9 +52,19 @@ export default function CategoryById({ category }) {
     pos(`/update-category/${category?.id}`, { name, imageUrl })
       .then((res) => {
         toast.success(`${category?.name} has been edited`);
-        setTimeout(() => {
-          router.push("/category");
-        }, 1000);
+
+        router.push(`/category/${category?.id}`, undefined, { shallow: false }).then((success) => {
+          if (success) {
+            setTimeout(() => {
+              
+              window.location.reload(); // Refresh halaman jika perpindahan halaman berhasil
+            },1000)
+          }
+        });
+
+
+
+        
       })
       .catch((err) => {
         console.log("resEditCategoryErr", err);
