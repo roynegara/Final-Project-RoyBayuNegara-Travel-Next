@@ -68,7 +68,8 @@ export default function PromoById({ promo }) {
         // setNotif("Promo updated successfully");
         toast.success(`${promo?.title} has been edited`);
         setTimeout(() => {
-          router.push("/promo");
+          router.push(`/promo/${promo?.id}`);
+          setPopupOpenEdit(false);
         }, 1000);
       })
       .catch((err) => {
@@ -161,7 +162,7 @@ export default function PromoById({ promo }) {
                 </button>
               </div>
 
-              
+
             </div>
           </div>
         )}
