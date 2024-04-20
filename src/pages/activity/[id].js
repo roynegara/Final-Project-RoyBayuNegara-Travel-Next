@@ -181,15 +181,15 @@ export default function ActivityById({ activity }) {
           <div className="popup-delete-activity">
             <div></div>
             <div>
-              <p>Are you sure you want to delete this destination?</p>
+              <p>Are you sure you want to delete {activity?.title} ?</p>
             </div>
 
             <div className="popup-delete-activity-btn-yes">
             <FormDeleteActivity title={`Yes`} onDelete={handleDeleteActivity} loading={loading} />
             </div>
 
-            <div>
-              <button className="popup-delete-activity-btn-no" onClick={togglePopupDelete}>Tidak</button>
+            <div className="popup-delete-activity-btn-no">
+              <button  onClick={togglePopupDelete}>Tidak</button>
 </div>
 
             </div>
