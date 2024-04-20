@@ -50,6 +50,28 @@ button {
   margin-left: 35px;
 }
 
+/* Home Start */
+.link-home {
+  margin: 25px;
+  padding: 25px;
+}
+
+.home-link {
+  text-decoration: none;
+  color: inherit;
+  background: #ededed;
+  color : black;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.home-link:hover {
+  background: green;
+  color: #ededed;
+}
+/* Home End */
+
+
 /* Register Start */
 .register {
   width: 420px;
