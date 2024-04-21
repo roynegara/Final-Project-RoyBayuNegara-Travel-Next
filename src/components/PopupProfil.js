@@ -28,16 +28,25 @@ const UpdateProfil = (props) => {
 
   const handleSubmit = () => {
 if(!name && !email && !phoneNumber){
-  toast.error("Name, email and phone number can't be empty");
+  toast.warning("Name, email, and phone number can't be empty");
   return;
+} else if (!name && !email) {
+  toast.warning("Name and email can't be empty");
+  return
+} else if (!email && !phoneNumber) {
+  toast.warning("Email and phone number can't be empty");
+  return
+} else if (!name && !phoneNumber) {
+  toast.warning("Name and phone number can't be empty");
+  return
 } else if (!name) {
-  toast.error("Name can't be empty");
+  toast.warning("Name can't be empty");
   return;
 } else if (!email) {
-  toast.error("Email can't be empty");
+  toast.warning("Email can't be empty");
   return;
 } else if (!phoneNumber) {
-  toast.error("Phone number can't be empty");
+  toast.warning("Phone number can't be empty");
   return;
 }
 
@@ -73,7 +82,15 @@ if(!name && !email && !phoneNumber){
       })
       .catch((err) => {
         console.log(err);
-        toast.error(err?.message);
+        if (
+          err?.response?.data?.errors &&
+          err?.response?.data?.errors.length > 0 &&
+          err.response.data.errors[0].message
+        ) {
+          toast.error(err.response.data.errors[0].message);
+        } else {
+          toast.error(err?.response?.data?.message);
+        }
       });
   };
 
