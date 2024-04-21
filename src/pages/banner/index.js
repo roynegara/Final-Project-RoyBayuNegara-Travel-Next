@@ -1,26 +1,22 @@
+//banner styling
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useRouter } from "next/router";
+
 import Link from "next/link";
 import PopupCreateBanner from "@/components/PopupCreateBanner";
 
+import { Carousel } from "react-bootstrap/Carousel";
+
 const Banner = () => {
   const [banners, setBanners] = useState([]);
-  // const router = useRouter();
 
   const [buttonPopupCreateBanner, setButtonPopupCreateBanner] = useState(false);
 
   const getBanners = () => {
-    // const accessToken = localStorage.getItem("access_token");
-    // if (!accessToken) {
-    //   router.push("/login");
-    // }
-
     axios
       .get("https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/banners", {
         headers: {
           apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
-          // Authorization: `Bearer ${accessToken}`,
         },
       })
       .then((res) => {
@@ -45,15 +41,7 @@ const Banner = () => {
       <div>
         {banners.map((banner, index) => (
           <div className="banners" key={index}>
-            <img
-              src={banner.imageUrl}
-              alt={banner.name}
-              // onError={(e) => {
-              //   e.target.onerror = null;
-              //   e.target.src = "fallback-mage-url";
-              // }}
-            />
-
+            <img src={banner.imageUrl} alt={banner.name} />
             <p>{banner.name}</p>
             <div>
               <Link href={`/banner/${banner.id}`}>
@@ -68,6 +56,78 @@ const Banner = () => {
 };
 
 export default Banner;
+
+// //banner sudah oke
+// import React, { useEffect, useState } from "react";
+// import axios from "axios";
+// import { useRouter } from "next/router";
+// import Link from "next/link";
+// import PopupCreateBanner from "@/components/PopupCreateBanner";
+
+// const Banner = () => {
+//   const [banners, setBanners] = useState([]);
+//   // const router = useRouter();
+
+//   const [buttonPopupCreateBanner, setButtonPopupCreateBanner] = useState(false);
+
+//   const getBanners = () => {
+//     // const accessToken = localStorage.getItem("access_token");
+//     // if (!accessToken) {
+//     //   router.push("/login");
+//     // }
+
+//     axios
+//       .get("https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/banners", {
+//         headers: {
+//           apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
+//           // Authorization: `Bearer ${accessToken}`,
+//         },
+//       })
+//       .then((res) => {
+//         console.log("res", res);
+//         setBanners(res.data.data);
+//       })
+//       .catch((err) => {
+//         console.log("err", err);
+//       });
+//   };
+
+//   useEffect(() => {
+//     getBanners();
+//   }, []);
+
+//   return (
+//     <div>
+//       <h1>Banner</h1>
+//       <button onClick={() => setButtonPopupCreateBanner(true)}>Create Banner</button>
+//       <PopupCreateBanner trigger={buttonPopupCreateBanner} setTrigger={setButtonPopupCreateBanner}></PopupCreateBanner>
+
+//       <div>
+//         {banners.map((banner, index) => (
+//           <div className="banners" key={index}>
+//             <img
+//               src={banner.imageUrl}
+//               alt={banner.name}
+//               // onError={(e) => {
+//               //   e.target.onerror = null;
+//               //   e.target.src = "fallback-mage-url";
+//               // }}
+//             />
+
+//             <p>{banner.name}</p>
+//             <div>
+//               <Link href={`/banner/${banner.id}`}>
+//                 <button>Detail</button>
+//               </Link>
+//             </div>
+//           </div>
+//         ))}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Banner;
 
 // import React, { useEffect, useState } from "react";
 // import axios from "axios";
