@@ -64,7 +64,7 @@ const Dashboard = () => {
       })
       .then((res) => {
         console.log("res", res);
-        setUser(res.data.data);
+        setUser(res.data.data); //menampilkan user yang sudah login
       })
       .catch((err) => {
         console.log("err", err);
@@ -110,19 +110,18 @@ const Dashboard = () => {
         <img  className="image-profile" src={user.profilePictureUrl} alt={user.name} />
         
         <div>
-          <main>
-            <h1>Edit Avatar</h1>
-          {/* <img
-            className="image-profile"
-            src={user.profilePictureUrl}
-            alt={user.name}
-            onClick={() => setButtonPopupImg(true)}
-          /> */}
+          <div>
+           
             <button onClick={() => setButtonPopupImg(true)}>Edit Avatar</button>
           <PopupImg trigger={buttonPopupImg}  setTrigger={setButtonPopupImg}>
-            Edit Profil
+            
             </PopupImg>
-          </main>
+          </div>
+<div><button onClick={() => setButtonPopup(true)}> Edit Profile</button>
+            <PopupProfil setUser={setUser}  trigger={buttonPopup} setTrigger={setButtonPopup}>
+              
+            </PopupProfil></div>
+          
           
         </div>
 
@@ -134,19 +133,7 @@ const Dashboard = () => {
         {notif && <p style={{ color: notif === "Status : Logout Successfully" ? "green" : "red" }}>{notif}</p>}
         <button onClick={handleLogout}>Logout</button>
 
-        <div>
-          <main>
-            <h1>Edit Your Profile</h1>
-            <button onClick={() => setButtonPopup(true)}> Popup Edit Here</button>
-            <PopupProfil setUser={setUser}  trigger={buttonPopup} setTrigger={setButtonPopup}>
-              
-            </PopupProfil>
-
-            {/* <Popup trigger={timedPopup} setTrigger={setTimedPopup}>
-              My Timed Profile
-            </Popup> */}
-          </main>
-        </div>
+       
       </div>
       <div>
         {users.map((user, index) => (

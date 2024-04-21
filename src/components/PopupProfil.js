@@ -1,34 +1,30 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "sonner";
+import { useRouter } from "next/router";
 
 const UpdateProfil = (props) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  // const [profilePictureUrl, setProfilePictureUrl] = useState("");
 
-  // const [notif, setNotif] = useState("");
+  const router = useRouter();
+
+ 
+  
 
   const handleNameChange = (e) => {
     setName(e.target.value);
-    console.log("name", e.target.value);
   };
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
-    console.log("email", e.target.value);
   };
 
   const handlePhoneNumberChange = (e) => {
     setPhoneNumber(e.target.value);
-    console.log("phoneNumber", e.target.value);
   };
 
-  // const handleProfilePictureUrlChange = (e) => {
-  //   setProfilePictureUrl(e.target.value);
-  //   console.log("profilePictureUrl", e.target.value);
-  // }
 
   const handleSubmit = () => {
 if(!name && !email && !phoneNumber){
@@ -46,30 +42,37 @@ if(!name && !email && !phoneNumber){
 }
 
 
-    const payload = {
-      name: name,
-      email: email,
-      phoneNumber: phoneNumber,
-      // profilePictureUrl: profilePictureUrl,
-    };
+
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("email", email);
+    formData.append("phoneNumber", phoneNumber);
 
     const accessToken = localStorage.getItem("access_token");
     axios
-      .post("https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/update-profile", payload, {
+      .post("https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/update-profile", formData, {
         headers: {
           apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
           Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "multipart/form-data",
         },
       })
       .then((res) => {
-        console.log("res", res);
-        // setNotif(res?.data?.message);
-        toast.success(res?.data?.message);
-        // props.setUser(res?.data?.data);
+        console.log('res', res)
+        toast.success('Profile has been updated');
+
+        router.push(`/dashboard`, undefined, { shallow: false }).then((success) => {
+          if (success) {
+            setTimeout(() => {
+              
+              window.location.reload(); 
+            },1000)
+          }
+        });
+
       })
       .catch((err) => {
-        console.log("err", err);
-        // setNotif(err?.message);
+        console.log(err);
         toast.error(err?.message);
       });
   };
@@ -90,13 +93,10 @@ if(!name && !email && !phoneNumber){
           <label>Phone Number:</label>
           <input type="text" name="phoneNumber" value={phoneNumber} onChange={handlePhoneNumberChange} />
         </div>
-        {/* <div>
-          <label>Profile Picture Url:</label>
-          <input type="text" name="profilePictureUrl" value={profilePictureUrl} onChange={handleProfilePictureUrlChange} />
-        </div> */}
+       
         <div>
-          {/* <p>{notif}</p> */}
-          <button type="submit" onClick={handleSubmit}>
+         
+          <button type="button" onClick={handleSubmit}>
             Update
           </button>
         </div>
@@ -114,6 +114,233 @@ if(!name && !email && !phoneNumber){
 };
 
 export default UpdateProfil;
+
+
+
+// import React, { useState } from "react";
+// import axios from "axios";
+// import { toast } from "sonner";
+
+// const UpdateProfil = (props) => {
+//   const [name, setName] = useState("");
+//   const [email, setEmail] = useState("");
+//   const [phoneNumber, setPhoneNumber] = useState("");
+ 
+ 
+
+//   const handleNameChange = (e) => {
+//     setName(e.target.value);
+//     console.log("name", e.target.value);
+//   };
+
+//   const handleEmailChange = (e) => {
+//     setEmail(e.target.value);
+//     console.log("email", e.target.value);
+//   };
+
+//   const handlePhoneNumberChange = (e) => {
+//     setPhoneNumber(e.target.value);
+//     console.log("phoneNumber", e.target.value);
+//   };
+
+ 
+
+//   const handleSubmit = () => {
+// if(!name && !email && !phoneNumber){
+//   toast.error("Name, email and phone number can't be empty");
+//   return;
+// } else if (!name) {
+//   toast.error("Name can't be empty");
+//   return;
+// } else if (!email) {
+//   toast.error("Email can't be empty");
+//   return;
+// } else if (!phoneNumber) {
+//   toast.error("Phone number can't be empty");
+//   return;
+// }
+
+
+//     const payload = {
+//       name: name,
+//       email: email,
+//       phoneNumber: phoneNumber,
+      
+//     };
+
+//     const accessToken = localStorage.getItem("access_token");
+//     axios
+//       .post("https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/update-profile", payload, {
+//         headers: {
+//           apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
+//           Authorization: `Bearer ${accessToken}`,
+//         },
+//       })
+//       .then((res) => {
+//         console.log("res", res);
+//         toast.success('Profile has been updated');
+        
+//       })
+//       .catch((err) => {
+//         console.log("err", err);
+//         toast.error(err?.message);
+//       });
+//   };
+
+//   return props.trigger ? (
+//     <div className="popup">
+//       <h1> Update Profile</h1>
+//       <form>
+//         <div>
+//           <label>Name:</label>
+//           <input type="text" name="name" value={name} onChange={handleNameChange} />
+//         </div>
+//         <div>
+//           <label>Email:</label>
+//           <input type="email" name="email" value={email} onChange={handleEmailChange} />
+//         </div>
+//         <div>
+//           <label>Phone Number:</label>
+//           <input type="text" name="phoneNumber" value={phoneNumber} onChange={handlePhoneNumberChange} />
+//         </div>
+        
+//         <div>
+         
+//           <button type="submit" onClick={handleSubmit}>
+//             Update
+//           </button>
+//         </div>
+//       </form>
+
+//       <button className="btn-close-popup" onClick={() => props.setTrigger(false)}>
+//         {" "}
+//         X{" "}
+//       </button>
+//       {props.children}
+//     </div>
+//   ) : (
+//     ""
+//   );
+// };
+
+// export default UpdateProfil;
+
+
+// //ada notif jika tdak ada field yg diisi
+// import React, { useState } from "react";
+// import axios from "axios";
+// import { toast } from "sonner";
+
+// const UpdateProfil = (props) => {
+//   const [name, setName] = useState("");
+//   const [email, setEmail] = useState("");
+//   const [phoneNumber, setPhoneNumber] = useState("");
+
+
+//   const handleNameChange = (e) => {
+//     setName(e.target.value);
+//     console.log("name", e.target.value);
+//   };
+
+//   const handleEmailChange = (e) => {
+//     setEmail(e.target.value);
+//     console.log("email", e.target.value);
+//   };
+
+//   const handlePhoneNumberChange = (e) => {
+//     setPhoneNumber(e.target.value);
+//     console.log("phoneNumber", e.target.value);
+//   };
+
+
+//   const handleSubmit = () => {
+// if(!name && !email && !phoneNumber){
+//   toast.error("Name, email and phone number can't be empty");
+//   return;
+// } else if (!name) {
+//   toast.error("Name can't be empty");
+//   return;
+// } else if (!email) {
+//   toast.error("Email can't be empty");
+//   return;
+// } else if (!phoneNumber) {
+//   toast.error("Phone number can't be empty");
+//   return;
+// }
+
+
+//     const payload = {
+//       name: name,
+//       email: email,
+//       phoneNumber: phoneNumber,
+
+//     };
+
+//     const accessToken = localStorage.getItem("access_token");
+//     axios
+//       .post("https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/update-profile", payload, {
+//         headers: {
+//           apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
+//           Authorization: `Bearer ${accessToken}`,
+//         },
+//       })
+//       .then((res) => {
+//         console.log("res", res);
+
+//         toast.success(res?.data?.message);
+//       //   router.push(`/dashboard`, undefined, { shallow: false }).then((success) => {
+//       //     if (success) {
+//       //       setTimeout(() => {
+              
+//       //         window.location.reload(); 
+//       //       },1000)
+//       //     }
+//       //   });
+//       })
+//       .catch((err) => {
+//         console.log("err", err);
+    
+//         toast.error(err?.message);
+//       });
+//   };
+
+//   return props.trigger ? (
+//     <div className="popup">
+//       <h1> Update Profile</h1>
+//       <form>
+//         <div>
+//           <label>Name:</label>
+//           <input type="text" name="name" value={name} onChange={handleNameChange} />
+//         </div>
+//         <div>
+//           <label>Email:</label>
+//           <input type="email" name="email" value={email} onChange={handleEmailChange} />
+//         </div>
+//         <div>
+//           <label>Phone Number:</label>
+//           <input type="text" name="phoneNumber" value={phoneNumber} onChange={handlePhoneNumberChange} />
+//         </div>
+      
+//         <div>
+//           {/* <p>{notif}</p> */}
+//           <button type="submit" onClick={handleSubmit}>
+//             Update
+//           </button>
+//         </div>
+//       </form>
+
+//       <button className="btn-close-popup" onClick={() => props.setTrigger(false)}>
+//         {" "}
+//         X{" "}
+//       </button>
+//       {props.children}
+//     </div>
+//   ) : (
+//     ""
+//   );
+// };
+
+// export default UpdateProfil;
 
 
 // cara lain

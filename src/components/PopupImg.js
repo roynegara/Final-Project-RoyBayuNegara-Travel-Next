@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "sonner";
+import { useRouter } from "next/router";
 
 const Upload = (props) => {
   const [file, setFile] = useState('');
   const [imageUrl, setImageUrl] = useState("");
 
+  const router = useRouter();
   // const handleImageUrlChange = (e) => {
   //   setImageUrl(e.target.value);
   // };
@@ -28,9 +30,20 @@ const Upload = (props) => {
         .then((res) => {
           console.log("res", res);
           setImageUrl(res?.data?.url);
+          // toast.success(res?.data?.message);
+          toast.success('Profile picture has been updated');
+          router.push(`/dashboard`, undefined, { shallow: false }).then((success) => {
+            if (success) {
+              setTimeout(() => {
+                
+                window.location.reload(); 
+              },1000)
+            }
+          });
         })
         .catch((err) => {
           console.log("err", err);
+          toast.error(err?.response?.data?.message);
         });
     }
   };
@@ -44,6 +57,12 @@ const Upload = (props) => {
   };
 
   const handleUpload = () => {
+if (!file) {
+  toast.warning("Please select an image");
+  return;
+}
+
+
     const formData = new FormData();
     formData.append("image", file);
 
@@ -63,18 +82,20 @@ const Upload = (props) => {
       )
       .then((res) => {
         console.log(res);
-        setImageUrl(res.data.url); 
-        toast.success(res?.data?.message)
-      })
+        setImageUrl(res.data.url);
+        // toast.success(res?.data?.message);
+       
+       
+})
       .catch((err) => {
         console.log(err);
-        toast.error(err?.response?.data?.message)
+        // toast.error(err?.response?.data?.message)
       });
   };
 
   return props.trigger ? (
     <div className="popupImg">
-      <h1>Upload</h1>
+      <h1>Edit Avatar</h1>
       {/* <img src={imageUrl} alt="Uploaded" /> */}
       <input onChange={handleFileChange} type="file" />
       <button onClick={handleUpload}>Upload</button>
