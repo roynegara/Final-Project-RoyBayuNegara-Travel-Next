@@ -13,6 +13,7 @@ export default function Home() {
   const [banners, setBanners] = useState([]);
   const [promos, setPromos] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [activities, setActivities] = useState([]);
 
   const getBanners = () => {
     axios
@@ -66,10 +67,29 @@ export default function Home() {
       });
   };
 
+  const getActivities = () => {
+    const accessToken = localStorage.getItem("accessToken");
+    axios
+      .get("https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/activities", {
+        headers: {
+          apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
+      .then((res) => {
+        console.log("res", res);
+        setActivities(res.data.data);
+      })
+      .catch((err) => {
+        console.log("err", err);
+      });
+  };
+
   useEffect(() => {
     getBanners();
     getPromos();
     getCategories();
+    getActivities();
   }, []);
 
   return (
@@ -105,7 +125,9 @@ export default function Home() {
         <div className="banners-container">
           {banners.map((banner, index) => (
             <div className="banners" key={index}>
-              <img src={banner.imageUrl} alt={banner.name} />
+              <Link href={`/banner/${banner.id}`}>
+                <img src={banner.imageUrl} alt={banner.name} />
+              </Link>
               <p>{banner.name}</p>
             </div>
           ))}
@@ -117,7 +139,9 @@ export default function Home() {
         <div className="promos-container">
           {promos.map((promo, index) => (
             <div className="promos" key={index}>
-              <img src={promo.imageUrl} alt={promo.title} />
+              <Link href={`/promo/${promo.id}`}>
+                <img src={promo.imageUrl} alt={promo.title} />
+              </Link>
               <p>{promo.title}</p>
             </div>
           ))}
@@ -129,13 +153,30 @@ export default function Home() {
         <div className="categories-container">
           {categories.map((category, index) => (
             <div className="categories" key={index}>
-              <img src={category.imageUrl} alt={category.name} />
+              <Link href={`/category/${category.id}`}>
+                <img src={category.imageUrl} alt={category.name} />
+              </Link>
+            </div>
+          ))}
+        </div>
+      </div>
 
-              <div>
-                <Link href={`/category/${category.id}`}>
-                  <button>{category.name}</button>
-                </Link>
-              </div>
+      <div className="activities-home">
+        <h1>Top Destination</h1>
+        <div className="activities-container">
+          {activities.map((activity, index) => (
+            <div className="activities" key={index}>
+              <h3>{activity.title}</h3>
+              <Link href={`/activity/${activity.id}`}>
+                <img
+                  src={
+                    activity.imageUrls?.[0] && activity.imageUrls?.[1]
+                      ? activity.imageUrls?.[1]
+                      : activity.imageUrls?.[0]
+                  }
+                  alt={activity.title}
+                />
+              </Link>
             </div>
           ))}
         </div>
