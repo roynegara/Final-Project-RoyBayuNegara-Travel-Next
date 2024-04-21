@@ -6,9 +6,9 @@ const Upload = (props) => {
   const [file, setFile] = useState('');
   const [imageUrl, setImageUrl] = useState("");
 
-  const handleImageUrlChange = (e) => {
-    setImageUrl(e.target.value);
-  };
+  // const handleImageUrlChange = (e) => {
+  //   setImageUrl(e.target.value);
+  // };
 
   const handleSubmit = () => {
     if (imageUrl) {
@@ -68,6 +68,7 @@ const Upload = (props) => {
       })
       .catch((err) => {
         console.log(err);
+        toast.error(err?.response?.data?.message)
       });
   };
 

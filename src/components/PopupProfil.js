@@ -1,76 +1,76 @@
-
 import React, { useState } from "react";
 import axios from "axios";
+import { toast } from "sonner";
 
 const UpdateProfil = (props) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [notif, setNotif] = useState("");
-  const [profilePictureUrl, setProfilePictureUrl] = useState("");
-  
+  // const [profilePictureUrl, setProfilePictureUrl] = useState("");
+
+  // const [notif, setNotif] = useState("");
 
   const handleNameChange = (e) => {
     setName(e.target.value);
+    console.log("name", e.target.value);
   };
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
+    console.log("email", e.target.value);
   };
 
   const handlePhoneNumberChange = (e) => {
     setPhoneNumber(e.target.value);
+    console.log("phoneNumber", e.target.value);
   };
 
-  const handleUpload = (e) => {
-    const file = e.target.files[0];
-    const formData = new FormData();
-    formData.append("image", file);
-
-    const accessToken = localStorage.getItem("access_token");
-    const config = {
-      headers: {
-        "Content-Type": "multipart/form-data",
-        Authorization: `Bearer ${accessToken}`,
-        apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
-      },
-    };
-
-    axios
-      .post("https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/upload-image", formData, config)
-      .then((res) => {
-        setProfilePictureUrl(res.data.url);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  // const handleProfilePictureUrlChange = (e) => {
+  //   setProfilePictureUrl(e.target.value);
+  //   console.log("profilePictureUrl", e.target.value);
+  // }
 
   const handleSubmit = () => {
-    const formData = new FormData();
-    formData.append("name", name);
-    formData.append("email", email);
-    formData.append("phoneNumber", phoneNumber);
+if(!name && !email && !phoneNumber){
+  toast.error("Name, email and phone number can't be empty");
+  return;
+} else if (!name) {
+  toast.error("Name can't be empty");
+  return;
+} else if (!email) {
+  toast.error("Email can't be empty");
+  return;
+} else if (!phoneNumber) {
+  toast.error("Phone number can't be empty");
+  return;
+}
+
+
+    const payload = {
+      name: name,
+      email: email,
+      phoneNumber: phoneNumber,
+      // profilePictureUrl: profilePictureUrl,
+    };
 
     const accessToken = localStorage.getItem("access_token");
     axios
-      .post("https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/update-profile", formData, {
+      .post("https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/update-profile", payload, {
         headers: {
           apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
           Authorization: `Bearer ${accessToken}`,
-          "Content-Type": "multipart/form-data",
         },
       })
       .then((res) => {
-        const newProfilePictureUrl = res?.data?.url;
-        if (newProfilePictureUrl) {
-          setProfilePictureUrl(newProfilePictureUrl);
-        }
-        setNotif(res?.data?.message);
+        console.log("res", res);
+        // setNotif(res?.data?.message);
+        toast.success(res?.data?.message);
+        // props.setUser(res?.data?.data);
       })
       .catch((err) => {
-        console.log(err);
-        setNotif(err?.message);
+        console.log("err", err);
+        // setNotif(err?.message);
+        toast.error(err?.message);
       });
   };
 
@@ -90,13 +90,13 @@ const UpdateProfil = (props) => {
           <label>Phone Number:</label>
           <input type="text" name="phoneNumber" value={phoneNumber} onChange={handlePhoneNumberChange} />
         </div>
+        {/* <div>
+          <label>Profile Picture Url:</label>
+          <input type="text" name="profilePictureUrl" value={profilePictureUrl} onChange={handleProfilePictureUrlChange} />
+        </div> */}
         <div>
-          <label>Profile Picture:</label>
-          <input type="file" name="profilePictureUrl" onChange={handleUpload} />
-        </div>
-        <div>
-          <p>{notif}</p>
-          <button type="button" onClick={handleSubmit}>
+          {/* <p>{notif}</p> */}
+          <button type="submit" onClick={handleSubmit}>
             Update
           </button>
         </div>
@@ -114,6 +114,124 @@ const UpdateProfil = (props) => {
 };
 
 export default UpdateProfil;
+
+
+// cara lain
+// import React, { useState } from "react";
+// import axios from "axios";
+
+// const UpdateProfil = (props) => {
+//   const [name, setName] = useState("");
+//   const [email, setEmail] = useState("");
+//   const [phoneNumber, setPhoneNumber] = useState("");
+//   const [notif, setNotif] = useState("");
+ 
+  
+
+//   const handleNameChange = (e) => {
+//     setName(e.target.value);
+//   };
+
+//   const handleEmailChange = (e) => {
+//     setEmail(e.target.value);
+//   };
+
+//   const handlePhoneNumberChange = (e) => {
+//     setPhoneNumber(e.target.value);
+//   };
+
+//   const handleUpload = (e) => {
+//     const file = e.target.files[0];
+//     const formData = new FormData();
+//     formData.append("image", file);
+
+//     const accessToken = localStorage.getItem("access_token");
+//     const config = {
+//       headers: {
+//         "Content-Type": "multipart/form-data",
+//         Authorization: `Bearer ${accessToken}`,
+//         apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
+//       },
+//     };
+
+//     axios
+//       .post("https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/upload-image", formData, config)
+//       .then((res) => {
+//         setProfilePictureUrl(res.data.url);
+//       })
+//       .catch((err) => {
+//         console.log(err);
+//       });
+//   };
+
+//   const handleSubmit = () => {
+//     const formData = new FormData();
+//     formData.append("name", name);
+//     formData.append("email", email);
+//     formData.append("phoneNumber", phoneNumber);
+
+//     const accessToken = localStorage.getItem("access_token");
+//     axios
+//       .post("https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/update-profile", formData, {
+//         headers: {
+//           apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
+//           Authorization: `Bearer ${accessToken}`,
+//           "Content-Type": "multipart/form-data",
+//         },
+//       })
+//       .then((res) => {
+//         const newProfilePictureUrl = res?.data?.url;
+//         if (newProfilePictureUrl) {
+//           setProfilePictureUrl(newProfilePictureUrl);
+//         }
+//         setNotif(res?.data?.message);
+//       })
+//       .catch((err) => {
+//         console.log(err);
+//         setNotif(err?.message);
+//       });
+//   };
+
+//   return props.trigger ? (
+//     <div className="popup">
+//       <h1> Update Profile</h1>
+//       <form>
+//         <div>
+//           <label>Name:</label>
+//           <input type="text" name="name" value={name} onChange={handleNameChange} />
+//         </div>
+//         <div>
+//           <label>Email:</label>
+//           <input type="email" name="email" value={email} onChange={handleEmailChange} />
+//         </div>
+//         <div>
+//           <label>Phone Number:</label>
+//           <input type="text" name="phoneNumber" value={phoneNumber} onChange={handlePhoneNumberChange} />
+//         </div>
+//         <div>
+//           <label>Profile Picture:</label>
+//           <input type="file" name="profilePictureUrl" onChange={handleUpload} />
+//         </div>
+//         <div>
+//           <p>{notif}</p>
+//           <button type="button" onClick={handleSubmit}>
+//             Update
+//           </button>
+//         </div>
+//       </form>
+
+//       <button className="btn-close-popup" onClick={() => props.setTrigger(false)}>
+//         {" "}
+//         X{" "}
+//       </button>
+//       {props.children}
+//     </div>
+//   ) : (
+//     ""
+//   );
+// };
+
+// export default UpdateProfil;
 
 
 
