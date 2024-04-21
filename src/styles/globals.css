@@ -486,6 +486,18 @@ button {
 }
 
 
+.categories-container {
+  display: flex;
+  
+}
+
+.categories-container img {
+  /* width: 100%; */
+  transition: transform 0.5s ease;
+  padding: 5px;
+  border-radius: 15px;
+}
+
 
 
 /* Category End */

@@ -12,6 +12,7 @@ export default function Home() {
   const router = useRouter();
   const [banners, setBanners] = useState([]);
   const [promos, setPromos] = useState([]);
+  const [categories, setCategories] = useState([]);
 
   const getBanners = () => {
     axios
@@ -47,9 +48,28 @@ export default function Home() {
       });
   };
 
+  const getCategories = () => {
+    const accessToken = localStorage.getItem("access_token");
+    axios
+      .get("https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/categories", {
+        headers: {
+          apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
+      .then((res) => {
+        console.log("res", res);
+        setCategories(res.data.data);
+      })
+      .catch((err) => {
+        console.log("err", err);
+      });
+  };
+
   useEffect(() => {
     getBanners();
     getPromos();
+    getCategories();
   }, []);
 
   return (
@@ -80,17 +100,16 @@ export default function Home() {
         </Link>
       </div>
 
-      
-        <div className="banners-home">
+      <div className="banners-home">
         <h1>From Indonesia To The World</h1>
-          <div className="banners-container">
-            {banners.map((banner, index) => (
-              <div className="banners" key={index}>
-                <img src={banner.imageUrl} alt={banner.name} />
-                <p>{banner.name}</p>
-              </div>
-            ))}
-          </div>     
+        <div className="banners-container">
+          {banners.map((banner, index) => (
+            <div className="banners" key={index}>
+              <img src={banner.imageUrl} alt={banner.name} />
+              <p>{banner.name}</p>
+            </div>
+          ))}
+        </div>
       </div>
 
       <div className="promos-home">
@@ -99,15 +118,28 @@ export default function Home() {
           {promos.map((promo, index) => (
             <div className="promos" key={index}>
               <img src={promo.imageUrl} alt={promo.title} />
-              <p>{promo.title}</p>              
+              <p>{promo.title}</p>
             </div>
           ))}
         </div>
       </div>
 
+      <div className="categories-home">
+        <h1>Explore The World and Enhance Your Trip</h1>
+        <div className="categories-container">
+          {categories.map((category, index) => (
+            <div className="categories" key={index}>
+              <img src={category.imageUrl} alt={category.name} />
 
-
-
+              <div>
+                <Link href={`/category/${category.id}`}>
+                  <button>{category.name}</button>
+                </Link>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
