@@ -11,6 +11,7 @@ import axios from "axios";
 export default function Home() {
   const router = useRouter();
   const [banners, setBanners] = useState([]);
+  const [promos, setPromos] = useState([]);
 
   const getBanners = () => {
     axios
@@ -28,8 +29,27 @@ export default function Home() {
       });
   };
 
+  const getPromos = () => {
+    // const accessToken = localStorage.getItem("access_token");
+    axios
+      .get("https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/promos", {
+        headers: {
+          apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
+          // Authorization: `Bearer ${accessToken}`,
+        },
+      })
+      .then((res) => {
+        console.log("res", res);
+        setPromos(res.data.data);
+      })
+      .catch((err) => {
+        console.log("err", err);
+      });
+  };
+
   useEffect(() => {
     getBanners();
+    getPromos();
   }, []);
 
   return (
@@ -60,18 +80,34 @@ export default function Home() {
         </Link>
       </div>
 
-      <div className="banners-home">
-        <div className="banners-container">
-          <div className="banners-slider ">
+      
+        <div className="banners-home">
+        <h1>From Indonesia To The World</h1>
+          <div className="banners-container">
             {banners.map((banner, index) => (
               <div className="banners" key={index}>
                 <img src={banner.imageUrl} alt={banner.name} />
                 <p>{banner.name}</p>
               </div>
             ))}
-          </div>
+          </div>     
+      </div>
+
+      <div className="promos-home">
+        <h1>Enjoy Your Trip With Our Promo</h1>
+        <div className="promos-container">
+          {promos.map((promo, index) => (
+            <div className="promos" key={index}>
+              <img src={promo.imageUrl} alt={promo.title} />
+              <p>{promo.title}</p>              
+            </div>
+          ))}
         </div>
       </div>
+
+
+
+
     </div>
   );
 }

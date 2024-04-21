@@ -257,18 +257,14 @@ button {
   transform: translate(80%, -100%);
 }
 
-.banners-container {
-  width: 100%;
-  overflow: hidden;
-  position: relative;
-}
 
-.banners-slider {
+
+.banners-container {
   display: flex;
   
 }
 
-.banners-slider img {
+.banners-container img {
   width: 800px;
   transition: transform 0.5s ease;
   padding: 5px;
@@ -374,6 +370,18 @@ button {
   transform: translate(80%, -100%);
 }
 
+
+.promos-container {
+  display: flex;
+  
+}
+
+.promos-container img {
+  width: 800px;
+  transition: transform 0.5s ease;
+  padding: 5px;
+  border-radius: 15px;
+}
 
 /* Promo End */
 
