@@ -36,9 +36,18 @@ const Login = () => {
         setNotif("Status : " + res?.data?.message);
         const token = res?.data?.token;
         localStorage.setItem("access_token", token);
+
         setTimeout(() => {
-          router.push("/dashboard");
-        }, 1500);
+          router.push('/')
+          window.location.reload()
+        },1000)
+        // router.}push("/", undefined, { shallow: true }).then((success) => {
+        //   if (success) {
+        //     setTimeout(() => {
+        //       window.location.reload()
+        //     },1000)
+        //   }
+        // })
       })
       .catch((err) => {
         console.log("error", err?.response);

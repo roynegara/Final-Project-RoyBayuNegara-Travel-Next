@@ -1,6 +1,23 @@
-import { createStore } from "redux";
-import authReducer from "./reducers";
+// store.js
+// import { createStore } from "redux";
+// import rootReducer from "./rootReducer";
 
-const store = createStore(authReducer);
+// const store = createStore(rootReducer);
 
-export default store
+// export default store;
+
+
+
+
+import { createStore, combineReducers } from "redux";
+import authReducer from "@/Redux/features/authSlice";
+
+// Gabungkan reducer menjadi satu root reducer
+const rootReducer = combineReducers({
+  auth: authReducer,
+});
+
+// Buat store dengan root reducer
+const store = createStore(rootReducer);
+
+export default store;

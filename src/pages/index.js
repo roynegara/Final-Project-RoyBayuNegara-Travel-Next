@@ -1,8 +1,3 @@
-// import Image from "next/image";
-// import { Inter } from "next/font/google";
-
-// const inter = Inter({ subsets: ["latin"] });
-
 import { useRouter } from "next/router";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
@@ -96,7 +91,7 @@ export default function Home() {
   
 
   return (
-    <div>
+    <div className="home">
       <div className="banners-home">
         <h1>From Indonesia To The World</h1>
         <div className="banners-container">
