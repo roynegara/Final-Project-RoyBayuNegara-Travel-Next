@@ -5,7 +5,7 @@ const Users = () => {
     const [users, setUsers] = useState([]);
     const [currentPage, setCurrentPage] = useState(1); // Track current page
     const [totalPages, setTotalPages] = useState(0); // Track total pages
-    const itemsPerPage = 14; // Number of items per page
+    const itemsPerPage = 16; // Number of items per page
     const paginationRange = 10; // Number of page buttons to display
 
     useEffect(() => {
@@ -30,11 +30,21 @@ const Users = () => {
         };
 
         getUsers();
-    }, [currentPage]); // Call useEffect whenever currentPage changes
+    }, [currentPage, itemsPerPage]); // Call useEffect whenever currentPage or itemsPerPage changes
 
     // Function to handle pagination
     const goToPage = (page) => {
         setCurrentPage(page);
+    };
+
+    // Function to go to the first page
+    const goToFirstPage = () => {
+        setCurrentPage(1);
+    };
+
+    // Function to go to the last page
+    const goToLastPage = () => {
+        setCurrentPage(totalPages);
     };
 
     // Generate page numbers
@@ -57,7 +67,8 @@ const Users = () => {
                     <p>Phone Number : {user.phoneNumber}</p>           
                 </div>
             ))}
-            <div>
+            <div className="pagination">
+                <button onClick={goToFirstPage} disabled={currentPage === 1}>Start</button>
                 <button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>Previous</button>
                 {pageNumbers.map((number) => (
                     <span
@@ -69,12 +80,176 @@ const Users = () => {
                     </span>
                 ))}
                 <button onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === totalPages}>Next</button>
+                <button onClick={goToLastPage} disabled={currentPage === totalPages}>End</button>
             </div>
         </div>
     );
 }
 
 export default Users;
+
+
+
+////pagination berada diluar map.users
+// import axios from "axios";
+// import React, { useState, useEffect } from "react";
+
+// const Users = () => {
+//     const [users, setUsers] = useState([]);
+//     const [currentPage, setCurrentPage] = useState(1); // Track current page
+//     const [totalPages, setTotalPages] = useState(0); // Track total pages
+//     const itemsPerPage = 16; // Number of items per page
+//     const paginationRange = 10; // Number of page buttons to display
+
+//     useEffect(() => {
+//         const getUsers = async () => {
+//             try {
+//                 const accessToken = localStorage.getItem("access_token");
+//                 const response = await axios.get("https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/all-user", {
+//                     headers: {
+//                         apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
+//                         Authorization: `Bearer ${accessToken}`,
+//                     },
+//                 });
+//                 const totalUsers = response.data.data.length;
+//                 setTotalPages(Math.ceil(totalUsers / itemsPerPage));
+//                 const startIndex = (currentPage - 1) * itemsPerPage;
+//                 const endIndex = currentPage * itemsPerPage;
+//                 const usersForPage = response.data.data.slice(startIndex, endIndex);
+//                 setUsers(usersForPage);
+//             } catch (error) {
+//                 console.error("Error fetching users:", error);
+//             }
+//         };
+
+//         getUsers();
+//     }, [currentPage, itemsPerPage]); // Call useEffect whenever currentPage or itemsPerPage changes
+
+//     // Function to handle pagination
+//     const goToPage = (page) => {
+//         setCurrentPage(page);
+//     };
+
+//     // Generate page numbers
+//     const pageNumbers = [];
+//     const startPage = Math.max(1, currentPage - Math.floor(paginationRange / 2));
+//     const endPage = Math.min(totalPages, startPage + paginationRange - 1);
+//     for (let i = startPage; i <= endPage; i++) {
+//         pageNumbers.push(i);
+//     }
+
+//     return (
+//         <div className="users">
+//             {users.map((user, index) => (
+//                 <div key={index}>
+//                     <img className="image-users" src={user.profilePictureUrl} alt={user.name} />
+//                     <p>User Id : {user.id}</p>
+//                     <p>Name : {user.name}</p>
+//                     <p>Email : {user.email}</p>
+//                     <p>Role : {user.role}</p>
+//                     <p>Phone Number : {user.phoneNumber}</p>           
+//                 </div>
+//             ))}
+           
+//             <div className="pagination">
+//                 <button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>Previous</button>
+//                 {pageNumbers.map((number) => (
+//                     <span
+//                         key={number}
+//                         onClick={() => goToPage(number)}
+//                         style={{ cursor: 'pointer', margin: '0 5px', fontWeight: currentPage === number ? 'bold' : 'normal' }}
+//                     >
+//                         {number}
+//                     </span>
+//                 ))}
+//                 <button onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === totalPages}>Next</button>
+//             </div>
+//         </div>
+//     );
+// }
+
+// export default Users;
+
+
+
+//// pagination msh 14 dan gabung ke map.users
+// import axios from "axios";
+// import React, { useState, useEffect } from "react";
+
+// const Users = () => {
+//     const [users, setUsers] = useState([]);
+//     const [currentPage, setCurrentPage] = useState(1); // Track current page
+//     const [totalPages, setTotalPages] = useState(0); // Track total pages
+//     const itemsPerPage = 16; // Number of items per page
+//     const paginationRange = 10; // Number of page buttons to display
+
+//     useEffect(() => {
+//         const getUsers = async () => {
+//             try {
+//                 const accessToken = localStorage.getItem("access_token");
+//                 const response = await axios.get("https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/all-user", {
+//                     headers: {
+//                         apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
+//                         Authorization: `Bearer ${accessToken}`,
+//                     },
+//                 });
+//                 const totalUsers = response.data.data.length;
+//                 setTotalPages(Math.ceil(totalUsers / itemsPerPage));
+//                 const startIndex = (currentPage - 1) * itemsPerPage;
+//                 const endIndex = currentPage * itemsPerPage;
+//                 const usersForPage = response.data.data.slice(startIndex, endIndex);
+//                 setUsers(usersForPage);
+//             } catch (error) {
+//                 console.error("Error fetching users:", error);
+//             }
+//         };
+
+//         getUsers();
+//     }, [currentPage]); // Call useEffect whenever currentPage changes
+
+//     // Function to handle pagination
+//     const goToPage = (page) => {
+//         setCurrentPage(page);
+//     };
+
+//     // Generate page numbers
+//     const pageNumbers = [];
+//     const startPage = Math.max(1, currentPage - Math.floor(paginationRange / 2));
+//     const endPage = Math.min(totalPages, startPage + paginationRange - 1);
+//     for (let i = startPage; i <= endPage; i++) {
+//         pageNumbers.push(i);
+//     }
+
+//     return (
+//         <div className="users">
+//             {users.map((user, index) => (
+//                 <div key={index}>
+//                     <img className="image-users" src={user.profilePictureUrl} alt={user.name} />
+//                     <p>User Id : {user.id}</p>
+//                     <p>Name : {user.name}</p>
+//                     <p>Email : {user.email}</p>
+//                     <p>Role : {user.role}</p>
+//                     <p>Phone Number : {user.phoneNumber}</p>           
+//                 </div>
+//             ))}
+//             <div>
+//                 <button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>Previous</button>
+//                 {pageNumbers.map((number) => (
+//                     <span
+//                         key={number}
+//                         onClick={() => goToPage(number)}
+//                         style={{ cursor: 'pointer', margin: '0 5px', fontWeight: currentPage === number ? 'bold' : 'normal' }}
+//                     >
+//                         {number}
+//                     </span>
+//                 ))}
+//                 <button onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === totalPages}>Next</button>
+//             </div>
+//         </div>
+//     );
+// }
+
+// export default Users;
 
 
 
