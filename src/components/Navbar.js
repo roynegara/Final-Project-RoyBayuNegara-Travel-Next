@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
-// import Logout from "@/pages/authentication/logout";
-// import Logout from "@/pages/authentication/logout";
+import LogInOut from "./LogInOut/LogInOut";
 
 export default function Navbar() {
-  const router = useRouter();
+  // const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   
 
@@ -20,15 +19,15 @@ export default function Navbar() {
         <a href="/">Luxury Travel</a>
       </div>
       <div className={`navbar-nav ${isOpen ? "active" : ""}`}>
-        <Link href="/" className={router.pathname === "/" ? "active" : ""}>
+        <Link active href="/">
           Home
         </Link>
-      
+        <Link href="/promo">Promo</Link> 
+      <LogInOut />
       </div>
       <button className="navbar-toggle" onClick={toggleMenu}>
         <span className="toggle-icon">&#9776;</span>
       </button>
-      {/* <Logout /> */}
       
     </nav>
   );

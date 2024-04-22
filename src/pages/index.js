@@ -15,6 +15,7 @@ export default function Home() {
   const [categories, setCategories] = useState([]);
   const [activities, setActivities] = useState([]);
 
+
   const getBanners = () => {
     axios
       .get("https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/banners", {
@@ -92,34 +93,10 @@ export default function Home() {
     getActivities();
   }, []);
 
+  
+
   return (
     <div>
-      <h1>Hello</h1>
-
-      <div className="link-home">
-        <Link className="home-link" href="/login">
-          Login
-        </Link>
-        <Link className="home-link" href="/register">
-          Register
-        </Link>
-        <Link className="home-link" href="/dashboard">
-          Dashboard
-        </Link>
-        <Link className="home-link" href="/banner">
-          Banner
-        </Link>
-        <Link className="home-link" href={"/promo"}>
-          Promo
-        </Link>
-        <Link className="home-link" href="/category">
-          Category
-        </Link>
-        <Link className="home-link" href="/activity">
-          Destination
-        </Link>
-      </div>
-
       <div className="banners-home">
         <h1>From Indonesia To The World</h1>
         <div className="banners-container">
@@ -134,7 +111,31 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="promos-home">
+      
+      <div>
+        <h1>Enjoy Your Trip With Our Promo</h1>
+        <div className="wrapper">
+          <i id="left" class="fa-solid fa-angle-left"></i>
+          <ul className="carousel">
+            {promos.map((promo, index) => (
+              <li className="card" key={index}>
+                <div className="img">
+                  <img src={promo.imageUrl} alt={promo.title} />
+                </div>
+                <h2>{promo.title}</h2>
+                <p>{promo.description}</p>
+                <p>{promo.code}</p>
+                <p>IDR {promo.promo_discount_price}</p>
+              </li>
+            ))}
+          </ul>
+          <i id="right" class="fa-solid fa-angle-right"></i>
+        </div>
+      </div>
+
+      
+      
+      {/* <div className="promos-home">
         <h1>Enjoy Your Trip With Our Promo</h1>
         <div className="promos-container">
           {promos.map((promo, index) => (
@@ -146,7 +147,7 @@ export default function Home() {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
 
       <div className="categories-home">
         <h1>Explore The World and Enhance Your Trip</h1>

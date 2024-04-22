@@ -3,7 +3,121 @@
 body {
   background: #081b29;
   color: #ededed;
+
+  /* display: flex;
+  padding: 0 35px;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(to left top, #031a9a, #8b53ff); */
 }
+
+/* Unit testing Start */
+
+.wrapper {
+  max-width: 1100px;
+  width: 100%;
+  position: relative;
+}
+.wrapper i {
+  top: 50%;
+  height: 50px;
+  width: 50px;
+  cursor: pointer;
+  font-size: 1.25rem;
+  position: absolute;
+  text-align: center;
+  line-height: 50px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.23);
+  transform: translateY(-50%);
+  transition: transform 0.1s linear;
+}
+.wrapper i:active {
+  transform: translateY(-50%) scale(0.85);
+}
+.wrapper i:first-child {
+  left: -22px;
+}
+.wrapper i:last-child {
+  right: -22px;
+}
+.wrapper .carousel {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% / 3) - 12px);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 16px;
+  border-radius: 8px;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+.carousel::-webkit-scrollbar {
+  display: none;
+}
+.carousel.no-transition {
+  scroll-behavior: auto;
+}
+.carousel.dragging {
+  scroll-snap-type: none;
+  scroll-behavior: auto;
+}
+.carousel.dragging .card {
+  cursor: grab;
+  user-select: none;
+}
+.carousel :where(.card, .img) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.carousel .card {
+  scroll-snap-align: start;
+  height: 342px;
+  list-style: none;
+  background: #fff;
+  cursor: pointer;
+  padding-bottom: 15px;
+  flex-direction: column;
+  border-radius: 8px;
+}
+.carousel .card .img {
+  background: #8b53ff;
+  height: 148px;
+  width: 148px;
+  border-radius: 50%;
+}
+.card .img img {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #fff;
+}
+.carousel .card h2 {
+  font-weight: 500;
+  font-size: 1.56rem;
+  margin: 30px 0 5px;
+}
+.carousel .card span {
+  color: #6a6d78;
+  font-size: 1.31rem;
+}
+
+@media screen and (max-width: 900px) {
+  .wrapper .carousel {
+    grid-auto-columns: calc((100% / 2) - 9px);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .wrapper .carousel {
+    grid-auto-columns: 100%;
+  }
+}
+/* Unit testing End */
 
 * {
   margin: 0;
@@ -16,26 +130,24 @@ button {
   cursor: pointer;
 }
 
+/* ========= Navbar Start ========= */
 .navbar {
   position: fixed;
-  justify-content: space-between;
-  display: flex;
   top: 0;
   left: 0;
   width: 100%;
-  background: rgba(0, 0, 0, 0.6);
+  justify-content: space-between;
+  display: flex;
+  padding: 20px 10%;
+  z-index: 2;
 }
 
 .logo a {
   text-decoration: none;
   position: relative;
   font-size: 24px;
-  color: #ededed;
   font-weight: 600;
-}
-
-.navbar-toggle {
-  display: none;
+  color: #ededed;
 }
 
 .navbar-nav {
@@ -50,6 +162,32 @@ button {
   margin-left: 35px;
 }
 
+.navbar-nav a:hover {
+  color: #b3b3b3;
+}
+
+.navbar-toggle {
+  display: none;
+}
+
+/* Loginout Start */
+.loginout,
+.loginout a {
+  text-decoration: none;
+  color: #ededed;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.loginout:hover,
+.loginout a:hover {
+  color: #b3b3b3;
+  
+}
+/* Loginout End */
+
+/* ========== Navbar End ========== */
+
 /* Home Start */
 .link-home {
   margin: 25px;
@@ -60,7 +198,7 @@ button {
   text-decoration: none;
   color: inherit;
   background: #ededed;
-  color : black;
+  color: black;
   padding: 20px;
   border-radius: 10px;
 }
@@ -70,7 +208,6 @@ button {
   color: #ededed;
 }
 /* Home End */
-
 
 /* Register Start */
 .register {
@@ -161,7 +298,9 @@ button {
   height: 300px;
 }
 
-.popup-create-banner, .popup-edit-banner, .popup-delete-banner  {
+.popup-create-banner,
+.popup-edit-banner,
+.popup-delete-banner {
   width: 420px;
   background: rgb(5, 5, 150);
   border: 2px solid rgba(255, 255, 255, 0.5);
@@ -179,7 +318,8 @@ button {
   text-align: center;
 }
 
-.btn-close-popup-create-banner, .btn-close-popup-edit-banner{
+.btn-close-popup-create-banner,
+.btn-close-popup-edit-banner {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -187,7 +327,7 @@ button {
 
 .form-edit-banner {
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   text-align: center;
 }
 
@@ -197,17 +337,14 @@ button {
   padding: 10px;
   margin-top: 10px;
   background: black;
-  color:white;
+  color: white;
   font-weight: 600;
 }
 
-.form-edit-banner button:hover{
+.form-edit-banner button:hover {
   background: black;
   color: orangered;
 }
-
-
-
 
 .popup-delete-banner {
   text-align: center;
@@ -221,14 +358,14 @@ button {
   padding: 10px;
   /* margin-top: 10px; */
   background: #ededed;
-  color:green;
+  color: green;
   font-weight: 600;
   width: 70px;
   height: 45px;
   margin: 10px;
 }
 
-.popup-delete-banner-btn-no button:hover{
+.popup-delete-banner-btn-no button:hover {
   background: green;
   color: #ededed;
 }
@@ -239,29 +376,25 @@ button {
   padding: 10px;
   /* margin-top: 10px; */
   background: #ededed;
-  color:red;
+  color: red;
   font-weight: 600;
   width: 70px;
   height: 45px;
   margin: 10px;
 }
 
-.popup-delete-banner-btn-yes button:hover{
+.popup-delete-banner-btn-yes button:hover {
   background: red;
   color: #ededed;
 }
 
-
 .popup-delete-banner > div:first-child {
-  position: absolute; 
+  position: absolute;
   transform: translate(80%, -100%);
 }
 
-
-
 .banners-container {
   display: flex;
-  
 }
 
 .banners-container img {
@@ -282,7 +415,9 @@ button {
   height: 300px;
 }
 
-.popup-create-promo, .popup-edit-promo, .popup-delete-promo  {
+.popup-create-promo,
+.popup-edit-promo,
+.popup-delete-promo {
   width: 420px;
   background: rgb(5, 5, 150);
   border: 2px solid rgba(255, 255, 255, 0.5);
@@ -293,9 +428,11 @@ button {
   position: absolute;
   top: 45%;
   left: 50%;
-  transform: translate(-50%, -50%);}
+  transform: translate(-50%, -50%);
+}
 
-.btn-close-popup-create-promo, .btn-close-popup-edit-promo {
+.btn-close-popup-create-promo,
+.btn-close-popup-edit-promo {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -303,7 +440,7 @@ button {
 
 .form-edit-promo {
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   text-align: center;
 }
 
@@ -313,11 +450,11 @@ button {
   padding: 10px;
   margin-top: 10px;
   background: black;
-  color:white;
+  color: white;
   font-weight: 600;
 }
 
-.form-edit-promo button:hover{
+.form-edit-promo button:hover {
   background: black;
   color: orangered;
 }
@@ -334,14 +471,14 @@ button {
   padding: 10px;
   /* margin-top: 10px; */
   background: #ededed;
-  color:green;
+  color: green;
   font-weight: 600;
   width: 70px;
   height: 45px;
   margin: 10px;
 }
 
-.popup-delete-promo-btn-no button:hover{
+.popup-delete-promo-btn-no button:hover {
   background: green;
   color: #ededed;
 }
@@ -352,26 +489,24 @@ button {
   padding: 10px;
   /* margin-top: 10px; */
   background: #ededed;
-  color:red;
+  color: red;
   font-weight: 600;
   width: 70px;
   height: 45px;
   margin: 10px;
 }
 
-.popup-delete-promo-btn-yes button:hover{
+.popup-delete-promo-btn-yes button:hover {
   background: red;
   color: #ededed;
 }
 
-
 .popup-delete-promo > div:first-child {
-  position: absolute; 
+  position: absolute;
   transform: translate(80%, -100%);
 }
 
-
-.promos-container {
+/* .promos-container {
   display: flex;
   
 }
@@ -381,7 +516,25 @@ button {
   transition: transform 0.5s ease;
   padding: 5px;
   border-radius: 15px;
+} */
+
+/* .promos-home-index {
+  background: white;
+  height: 450px;
+  color: #081b29;
+  border-radius: 12px;
+  
 }
+
+.promos-home-img {
+   height: 44px;
+   width: 44px;
+   border-radius: 50%;
+   display: flex;
+   
+   
+   
+} */
 
 /* Promo End */
 
@@ -395,7 +548,9 @@ button {
   height: 300px;
 }
 
-.popup-create-category, .popup-edit-category, .popup-delete-category  {
+.popup-create-category,
+.popup-edit-category,
+.popup-delete-category {
   width: 420px;
   background: rgb(5, 5, 150);
   border: 2px solid rgba(255, 255, 255, 0.5);
@@ -406,11 +561,11 @@ button {
   position: absolute;
   top: 45%;
   left: 50%;
-  transform: translate(-50%, -50%);}
+  transform: translate(-50%, -50%);
+}
 
-
-
-.btn-close-popup-create-category, .btn-close-popup-edit-category {
+.btn-close-popup-create-category,
+.btn-close-popup-edit-category {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -418,7 +573,7 @@ button {
 
 .form-edit-category {
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   text-align: center;
 }
 
@@ -428,11 +583,11 @@ button {
   padding: 10px;
   margin-top: 10px;
   background: black;
-  color:white;
+  color: white;
   font-weight: 600;
 }
 
-.form-edit-category button:hover{
+.form-edit-category button:hover {
   background: black;
   color: orangered;
 }
@@ -449,14 +604,14 @@ button {
   padding: 10px;
   /* margin-top: 10px; */
   background: #ededed;
-  color:green;
+  color: green;
   font-weight: 600;
   width: 70px;
   height: 45px;
   margin: 10px;
 }
 
-.popup-delete-category-btn-no button:hover{
+.popup-delete-category-btn-no button:hover {
   background: green;
   color: #ededed;
 }
@@ -467,28 +622,25 @@ button {
   padding: 10px;
   /* margin-top: 10px; */
   background: #ededed;
-  color:red;
+  color: red;
   font-weight: 600;
   width: 70px;
   height: 45px;
   margin: 10px;
 }
 
-.popup-delete-category-btn-yes button:hover{
+.popup-delete-category-btn-yes button:hover {
   background: red;
   color: #ededed;
 }
 
-
 .popup-delete-category > div:first-child {
-  position: absolute; 
+  position: absolute;
   transform: translate(80%, -100%);
 }
 
-
 .categories-container {
   display: flex;
-  
 }
 
 .categories-container img {
@@ -497,8 +649,6 @@ button {
   padding: 5px;
   border-radius: 15px;
 }
-
-
 
 /* Category End */
 
@@ -512,7 +662,9 @@ button {
   height: 300px;
 }
 
-.popup-create-activity, .popup-edit-activity, .popup-delete-activity  {
+.popup-create-activity,
+.popup-edit-activity,
+.popup-delete-activity {
   width: 420px;
   background: rgb(5, 5, 150);
   border: 2px solid rgba(255, 255, 255, 0.5);
@@ -523,10 +675,11 @@ button {
   position: absolute;
   top: 45%;
   left: 50%;
-  transform: translate(-50%, -50%);}
+  transform: translate(-50%, -50%);
+}
 
-  
-.btn-close-popup-create-activity, .btn-close-popup-edit-activity {
+.btn-close-popup-create-activity,
+.btn-close-popup-edit-activity {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -534,7 +687,7 @@ button {
 
 .form-edit-activity {
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   text-align: center;
 }
 
@@ -544,11 +697,11 @@ button {
   padding: 10px;
   margin-top: 10px;
   background: black;
-  color:white;
+  color: white;
   font-weight: 600;
 }
 
-.form-edit-activity button:hover{
+.form-edit-activity button:hover {
   background: black;
   color: orangered;
 }
@@ -565,14 +718,14 @@ button {
   padding: 10px;
   /* margin-top: 10px; */
   background: #ededed;
-  color:green;
+  color: green;
   font-weight: 600;
   width: 70px;
   height: 45px;
   margin: 10px;
 }
 
-.popup-delete-activity-btn-no button:hover{
+.popup-delete-activity-btn-no button:hover {
   background: green;
   color: #ededed;
 }
@@ -583,27 +736,25 @@ button {
   padding: 10px;
   /* margin-top: 10px; */
   background: #ededed;
-  color:red;
+  color: red;
   font-weight: 600;
   width: 70px;
   height: 45px;
   margin: 10px;
 }
 
-.popup-delete-activity-btn-yes button:hover{
+.popup-delete-activity-btn-yes button:hover {
   background: red;
   color: #ededed;
 }
 
-
 .popup-delete-activity > div:first-child {
-  position: absolute; 
+  position: absolute;
   transform: translate(80%, -100%);
 }
 
 .activities-container {
   display: flex;
-  
 }
 
 .activities-container img {
@@ -614,7 +765,6 @@ button {
 }
 
 /* Activity End */
-
 
 /* @tailwind base;
 @tailwind components;
