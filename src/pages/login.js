@@ -38,7 +38,7 @@ const Login = () => {
         localStorage.setItem("access_token", token);
 
         setTimeout(() => {
-          router.push("/", undefined, { shallow: true }).then((success) => {
+          router.push("/dashboard", undefined, { shallow: true }).then((success) => {
             if (success) {
               setTimeout(() => {
                 window.location.reload();

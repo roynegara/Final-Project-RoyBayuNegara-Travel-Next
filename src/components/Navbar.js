@@ -67,7 +67,8 @@ export default function Navbar() {
         <Link href="/">Home</Link>
         <Link href="/promo">Promo</Link>
         <Link href="/activity">Destination</Link>
-
+        {!isLoggedIn ?(null) :(<Link href={'/dashboard'}>Dashboard</Link>)}
+        
         {!isLoggedIn ? (
           <a href="/login">Login</a>
         ) : (
