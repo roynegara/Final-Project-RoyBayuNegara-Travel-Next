@@ -264,6 +264,9 @@ border-radius: 15px;
 }
 /* Home End */
 
+
+
+
 /* Register Start */
 .register {
   width: 420px;
@@ -341,6 +344,17 @@ border-radius: 15px;
   right: 10px;
 }
 /* Dashboard End */
+
+/* ========== Users Start ========== */
+.users {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+/* ========== Users End ==========  */
+
 
 /* Banner Start */
 .banner img {

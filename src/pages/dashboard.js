@@ -10,7 +10,10 @@ const Dashboard = () => {
   const [user, setUser] = useState({});
   const [notif, setNotif] = useState("");
   const [role, setRole] = useState("");
-  
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+
   // const [selectFile, setSelectFile] = useState('');
 
   const [buttonPopup, setButtonPopup] = useState(false);
@@ -29,10 +32,10 @@ const Dashboard = () => {
     if (!accessToken) {
       router.push("/login");
     } else {
-      getUsers();
+      getUsers(currentPage);
       getLoggedUser();
     }
-  }, []);
+  }, [currentPage]);
 
   const getUsers = () => {
     const accessToken = localStorage.getItem("access_token");
@@ -45,7 +48,8 @@ const Dashboard = () => {
       })
       .then((res) => {
         console.log("res", res);
-        setUsers(res.data.data);
+        // setUsers(res.data.data);
+        getUsers(currentPage)
       })
       .catch((err) => {
         console.log("err", err);
@@ -101,28 +105,26 @@ const Dashboard = () => {
       });
   };
 
- 
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
 
   return (
     <div>
       <h1>Dashboard</h1>
       <div className="profile">
-        <img  className="image-profile" src={user.profilePictureUrl} alt={user.name} />
-        
+        <img className="image-profile" src={user.profilePictureUrl} alt={user.name} />
+
         <div>
           <div>
-           
             <button onClick={() => setButtonPopupImg(true)}>Edit Avatar</button>
-          <PopupImg trigger={buttonPopupImg}  setTrigger={setButtonPopupImg}>
-            
-            </PopupImg>
+            <PopupImg trigger={buttonPopupImg} setTrigger={setButtonPopupImg}></PopupImg>
           </div>
-<div><button onClick={() => setButtonPopup(true)}> Edit Profile</button>
-            <PopupProfil setUser={setUser}  trigger={buttonPopup} setTrigger={setButtonPopup}>
-              
-            </PopupProfil></div>
-          
-          
+          <div>
+            <button onClick={() => setButtonPopup(true)}> Edit Profile</button>
+            <PopupProfil setUser={setUser} trigger={buttonPopup} setTrigger={setButtonPopup}></PopupProfil>
+          </div>
         </div>
 
         <p>User Id : {user.id}</p>
@@ -132,8 +134,6 @@ const Dashboard = () => {
         <p>Phone Number : {user.phoneNumber}</p>
         {notif && <p style={{ color: notif === "Status : Logout Successfully" ? "green" : "red" }}>{notif}</p>}
         <button onClick={handleLogout}>Logout</button>
-
-       
       </div>
       <div>
         {users.map((user, index) => (
@@ -156,6 +156,13 @@ const Dashboard = () => {
           </div>
         ))}
       </div>
+      <div>
+        {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+          <button key={page} onClick={() => handlePageChange(page)}>
+            {page}
+          </button>
+        ))}
+      </div>
     </div>
   );
 };
@@ -163,6 +170,161 @@ const Dashboard = () => {
 export default Dashboard;
 
 
+// //sdh benar
+// import React, { useState, useEffect } from "react";
+// import { useRouter } from "next/router";
+// import axios from "axios";
+// import PopupProfil from "@/components/PopupProfil";
+// import PopupImg from "@/components/PopupImg";
+
+// const Dashboard = () => {
+//   const router = useRouter();
+//   const [users, setUsers] = useState([]);
+//   const [user, setUser] = useState({});
+//   const [notif, setNotif] = useState("");
+//   const [role, setRole] = useState("");
+
+//   // const [selectFile, setSelectFile] = useState('');
+
+//   const [buttonPopup, setButtonPopup] = useState(false);
+//   const [buttonPopupImg, setButtonPopupImg] = useState(false);
+
+//   // const [timedPopup, setTimedPopup] = useState(false);
+
+//   // useEffect(() => {
+//   //   setTimeout(() => {
+//   //     setTimedPopup(true);
+//   //   }, 3000);
+//   // }, []);
+
+//   useEffect(() => {
+//     const accessToken = localStorage.getItem("access_token");
+//     if (!accessToken) {
+//       router.push("/login");
+//     } else {
+//       getUsers();
+//       getLoggedUser();
+//     }
+//   }, []);
+
+//   const getUsers = () => {
+//     const accessToken = localStorage.getItem("access_token");
+//     axios
+//       .get("https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/all-user", {
+//         headers: {
+//           apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
+//           Authorization: `Bearer ${accessToken}`,
+//         },
+//       })
+//       .then((res) => {
+//         console.log("res", res);
+//         setUsers(res.data.data);
+//       })
+//       .catch((err) => {
+//         console.log("err", err);
+//       });
+//   };
+
+//   const getLoggedUser = () => {
+//     const accessToken = localStorage.getItem("access_token");
+
+//     axios
+//       .get("https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/user", {
+//         headers: {
+//           apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
+//           Authorization: `Bearer ${accessToken}`,
+//         },
+//       })
+//       .then((res) => {
+//         console.log("res", res);
+//         setUser(res.data.data); //menampilkan user yang sudah login
+//       })
+//       .catch((err) => {
+//         console.log("err", err);
+//       });
+//   };
+
+//   const handleLogout = () => {
+//     localStorage.removeItem("access_token");
+//     setNotif("Status : Logout Successfully");
+//     setTimeout(() => {
+//       router.push("/login");
+//     }, 1500);
+//   };
+
+//   const handleChangeUserRole = (id, role) => {
+//     const accessToken = localStorage.getItem("access_token");
+//     axios
+//       .post(
+//         `https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/update-user-role/${id}`,
+//         { role },
+//         {
+//           headers: {
+//             apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
+//             Authorization: `Bearer ${accessToken}`,
+//           },
+//         }
+//       )
+//       .then((res) => {
+//         console.log("res", res);
+//         getUsers();
+//       })
+//       .catch((err) => {
+//         console.log("err", err);
+//       });
+//   };
+
+//   return (
+//     <div>
+//       <h1>Dashboard</h1>
+//       <div className="profile">
+//         <img className="image-profile" src={user.profilePictureUrl} alt={user.name} />
+
+//         <div>
+//           <div>
+//             <button onClick={() => setButtonPopupImg(true)}>Edit Avatar</button>
+//             <PopupImg trigger={buttonPopupImg} setTrigger={setButtonPopupImg}></PopupImg>
+//           </div>
+//           <div>
+//             <button onClick={() => setButtonPopup(true)}> Edit Profile</button>
+//             <PopupProfil setUser={setUser} trigger={buttonPopup} setTrigger={setButtonPopup}></PopupProfil>
+//           </div>
+//         </div>
+
+//         <p>User Id : {user.id}</p>
+//         <p>Name : {user.name}</p>
+//         <p>Email : {user.email}</p>
+//         <p>Role : {user.role}</p>
+//         <p>Phone Number : {user.phoneNumber}</p>
+//         {notif && <p style={{ color: notif === "Status : Logout Successfully" ? "green" : "red" }}>{notif}</p>}
+//         <button onClick={handleLogout}>Logout</button>
+//       </div>
+//       <div>
+//         {users.map((user, index) => (
+//           <div key={index}>
+//             <img className="image-users" src={user.profilePictureUrl} alt={user.name} />
+//             <p>User Id : {user.id}</p>
+//             <p>Name : {user.name}</p>
+//             <p>Email : {user.email}</p>
+//             <p>Role : {user.role}</p>
+//             <p>Phone Number : {user.phoneNumber}</p>
+//             <div>
+//               <label>Update Role : </label>
+//               <select name="role" value={role} onChange={(e) => setRole(e.target.value)}>
+//                 <option value="">-- Change Role --</option>
+//                 <option value={"admin"}>Admin</option>
+//                 <option value={"user"}>User</option>
+//               </select>
+//               <button onClick={() => handleChangeUserRole(user.id, role)}>Change Role</button>
+//             </div>
+//           </div>
+//         ))}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Dashboard;
 
 //mas muhsin
 // import React, { useState, useEffect } from "react";
@@ -270,7 +432,6 @@ export default Dashboard;
 
 //   const handleUpload = (selectFile) => {
 
-
 //     if (!selectFile) {
 //       setNotif("Please Select a File ");
 //       return;
@@ -292,7 +453,7 @@ export default Dashboard;
 //       .then((res) => {
 //         console.log("res", res);
 //         setImageUrl(res.data.url);
-//         setNotif(res.data.message);      
+//         setNotif(res.data.message);
 //               })
 //       .catch((err) => {
 //         console.log("err", err);
@@ -320,7 +481,7 @@ export default Dashboard;
 //             Edit Profil
 //             </PopupImg>
 //           </main>
-          
+
 //         </div>
 
 //         <p>User Id : {user.id}</p>
@@ -336,7 +497,7 @@ export default Dashboard;
 //             <h1>Edit Your Profile</h1>
 //             <button onClick={() => setButtonPopup(true)}> Popup Edit Here</button>
 //             <PopupProfil setUser={setUser} trigger={buttonPopup} setTrigger={setButtonPopup}>
-              
+
 //             </PopupProfil>
 
 //             {/* <Popup trigger={timedPopup} setTrigger={setTimedPopup}>
