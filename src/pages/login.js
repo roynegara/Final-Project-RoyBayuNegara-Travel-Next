@@ -38,9 +38,17 @@ const Login = () => {
         localStorage.setItem("access_token", token);
 
         setTimeout(() => {
-          router.push('/')
-          window.location.reload()
-        },1000)
+          router.push("/", undefined, { shallow: true }).then((success) => {
+            if (success) {
+              setTimeout(() => {
+                window.location.reload();
+              });
+            }
+          });
+        }, 500); // Menunggu 2 detik sebelum melakukan router push
+
+   
+        
         // router.}push("/", undefined, { shallow: true }).then((success) => {
         //   if (success) {
         //     setTimeout(() => {
