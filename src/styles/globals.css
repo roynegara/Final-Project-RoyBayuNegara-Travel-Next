@@ -388,12 +388,12 @@ border-radius: 15px;
   font-size: 30px;
   width: 500px;
   /* background: transparent; */
-  background: rgba(255, 255, 255, 0.1);
+  background: rgb(56, 143, 188, 0.4);
   border: 2px solid rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(25px);
   
   box-shadow: 0 0 10px rgba(0, 0, 0, 0, 0.2);
-  color: #b3b3b3;
+  color: #e2e2e2;
   border-radius: 10px;
   padding: 30px 40px;
   margin-left: auto;
@@ -404,7 +404,7 @@ border-radius: 15px;
   margin-top: 50px;
   width: 420px;
   /* background: transparent; */
-  background: rgba(255, 255, 255, 0.1);
+  background: rgb(56, 143, 188, 0.4);
   border: 1px solid rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(15px);
   /* filter: blur(1px); */
@@ -424,6 +424,8 @@ border-radius: 15px;
   margin-bottom: 10px;
   margin-left: auto;
   margin-right: auto;
+  border: 5px solid rgb(56, 143, 188, 0.2);
+  box-shadow:0 0 10px rgba(0, 0, 0, 0, 0.2);
 }
 
 .profile-user {
@@ -434,7 +436,7 @@ border-radius: 15px;
   margin-bottom: 10px;
   font-size: 22px;
   font-weight: 500;
-  color: #b3b3b3;
+  color:#e2e2e2;
 }
 
 .btn-profile{
@@ -445,10 +447,16 @@ border-radius: 15px;
 }
 
 .btn-profile button {
-  /* margin: 0 5px; */
   text-decoration: none;
-  color: #333;
-  background: #ededed;
+  /* color: #333;
+  background: #ededed; */
+  background: rgb(56, 143, 188, 0.4);
+
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);
+  /* filter: blur(1px); */
+  
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0, 0.2);
   border: none;
   border-radius: 4px;
   font-size: 18px;
@@ -457,6 +465,19 @@ border-radius: 15px;
   margin: 10px;
   width: 125px;
   height: 40px;
+  color:#e2e2e2;
+}
+
+.btn-profile button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);
+  /* filter: blur(1px); */
+  
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0, 0.2);
+
+  /* background: green;
+  color: #d4d4d4; */
 }
 /* ========== Profile End ========== */
 
