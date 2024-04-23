@@ -140,6 +140,13 @@ button {
   display: flex;
   padding: 20px 10%;
   z-index: 2;
+
+  background: linear-gradient(to right bottom, #56b9e7,  #003e6b);
+  /* background: rgba(255, 255, 255, 0.1); */
+  /* border: 2px solid rgba(255, 255, 255, 0.2); */
+  backdrop-filter: blur(25px);
+  
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0, 0.2);
 }
 
 .logo a {
@@ -148,6 +155,7 @@ button {
   font-size: 24px;
   font-weight: 600;
   color: #ededed;
+  
 }
 
 .navbar-nav {
@@ -234,7 +242,8 @@ border-radius: 15px;
   /* background: url("https://img.freepik.com/free-photo/mesmerizing-green-forest-full-different-kinds-unique-plants-yakushima-japan_181624-36812.jpg?t=st=1709945766~exp=1709949366~hmac=66c4f9a8be4f9976e111b33d8085882ac64096877ef13875986dac1d50aa521d&w=1380")
     no-repeat; */
 
-    background: linear-gradient(to right bottom, #081b29, green);
+    background: linear-gradient(to right bottom, #56b9e7,  #003e6b);
+    /* background: linear-gradient(195deg, #79CAF0 31%, transparent 31%); */
  ;
   background-size: cover;
   background-position: center;
@@ -354,6 +363,102 @@ border-radius: 15px;
   text-align: center;
 }
 /* ========== Users End ==========  */
+
+/* ========== Profile Start ========== */
+.profile-main {
+  /* margin-top: 100px;
+  display: block;
+  text-align: center;
+  background: linear-gradient(to right bottom, #56b9e7,  #003e6b); 
+  padding: 20px 10%; */
+
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+  background: linear-gradient(to right bottom, #208cbe,  #002946); 
+  background: url('https://img.freepik.com/free-photo/wooden-bridge-koh-nangyuan-island-surat-thani-thailand_335224-1082.jpg?t=st=1713838704~exp=1713842304~hmac=57ffbe528ff92181c489954087848c16ccc6ab750a398a579d9661a02f322bc7&w=1380'), no-repeat;
+  background-size: cover;
+  background-position: center;
+  padding: 20px 10%;
+}
+
+.profile-title{
+  margin-top: 100px;
+  font-size: 30px;
+  width: 500px;
+  /* background: transparent; */
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(25px);
+  
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0, 0.2);
+  color: #b3b3b3;
+  border-radius: 10px;
+  padding: 30px 40px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.profile-card {
+  margin-top: 50px;
+  width: 420px;
+  /* background: transparent; */
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);
+  /* filter: blur(1px); */
+  
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0, 0.2);
+  color: #ededed;
+  border-radius: 10px;
+  padding: 30px 40px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.image-profile{
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.profile-user {
+  display: block;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
+  font-size: 22px;
+  font-weight: 500;
+  color: #b3b3b3;
+}
+
+.btn-profile{
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  display: flex;
+}
+
+.btn-profile button {
+  /* margin: 0 5px; */
+  text-decoration: none;
+  color: #333;
+  background: #ededed;
+  border: none;
+  border-radius: 4px;
+  font-size: 18px;
+  font-weight: 500;
+  padding: 4px;
+  margin: 10px;
+  width: 125px;
+  height: 40px;
+}
+/* ========== Profile End ========== */
 
 
 /* Banner Start */
@@ -834,6 +939,14 @@ border-radius: 15px;
 }
 
 /* Activity End */
+
+/* ========= Footer Start ========= */
+.footer{
+  background: linear-gradient(to right bottom,  #003e6b, #56b9e7);
+  text-align: center;
+}
+/* ========= Footer End ========= */
+
 
 /* @tailwind base;
 @tailwind components;
