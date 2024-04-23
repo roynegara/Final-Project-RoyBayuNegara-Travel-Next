@@ -135,7 +135,7 @@ const Users = () => {
                     <span
                         key={number}
                         onClick={() => goToPage(number)}
-                        style={{ cursor: "pointer", margin: "0 5px", fontWeight: currentPage === number ? "bold" : "normal" }}
+                        style={{ cursor: "pointer", margin: "0 5px", fontWeight: currentPage === number ? "bold" : "normal", border: currentPage === number ? "1px solid white" : "none" }}
                     >
                         {number}
                     </span>

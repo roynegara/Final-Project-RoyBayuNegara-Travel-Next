@@ -539,7 +539,9 @@ border-radius: 15px;
   margin-right: auto;
 }
 
-.users-btn-change-role button {  
+.users-btn-change-role button, .btn-pagination button, .btn-pagination span {
+  
+
   text-decoration: none;
   background: rgb(56, 143, 188, 0.4);
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -556,15 +558,13 @@ border-radius: 15px;
   color:#e2e2e2;
 }
 
-.users-btn-change-role button:hover {
+.users-btn-change-role button:hover, .btn-pagination button:hover, .btn-pagination span:hover {
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(15px);  
   box-shadow: 0 0 10px rgba(0, 0, 0, 0, 0.2);
 }
-/* .users-card:last-child {
-  margin-bottom: 0; 
-} */
+
 
 .users-avatar {
   width: 150px;
