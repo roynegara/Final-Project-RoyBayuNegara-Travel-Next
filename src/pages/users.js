@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
+import {toast} from "sonner";
 
 const Users = () => {
     const [users, setUsers] = useState([]);
@@ -8,6 +9,7 @@ const Users = () => {
     const itemsPerPage = 16; // Number of items per page
     const paginationRange = 10; // Number of page buttons to display
     const [role, setRole] = useState("");
+   
     const [selectedUserId, setSelectedUserId] = useState(null); // Track selected user for role change
     const [isModalOpen, setIsModalOpen] = useState(false); // Track modal visibility
 
@@ -27,6 +29,7 @@ const Users = () => {
                 const endIndex = currentPage * itemsPerPage;
                 const usersForPage = response.data.data.slice(startIndex, endIndex);
                 setUsers(usersForPage);
+                const userNames = usersForPage.map(user => user.name);
             } catch (error) {
                 console.error("Error fetching users:", error);
             }
@@ -77,8 +80,11 @@ const Users = () => {
             )
             .then((res) => {
                 console.log("res", res);
-                getUsers();
+                // getUsers();
+                const userName = users.find(user => user.id === selectedUserId)?.name;
+                toast.success(`${userName} roles's has been changed to ${role}`);
                 closeModal(); // Close modal after role change
+                
             })
             .catch((err) => {
                 console.log("err", err);
@@ -132,7 +138,7 @@ const Users = () => {
                 </button>
             </div>
           
-            {isModalOpen && (
+            {isModalOpen && (                 
                 <div className="popup-edit-users">                    
                         <span className="btn-close-popup-edit-users" onClick={closeModal}>
                             &times;
