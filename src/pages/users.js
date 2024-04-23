@@ -6,7 +6,7 @@ const Users = () => {
     const [users, setUsers] = useState([]);
     const [currentPage, setCurrentPage] = useState(1); // Track current page
     const [totalPages, setTotalPages] = useState(0); // Track total pages
-    const itemsPerPage = 16; // Number of items per page
+    const itemsPerPage = 15; // Number of items per page
     const paginationRange = 10; // Number of page buttons to display
     const [role, setRole] = useState("");
    
@@ -83,6 +83,9 @@ const Users = () => {
                 // getUsers();
                 const userName = users.find(user => user.id === selectedUserId)?.name;
                 toast.success(`${userName} roles's has been changed to ${role}`);
+                setTimeout(() => {
+                    window.location.reload();
+                },1000)
                 closeModal(); // Close modal after role change
                 
             })
@@ -99,22 +102,29 @@ const Users = () => {
         pageNumbers.push(i);
     };
 
+    const userName = users.find(user => user.id === selectedUserId)?.name;
     return (
         <div className="users">
+            <h1 className="users-title">The Member User of This Website</h1>
+          
+            <div className="users-content">
             {users.map((user, index) => (
                 <div key={index}>
-                    <img className="image-users" src={user.profilePictureUrl} alt={user.name} />
-                    <p>User Id : {user.id}</p>
+                    <div className="users-card">
                     <p>Name : {user.name}</p>
+                    <img className="users-avatar" src={user.profilePictureUrl} alt={user.name} />
                     <p>Email : {user.email}</p>
                     <p>Role : {user.role}</p>
                     <p>Phone Number : {user.phoneNumber}</p>
-                    <div>
+                        </div>
+                    <div className="users-btn-change-role">
                         <button onClick={() => openModal(user.id)}>Change Role</button>
                     </div>
                 </div>
             ))}
-            <div className="pagination">
+            </div>
+            
+            <div className="btn-pagination">
                 <button onClick={goToFirstPage} disabled={currentPage === 1}>
                     Start
                 </button>
@@ -138,12 +148,13 @@ const Users = () => {
                 </button>
             </div>
           
-            {isModalOpen && (                 
+            {isModalOpen && (     
+                
                 <div className="popup-edit-users">                    
                         <span className="btn-close-popup-edit-users" onClick={closeModal}>
                             &times;
                         </span>
-                        <h2>Update Role </h2>
+                        <h2>Update Role "{userName}"  </h2>
                         <select name="role" value={role} onChange={(e) => setRole(e.target.value)}>
                             <option value="">Choose Role</option>
                             <option value={"admin"}>Admin</option>
@@ -152,7 +163,8 @@ const Users = () => {
                         <button onClick={handleChangeUserRole}>Change</button>
                     </div>
               
-            )}
+                )}
+                
         </div>
     );
 };
