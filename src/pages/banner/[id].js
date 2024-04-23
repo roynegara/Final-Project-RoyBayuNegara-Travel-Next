@@ -134,7 +134,9 @@ export default function BannerById({ banner }) {
             </pre>
           </div>
         )}
+
       </div>
+      
 
       <div>
         
