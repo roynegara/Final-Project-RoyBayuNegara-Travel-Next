@@ -73,12 +73,12 @@ const [showActivity, setShowActivity] = useState(false);
       {/* Kolom Kiri (Sidebar Navigasi) */}
       <div className="sidebar">
         <ul>
-          <li onClick={handleProfileClick}>Profile</li>
-          <li onClick={handleUsersClick}>Users</li>
-          <li onClick={handleBannerClick}>Banner</li>
-          <li onClick={handlePromoClick}>Promo</li>
-          <li onClick={handleCategoryClick}>Category</li>
-          <li onClick={handleActivityClick}>Destination</li>
+          <li className='sidebar-position' onClick={handleProfileClick}>Profile</li>
+          <li className='sidebar-position' onClick={handleUsersClick}>Users</li>
+          <li className='sidebar-position' onClick={handleBannerClick}>Banner</li>
+          <li className='sidebar-position' onClick={handlePromoClick}>Promo</li>
+          <li className='sidebar-position' onClick={handleCategoryClick}>Category</li>
+          <li className='sidebar-position' onClick={handleActivityClick}>Destination</li>
           <li className='sidebar-logout'>Logout</li>
         </ul>
       </div>

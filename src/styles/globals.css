@@ -1235,6 +1235,13 @@ body {
   background: linear-gradient(to right bottom, #56b9e7,  #003e6b);
   width: 10%;
   padding: 25px;
+  
+    position: fixed; /* Menetapkan posisi sidebar */
+    top: 0; /* Menempatkan sidebar di bagian atas */
+    left: 0; /* Menempatkan sidebar di sisi kiri */
+    height: 100%;
+    overflow-y: auto; /* Mengaktifkan scroll jika konten sidebar melebihi ketinggian */
+  
   /* padding-top: 25px; */
   /* padding-bottom: 25px;  */
 }
@@ -1248,7 +1255,10 @@ body {
 .sidebar li {
   padding: 10px;
   cursor: pointer;
+  
 }
+
+
 
 .sidebar-logout {
   position: fixed;
@@ -1270,6 +1280,10 @@ body {
   padding: 1rem;
   width: 75%;
   color: #707070;
+
+  margin-left: 200px; /* Pastikan konten diberi ruang setelah sidebar */
+  padding: 20px;
+
 }
 
 /* Tambahkan gaya lain sesuai kebutuhan Anda */
