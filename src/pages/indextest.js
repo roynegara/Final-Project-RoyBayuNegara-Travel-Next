@@ -27,7 +27,7 @@ const Dashboard = () => {
 
       {/* Kolom Kanan (Konten Dinamis) */}
       <div className="content">
-        <h1>Dashboard Content</h1>
+        {/* <h1>Dashboard Content</h1> */}
         {showProfile && <Profile />}
         {/* Tampilkan konten di sini berdasarkan item navigasi */}
       </div>

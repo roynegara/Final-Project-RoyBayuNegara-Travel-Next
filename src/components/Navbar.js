@@ -70,7 +70,7 @@ export default function Navbar() {
         {!isLoggedIn ?(null) :(<Link href={'/dashboard'}>Dashboard</Link>)}
         
         {!isLoggedIn ? (
-          <a href="/login">Login</a>
+          <a href="/register">Register</a>
         ) : (
           <div className="dropdown" onMouseEnter={toggleDropdown} onMouseLeave={closeDropdown}>            
             <div className="profile-navbar">              

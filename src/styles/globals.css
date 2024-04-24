@@ -1,7 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap");
 
 body {
-  background: #081b29;
+  /* background: #081b29; */
+  background: linear-gradient(to right bottom, #56b9e7,  #003e6b);
   color: #ededed;
 
   /* display: flex;
@@ -718,7 +719,7 @@ border-radius: 15px;
 }
 
 .banners-container {
-  display: flex;
+  /* display: flex;? */
 }
 
 .banners-container img {
@@ -1138,13 +1139,33 @@ body {
 /* Gaya CSS Kustom */
 .dashboard {
   display: flex;
-  margin-top: 200px;
+  margin-top: 75px;
+  min-height: 87vh;
+  background: linear-gradient(to right bottom,  #003e6b, #56b9e7);
 }
 
 .sidebar {
-  background-color: #707070;
-  width: 25%;
-  padding: 1rem;
+  background: linear-gradient(to right bottom, #56b9e7,  #003e6b);
+  width: 10%;
+  padding: 25px;
+  /* padding-top: 25px; */
+  /* padding-bottom: 25px;  */
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.sidebar-logout {
+  position: fixed;
+  bottom: 35px;
 }
 
 .sidebar ul {
