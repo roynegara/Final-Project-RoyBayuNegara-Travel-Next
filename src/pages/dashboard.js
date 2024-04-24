@@ -1,12 +1,72 @@
 import React, { useState } from 'react';
 import Profile from '@/pages/profile';
+import Users from '@/pages/users';
+import Banner from '@/pages/banner';
+import Promo from '@/pages/promo';
+import Category from '@/pages/category';
+import Activity from '@/pages/activity';
 
 const Dashboard = () => {
-  const [showProfile, setShowProfile] = useState(false);
+  const [showProfile, setShowProfile] = useState(true); // Ubah nilai awal menjadi true
+  const [showUsers, setShowUsers] = useState(false);
+  const [showbanner, setShowBanner] = useState(false);
+  const [showPromo, setShowPromo] = useState(false);
+  const [showCategory, setShowCategory] = useState(false);
+const [showActivity, setShowActivity] = useState(false);
 
   const handleProfileClick = () => {
     setShowProfile(true);
+    setShowUsers(false);
+    setShowBanner(false);
+    setShowPromo(false);
+    setShowCategory(false);
+    setShowActivity(false);
   };
+
+  const handleUsersClick = () => {
+    setShowUsers(true);
+    setShowProfile(false);
+    setShowBanner(false);
+    setShowPromo(false);
+    setShowCategory(false);
+    setShowActivity(false);
+  }
+
+  const handleBannerClick = () => {
+    setShowBanner(true);
+    setShowProfile(false);
+    setShowUsers(false);
+    setShowPromo(false);
+    setShowCategory(false);
+    setShowActivity(false);
+  }
+
+  const handlePromoClick = () => {
+    setShowPromo(true);
+    setShowProfile(false);
+    setShowUsers(false);
+    setShowBanner(false);
+    setShowCategory(false);
+    setShowActivity(false);
+  }
+
+  const handleCategoryClick = () => {
+    setShowCategory(true);
+    setShowProfile(false);
+    setShowUsers(false);
+    setShowBanner(false);
+    setShowPromo(false);
+    setShowActivity(false);
+  }
+
+  const handleActivityClick = () => {
+    setShowActivity(true);
+    setShowProfile(false);
+    setShowUsers(false);
+    setShowBanner(false);
+    setShowPromo(false);
+    setShowCategory(false);
+  }
 
   return (
     <div className="dashboard">
@@ -14,11 +74,11 @@ const Dashboard = () => {
       <div className="sidebar">
         <ul>
           <li onClick={handleProfileClick}>Profile</li>
-          <li>User</li>
-          <li>Banner</li>
-          <li>Promo</li>
-          <li>Category</li>
-          <li>Destination</li>
+          <li onClick={handleUsersClick}>Users</li>
+          <li onClick={handleBannerClick}>Banner</li>
+          <li onClick={handlePromoClick}>Promo</li>
+          <li onClick={handleCategoryClick}>Category</li>
+          <li onClick={handleActivityClick}>Destination</li>
           <li className='sidebar-logout'>Logout</li>
         </ul>
       </div>
@@ -27,6 +87,12 @@ const Dashboard = () => {
       <div className="content">
         {/* <h1>Dashboard Content</h1> */}
         {showProfile && <Profile />}
+        {showUsers && <Users />}
+        {showbanner && <Banner />}
+        {showPromo && <Promo />}
+        {showCategory && <Category />}
+        {showActivity && <Activity />}
+
         {/* Tampilkan konten di sini berdasarkan item navigasi */}
       </div>
     </div>
