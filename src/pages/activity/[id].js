@@ -4,6 +4,7 @@ import useDeleteActivity from "@/hooks/useDeleteActivity";
 import FormDeleteActivity from "@/components/FormDeleteActivity";
 import { useRouter } from "next/router";
 import { toast } from "sonner";
+import Iframe from 'react-iframe';
 
 import FormEditActivity from "@/components/FormEditActivity";
 import useEditActivity from "@/hooks/useEditActivity";
@@ -47,6 +48,7 @@ export default function ActivityById({ activity }) {
   };
 
   const handleEditActivity = ({
+    categories,
     categoryId,
     title,
     description,
@@ -62,6 +64,7 @@ export default function ActivityById({ activity }) {
     location_maps,
   }) => {
     pos(`/update-activity/${activity?.id}`, {
+      categories,
       categoryId,
       title,
       description,
@@ -122,7 +125,6 @@ export default function ActivityById({ activity }) {
     setPopupOpenDelete(!isPopupOpenDelete);
   };
 
-
   return (
     <div className="activity">
       <div>
@@ -145,6 +147,11 @@ export default function ActivityById({ activity }) {
       <h2> Proce Discount : {activity.price_discount}</h2>
       <h2> Rating : {activity.rating}</h2>
         <h2>Total Review : {activity.total_reviews}</h2>
+        {/* <h2>Location Maps : {activity.location_maps}</h2> */}
+        
+        <div dangerouslySetInnerHTML={{ __html: activity.location_maps }} />
+  
+
       </div>
       
       <div>
@@ -153,6 +160,7 @@ export default function ActivityById({ activity }) {
           <div className="popup-edit-activity">
             <button className="btn-close-popup-edit-activity" onClick={togglePopupEdit}>X</button>
             <FormEditActivity
+              categories={activity?.categories}
               defaultCategoryId={activity?.categoryId}
               title={` Edit ${activity?.title} Destination ?`}
               defaultName={activity?.title}

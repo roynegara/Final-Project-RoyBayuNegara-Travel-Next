@@ -1,4 +1,5 @@
-//mau di styling
+
+//sudah distyling tapi masih menutupi popup
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
@@ -34,7 +35,7 @@ const Activity = () => {
   
   return (
     <div>
-      <div>
+      <div >
         <h1 className="activities-title">Activity</h1>
         <button onClick={() => setButtonPopupCreateActivity(true)}>Create Activity</button>
         <PopupCreateActivity trigger={buttonPopupCreateActivity} setTrigger={setButtonPopupCreateActivity}></PopupCreateActivity>
@@ -44,7 +45,7 @@ const Activity = () => {
         {activities.map((activity, index) => (
           <div className="activities-card" key={index}>
             <h3>{activity.title}</h3>
-            
+
             <img
               src={
                 activity.imageUrls?.[0] && activity.imageUrls?.[1] ? activity.imageUrls?.[1] : activity.imageUrls?.[0]
