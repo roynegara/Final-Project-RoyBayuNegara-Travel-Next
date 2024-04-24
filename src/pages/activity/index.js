@@ -44,6 +44,7 @@ const Activity = () => {
         {activities.map((activity, index) => (
           <div className="activities-card" key={index}>
             <h3>{activity.title}</h3>
+            
             <img
               src={
                 activity.imageUrls?.[0] && activity.imageUrls?.[1] ? activity.imageUrls?.[1] : activity.imageUrls?.[0]
