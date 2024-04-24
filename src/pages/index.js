@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import BannerCarousel from "@/pages/bannerCarousel";
 
 export default function Home() {
   const router = useRouter();
@@ -92,11 +93,20 @@ export default function Home() {
 
   return (
     <div className="home">
-      <div className="banners-home">
+
+<div className="home-title">
+<h1>Luxury Travel</h1>
+<h1>With Us Travel Everywere Place To Visit</h1>
+<h1>Discover amazing places with promo prices and luxury experience</h1>
+</div>
+      
+<BannerCarousel/>
+
+       {/* <div className="banners-home">
         <h1>From Indonesia To The World</h1>
-        <div className="banners-container">
+        <div className="banners-container-home">
           {banners.map((banner, index) => (
-            <div className="banners" key={index}>
+            <div className="banners-list" key={index}>
               <Link href={`/banner/${banner.id}`}>
                 <img src={banner.imageUrl} alt={banner.name} />
               </Link>
@@ -104,7 +114,7 @@ export default function Home() {
             </div>
           ))}
         </div>
-      </div>
+      </div>  */}
 
       
       <div>

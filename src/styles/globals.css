@@ -240,6 +240,7 @@ border-radius: 15px;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  /* text-align: center; */
   /* background: url("https://img.freepik.com/free-photo/mesmerizing-green-forest-full-different-kinds-unique-plants-yakushima-japan_181624-36812.jpg?t=st=1709945766~exp=1709949366~hmac=66c4f9a8be4f9976e111b33d8085882ac64096877ef13875986dac1d50aa521d&w=1380")
     no-repeat; */
 
@@ -251,8 +252,88 @@ border-radius: 15px;
   padding: 20px 10%;
 }
 
+.home-title{
+  margin-top: 100px;
+  margin-bottom: 20px;
+}
+
+/* Banner Component Home Start */
+/* Container for the entire carousel */
+.banners-home {
+  margin-top: 50px;
+  width: 420px;
+  /* background: transparent; */
+  background: rgb(56, 143, 188, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);
+  /* filter: blur(1px); */
+  
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0, 0.2);
+  color: #ededed;
+  border-radius: 10px;
+  padding: 30px 40px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Heading style */
+.banners-home h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Container for individual banners */
+.banners-container-home {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Style for each banner item */
+.banners-list {
+  padding: 20px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  margin-bottom: 20px;
+}
+
+/* Banner image style */
+.banners-list img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Banner name style */
+.banners-list p {
+  font-size: 16px;
+  color: #555;
+  margin-top: 10px;
+}
+
+/* Overlay di atas gambar */
+.banner-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Tampilkan overlay saat dihover */
+.banners-list:hover .banner-overlay {
+  opacity: 1;
+}
 
 
+/* Banner Component Home End */
 
 .link-home {
   margin: 25px;
@@ -613,9 +694,15 @@ border-radius: 15px;
 
 
 /* Banner Start */
+
+
+
+
+
+
 .banner img {
   width: 1000px;
-  /* height: 300px; */
+  height: 300px;
 }
 
 .banners img {
