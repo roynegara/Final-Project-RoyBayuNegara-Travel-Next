@@ -7,6 +7,8 @@ import PopupCreateBanner from "@/components/PopupCreateBanner";
 
 import { Carousel } from "react-bootstrap/Carousel";
 
+
+
 const Banner = () => {
   const [banners, setBanners] = useState([]);
 
@@ -34,19 +36,20 @@ const Banner = () => {
 
   return (
     <div>
-      <h1>Banner</h1>
+      <h1 className="banners-title">Banner</h1>
       <button onClick={() => setButtonPopupCreateBanner(true)}>Create Banner</button>
       <PopupCreateBanner trigger={buttonPopupCreateBanner} setTrigger={setButtonPopupCreateBanner}></PopupCreateBanner>
 
-      <div>
+      <div className="banners">
         {banners.map((banner, index) => (
-          <div className="banners" key={index}>
+          <div className="banners-card" key={index}>
             <img src={banner.imageUrl} alt={banner.name} />
             <p>{banner.name}</p>
             <div>
               <Link href={`/banner/${banner.id}`}>
-                <button>Detail</button>
+                <button>Read More for {banner.name }</button>
               </Link>
+              
             </div>
           </div>
         ))}

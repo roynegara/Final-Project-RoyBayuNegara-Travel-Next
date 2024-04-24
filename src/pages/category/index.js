@@ -32,14 +32,14 @@ const Category = () => {
 
   return (
     <div>
-      <h1>Category</h1>
+      <h1 className="categories-title">Category</h1>
       <button onClick={() => setButtonPopupCreateCategory(true)}>Create Category</button>
       <PopupCreateCategory trigger={buttonPopupCreateCategory} setTrigger={setButtonPopupCreateCategory}></PopupCreateCategory>
 
 
-      <div>
+      <div className="categories">
         {categories.map((category, index) => (
-          <div className="categories" key={index}>
+          <div className="categories-card" key={index}>
             <img src={category.imageUrl} alt={category.name} />
             
             <p>{category.id}</p>

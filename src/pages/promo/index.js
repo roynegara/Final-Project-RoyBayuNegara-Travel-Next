@@ -32,14 +32,14 @@ const Promo = () => {
 
   return (
     <div>
-      <h1>Promo</h1>
+      <h1 className="promos-title">Promo</h1>
       <button onClick={() => setButtonPopupCreatePromo(true)}>Create Promo</button>
       <PopupCreatePromo trigger={buttonPopupCreatePromo} setTrigger={setButtonPopupCreatePromo}></PopupCreatePromo>
 
 
-      <div>
+      <div className="promos">
         {promos.map((promo, index) => (
-            <div className="promos" key={index}>
+            <div className="promos-card" key={index}>
                 <img  src={promo.imageUrl} alt={promo.title}/>
             <p>{promo.id}</p>
                 <p>{promo.title}</p>
