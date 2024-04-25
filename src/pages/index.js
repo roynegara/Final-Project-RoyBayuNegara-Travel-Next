@@ -3,6 +3,7 @@ import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import BannerCarousel from "@/pages/bannerCarousel";
+import ActivityList from "@/pages/activity/activitybyCategotyId";
 
 export default function Home() {
   const router = useRouter();
@@ -100,7 +101,8 @@ export default function Home() {
 <h1>Discover amazing places with promo prices and luxury experience</h1>
 </div>
       
-<BannerCarousel/>
+      <BannerCarousel />
+      <ActivityList />
 
        {/* <div className="banners-home">
         <h1>From Indonesia To The World</h1>

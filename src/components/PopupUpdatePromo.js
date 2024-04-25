@@ -22,6 +22,7 @@ try {
     const response = await axios.post(`https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/update-promo/${promo?.id}`, {
         title: promo.title,
         imageUrl: promo.imageUrl,
+        description: promo.description,
         promo_code: promo.promo_code,
         minimum_claim_price: promo.minimum_claim_price,
         promo_discount_price: promo.promo_discount_price,
@@ -48,6 +49,16 @@ try {
                         type="text"
                         name="title"
                         value={promo.title}
+                        onChange={handleChange}
+                    />
+                </div>
+
+                <div>
+                    <label>Description:</label>
+                    <input
+                        type="text"
+                        name="description"
+                        value={promo.description}
                         onChange={handleChange}
                     />
                 </div>

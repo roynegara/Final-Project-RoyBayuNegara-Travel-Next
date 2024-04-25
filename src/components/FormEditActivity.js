@@ -1,5 +1,4 @@
 export default function FormEditActivity({
-  categories,
   defaultCategoryId,
   title,
   defaultName,
@@ -13,7 +12,7 @@ export default function FormEditActivity({
   defaultAddress,
   defaultProvince,
   defaultCity,
-  defaultLocation_Maps, 
+defaultLocation_Maps, 
   onEdit,
   loadingEditActivity,
 }) {
@@ -38,6 +37,11 @@ export default function FormEditActivity({
     const city = formData.get("kotaActivity");
     const location_maps = formData.get("lokasiActivity");
 
+    // const terms_condition = formData.get("syaratKetentuan");
+    // const promo_code = formData.get("promoKode");
+    // const promo_discount_price = parseFloat(formData.get("promoHargaDiskon"));
+    // const minimum_claim_price = parseFloat(formData.get("klaimHargaMinimum"));
+
     onEdit({ categoryId, title, description, imageUrls, price, price_discount, rating, total_reviews, facilities, address, province, city, location_maps });
   };
 
@@ -46,11 +50,7 @@ export default function FormEditActivity({
       <div className="form-edit-activity">
         <h5>{title}</h5>
         <div>
-          <select defaultValue={defaultCategoryId} name="categoryId">
-            {categories.map((category) => (
-              <option key={category.id} value={category.id}>{category.name}</option>
-            ))}
-          </select>
+          <input defaultValue={defaultCategoryId} name="categoryId" placeholder="Masukkan Category Id" />
           <input defaultValue={defaultName} name="namaActivity" placeholder="Masukkan Nama Activity" />
           <input defaultValue={defaultDescription} name="deskripsiActivity" placeholder="Masukkan Deskripsi Activity" />
           <input defaultValue={defaultImageUrls} name="gambarActivity" placeholder="Masukkan Gambar Activity" />
@@ -63,9 +63,10 @@ export default function FormEditActivity({
           <input defaultValue={defaultProvince} name="provinsiActivity" placeholder="Masukkan Provinsi Activity" />
           <input defaultValue={defaultCity} name="kotaActivity" placeholder="Masukkan Kota Activity" />
           <input defaultValue={defaultLocation_Maps} name="lokasiActivity" placeholder="Masukkan Lokasi Activity" />
+
         </div>
         <div>
-          <button type="submit" disabled={loadingEditActivity}>
+          <button type="onSubmit" disabled={loadingEditActivity}>
             {loadingEditActivity ? "Loading..." : title}
           </button>
         </div>
