@@ -34,8 +34,7 @@ const Promo = () => {
     <div>
       <h1 className="promos-title">Promo</h1>
       <button onClick={() => setButtonPopupCreatePromo(true)}>Create Promo</button>
-      <PopupCreatePromo trigger={buttonPopupCreatePromo} setTrigger={setButtonPopupCreatePromo}></PopupCreatePromo>
-
+      
 
       <div className="promos">
         {promos.map((promo, index) => (
@@ -52,6 +51,10 @@ const Promo = () => {
 
           </div>
         ))}
+      </div>
+      <div>
+      <PopupCreatePromo trigger={buttonPopupCreatePromo} setTrigger={setButtonPopupCreatePromo}></PopupCreatePromo>
+
       </div>
     </div>
   );

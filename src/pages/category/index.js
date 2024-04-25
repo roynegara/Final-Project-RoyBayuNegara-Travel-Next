@@ -34,7 +34,7 @@ const Category = () => {
     <div>
       <h1 className="categories-title">Category</h1>
       <button onClick={() => setButtonPopupCreateCategory(true)}>Create Category</button>
-      <PopupCreateCategory trigger={buttonPopupCreateCategory} setTrigger={setButtonPopupCreateCategory}></PopupCreateCategory>
+     
 
 
       <div className="categories">
@@ -52,6 +52,9 @@ const Category = () => {
                 </div>
           </div>
         ))}
+      </div>
+      <div>
+      <PopupCreateCategory trigger={buttonPopupCreateCategory} setTrigger={setButtonPopupCreateCategory}></PopupCreateCategory>
       </div>
     </div>
   );

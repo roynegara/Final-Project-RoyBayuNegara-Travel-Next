@@ -36,9 +36,10 @@ const Banner = () => {
 
   return (
     <div>
+      
       <h1 className="banners-title">Banner</h1>
       <button onClick={() => setButtonPopupCreateBanner(true)}>Create Banner</button>
-      <PopupCreateBanner trigger={buttonPopupCreateBanner} setTrigger={setButtonPopupCreateBanner}></PopupCreateBanner>
+      {/* <PopupCreateBanner trigger={buttonPopupCreateBanner} setTrigger={setButtonPopupCreateBanner}></PopupCreateBanner> */}
 
       <div className="banners">
         {banners.map((banner, index) => (
@@ -53,6 +54,9 @@ const Banner = () => {
             </div>
           </div>
         ))}
+      </div>
+      <div>
+      <PopupCreateBanner trigger={buttonPopupCreateBanner} setTrigger={setButtonPopupCreateBanner}></PopupCreateBanner>
       </div>
     </div>
   );

@@ -256,7 +256,7 @@ const CreateActivity = (props) => {
       </div>
 
       <button className="btn-close-popup-create-activity" onClick={() => props.setTrigger(false)}>
-        X{" "}
+        X
       </button>
       {props.children}
     </div>

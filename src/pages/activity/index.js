@@ -43,7 +43,7 @@ const Activity = () => {
       <div>
         <h1 className="activities-title">Activity</h1>
         <button onClick={handleCreateActivityClick}>Create Activity</button>
-        <PopupCreateActivity trigger={buttonPopupCreateActivity} setTrigger={handlePopupClose} />
+        
       </div>
 
       <div className={buttonPopupCreateActivity ? "blur" : ""}> {/* Tambahkan class blur jika popup create aktif */}
@@ -74,7 +74,11 @@ const Activity = () => {
             </div>
           ))}
         </div>
+        
       </div>
+      <div>
+        <PopupCreateActivity  trigger={buttonPopupCreateActivity} setTrigger={handlePopupClose} />
+        </div>
     </div>
   );
 };
