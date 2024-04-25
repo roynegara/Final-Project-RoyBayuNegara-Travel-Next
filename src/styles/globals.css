@@ -1513,6 +1513,9 @@ gap: 5px;
   border-radius: 15px;
 }
 
+.blur {
+  filter: blur(5px); /* Atur tingkat blur sesuai kebutuhan */
+}
 /* Activity End */
 
 /* ========= Footer Start ========= */
