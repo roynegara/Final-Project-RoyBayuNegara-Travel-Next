@@ -117,6 +117,9 @@ export default function PromoById({ promo }) {
       <div>
         <h2>Read The Term and Condition : {promo.terms_condition}</h2>
       </div>
+      <div>
+        <p>{promo?.description}</p>
+      </div>
 
       <div>
         <button onClick={togglePopupEdit}> Edit Promo {promo?.title}</button>

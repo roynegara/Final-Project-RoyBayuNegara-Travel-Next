@@ -126,11 +126,11 @@ export default function ActivityById({ activity }) {
   return (
     <div className="activity">
       <div>
-        <h1>{activity.title}</h1>
         <img
           src={activity.imageUrls?.[0] && activity.imageUrls?.[1] ? activity.imageUrls?.[1] : activity.imageUrls?.[0]}
           alt={activity.name}
-        />
+          />
+          <h1>{activity.title}</h1>
       </div>
 
       {/* {activity.imageUrls.map((url, index) => (
