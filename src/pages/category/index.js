@@ -47,7 +47,7 @@ const Category = () => {
             
                 <div>
                   <Link href={`/category/${category.id}`}>
-                    <button>View Details</button>
+                    <button>Read More</button>
                   </Link>
                 </div>
           </div>

@@ -45,7 +45,7 @@ const Promo = () => {
                 <p>{promo.description}</p>
 
                 <div>
-                    <Link href={`/promo/${promo.id}`}><button>Detail</button></Link>
+                    <Link href={`/promo/${promo.id}`}><button>Read More</button></Link>
                     
                 </div>
 

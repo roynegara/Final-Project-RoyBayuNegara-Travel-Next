@@ -56,7 +56,7 @@ const Activity = () => {
             
             <div>
               <Link href={`/activity/${activity.id}`}>
-                <button>Detail Activity By Id</button>
+                <button>Read More</button>
               </Link>              
             </div>
            
