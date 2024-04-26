@@ -261,51 +261,68 @@ border-radius: 15px;
 /* Container for the entire carousel */
 .banners-home {
   margin-top: 50px;
-  width: 420px; 
+  width: 100%; 
   background: rgb(56, 143, 188, 0.4);
   border: 1px solid rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(15px);  
   box-shadow: 0 0 10px rgba(0, 0, 0, 0, 0.2);
   color: #ededed;
   border-radius: 10px;
-  padding: 30px 40px;
+  /* padding: 30px 40px; */
+  padding-left: 5px;
+  padding-right: 5px;
   margin-left: auto;
   margin-right: auto;
 }
 
 /* Heading style */
 .banners-home h1 {
-  font-size: 24px;
+  font-size: 50px;
   margin-bottom: 20px;
-  color: #333;
+  color: #ededed;
+  text-align: center;
 }
 
 /* Container for individual banners */
 .banners-container-home {
-  max-width: 800px;
+  max-width: 100%;
   margin: 0 auto;
 }
 
 /* Style for each banner item */
 .banners-list {
   padding: 20px;
-  border: 1px solid #ddd;
-  background-color: #fff;
+  background: rgb(56, 143, 188, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);  
   margin-bottom: 20px;
+  border-radius: 10px;
 }
 
 /* Banner image style */
 .banners-list img {
-  max-width: 100%;
-  height: auto;
+  /* max-width: 100%; */
+  height: 500px;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 10px;
 }
 
 /* Banner name style */
 .banners-list p {
-  font-size: 16px;
-  color: #555;
+  font-size: 25px;
+  color: #ededed;
   margin-top: 10px;
+text-align: center;
 }
+
+.banners-list a {
+  font-size: 50px;
+  color: #ededed;
+  margin-top: 10px;
+  text-decoration: none;
+}
+
 
 /* Overlay di atas gambar */
 .banner-overlay {
@@ -327,6 +344,8 @@ border-radius: 15px;
 /* Tampilkan overlay saat dihover */
 .banners-list:hover .banner-overlay {
   opacity: 1;
+  border-radius: 10px;
+  
 }
 
 
@@ -1113,8 +1132,11 @@ gap: 5px;;
 
 .promos-card-home p {
   position: absolute;
-  bottom: 10px;  
-  left: 28%;
+  bottom: 5%;  
+  left: 0;
+  right: 0;
+  text-align: center;
+  /* center: 28%; */
   color: white;
   background-color: rgba(0, 0, 0, 0.5);
   padding: 5px;
@@ -1355,8 +1377,8 @@ gap: 5px;
 
 .categories-card-home p {
   position: absolute;
-  bottom: 10px;
-  left: 10px;
+  bottom: 5%;
+  left: 5%;
   color: white;
   background-color: rgba(0, 0, 0, 0.5);
   padding: 5px;
@@ -1629,8 +1651,8 @@ gap: 5px;
 
 .activities-card-home p {
   position: absolute;
-  bottom: 10px;
-  left: 58%;
+  bottom: 5%;
+  Right: 5%;
   color: white;
   background-color: rgba(0, 0, 0, 0.5);
   padding: 5px;
