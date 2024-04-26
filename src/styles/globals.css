@@ -504,15 +504,6 @@ text-align: center;
 }
 /* Dashboard End */
 
-/* ========== Users Start ========== */
-.users {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-/* ========== Users End ==========  */
 
 /* ========== Profile Start ========== */
 .profile-main {
@@ -631,16 +622,30 @@ text-align: center;
 /* ========== Profile End ========== */
 
 /* ========== Users Start ========== */
+
+
+/* ========== Users Start ========== */
+.users {
+  /* display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  text-align: center; */
+}
+/* ========== Users End ==========  */
+
+
 .users {
   justify-content: center;
   align-items: center;
   text-align: center;
   min-height: 100vh;
   /* background: linear-gradient(to right bottom, #208cbe,  #002946);  */
-  background: url('https://img.freepik.com/free-photo/tranquil-bay-with-azure-waters-palmfringed-sands-is-hidden-by-green-hills_91128-4562.jpg?t=st=1713874971~exp=1713878571~hmac=3e92a893bcf52c58f81f02f0b37da4e77a643cc293f2053ff2191445724c6083&w=1800'), no-repeat;
-  background-size: cover;
-  background-position: center;
-  padding: 20px 10%;
+  /* background: url('https://img.freepik.com/free-photo/tranquil-bay-with-azure-waters-palmfringed-sands-is-hidden-by-green-hills_91128-4562.jpg?t=st=1713874971~exp=1713878571~hmac=3e92a893bcf52c58f81f02f0b37da4e77a643cc293f2053ff2191445724c6083&w=1800'), no-repeat; */
+  /* background-size: cover; */
+  /* background-position: center; */
+  /* padding: 20px 10%; */
+  /* padding : 0; */
   display: block;
 }
 
@@ -734,9 +739,12 @@ text-align: center;
   
 }
 
+
+
+
 .popup-edit-users {
   width: 420px;
-  background: rgb(5, 5, 150);
+  background: rgb(56, 143, 188, 0.4);
   border: 2px solid rgba(255, 255, 255, 0.5);
   padding: 30px;
   border-radius: 15px;
@@ -746,6 +754,7 @@ text-align: center;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
+  color: #e2e2e2;
 }
 
 .btn-close-popup-edit-users {
@@ -753,9 +762,12 @@ text-align: center;
   top: 10px;
   right: 10px;
   cursor: pointer;
+  color: #e2e2e2;
 }
 
-
+.blur-users {
+  filter: blur(5px); /* Atur tingkat blur sesuai kebutuhan */
+}
 
 /* ========== Users End ========== */
 

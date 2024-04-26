@@ -104,9 +104,9 @@ const Users = () => {
 
     const userName = users.find(user => user.id === selectedUserId)?.name;
     return (
-        <div className="users">
+        <div className='users'>
+            <div className={`users ${isModalOpen ? 'blur-users' : ''}`}>
             <h1 className="users-title">The Member User of This Website</h1>
-          
             <div className="users-content">
             {users.map((user, index) => (
                 <div key={index}>
@@ -147,7 +147,7 @@ const Users = () => {
                     End
                 </button>
             </div>
-          
+            </div>
             {isModalOpen && (     
                 
                 <div className="popup-edit-users">                    
