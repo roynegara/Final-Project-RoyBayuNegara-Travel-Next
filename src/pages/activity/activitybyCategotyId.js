@@ -65,7 +65,7 @@ const ActivityList = () => {
 
   return (
     <div className='activity-by-categoryId'>
-      <h1>Activity List</h1>
+      <h1>Category List</h1>
       <label htmlFor="categorySelect">Choose a category:</label>
       <select id="categorySelect" value={selectedCategory} onChange={handleCategoryChange}>
         <option value="">Select a category</option>
