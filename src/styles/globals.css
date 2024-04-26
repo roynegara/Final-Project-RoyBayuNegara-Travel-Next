@@ -1548,13 +1548,25 @@ gap: 5px;
   border-radius: 10px;
   margin-left: auto;
   margin-right: auto;
+  justify-content: center;
 }
 
-.activity-option-wrapper{
-  display: flex;
-  gap: 20px;  
+
+.activity-option-wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(auto, 1fr));
+  /* grid-template-columns: repeat(auto-fill, minmax(auto, 1fr)); */
+  /* grid-template-columns: repeat(auto-fit, minmax(calc(100% / 3 - 20px), 1fr)); */
+  gap: 20px;
   
 }
+
+
+/* .activity-option-wrapper{
+  display: flex;
+  gap: 20px;  
+} */
+
 
 .activity-option-card {
   margin-bottom: 20px;
@@ -1569,6 +1581,7 @@ gap: 5px;
   margin-left: auto;
   margin-right: auto;
 }
+
 
 
 .activity-option-card img {
