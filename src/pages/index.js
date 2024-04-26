@@ -148,7 +148,23 @@ export default function Home() {
         </div>
       </div> */}
 
-      <div className="categories-home">
+<div className="categories-home-wrapper">
+        <h1>Explore The World and Enhance Your Trip</h1>
+        <Link href="/category">See More</Link>
+        <div className="categories-container-home">
+          {categories.map((category, index) => (
+            <div className="categories-card-home" key={index}>
+              <Link href={`/category/${category.id}`}>
+                <img src={category.imageUrl} alt={category.name} />
+              </Link>
+              <p>{category.name}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+
+      {/* <div className="categories-home">
         <h1>Explore The World and Enhance Your Trip</h1>
         <div className="categories-container">
           {categories.map((category, index) => (
@@ -159,9 +175,34 @@ export default function Home() {
             </div>
           ))}
         </div>
+      </div> */}
+
+      
+<div className="activities-home-wrapper">
+        <h1>Top Destination</h1>
+        <Link href="/activity">See More</Link>
+        <div className="activities-container-home">
+          {activities.map((activity, index) => (
+            <div className="activities-card-home" key={index}>
+             
+              <Link href={`/activity/${activity.id}`}>
+                <img
+                  src={
+                    activity.imageUrls?.[0] && activity.imageUrls?.[1]
+                      ? activity.imageUrls?.[1]
+                      : activity.imageUrls?.[0]
+                  }
+                  alt={activity.title}
+                />
+              </Link>
+              <p>{activity.title}</p>
+            </div>
+          ))}
+        </div>
       </div>
 
-      <div className="activities-home">
+
+      {/* <div className="activities-home">
         <h1>Top Destination</h1>
         <div className="activities-container">
           {activities.map((activity, index) => (
@@ -180,7 +221,7 @@ export default function Home() {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
