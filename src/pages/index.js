@@ -118,29 +118,21 @@ export default function Home() {
         </div>
       </div>  */}
 
-      
-      <div>
+
+       <div className="promos-home-wrapper">
         <h1>Enjoy Your Trip With Our Promo</h1>
-        <div className="wrapper">
-          <i id="left" class="fa-solid fa-angle-left"></i>
-          <ul className="carousel">
-            {promos.map((promo, index) => (
-              <li className="card" key={index}>
-                <div className="img">
-                  <img src={promo.imageUrl} alt={promo.title} />
-                </div>
-                <h2>{promo.title}</h2>
-                <p>{promo.description}</p>
-                <p>{promo.code}</p>
-                <p>IDR {promo.promo_discount_price}</p>
-              </li>
-            ))}
-          </ul>
-          <i id="right" class="fa-solid fa-angle-right"></i>
+        <Link href="/promo">See More</Link>
+        <div className="promos-container-home">
+          {promos.map((promo, index) => (
+            <div className="promos-card-home" key={index}>
+              <Link href={`/promo/${promo.id}`}>
+                <img src={promo.imageUrl} alt={promo.title} />
+              </Link>
+              <p>{promo.title}</p>              
+            </div>
+          ))}
         </div>
       </div>
-
-      
       
       {/* <div className="promos-home">
         <h1>Enjoy Your Trip With Our Promo</h1>
