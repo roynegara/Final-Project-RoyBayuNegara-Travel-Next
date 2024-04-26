@@ -71,17 +71,21 @@ const ActivityList = () => {
         <option value="">Select a category</option>
         {categories.map((category) => (
           <option key={category.id} value={category.id}>{category.name}</option>
+          
         ))}
       </select>
+    
       
-      <h2>Activities</h2>
       {notif && <h1>{notif}</h1>}
-      <ul>
+      <ul className='activity-option-wrapper'>
         {activities.map((activity) => (
-          <li key={activity.id}>
-            <h3>{activity.title}</h3>
-            <p>{activity.description}</p>
-            <img src={activity.imageUrls[0]} alt={activity.title} />            
+          <li className='activity-option-card' key={activity.id}>
+            <img src={activity.imageUrls[0]} alt={activity.title} />  
+            <div className='activity-option-card-body'>
+              <h3 className='activity-option-card-title'>{activity.title}</h3>
+            <p className='activity-option-card-description'>{activity.description}</p>
+            </div>
+            
           </li>
         ))}
       </ul>

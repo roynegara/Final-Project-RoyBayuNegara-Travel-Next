@@ -1533,8 +1533,71 @@ gap: 5px;
 }
 
 /* activitybyCategory start */
+.activity-by-categoryId {
+  max-width: 100%;
+  margin: 0 auto;
+  
+  padding: 5px 300px;
+  
+
+  background: rgb(56, 143, 188, 0.4);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(25px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0, 0.2);
+  color: #e2e2e2;
+  border-radius: 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.activity-option-wrapper{
+  display: flex;
+  gap: 20px;  
+  
+}
+
+.activity-option-card {
+  margin-bottom: 20px;
+  margin-top: 20px;
+  background: rgb(56, 143, 188, 0.4);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(25px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0, 0.2);
+  color: #e2e2e2;
+  border-radius: 10px;
+  padding: 10px 15px;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 
+.activity-option-card img {
+  width: 300px;
+  height: 300px;
+  object-fit: cover; 
+  border-radius: 10px;
+}
+
+.activity-option-card-body {
+  width: 300px;
+   background: rgb(56, 143, 188, 0.4);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(25px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0, 0.2);
+  color: #e2e2e2;
+  border-radius: 10px;
+  padding: 10px 15px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.activity-option-card-title {
+  color: #e2e2e2;
+}
+
+.activity-option-card-description {
+  color: #e2e2e2;
+}
 /* activitybyCategory end */
 
 
