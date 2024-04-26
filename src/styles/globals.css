@@ -1307,7 +1307,7 @@ gap: 5px;
 
 /* Category End */
 
-/* Activity Start */
+/* ========= Activity Start ========= */
 .activities-header {
   position: absolute;
 }
@@ -1531,7 +1531,15 @@ gap: 5px;
 .blur {
   filter: blur(5px); /* Atur tingkat blur sesuai kebutuhan */
 }
-/* Activity End */
+
+/* activitybyCategory start */
+
+
+/* activitybyCategory end */
+
+
+
+/* ========= Activity End ========= */
 
 /* ========= Footer Start ========= */
 .footer{

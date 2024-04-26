@@ -27,11 +27,10 @@ const ActivityList = () => {
 
   // Fetch activities based on selected category
   useEffect(() => {
-    // if (!selectedCategory) {
-    //   toast.warning("Please select a category");
-    //   return;
-    // }
-  
+    // Reset activities and notification when category changes
+    setActivities([]);
+    setNotif("");
+
     const fetchActivities = async () => {
       try {
         const response = await axios.get(`https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/activities-by-category/${selectedCategory}`, {
@@ -49,11 +48,16 @@ const ActivityList = () => {
         console.error('Error fetching activities:', error);
       }
     };
-  
+
     if (selectedCategory) {
       fetchActivities();
     }
   }, [selectedCategory]);
+
+  // Reset selected category when category changes
+  useEffect(() => {
+    setSelectedCategory('');
+  }, [categories]);
 
   const handleCategoryChange = (e) => {
     setSelectedCategory(e.target.value);
@@ -77,8 +81,7 @@ const ActivityList = () => {
           <li key={activity.id}>
             <h3>{activity.title}</h3>
             <p>{activity.description}</p>
-            <img src={activity.imageUrls[0]} alt={activity.title} />
-            {/* Render other activity details here */}
+            <img src={activity.imageUrls[0]} alt={activity.title} />            
           </li>
         ))}
       </ul>
@@ -87,6 +90,100 @@ const ActivityList = () => {
 };
 
 export default ActivityList;
+
+
+
+
+//// berhasil
+// import React, { useState, useEffect } from 'react';
+// import axios from 'axios';
+// import { toast } from 'sonner';
+
+// const ActivityList = () => {
+//   const [categories, setCategories] = useState([]);
+//   const [selectedCategory, setSelectedCategory] = useState('');
+//   const [activities, setActivities] = useState([]);
+//   const [notif, setNotif] = useState("");
+
+//   // Fetch categories
+//   useEffect(() => {
+//     const fetchCategories = async () => {
+//       try {
+//         const response = await axios.get('https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/categories', {
+//           headers: {
+//             apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
+//           }
+//         });
+//         setCategories(response.data.data);
+//       } catch (error) {
+//         console.error('Error fetching categories:', error);
+//       }
+//     };
+//     fetchCategories();
+//   }, []);
+
+//   // Fetch activities based on selected category
+//   useEffect(() => {
+//     // if (!selectedCategory) {
+//     //   toast.warning("Please select a category");
+//     //   return;
+//     // }
+  
+//     const fetchActivities = async () => {
+//       try {
+//         const response = await axios.get(`https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/activities-by-category/${selectedCategory}`, {
+//           headers: {
+//             apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
+//           }
+//         });
+//         if (response.data.data.length === 0) {
+//           toast.warning("This category is empty");
+//           setNotif("This category is empty");
+//         } else {
+//           setActivities(response.data.data);
+//         }
+//       } catch (error) {
+//         console.error('Error fetching activities:', error);
+//       }
+//     };
+  
+//     if (selectedCategory) {
+//       fetchActivities();
+//     }
+//   }, [selectedCategory]);
+
+//   const handleCategoryChange = (e) => {
+//     setSelectedCategory(e.target.value);
+//   };
+
+  // return (
+  //   <div className='activity-by-categoryId'>
+  //     <h1>Activity List</h1>
+  //     <label htmlFor="categorySelect">Choose a category:</label>
+  //     <select id="categorySelect" value={selectedCategory} onChange={handleCategoryChange}>
+  //       <option value="">Select a category</option>
+  //       {categories.map((category) => (
+  //         <option key={category.id} value={category.id}>{category.name}</option>
+  //       ))}
+  //     </select>
+      
+  //     <h2>Activities</h2>
+  //     {notif && <h1>{notif}</h1>}
+  //     <ul>
+  //       {activities.map((activity) => (
+  //         <li key={activity.id}>
+  //           <h3>{activity.title}</h3>
+  //           <p>{activity.description}</p>
+  //           <img src={activity.imageUrls[0]} alt={activity.title} />
+  //           {/* Render other activity details here */}
+  //         </li>
+  //       ))}
+  //     </ul>
+  //   </div>
+  // );
+// };
+
+// export default ActivityList;
 
 
 
