@@ -176,6 +176,8 @@ button {
   color: #b3b3b3;
 }
 
+
+
 .profile-navbar {
   display: flex;
   align-items: center;
@@ -200,12 +202,17 @@ button {
   padding: 0;
 }
 
+.dropdown{
+  position: relative;
+}
+
 .dropdown-content-navbar{
 text-align: end;
 padding-right: 10px;
 background: #081b29;
 margin-left: 50px;
 border-radius: 15px;
+
 }
 
 .dropdown-content-navbar a {
@@ -230,6 +237,49 @@ border-radius: 15px;
   
 }  */
 /* Loginout End */
+
+/* Navbar toggle start */
+.navbar-toggle {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .navbar-nav {
+    display: none;
+
+    flex-direction: column;
+    position: absolute;
+    top: 80%;
+    left: 15%;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    width: 500px;  
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    align-items: center;
+    backdrop-filter: blur(20px);
+    border-radius: 10px;
+    padding: 5px;
+    
+  }
+
+  .navbar-nav.active {
+    display: flex;
+  }
+
+  .navbar-nav a {
+    margin: 10px 0;
+  }
+
+  .navbar-toggle {
+    display: block;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #ededed;
+  }
+}
+
+/* Navbar toggle end */
+
 
 /* ========== Navbar End ========== */
 

@@ -58,12 +58,19 @@ export default function Navbar() {
   // const accessToken = localStorage.getItem("access_token");
   const isLoggedIn = user && Object.keys(user).length > 0;
 
+  const [isOpen, setIsOpen] = useState(false);
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+    console.log(isOpen);
+  };
+
+
   return (
     <nav className="navbar">
       <div className="logo">
         <a href="/">Luxury Travel</a>
       </div>
-      <div className="navbar-nav">
+      <div className={`navbar-nav ${isOpen ? "active" : ""}`}>
         <Link href="/">Home</Link>
         <Link href="/promo">Promo</Link>
         <Link href="/activity">Destination</Link>
@@ -86,6 +93,13 @@ export default function Navbar() {
           </div>
         )}
       </div>
+
+
+      <button className="navbar-toggle" onClick={toggleMenu}>
+        <span className="toggle-icon">&#9776;</span>
+      </button>
+
+
     </nav>
   );
 }
