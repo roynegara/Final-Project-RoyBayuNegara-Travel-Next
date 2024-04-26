@@ -48,7 +48,7 @@ const Banner = () => {
             <p>{banner.name}</p>
             <div>
               <Link href={`/banner/${banner.id}`}>
-                <button>Read More for {banner.name }</button>
+                <button>Read More</button>
               </Link>
               
             </div>
