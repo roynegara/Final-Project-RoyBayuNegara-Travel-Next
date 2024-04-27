@@ -3,6 +3,7 @@
 body {
   /* background: #081b29; */
   /* background: linear-gradient(to right bottom, #56b9e7,  #003e6b); */
+  background: #042149;
   color: #ededed;
 
   /* display: flex;
@@ -206,15 +207,23 @@ background: transparent;
 
 .dropdown{
   position: relative;
+  
 }
 
 .dropdown-content-navbar{
 text-align: end;
 padding-right: 10px;
-background: #081b29;
+/* background: rgb(56, 143, 188, 0.4); */
 margin-left: 50px;
 border-radius: 15px;
 
+
+}
+
+.dropdown-content-navbar a:hover {
+  /* background: rgb(56, 143, 188, 0.4); */
+  color: #b3b3b3;
+  border-radius: 10px;
 }
 
 .dropdown-content-navbar a {
@@ -251,16 +260,21 @@ border-radius: 15px;
 
     flex-direction: column;
     position: absolute;
-    top: 80%;
+    top: 105%;
     left: 15%;
     border: 2px solid rgba(255, 255, 255, 0.2);
     width: 500px;  
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     align-items: center;
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(25px);
     border-radius: 10px;
-    padding: 5px;
+    padding: 5px; 
+ 
+    background: rgba(255, 255, 255, 0.2);
     
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0, 0.2);
+    background: rgba(4, 33, 73, 0.8);
+   
   }
 
   .navbar-nav.active {
@@ -278,6 +292,10 @@ border-radius: 15px;
     font-size: 24px;
     color: #ededed;
   }
+
+  .dropdown-content-navbar {
+
+text-align: center;  }
 }
 
 /* Navbar toggle end */
@@ -304,7 +322,7 @@ border-radius: 15px;
   background-size: cover;
   background-position: center;
   padding: 20px 10%;
-  background: #003e6b;
+  background: #042149;
 }
 
 .home-title{ 
@@ -377,19 +395,25 @@ font-size: 30px;
 /* Banner Component Home Start */
 /* Container for the entire carousel */
 .banners-home {
-  margin-top: 50px;
-  width: 100%; 
- 
+  margin-top: 100px;
+  width: 100%;  
 }
+
+.banner-home button {
+  color: #e2e2e2;
+}
+
+
 
 /* Heading style */
 .banners-home h1 {
   font-size: 50px;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
   color: #ededed;
   text-align: center;
-  background: rgb(56, 143, 188, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  /* background: rgb(56, 143, 188, 0.4); */
+  background: rgba(4, 33, 73, 0.8);
+  /* border: 1px solid rgba(255, 255, 255, 0.2); */
   backdrop-filter: blur(15px);  
   box-shadow: 0 0 10px rgba(0, 0, 0, 0, 0.2);
   color: #ededed;
@@ -410,12 +434,17 @@ font-size: 30px;
 
 /* Style for each banner item */
 .banners-list {
-  padding: 20px;
-  background: rgb(56, 143, 188, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  margin-top: 25px;
+  /* padding: 20px; */
+  /* background: rgb(56, 143, 188, 0.4); */
+  /* border: 1px solid rgba(255, 255, 255, 0.2); */
   backdrop-filter: blur(15px);  
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
   border-radius: 10px;
+  padding: 2px;
+  background: rgba(4, 33, 73, 0.8);
+border: 1px solid rgba(255, 255, 255, 0.2);
+
 }
 
 /* Banner image style */
@@ -433,6 +462,10 @@ font-size: 30px;
   color: #ededed;
   margin-top: 10px;
 text-align: center;
+background: rgba(4, 33, 73, 0.8);
+/* background: rgba(255, 255, 255, 0.1); */
+backdrop-filter: blur(25px);
+border-radius: 10px;
 }
 
 .banners-list a {
@@ -440,6 +473,7 @@ text-align: center;
   color: #ededed;
   margin-top: 10px;
   text-decoration: none;
+  
 }
 
 
@@ -450,12 +484,15 @@ text-align: center;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  /* background-color: rgba(0, 0, 0, 0.5); */
+background: rgba(255, 255, 255, 0.1);
+backdrop-filter: blur(6px);
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: #fff;
+  color: #e2e2e2;
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -585,7 +622,7 @@ text-align: center;
   text-align: center;
   min-height: 100vh;
   /* background: linear-gradient(to right bottom, #208cbe,  #002946);  */
-  background: url('https://img.freepik.com/free-photo/wooden-bridge-koh-nangyuan-island-surat-thani-thailand_335224-1082.jpg?t=st=1713838704~exp=1713842304~hmac=57ffbe528ff92181c489954087848c16ccc6ab750a398a579d9661a02f322bc7&w=1380'), no-repeat;
+  /* background: url('https://img.freepik.com/free-photo/wooden-bridge-koh-nangyuan-island-surat-thani-thailand_335224-1082.jpg?t=st=1713838704~exp=1713842304~hmac=57ffbe528ff92181c489954087848c16ccc6ab750a398a579d9661a02f322bc7&w=1380'), no-repeat; */
   background-size: cover;
   background-position: center;
   padding: 20px 10%;
@@ -1231,15 +1268,23 @@ gap: 5px;;
 
 /* Promo home style Start */
 .promos-home-wrapper {
-  max-width: 80%;
+  max-width: 100%;
   margin: 0 auto;
+  
 }
+
+.promos-home-wrapper h1 {
+  margin-top: 100px;
+}
+
 
 .promos-container-home {
   display: grid;
   grid-template-columns: 2fr 4fr 2fr;
   /* grid-template-columns: repeat(3, 1fr); */
   gap: 20px;
+  
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0, 0.2); */
 }
 
 
@@ -1259,6 +1304,7 @@ gap: 5px;;
   display: block;
   object-fit: cover;
  border-radius: 10px;
+ box-shadow: 0 4px 8px rgba(255, 255, 255, 0.6);
 }
 
 .promos-card-home p {
@@ -1275,16 +1321,47 @@ gap: 5px;;
   border-radius: 10px;
 }
 
-.see-more-promos-home{
-text-decoration: none;
-color: #e2e2e2;
-font-size: 20px;
-font-weight: 600;
-cursor: pointer;
-justify-content: end;
-align-items: end;
+.see-more-promo {
 
+text-align: center;
+padding: 10px;
+margin-top: 40px;
 }
+
+.see-more-promos-home {
+  text-decoration: none;
+   padding: 20px;
+  color: #b3b3b3;
+  font-size: 30px;
+  font-weight: 500;  
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);  
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0, 0.2);
+  border: none;
+  border-radius: 4px;
+  font-size: 18px;
+  font-weight: 500;
+  padding: 4px;
+  margin: 10px;
+  width: 125px;
+  height: 40px;
+  color:#e2e2e2;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+}
+
+.see-more-promos-home:hover {
+  
+  background: rgb(56, 143, 188, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0, 0.2);
+}
+
+
 
 /* Promo home style End */
 
@@ -1487,8 +1564,12 @@ gap: 5px;
 
 /* Categories home style Start */
 .categories-home-wrapper {
-  max-width: 80%;
+  max-width: 100%;
   margin: 0 auto;
+}
+
+.categories-home-wrapper h1 {
+  margin-top: 100px;
 }
 
 .categories-container-home {
@@ -1515,6 +1596,7 @@ gap: 5px;
   display: block;
   object-fit: cover;
  border-radius: 10px;
+ box-shadow: 0 4px 8px rgba(255, 255, 255, 0.6);
 }
 
 .categories-card-home p {
@@ -1761,8 +1843,12 @@ gap: 5px;
 
 /* Activity home style Start */
 .activities-home-wrapper {
-  max-width: 80%;
+  max-width: 100%;
   margin: 0 auto;
+}
+
+.activities-home-wrapper h1 {
+  margin-top: 100px;
 }
 
 .activities-container-home {
@@ -1789,6 +1875,7 @@ gap: 5px;
   display: block;
   object-fit: cover;
  border-radius: 10px;
+ box-shadow: 0 4px 8px rgba(255, 255, 255, 0.6);
 }
 
 .activities-card-home p {
@@ -1818,8 +1905,8 @@ text-align: end;
   
   padding: 5px 300px;
   
-
-  background: rgb(56, 143, 188, 0.4);
+background: rgba(4, 33, 73, 0.8);
+  /* background: rgb(56, 143, 188, 0.4); */
   border: 2px solid rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(25px);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0, 0.2);
@@ -1829,6 +1916,31 @@ text-align: end;
   margin-right: auto;
   justify-content: center;
 }
+
+
+.activity-option {
+  text-decoration: none;
+   padding: 20px;
+  font-size: 30px;
+  font-weight: 500;  
+  background: rgba(4, 33, 73, 1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);  
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0, 0.2);
+  border: none;
+  border-radius: 4px;
+  font-size: 18px;
+  font-weight: 500;
+  padding: 4px;
+  margin: 10px;
+  width: 190px;
+  height: 40px;
+  color:#e2e2e2;
+  cursor: pointer;
+}
+
+
+
 
 
 .activity-option-wrapper {

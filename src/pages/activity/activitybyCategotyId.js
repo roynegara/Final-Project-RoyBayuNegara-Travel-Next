@@ -66,11 +66,11 @@ const ActivityList = () => {
   return (
     <div className='activity-by-categoryId'>
       <h1>Category List</h1>
-      <label htmlFor="categorySelect">Choose a category : </label>
-      <select id="categorySelect" value={selectedCategory} onChange={handleCategoryChange}>
-        <option value="">Select a category</option>
+      {/* <label className='activity-option-choose'  htmlFor="categorySelect">Choose a category : </label> */}
+      <select className='activity-option' id="categorySelect" value={selectedCategory} onChange={handleCategoryChange}>
+        <option  value="">Select a category</option>
         {categories.map((category) => (
-          <option key={category.id} value={category.id}>{category.name}</option>
+          <option  key={category.id} value={category.id}>{category.name}</option>
           
         ))}
       </select>

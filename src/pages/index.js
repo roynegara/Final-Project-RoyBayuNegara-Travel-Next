@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import BannerCarousel from "@/pages/bannerCarousel";
 import ActivityList from "@/pages/activity/activitybyCategotyId";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export default function Home() {
   const router = useRouter();
@@ -127,9 +128,13 @@ export default function Home() {
       </div>  */}
 
 
-       <div className="promos-home-wrapper">
-        <h1>Enjoy Your Trip With Our Promo</h1>
-        <Link className="see-more-promos-home" href="/promo">See More</Link>
+        <div className="promos-home-wrapper">
+
+        
+          <h1><FontAwesomeIcon icon="fa-regular fa-tag" />Enjoy Your Trip With Our Promo</h1>
+          
+       
+
         <div className="promos-container-home">
           {promos.map((promo, index) => (
             <div className="promos-card-home" key={index}>
@@ -139,7 +144,11 @@ export default function Home() {
               <p>{promo.title}</p>              
             </div>
           ))}
-        </div>
+          </div>
+          
+          <div className="see-more-promo" >
+          <Link className="see-more-promos-home" href="/promo">See All Promos &gt; </Link>
+          </div>
       </div>
       
       {/* <div className="promos-home">
@@ -158,7 +167,7 @@ export default function Home() {
 
 <div className="categories-home-wrapper">
         <h1>Explore The World and Enhance Your Trip</h1>
-        <Link href="/category">See More</Link>
+        
         <div className="categories-container-home">
           {categories.map((category, index) => (
             <div className="categories-card-home" key={index}>
@@ -168,7 +177,10 @@ export default function Home() {
               <p>{category.name}</p>
             </div>
           ))}
-        </div>
+          </div>
+          <div className="see-more-promo" >
+            <Link className="see-more-promos-home" href="/category">See All Categorys &gt; </Link>
+          </div>
       </div>
 
 
@@ -188,7 +200,7 @@ export default function Home() {
       
 <div className="activities-home-wrapper">
         <h1>Top Destination</h1>
-        <Link href="/activity">See More</Link>
+        
         <div className="activities-container-home">
           {activities.map((activity, index) => (
             <div className="activities-card-home" key={index}>
@@ -206,7 +218,10 @@ export default function Home() {
               <p>{activity.title}</p>
             </div>
           ))}
-        </div>
+          </div>
+          <div className="see-more-promo" >
+          <Link className="see-more-promos-home" href="/activity">See All Destinations &gt;  </Link>
+            </div>
       </div>
 
 
