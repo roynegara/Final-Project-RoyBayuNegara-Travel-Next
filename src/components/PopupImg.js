@@ -28,20 +28,26 @@ const Upload = (props) => {
           }
         )
         .then((res) => {
+
+          // setTimeout (() => {
+            
+            props.setTrigger(false);
+          //   props.updateImageData();
+          // },100)
           console.log("res", res);
           setImageUrl(res?.data?.url);
           // toast.success(res?.data?.message);
           toast.success('Profile picture has been updated');
-          // router.push(`/dashboard`, undefined, { shallow: false }).then((success) => {
-          //   if (success) {
-          //     setTimeout(() => {
+          router.push(`/dashboard`, undefined, { shallow: false }).then((success) => {
+            if (success) {
+              setTimeout(() => {
                 
-          //       window.location.reload(); 
-          //     },1000)
-          //   }
-          // });
-          // props.updateImageData();
-          props.setTrigger(false);
+                window.location.reload(); 
+              },1000)
+            }
+          });
+          // 
+          
         })
         .catch((err) => {
           console.log("err", err);

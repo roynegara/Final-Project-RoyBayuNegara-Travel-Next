@@ -67,8 +67,15 @@ if(!name && !email && !phoneNumber){
         },
       })
       .then((res) => {
+        
+       
         console.log('res', res)
         toast.success('Profile has been updated');
+
+        setTimeout (() => {
+          props.setTrigger(false);
+          props.updateProfileData();
+        },100)
 
         // router.push(`/dashboard`, undefined, { shallow: false }).then((success) => {
         //   if (success) {
@@ -80,7 +87,7 @@ if(!name && !email && !phoneNumber){
         // });
         
         // props.updateProfileData();
-        props.setTrigger(false);
+        
 
       })
       .catch((err) => {
