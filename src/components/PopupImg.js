@@ -40,7 +40,7 @@ const Upload = (props) => {
           //     },1000)
           //   }
           // });
-          props.updateImageData();
+          // props.updateImageData();
           props.setTrigger(false);
         })
         .catch((err) => {
