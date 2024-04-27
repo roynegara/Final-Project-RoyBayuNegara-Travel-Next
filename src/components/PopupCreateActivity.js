@@ -152,14 +152,9 @@ const CreateActivity = (props) => {
         console.log("res", res);
         // setNotif("Status : Activity Created");
         toast.success(`${title} has been created`);
-
-        router.push("/activity", undefined, { shallow: true }).then((success) => {
-          if (success) {
-            setTimeout(() => {
-              window.location.reload()
-            }, 1000)
-          }
-        })
+        props.updateActivityData();
+        props.setTrigger(false);
+       
 
         // setTimeout(() => {
         //     props.setShowPopup(false);
@@ -197,9 +192,6 @@ const CreateActivity = (props) => {
       return;
     }
     
-    
-        
-    
         const config = {
           headers: {
             "content-type": "multipart/form-data",
@@ -218,6 +210,8 @@ const CreateActivity = (props) => {
             console.log(res);
             setImageUrls(res.data.url);
             // toast.success(res?.data?.message);
+            // props.updateActivityData();
+            // props.setTrigger(false);
            
            
     })
@@ -229,19 +223,28 @@ const CreateActivity = (props) => {
 
 
   return props.trigger ? (
-    <div className="popup-create-activity">
-      <h1>Create a Destination</h1>
+    <div className="popup-create-activity-wrap">
+    
+      <div className="popup-create-activity">
+        
+      <h1>Add Destination</h1>
 
-      <select name="categoryId" value={categoryId} onChange={handleCategoryIdChange}>
+        <div className="input-box-create-activity-separate">       
+        <div className="input-box-create-activity-7kiri">
+        <select className="option-create-activity" name="categoryId" value={categoryId} onChange={handleCategoryIdChange}>
         <option value="">-- Select Category --</option>
         {categories.map((category, index) => (
           <option key={index} value={category.id}>
             {category.name}
           </option>
         ))}
-      </select>
-
+        </select>
+        
+      <div className="input-box-create-activity">
       <input type="text" name="title" value={title} onChange={handleTitleChange} placeholder="Title" />
+        </div>
+        
+        <div className="input-box-create-activity">
       <input
         type="text"
         name="description"
@@ -249,55 +252,92 @@ const CreateActivity = (props) => {
         onChange={handleDescriptionChange}
         placeholder="Description"
       />
-      {/* <input type="text" name="imageUrls" value={imageUrls} onChange={handleImageUrlsChange} placeholder="Image Urls" /> */}
-      <input type="file" name="imageUrls" onChange={handleImageUrlsChange} multiple />
+        </div>
+        
+        
+      
+        
+        
+        <div className="input-box-create-activity">
       <input type="text" name="price" value={price} onChange={handlePriceChange} placeholder="Price" />
+        </div>
+
+        <div className="input-box-create-activity">
       <input
         type="text"
         name="price_discount"
         value={price_discount}
         onChange={handlePrice_discountChange}
         placeholder="Price Discount"
-      />
+          />
+          </div>
+          <div className="input-box-create-activity">
       <input type="text" name="rating" value={rating} onChange={handleRatingChange} placeholder="Rating" />
-      <input
+     </div>
+               
+    </div>
+          
+          <div className="input-box-create-activity-7kanan">
+
+           
+          <input className="upload-image-create-activity" id="file-upload" type="file" name="imageUrls" onChange={handleImageUrlsChange} multiple />
+          
+      
+
+
+
+     <div className="input-box-create-activity">
+          <input
         type="text"
         name="total_reviews"
         value={total_reviews}
         onChange={handleTotal_reviewsChange}
         placeholder="Total Reviews"
-      />
+          />
+          </div>
+
+          <div className="input-box-create-activity">
       <input
         type="text"
         name="facilities"
         value={facilities}
         onChange={handleFacilitiesChange}
         placeholder="Facilities"
-      />
-      <input type="text" name="address" value={address} onChange={handleAddressChange} placeholder="Address" />
-      <input type="text" name="province" value={province} onChange={handleProvinceChange} placeholder="Province" />
-      <input type="text" name="city" value={city} onChange={handleCityChange} placeholder="City" />
+          />
+        </div>
+
+        <div className="input-box-create-activity">
+          <input type="text" name="address" value={address} onChange={handleAddressChange} placeholder="Address" />
+        </div>
+
+        <div className="input-box-create-activity">
+          <input type="text" name="province" value={province} onChange={handleProvinceChange} placeholder="Province" />
+        </div>
+
+        <div className="input-box-create-activity">
+          <input type="text" name="city" value={city} onChange={handleCityChange} placeholder="City" />
+        </div>
+
+        <div className="input-box-create-activity">
       <input
         type="text"
         name="location_maps"
         value={location_maps}
         onChange={handleLocation_mapsChange}
         placeholder="Location Maps"
-      />
+          />
+          </div>
+          </div>
+          </div>
 
-      {/* {notif && <p style={{ color: "red" }}>{notif}</p>} */}
-
-      {/* <button onClick={handleSubmit}>Submit</button> */}
-
-      <div>
-        <button onClick={handleUpload}>Submit</button>
+      <div className="btn-create-activity-popup">
+        <button onClick={handleUpload}>Add Destination</button>
       </div>
 
-      <button className="btn-close-popup-create-activity" onClick={() => props.setTrigger(false)}>
-        X
-      </button>
+      <span className="btn-close-popup-create-activity" onClick={() => props.setTrigger(false)}>&times;</span>
       {props.children}
-    </div>
+      </div>
+      </div>
   ) : (
     ""
   );

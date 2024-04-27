@@ -30,14 +30,19 @@ const Activity = () => {
     getActivities();
   }, []);
 
+  const updateActivityData = () => {
+    getActivities();
+  }
   
   return (
     <div>
-      <div >
-        <h1 className="activities-title">Activity</h1>
-        <button onClick={() => setButtonPopupCreateActivity(true)}>Create Activity</button>
-        
+      <h1 className="activities-title">Destination Database</h1>
+      
+      <div className="activities-btn-popup-create" >
+        <button onClick={() => setButtonPopupCreateActivity(true)}>Add Destination</button>
       </div>
+
+      <div className={`${buttonPopupCreateActivity ? 'blur' : ''}`} >
 
       <div className="activities">
         {activities.map((activity, index) => (
@@ -64,8 +69,10 @@ const Activity = () => {
 
           
         ))}
-      </div>
-      <PopupCreateActivity trigger={buttonPopupCreateActivity} setTrigger={setButtonPopupCreateActivity}></PopupCreateActivity>
+        </div>
+        </div>
+        {buttonPopupCreateActivity && <PopupCreateActivity trigger={buttonPopupCreateActivity} setTrigger={setButtonPopupCreateActivity} updateActivityData={updateActivityData} />}
+
     </div>
   );
 };

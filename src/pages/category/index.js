@@ -34,7 +34,7 @@ const Category = () => {
 
   return (
     <div>
-      <h1 className="categories-title">Category</h1>
+      <h1 className="categories-title">Category Database</h1>
       <div className="categories-btn-popup-create">
         <button onClick={() => setButtonPopupCreateCategory(true)}>Add Category</button>
       </div>

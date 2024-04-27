@@ -1274,13 +1274,11 @@ backdrop-filter: blur(6px);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0, 0.2);
 }
 
-
 .banners {
   text-align: center;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(5, auto);
-  /* gap: 5px;; */
   }
 
   .banners-card {
@@ -1358,7 +1356,6 @@ backdrop-filter: blur(6px);
 
 .popup-create-banner {
   width: 420px;
-  /* background: transparent; */
   background: rgba(4, 33, 73, 0.8);
   border: 1px solid rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(15px);
@@ -1441,10 +1438,6 @@ backdrop-filter: blur(6px);
   align-items: center;
   justify-items: center;
 }
-
-
-
-
 
 .popup-edit-banner,
 .popup-delete-banner {
@@ -2337,17 +2330,13 @@ margin-top: 40px;
 /* Category End */
 
 /* ========= Activity Start ========= */
-.activities-header {
-  position: absolute;
-}
-
-
 .activities-title {
   margin-top: 100px;
   font-size: 30px;
   width: 500px;
-   background: rgb(56, 143, 188, 0.4);
-  border: 2px solid rgba(255, 255, 255, 0.2);
+   /* background: rgb(56, 143, 188, 0.4); */
+   background: rgba(4, 33, 73, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(25px);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0, 0.2);
   color: #e2e2e2;
@@ -2355,33 +2344,61 @@ margin-top: 40px;
   padding: 30px 40px;
   margin-left: auto;
   margin-right: auto;
+  text-align: center;
+}
+
+.activities-btn-popup-create {
+  text-align: end;
+  margin-right: 15px;
+}
+
+.activities-btn-popup-create button {
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);  
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0, 0.2);
+  border: none;
+  border-radius: 4px;
+  font-size: 18px;
+  font-weight: 500;
+  padding: 4px;
+  margin: 10px;
+  width: 180px;
+  height: 40px;
+  color:#e2e2e2;
+}
+
+.activities-btn-popup-create button:hover {
+  background: rgb(56, 143, 188, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);  
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0, 0.2);
 }
 
 .activities {
   text-align: center;
-display: grid;
-grid-template-columns: repeat(3, 1fr);
-grid-template-rows: repeat(5, auto);
-gap: 5px;
-
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(5, auto);
 }
 
 .activities-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;  
   margin-top: 50px;
-  width: 420px;
-  /* background: transparent; */
-  background: rgb(56, 143, 188, 0.4);
+  width: 500px;  
+  background: rgba(4, 33, 73, 0.8);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(15px);
-  /* filter: blur(1px); */
-  
+  backdrop-filter: blur(15px); 
   box-shadow: 0 0 10px rgba(0, 0, 0, 0, 0.2);
   color: #ededed;
   border-radius: 10px;
   padding: 30px 40px;
   margin-left: auto;
   margin-right: auto;
-
 }
 
 .activities-card img {
@@ -2391,20 +2408,21 @@ gap: 5px;
   margin-bottom: 10px;
   margin-left: auto;
   margin-right: auto;
-  border: 5px solid rgb(56, 143, 188, 0.2);
+  border: 15px solid rgb(56, 143, 188, 0.1);
   box-shadow:0 0 10px rgba(0, 0, 0, 0, 0.2);
+  transition: transform 0.3s ease; 
+}
+
+.activities-card img:hover {
+  transform: scale(1.1);
+  cursor: pointer;
 }
 
 .activities-card button {
   text-decoration: none;
-  /* color: #333;
-  background: #ededed; */
-  background: rgb(56, 143, 188, 0.4);
-
+  background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(15px);
-  /* filter: blur(1px); */
-  
+  backdrop-filter: blur(15px);  
   box-shadow: 0 0 10px rgba(0, 0, 0, 0, 0.2);
   border: none;
   border-radius: 4px;
@@ -2412,48 +2430,162 @@ gap: 5px;
   font-weight: 500;
   padding: 4px;
   margin: 10px;
-  width: 90%;
+  width: 140px;
   height: 40px;
   color:#e2e2e2;
 }
 
 .activities-card button:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgb(56, 143, 188, 0.4);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(15px);
-  /* filter: blur(1px); */
-  
+  backdrop-filter: blur(15px);  
   box-shadow: 0 0 10px rgba(0, 0, 0, 0, 0.2);
 }
 
-
-
-
-
-
-.activity img {
-  width: 1000px;
-}
-
-/* .activities img {
-  width: 300px;
-  height: 300px;
-} */
-
-.popup-create-activity{
-  
-  width: 420px;
-  background: rgb(5, 5, 150);
-  border: 2px solid rgba(255, 255, 255, 0.5);
-  padding: 30px;
-  border-radius: 15px;
-  backdrop-filter: blur(15px);
-
-  position: absolute;
-  top: 45%;
+.popup-create-activity-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+ background: rgba(4, 33, 73, 1);
+  background-size: cover;
+  background-position: center;
+  position: fixed;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.popup-create-activity{
+  width: 1000px;
+  background: rgba(4, 33, 73, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0, 0.2);
+  color: #ededed;
+  border-radius: 10px;
+  padding: 25px;
+  position: fixed;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+  color: #e2e2e2;
+}
+
+.popup-create-activity h1 {
+  text-align: center;
+  font-size: 36px;
+}
+
+.option-create-activity {
+  width: 75%;
+  height: 12%;
+  padding: 20px;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  outline: none;
+  border-radius: 9px;
+  font-size: 15px;
+  color: #ededed;
+  cursor: pointer;
+  background: rgba(4, 33, 73, 1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.upload-image-create-activity {
+  width: 75%;
+  height: 12%;
+  padding: 20px;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  outline: none;
+  border-radius: 9px;
+  font-size: 15px;
+  color: #ededed;
+  cursor: pointer;
+  background: rgba(4, 33, 73, 1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.upload-image-create-activity:hover {
+  cursor: pointer;
+}
+
+
+.input-box-create-activity {
+  position: relative;
+  width: 400px;
+  height: 50px;
+  margin: 30px;
+  padding: 30px;
+}
+
+.input-box-create-activity input {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  outline: none;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 9px;
+  font-size: 15px;
+  color: #ededed;
+  padding: 20px 45px 20px 20px;
+}
+
+.input-box-create-activity input::placeholder {
+  color: #b4b4b4;
+}
+
+.btn-create-activity-popup button {
+text-decoration: none;
+padding: 20px;
+ color: #b3b3b3;
+ font-size: 30px;
+ font-weight: 500;  
+ background: rgba(255, 255, 255, 0.1);
+ border: 1px solid rgba(255, 255, 255, 0.2);
+ backdrop-filter: blur(15px);  
+ box-shadow: 0 0 10px rgba(0, 0, 0, 0, 0.2);
+ border: none;
+ border-radius: 4px;
+ font-size: 18px;
+ font-weight: 500;
+ padding: 4px;
+ margin: 10px;
+ width: 185px;
+ height: 40px;
+ color:#e2e2e2;
+}
+
+.btn-create-activity-popup button:hover {
+  background: rgb(56, 143, 188, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0, 0.2);
+}
+
+.btn-close-popup-create-activity {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  color: #e2e2e2;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+}
+
+.input-box-create-activity-separate {
+  display: flex;
+  /* justify-content: center; */
+}
+
+
+
+
 
 
 .popup-edit-activity,

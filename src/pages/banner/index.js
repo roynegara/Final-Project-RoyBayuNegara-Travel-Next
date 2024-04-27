@@ -33,7 +33,7 @@ const Banner = () => {
 
   return (
     <div>
-      <h1 className="banners-title">Banner Display</h1>
+      <h1 className="banners-title">Banner Database</h1>
 
       <div className="banners-btn-popup-create">
         <button onClick={() => setButtonPopupCreateBanner(true)}>Add Banner</button>
