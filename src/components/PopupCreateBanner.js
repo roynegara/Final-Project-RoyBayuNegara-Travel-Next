@@ -57,13 +57,26 @@ const CreateBanner = (props) => {
   };
 
   return props.trigger ? (
+    <div className="popup-create-banner-wrap">
+
     <div className="popup-create-banner">
       <h1>Add Banner</h1>
-      <input type="text" name="name" value={name} onChange={handleNameChange} placeholder="Banner Name" />
+      <div className="input-box-create-banner">          
+        <input type="text" name="name" value={name} onChange={handleNameChange} placeholder="Banner Name" />
+      </div>
+      <div className="input-box-create-banner">
+          
       <input type="text" name="imageUrl" value={imageUrl} onChange={handleImageUrlChange} placeholder="Banner Image Url" />
+      </div>
+
+      <div className="btn-create-banner-popup">
+
       <button type="submit" onClick={handleUpload}>Add</button>
-      <button className="btn-close-popup-create-banner" onClick={() => props.setTrigger(false)}>X</button>
+        </div>
+        
+      <span className="btn-close-popup-create-banner" onClick={() => props.setTrigger(false)}>&times;</span>
       {props.children}
+    </div>
     </div>
   ) : (
     ""

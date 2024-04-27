@@ -38,9 +38,12 @@ const Banner = () => {
         <button onClick={() => setButtonPopupCreateBanner(true)}>Add Banner</button>
       </div>
 
+      <div className={`banner-container ${buttonPopupCreateBanner ? 'blur' : ''}`} >
+
+     
       <div className="banners">
         {banners.map((banner, index) => (
-          <div className={`banner-container ${buttonPopupCreateBanner ? 'blur' : ''}`} key={index}>
+          <div key={index}>
             <div className="banners-card">
               <img src={banner.imageUrl} alt={banner.name} />
               <p>{banner.name}</p>
@@ -52,7 +55,8 @@ const Banner = () => {
             </div>
           </div>
         ))}
-      </div>
+        </div>
+        </div>
 
       {buttonPopupCreateBanner && <PopupCreateBanner trigger={buttonPopupCreateBanner} setTrigger={setButtonPopupCreateBanner} updateBannerData={updateBannerData} />}
     </div>

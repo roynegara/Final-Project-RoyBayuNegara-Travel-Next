@@ -131,7 +131,7 @@ export default function Home() {
         <div className="promos-home-wrapper">
 
         
-          <h1><FontAwesomeIcon icon="fa-regular fa-tag" />Enjoy Your Trip With Our Promo</h1>
+          <h1><FontAwesomeIcon icon="fa-regular fa-tag" />  Enjoy your trip with our promo</h1>
           
        
 
@@ -166,7 +166,7 @@ export default function Home() {
       </div> */}
 
 <div className="categories-home-wrapper">
-        <h1>Explore The World and Enhance Your Trip</h1>
+        <h1>Explore the world and enhance your trip</h1>
         
         <div className="categories-container-home">
           {categories.map((category, index) => (
@@ -199,7 +199,7 @@ export default function Home() {
 
       
 <div className="activities-home-wrapper">
-        <h1>Top Destination</h1>
+        <h1>Top destination for your travels</h1>
         
         <div className="activities-container-home">
           {activities.map((activity, index) => (

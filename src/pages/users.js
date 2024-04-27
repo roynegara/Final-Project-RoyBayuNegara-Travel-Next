@@ -109,7 +109,7 @@ const Users = () => {
     return (
         <div className='users'>
             <div className={`users ${isModalOpen ? 'blur-users' : ''}`}>
-            <h1 className="users-title">The Member User of This Website</h1>
+            <h1 className="users-title">The Database Users of This Website</h1>
             <div className="users-content">
             {users.map((user, index) => (
                 <div key={index}>

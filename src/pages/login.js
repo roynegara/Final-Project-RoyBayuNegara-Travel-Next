@@ -96,6 +96,7 @@ const Login = () => {
 
       <input type="password" name="password" placeholder="Password" value={password} onChange={handlePasswordChange} />
         </div>
+        
         <div className="btn-login">
         <button onClick={handleLogin} disabled={loading ? true : false}>
         {loading ? "Loading..." : "Login"}
