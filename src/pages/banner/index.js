@@ -27,6 +27,10 @@ const Banner = () => {
     getBanners();
   }, []);
 
+  const updateBannerData = () => {
+    getBanners(); // Panggil kembali fungsi getBanners untuk memperbarui data banner
+  };
+
   return (
     <div>
       <h1 className="banners-title">Banner</h1>
@@ -36,27 +40,89 @@ const Banner = () => {
 
       <div className="banners">
         {banners.map((banner, index) => (
-           <div className={`banner-container ${buttonPopupCreateBanner ? 'blur' : ''}`}>
-
-          <div className="banners-card" key={index}>
-            <img src={banner.imageUrl} alt={banner.name} />
-            <p>{banner.name}</p>
-            <div>
-              <Link href={`/banner/${banner.id}`}>
-                <button>Read More</button>
-              </Link>
+          <div className={`banner-container ${buttonPopupCreateBanner ? 'blur' : ''}`} key={index}>
+            <div className="banners-card">
+              <img src={banner.imageUrl} alt={banner.name} />
+              <p>{banner.name}</p>
+              <div>
+                <Link href={`/banner/${banner.id}`}>
+                  <button>Read More</button>
+                </Link>
+              </div>
             </div>
-          </div>
           </div>
         ))}
       </div>
 
-      {buttonPopupCreateBanner && <PopupCreateBanner trigger={buttonPopupCreateBanner} setTrigger={setButtonPopupCreateBanner} />}
+      {buttonPopupCreateBanner && <PopupCreateBanner trigger={buttonPopupCreateBanner} setTrigger={setButtonPopupCreateBanner} updateBannerData={updateBannerData} />}
     </div>
   );
 };
 
 export default Banner;
+
+
+
+// // success blur when popup create onclock
+// import React, { useEffect, useState } from "react";
+// import axios from "axios";
+// import Link from "next/link";
+// import PopupCreateBanner from "@/components/PopupCreateBanner";
+
+// const Banner = () => {
+//   const [banners, setBanners] = useState([]);
+//   const [buttonPopupCreateBanner, setButtonPopupCreateBanner] = useState(false);
+
+//   const getBanners = () => {
+//     axios
+//       .get("https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/banners", {
+//         headers: {
+//           apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
+//         },
+//       })
+//       .then((res) => {
+//         console.log("res", res);
+//         setBanners(res.data.data);
+//       })
+//       .catch((err) => {
+//         console.log("err", err);
+//       });
+//   };
+
+//   useEffect(() => {
+//     getBanners();
+//   }, []);
+
+//   return (
+//     <div>
+//       <h1 className="banners-title">Banner</h1>
+//       <div className="banners-btn-popup-create">
+//         <button onClick={() => setButtonPopupCreateBanner(true)}>Add Banner</button>
+//       </div>
+
+//       <div className="banners">
+//         {banners.map((banner, index) => (
+//            <div className={`banner-container ${buttonPopupCreateBanner ? 'blur' : ''}`}>
+
+//           <div className="banners-card" key={index}>
+//             <img src={banner.imageUrl} alt={banner.name} />
+//             <p>{banner.name}</p>
+//             <div>
+//               <Link href={`/banner/${banner.id}`}>
+//                 <button>Read More</button>
+//               </Link>
+//             </div>
+//           </div>
+//           </div>
+//         ))}
+//       </div>
+
+//       {buttonPopupCreateBanner && <PopupCreateBanner trigger={buttonPopupCreateBanner} setTrigger={setButtonPopupCreateBanner} />}
+//     </div>
+//   );
+// };
+
+// export default Banner;
 
 
 
