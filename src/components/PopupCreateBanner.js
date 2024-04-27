@@ -91,7 +91,7 @@ const CreateBanner = (props) => {
 
   return props.trigger ? (
     <div className="popup-create-banner">
-      <h1>Create Banner</h1>
+      <h1>Add Banner</h1>
 
       {/* <input type="file" onChange={handleFileChange} /> */}
       <input type="text" name="name" value={name} onChange={handleNameChange} placeholder="Banner Name" />
@@ -105,7 +105,7 @@ const CreateBanner = (props) => {
 
       {notif && <p style={{ color: "red" }}>{notif}</p>}
       <button type="submit" onClick={handleUpload}>
-        Create Banner
+        Add
       </button>
 
       <button className="btn-close-popup-create-banner" onClick={() => props.setTrigger(false)}>

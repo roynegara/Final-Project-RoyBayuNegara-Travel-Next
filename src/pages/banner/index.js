@@ -1,13 +1,10 @@
-//banner styling
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
 import PopupCreateBanner from "@/components/PopupCreateBanner";
 
-
 const Banner = () => {
   const [banners, setBanners] = useState([]);
-
   const [buttonPopupCreateBanner, setButtonPopupCreateBanner] = useState(false);
 
   const getBanners = () => {
@@ -32,13 +29,15 @@ const Banner = () => {
 
   return (
     <div>
-      
       <h1 className="banners-title">Banner</h1>
-      <button onClick={() => setButtonPopupCreateBanner(true)}>Create Banner</button>
-      {/* <PopupCreateBanner trigger={buttonPopupCreateBanner} setTrigger={setButtonPopupCreateBanner}></PopupCreateBanner> */}
+      <div className="banners-btn-popup-create">
+        <button onClick={() => setButtonPopupCreateBanner(true)}>Add Banner</button>
+      </div>
 
       <div className="banners">
         {banners.map((banner, index) => (
+           <div className={`banner-container ${buttonPopupCreateBanner ? 'blur' : ''}`}>
+
           <div className="banners-card" key={index}>
             <img src={banner.imageUrl} alt={banner.name} />
             <p>{banner.name}</p>
@@ -46,19 +45,149 @@ const Banner = () => {
               <Link href={`/banner/${banner.id}`}>
                 <button>Read More</button>
               </Link>
-              
             </div>
+          </div>
           </div>
         ))}
       </div>
-      <div>
-      <PopupCreateBanner trigger={buttonPopupCreateBanner} setTrigger={setButtonPopupCreateBanner}></PopupCreateBanner>
-      </div>
+
+      {buttonPopupCreateBanner && <PopupCreateBanner trigger={buttonPopupCreateBanner} setTrigger={setButtonPopupCreateBanner} />}
     </div>
   );
 };
 
 export default Banner;
+
+
+
+////masih blur semua
+// import React, { useEffect, useState } from "react";
+// import axios from "axios";
+// import Link from "next/link";
+// import PopupCreateBanner from "@/components/PopupCreateBanner";
+
+// const Banner = () => {
+//   const [banners, setBanners] = useState([]);
+//   const [buttonPopupCreateBanner, setButtonPopupCreateBanner] = useState(false);
+
+//   const getBanners = () => {
+//     axios
+//       .get("https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/banners", {
+//         headers: {
+//           apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
+//         },
+//       })
+//       .then((res) => {
+//         console.log("res", res);
+//         setBanners(res.data.data);
+//       })
+//       .catch((err) => {
+//         console.log("err", err);
+//       });
+//   };
+
+//   useEffect(() => {
+//     getBanners();
+//   }, []);
+
+//   return (
+//     <div>
+//       <h1 className="banners-title">Banner</h1>
+//       <div className="banners-btn-popup-create">
+//         <button onClick={() => setButtonPopupCreateBanner(true)}>Add Banner</button>
+//       </div>
+
+//       <div className="banners">
+//         {banners.map((banner, index) => (
+//           <div className="banners-card" key={index}>
+//             <img src={banner.imageUrl} alt={banner.name} />
+//             <p>{banner.name}</p>
+//             <div>
+//               <Link href={`/banner/${banner.id}`}>
+//                 <button>Read More</button>
+//               </Link>
+//             </div>
+//           </div>
+//         ))}
+//       </div>
+
+//       {/* Overlay to blur other content */}
+//       {buttonPopupCreateBanner && (
+//         <div className="overlay-banners">
+//           <PopupCreateBanner trigger={buttonPopupCreateBanner} setTrigger={setButtonPopupCreateBanner} />
+//         </div>
+//       )}
+//     </div>
+//   );
+// };
+
+// export default Banner;
+
+
+// //banner styling
+// import React, { useEffect, useState } from "react";
+// import axios from "axios";
+// import Link from "next/link";
+// import PopupCreateBanner from "@/components/PopupCreateBanner";
+
+
+// const Banner = () => {
+//   const [banners, setBanners] = useState([]);
+
+//   const [buttonPopupCreateBanner, setButtonPopupCreateBanner] = useState(false);
+
+//   const getBanners = () => {
+//     axios
+//       .get("https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/banners", {
+//         headers: {
+//           apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
+//         },
+//       })
+//       .then((res) => {
+//         console.log("res", res);
+//         setBanners(res.data.data);
+//       })
+//       .catch((err) => {
+//         console.log("err", err);
+//       });
+//   };
+
+//   useEffect(() => {
+//     getBanners();
+//   }, []);
+
+//   return (
+//     <div>
+      
+//       <h1 className="banners-title">Banner</h1>
+//       <div className="banners-btn-popup-create">
+
+//       <button onClick={() => setButtonPopupCreateBanner(true)}>Add Banner</button>
+//       </div>
+//       {/* <PopupCreateBanner trigger={buttonPopupCreateBanner} setTrigger={setButtonPopupCreateBanner}></PopupCreateBanner> */}
+
+//       <div className="banners">
+//         {banners.map((banner, index) => (
+//           <div className="banners-card" key={index}>
+//             <img src={banner.imageUrl} alt={banner.name} />
+//             <p>{banner.name}</p>
+//             <div>
+//               <Link href={`/banner/${banner.id}`}>
+//                 <button>Read More</button>
+//               </Link>
+              
+//             </div>
+//           </div>
+//         ))}
+//       </div>
+//       <div>
+//       <PopupCreateBanner trigger={buttonPopupCreateBanner} setTrigger={setButtonPopupCreateBanner}></PopupCreateBanner>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Banner;
 
 // //banner sudah oke
 // import React, { useEffect, useState } from "react";
