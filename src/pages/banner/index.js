@@ -1,12 +1,8 @@
 //banner styling
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-
 import Link from "next/link";
 import PopupCreateBanner from "@/components/PopupCreateBanner";
-
-import { Carousel } from "react-bootstrap/Carousel";
-
 
 
 const Banner = () => {
