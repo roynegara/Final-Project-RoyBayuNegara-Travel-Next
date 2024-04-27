@@ -46,7 +46,10 @@ const Profile = () => {
 
   return (
       <div className="profile-main">
-          <h1 className="profile-title">My Profile</h1>
+      <h1 className="profile-title">My Profile</h1>
+      
+      <div className={`${buttonPopupImg ? 'blur' : ''}`} >
+
       <div className="profile-card">
         <div>
           <img className="image-profile" src={user.profilePictureUrl} alt={user.name} />
@@ -59,12 +62,12 @@ const Profile = () => {
           <p>Role : {user.role}</p>
           <p>Phone Number : {user.phoneNumber}</p>
         </div>
-      </div>
+        </div>
+       
 
       <div className="btn-profile">
         <div>
           <button onClick={() => setButtonPopupImg(true)}>Edit Avatar</button>
-          { buttonPopupImg && <PopupImg trigger={buttonPopupImg} setTrigger={setButtonPopupImg} updateImageData={updateImageData}/>}
         </div>
 
         <div>
@@ -75,7 +78,9 @@ const Profile = () => {
         <div>
           <button onClick={handleLogout}>Logout</button>
         </div>
+        </div>
       </div>
+      { buttonPopupImg && <PopupImg trigger={buttonPopupImg} setTrigger={setButtonPopupImg} updateImageData={updateImageData}/>}
     </div>
   );
 };
