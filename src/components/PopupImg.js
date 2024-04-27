@@ -94,19 +94,25 @@ if (!file) {
   };
 
   return props.trigger ? (
-    <div className="popupImg">
-      <h1>Edit Avatar</h1>
-      {/* <img src={imageUrl} alt="Uploaded" /> */}
-      <input onChange={handleFileChange} type="file" />
+    <div className="popup-update-image-wrap">
+
+      <div className="popup-update-image">
+        
+        <h1>Edit Avatar</h1>
+        
+        <div className="input-box-update-image">
+        <input onChange={handleFileChange} type="file" />
+        </div>
+        
+        <div className="btn-update-image-popup">
       <button onClick={handleUpload}>Upload</button>
+</div>
 
       
-      <button className="btn-close-popupImg" onClick={() => props.setTrigger(false)}>
-        {" "}
-        X{" "}
-      </button>
+      <span className="btn-close-popup-update-image" onClick={() => props.setTrigger(false)}>&times;</span>
       {props.children}
-    </div>
+      </div>
+      </div>
   ) : (
     ''
   )

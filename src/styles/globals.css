@@ -818,66 +818,7 @@ backdrop-filter: blur(6px);
   color: #b3b3b3;
 }
 
-
-
-
 /* Register End */
-
-/* Dashboard Start */
-.profile {
-  border: 2px solid #fff;
-  background: yellowgreen;
-}
-
-/* .image-profile {
-  width: 80px;
-  height: 80px;
-} */
-.image-users {
-  width: 50px;
-  height: 50px;
-}
-
-.popup {
-  width: 420px;
-  background: rgb(5, 5, 150);
-  border: 2px solid rgba(255, 255, 255, 0.5);
-  padding: 30px;
-  border-radius: 15px;
-  backdrop-filter: blur(15px);
-
-  position: absolute;
-  top: 45%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.btn-close-popup {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-}
-
-.popupImg {
-  width: 420px;
-  background: rgb(5, 5, 150);
-  border: 2px solid rgba(255, 255, 255, 0.5);
-  padding: 30px;
-  border-radius: 15px;
-  backdrop-filter: blur(15px);
-
-  position: absolute;
-  top: 45%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.btn-close-popupImg {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-}
-/* Dashboard End */
 
 
 /* ========== Profile Start ========== */
@@ -995,14 +936,111 @@ backdrop-filter: blur(6px);
 .btn-profile button:hover {
   background: rgb(56, 143, 188, 0.4);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(15px);
-  /* filter: blur(1px); */
-  
+  backdrop-filter: blur(15px); 
   box-shadow: 0 0 10px rgba(0, 0, 0, 0, 0.2);
-
-  /* background: green;
-  color: #d4d4d4; */
 }
+
+.popup-update-image-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+ background: rgba(4, 33, 73, 1);
+  background-size: cover;
+  background-position: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.popup-update-image{
+  width: 420px;
+  background: rgba(4, 33, 73, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0, 0.2);
+  color: #ededed;
+  border-radius: 10px;
+  padding: 25px;
+  position: fixed;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+  color: #e2e2e2;
+}
+
+.popup-update-image h1 {
+  font-size: 30px;
+  text-align: center;
+}
+
+.input-box-update-image{
+  position: relative;
+  width: 100%;
+  height: 50px;
+  margin: 30px 0;
+}
+
+.input-box-update-image input{
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 9px;
+  font-size: 15px;
+  color: #ededed;
+  padding: 20px 45px 20px 20px;
+}
+
+.input-box-update-image input::placeholder{
+  color: #b4b4b4;
+}
+
+.btn-update-image-popup button {
+  text-decoration: none;
+  padding: 20px;
+ color: #b3b3b3;
+ font-size: 30px;
+ font-weight: 500;  
+ background: rgba(255, 255, 255, 0.1);
+ border: 1px solid rgba(255, 255, 255, 0.2);
+ backdrop-filter: blur(15px);  
+ box-shadow: 0 0 10px rgba(0, 0, 0, 0, 0.2);
+ border: none;
+ border-radius: 4px;
+ font-size: 18px;
+ font-weight: 500;
+ padding: 4px;
+ margin: 10px;
+ width: 125px;
+ height: 40px;
+ color:#e2e2e2;
+ cursor: pointer;
+}
+
+.btn-update-image-popup button:hover {
+  background: rgb(56, 143, 188, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0, 0.2);
+}
+
+.btn-close-popup-update-image {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  color: #e2e2e2;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+}
+
+
 /* ========== Profile End ========== */
 
 /* ========== Users Start ========== */
