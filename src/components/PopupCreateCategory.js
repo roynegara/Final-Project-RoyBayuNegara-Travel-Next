@@ -75,11 +75,17 @@ const CreateCategory = (props) => {
   };
 
   return props.trigger ? (
-    <div className="popup-create-category">
-      <h1>Create Category</h1>
+    <div className="popup-create-category-wrap">
+   
+      <div className="popup-create-category">
+        
+      <h1>Add Category</h1>
 
-      {/* <input type="file" onChange={handleFileChange} /> */}
+        <div className="input-box-create-category">
       <input type="text" name="name" value={name} onChange={handleNameChange} placeholder="Category Name" />
+        </div>
+
+      <div className="input-box-create-category">
       <input
         type="text"
         name="imageUrl"
@@ -87,17 +93,16 @@ const CreateCategory = (props) => {
         onChange={handleImageUrlChange}
         placeholder="Category Image Url"
       />
-
-      {/* {notif && <p style={{ color: "red" }}>{notif}</p>} */}
-      <button type="submit" onClick={handleSubmit}>
-        Submit
-      </button>
-
-      <button className="btn-close-popup-create-category" onClick={() => props.setTrigger(false)}>
-        X
-      </button>
+        </div>
+        
+        <div className="btn-create-category-popup">
+        <button type="submit" onClick={handleSubmit}>Add Category</button>
+      </div>
+      
+      <span className="btn-close-popup-create-category" onClick={() => props.setTrigger(false)}>&times;</span>
       {props.children}
-    </div>
+      </div>
+      </div>
   ) : (
     ""
   );

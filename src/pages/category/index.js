@@ -30,18 +30,24 @@ const Category = () => {
     getCategories();
   }, []);
 
+  const updateCategoryData = () => { 
+    getCategories();
+  }
+
   return (
     <div>
       <h1 className="categories-title">Category</h1>
-      <button onClick={() => setButtonPopupCreateCategory(true)}>Create Category</button>
-     
 
+      <div className="categories-btn-popup-create">
+      <button onClick={() => setButtonPopupCreateCategory(true)}>Create Category</button>
+      </div>
+     
+      <div className={`${buttonPopupCreateCategory ? 'blur' : ''}`} >
 
       <div className="categories">
         {categories.map((category, index) => (
           <div className="categories-card" key={index}>
             <img src={category.imageUrl} alt={category.name} />
-            
             <p>{category.id}</p>
             <p>{category.name}</p>
             
@@ -51,11 +57,12 @@ const Category = () => {
                   </Link>
                 </div>
           </div>
+          
         ))}
-      </div>
-      <div>
-      <PopupCreateCategory trigger={buttonPopupCreateCategory} setTrigger={setButtonPopupCreateCategory}></PopupCreateCategory>
-      </div>
+        </div>
+        </div>
+     
+        {buttonPopupCreateCategory && <PopupCreateCategory trigger={buttonPopupCreateCategory} setTrigger={setButtonPopupCreateCategory} updateCategoryData={updateCategoryData}/>}
     </div>
   );
 };
