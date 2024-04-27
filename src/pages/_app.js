@@ -22,6 +22,7 @@ import TravelLayout from "@/layout/TravelLayout";
 import { Toaster } from "sonner";
 import store from "@/Redux/store";
 
+
 export default function App({ Component, pageProps }) {
   return (
    

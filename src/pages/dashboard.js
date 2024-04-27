@@ -5,6 +5,8 @@ import Banner from '@/pages/banner';
 import Promo from '@/pages/promo';
 import Category from '@/pages/category';
 import Activity from '@/pages/activity';
+import { useRouter } from 'next/router';
+
 
 const Dashboard = () => {
   const [showProfile, setShowProfile] = useState(true); // Ubah nilai awal menjadi true
@@ -13,7 +15,19 @@ const Dashboard = () => {
   const [showPromo, setShowPromo] = useState(false);
   const [showCategory, setShowCategory] = useState(false);
 const [showActivity, setShowActivity] = useState(false);
-
+  const router = useRouter();
+  
+const handleLogout = () => {
+  localStorage.removeItem("access_token");
+  router.push("/login", undefined, { shallow: true }).then((success) => {
+    if (success) {
+      setTimeout(() => {
+        window.location.reload();
+      });
+    }
+  });
+};
+  
   const handleProfileClick = () => {
     setShowProfile(true);
     setShowUsers(false);
@@ -79,7 +93,7 @@ const [showActivity, setShowActivity] = useState(false);
           <li className='sidebar-position' onClick={handlePromoClick}>Promo</li>
           <li className='sidebar-position' onClick={handleCategoryClick}>Category</li>
           <li className='sidebar-position' onClick={handleActivityClick}>Destination</li>
-          <li className='sidebar-logout'>Logout</li>
+          <li className='sidebar-logout' onClick={handleLogout} >Logout</li>
         </ul>
       </div>
 

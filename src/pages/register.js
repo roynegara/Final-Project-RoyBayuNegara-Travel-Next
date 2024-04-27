@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
+import {toast} from 'sonner'
 
 const Register = () => {
   const router = useRouter();
-  const [notif, setNotif] = useState("");
+  // const [notif, setNotif] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -62,14 +63,25 @@ const Register = () => {
       })
       .then((res) => {
         console.log("response", res);
-        setNotif("Status : " + res?.data?.message);
+        toast.success("Status : " + res?.data?.message);
         setTimeout(() => {
           router.push("/login");
         }, 1500);
       })
       .catch((err) => {
         console.log("error", err.response);
-        setNotif("Status : " + err?.response?.data?.message);
+        // toast.error("Status : " + err?.response?.data?.message);
+
+        if (
+          err?.response?.data?.errors &&
+          err?.response?.data?.errors.length > 0 &&
+          err.response.data.errors[0].message
+        ) {
+          toast.error(err.response.data.errors[0].message);
+        } else {
+          toast.error(err?.response?.data?.message);
+        }
+
       });
   };
 
@@ -80,7 +92,7 @@ const Register = () => {
   
     <div className="register">
       <h1>Register</h1>
-      {notif && <p style={{ color: notif === "Status : User Created" ? "green" : "red" }}>{notif}</p>}
+      {/* {notif && <p style={{ color: notif === "Status : User Created" ? "green" : "red" }}>{notif}</p>} */}
         <div className="input-box-register">
           
       <input type="text" name="name" value={name} onChange={handleNameChange} placeholder="Name" />
@@ -103,7 +115,7 @@ const Register = () => {
 
       <div className="input-box-registe">
         <label>Choose Role : </label>
-        <select className="activity-option-register" name="role" value={role} onChange={handleRoleChange}>
+        <select className="option-register" name="role" value={role} onChange={handleRoleChange}>
           <option value={"admin"}>Admin</option>
           <option value={"user"}>User</option>
         </select>

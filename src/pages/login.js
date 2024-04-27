@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
+import {toast} from 'sonner'
+
 
 const Login = () => {
   const router = useRouter();
@@ -33,7 +35,7 @@ const Login = () => {
       })
       .then((res) => {
         console.log("response", res);
-        setNotif("Status : " + res?.data?.message);
+        toast.success("Status : " + res?.data?.message);
         const token = res?.data?.token;
         localStorage.setItem("access_token", token);
 
@@ -59,7 +61,16 @@ const Login = () => {
       })
       .catch((err) => {
         console.log("error", err?.response);
-        setNotif("Status : " + err?.response?.data?.message);
+        // toast.error("Status : " + err?.response?.data?.message);
+        if (
+          err?.response?.data?.errors &&
+          err?.response?.data?.errors.length > 0 &&
+          err.response.data.errors[0].message
+        ) {
+          toast.error(err.response.data.errors[0].message);
+        } else {
+          toast.error(err?.response?.data?.message);
+        }
       });
   };
 
@@ -70,7 +81,9 @@ const Login = () => {
   return (
     <div className="login-wrap">
 
-    <div className="login">
+      <div className="login">
+        
+        
       <h1>Login</h1>
       {notif && <p style={{ color: notif === "Status : Authentication successful" ? "green" : "red" }}>{notif}</p>}
         
