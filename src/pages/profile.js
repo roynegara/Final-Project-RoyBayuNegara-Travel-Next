@@ -40,6 +40,10 @@ const Profile = () => {
     getLoggedUser();
   });
 
+  const updateImageData = () => {
+    getLoggedUser();
+  }
+
   return (
       <div className="profile-main">
           <h1 className="profile-title">My Profile</h1>
@@ -60,7 +64,7 @@ const Profile = () => {
       <div className="btn-profile">
         <div>
           <button onClick={() => setButtonPopupImg(true)}>Edit Avatar</button>
-          <PopupImg trigger={buttonPopupImg} setTrigger={setButtonPopupImg}></PopupImg>
+          { buttonPopupImg && <PopupImg trigger={buttonPopupImg} setTrigger={setButtonPopupImg} updateImageData={updateImageData}/>}
         </div>
 
         <div>

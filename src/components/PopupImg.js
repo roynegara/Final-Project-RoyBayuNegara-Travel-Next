@@ -32,14 +32,16 @@ const Upload = (props) => {
           setImageUrl(res?.data?.url);
           // toast.success(res?.data?.message);
           toast.success('Profile picture has been updated');
-          router.push(`/dashboard`, undefined, { shallow: false }).then((success) => {
-            if (success) {
-              setTimeout(() => {
+          // router.push(`/dashboard`, undefined, { shallow: false }).then((success) => {
+          //   if (success) {
+          //     setTimeout(() => {
                 
-                window.location.reload(); 
-              },1000)
-            }
-          });
+          //       window.location.reload(); 
+          //     },1000)
+          //   }
+          // });
+          props.updateImageData();
+          props.setTrigger(false);
         })
         .catch((err) => {
           console.log("err", err);

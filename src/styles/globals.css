@@ -976,25 +976,29 @@ backdrop-filter: blur(6px);
   text-align: center;
 }
 
-.input-box-update-image{
+.input-box-update-image input{
   position: relative;
   width: 100%;
-  height: 50px;
+  height: 80%;
   margin: 30px 0;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 9px;
+  padding: 20px 45px 20px 20px;
+  font-size: 15px;
 }
 
-.input-box-update-image input{
+/* .input-box-update-image input{
   width: 100%;
   height: 100%;
   background: transparent;
   border: none;
   outline: none;
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  
   border-radius: 9px;
   font-size: 15px;
   color: #ededed;
   padding: 20px 45px 20px 20px;
-}
+} */
 
 .input-box-update-image input::placeholder{
   color: #b4b4b4;
