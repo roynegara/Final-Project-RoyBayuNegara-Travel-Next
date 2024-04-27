@@ -93,13 +93,21 @@ export default function Home() {
   
 
   return (
+    <div>
+<div className="home-title">
+        <a className="home-title-main">Luxury Travel</a>
+        <br/>
+        <h1>With Us Travel Everywere Place To Visit</h1>
+        <br/>
+        <h1>Discover amazing places with promo prices and luxury experience</h1>
+        
+        <div className="home-title-btn" >
+        <Link className="home-title-btn-inner" href="/login">Login</Link>
+        <Link className="home-title-btn-inner" href="/register">Register</Link>
+        </div>
+</div>
     <div className="home">
 
-<div className="home-title">
-<h1>Luxury Travel</h1>
-<h1>With Us Travel Everywere Place To Visit</h1>
-<h1>Discover amazing places with promo prices and luxury experience</h1>
-</div>
       
       <BannerCarousel />
       <ActivityList />
@@ -121,7 +129,7 @@ export default function Home() {
 
        <div className="promos-home-wrapper">
         <h1>Enjoy Your Trip With Our Promo</h1>
-        <Link href="/promo">See More</Link>
+        <Link className="see-more-promos-home" href="/promo">See More</Link>
         <div className="promos-container-home">
           {promos.map((promo, index) => (
             <div className="promos-card-home" key={index}>
@@ -222,6 +230,7 @@ export default function Home() {
           ))}
         </div>
       </div> */}
+    </div>
     </div>
   );
 }

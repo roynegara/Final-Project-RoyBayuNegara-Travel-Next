@@ -3,9 +3,9 @@ import React from 'react';
 
 const Layout = ({ children }) => {
   return (
-    <div className="flex">
+    <div>
       {/* Kolom Kiri (Sidebar Navigasi) */}
-      <div className="w-1/4 bg-gray-200">
+      <div >
         <ul>
           <li>Profile</li>
           <li>User</li>
@@ -18,7 +18,7 @@ const Layout = ({ children }) => {
       </div>
 
       {/* Kolom Kanan (Konten Dinamis) */}
-      <div className="w-3/4 p-4 overflow-y-auto">
+      <div>
         {children}
       </div>
     </div>

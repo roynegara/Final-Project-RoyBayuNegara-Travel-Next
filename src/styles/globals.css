@@ -2,7 +2,7 @@
 
 body {
   /* background: #081b29; */
-  background: linear-gradient(to right bottom, #56b9e7,  #003e6b);
+  /* background: linear-gradient(to right bottom, #56b9e7,  #003e6b); */
   color: #ededed;
 
   /* display: flex;
@@ -142,9 +142,11 @@ button {
   padding: 20px 10%;
   z-index: 2;
 
-  background: linear-gradient(to right bottom, #56b9e7,  #003e6b);
+  /* background: linear-gradient(to right bottom, #56b9e7,  #003e6b); */
+background: transparent;
   /* background: rgba(255, 255, 255, 0.1); */
-  /* border: 2px solid rgba(255, 255, 255, 0.2); */
+  /* border: 1px solid rgba(255, 255, 255, 0.2); */
+  border-bottom: 0.5px solid rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(25px);
   
   box-shadow: 0 0 10px rgba(0, 0, 0, 0, 0.2);
@@ -294,18 +296,83 @@ border-radius: 15px;
   /* background: url("https://img.freepik.com/free-photo/mesmerizing-green-forest-full-different-kinds-unique-plants-yakushima-japan_181624-36812.jpg?t=st=1709945766~exp=1709949366~hmac=66c4f9a8be4f9976e111b33d8085882ac64096877ef13875986dac1d50aa521d&w=1380")
     no-repeat; */
 
-    background: linear-gradient(to right bottom, #56b9e7,  #003e6b);
+    /* background: linear-gradient(to right bottom, #56b9e7,  #003e6b); */
+    /* background: linear-gradient(to right bottom, #32abe2,  #003e6b); */
+    background: #fff;
     /* background: linear-gradient(195deg, #79CAF0 31%, transparent 31%); */
  ;
   background-size: cover;
   background-position: center;
   padding: 20px 10%;
+  background: #003e6b;
 }
 
-.home-title{
-  margin-top: 100px;
-  margin-bottom: 20px;
+.home-title{ 
+  /* padding: 20px 20%; */
+  padding-top: 15%;
+  padding-bottom: 15%;
+
+  background: url('https://ik.imagekit.io/tvlk/image/imageResource/2023/09/27/1695776209619-17a750c3f514f7a8cccde2d0976c902a.png?tr=q-75'),no-repeat;
+color: #e2e2e2;
+text-align: center;
+background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+    /* box-shadow: 50px 60px 50px rgba(1, 1, 1, 1); */
+    box-shadow: inset 0 0 50px rgba(0, 0, 0, 1);
 }
+
+.home-title h1 {
+font-size: 30px;
+/* font-weight: 800; */
+}
+
+
+
+.home-title-main {
+    font-weight: 800;
+    font-size: 80px;
+    
+}
+
+.home-title-btn{
+  display: flex;
+  justify-content: center; 
+  margin-top: 80px;
+}
+
+.home-title-btn-inner {
+  text-decoration: none;
+   padding: 20px;
+  color: #b3b3b3;
+  font-size: 30px;
+  font-weight: 500;  
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);  
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0, 0.2);
+  border: none;
+  border-radius: 4px;
+  font-size: 18px;
+  font-weight: 500;
+  padding: 4px;
+  margin: 10px;
+  width: 125px;
+  height: 40px;
+  color:#e2e2e2;
+}
+
+.home-title-btn-inner:hover {
+  
+  background: rgb(56, 143, 188, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0, 0.2);
+}
+
+
+
 
 /* Banner Component Home Start */
 /* Container for the entire carousel */
@@ -1208,6 +1275,17 @@ gap: 5px;;
   border-radius: 10px;
 }
 
+.see-more-promos-home{
+text-decoration: none;
+color: #e2e2e2;
+font-size: 20px;
+font-weight: 600;
+cursor: pointer;
+justify-content: end;
+align-items: end;
+
+}
+
 /* Promo home style End */
 
 /* Promo End */
@@ -1866,16 +1944,17 @@ body {
 /* Gaya CSS Kustom */
 .dashboard {
   display: flex;
-  margin-top: 75px;
+  /* margin-top: 75px; */
   min-height: 87vh;
-  background: linear-gradient(to right bottom,  #003e6b, #56b9e7);
+  /* background: linear-gradient(to right bottom,  #003e6b, #56b9e7); */
+  background: #003e6b;
 }
 
 .sidebar {
-  background: linear-gradient(to right bottom, #56b9e7,  #003e6b);
+  background: linear-gradient(to right bottom, #00608d,  #003e6b);
   width: 10%;
   padding: 25px;
-  margin-top: 76px;
+  /* margin-top: 76px; */
   
     position: fixed; /* Menetapkan posisi sidebar */
     top: 0; /* Menempatkan sidebar di bagian atas */
@@ -1890,7 +1969,7 @@ body {
 .sidebar ul {
   list-style-type: none;
   padding: 0;
-  margin: 0;
+  margin-top: 76px;
 }
 
 .sidebar li {
@@ -1898,7 +1977,6 @@ body {
   cursor: pointer;
   
 }
-
 
 
 .sidebar-logout {
@@ -1919,8 +1997,8 @@ body {
 .content {
   overflow-y: auto;
   /* padding: 1rem; */
-  width: 75%;
-  color: #707070;
+  width: 100%;
+  /* color: #707070; */
 
   margin-left: 200px; /* Pastikan konten diberi ruang setelah sidebar */
   padding: 20px;
