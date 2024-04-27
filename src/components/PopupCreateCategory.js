@@ -57,14 +57,8 @@ const CreateCategory = (props) => {
         console.log("res", res);
         toast.success(`${name} has been created`);
         // setNotif(res.data.message);
-        router.push("/category", undefined, { shallow: false }).then((success) => {
-          if (success) {
-            setTimeout(() => {
-              
-              window.location.reload(); // Refresh halaman jika perpindahan halaman berhasil
-            },1000)
-          }
-        });
+        props.updateCategoryData();
+        props.setTrigger(false)
 
       })
       .catch((err) => {
