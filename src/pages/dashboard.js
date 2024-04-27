@@ -26,7 +26,9 @@ const handleLogout = () => {
       });
     }
   });
-};
+  };
+  
+  
   
   const handleProfileClick = () => {
     setShowProfile(true);
