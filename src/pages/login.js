@@ -63,22 +63,42 @@ const Login = () => {
       });
   };
 
+ 
+  
+
+
   return (
+    <div className="login-wrap">
+
     <div className="login">
       <h1>Login</h1>
       {notif && <p style={{ color: notif === "Status : Authentication successful" ? "green" : "red" }}>{notif}</p>}
+        
+        <div className="input-box-login">
+          
+          <input type="text" name="email" placeholder="Email" value={email} onChange={handleEmailChange} />
+          
+        </div>
+        <div className="input-box-login">
 
-      <input type="text" name="email" placeholder="Email" value={email} onChange={handleEmailChange} />
       <input type="password" name="password" placeholder="Password" value={password} onChange={handlePasswordChange} />
-      <button onClick={handleLogin} disabled={loading ? true : false}>
+        </div>
+        <div className="btn-login">
+        <button onClick={handleLogin} disabled={loading ? true : false}>
         {loading ? "Loading..." : "Login"}
-      </button>
+          </button>
+          <p>
+        Not have an account? <a href="/register">Register</a>
+      </p>
+        </div>        
+      
       {/* <button onClick={handleLogin} disabled={email === "" || password === "" || loading ? true : false}>
         {loading ? "Loading..." : "Login"}
       </button> */}
-      <p>
-        Not have an account? <a href="/register">Register</a>
-      </p>
+      
+      </div>
+      
+
     </div>
   );
 };

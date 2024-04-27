@@ -220,7 +220,7 @@ export default function Home() {
           ))}
           </div>
           <div className="see-more-promo" >
-          <Link className="see-more-promos-home" href="/activity">See All Destinations &gt;  </Link>
+          <Link className="see-more-promos-home" href="/activity">See All Destinations   </Link>
             </div>
       </div>
 

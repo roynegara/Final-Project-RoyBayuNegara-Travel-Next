@@ -74,38 +74,52 @@ const Register = () => {
   };
 
   return (
+
+    <div className="register-wrap">
+
+  
     <div className="register">
       <h1>Register</h1>
       {notif && <p style={{ color: notif === "Status : User Created" ? "green" : "red" }}>{notif}</p>}
-
+        <div className="input-box-register">
+          
       <input type="text" name="name" value={name} onChange={handleNameChange} placeholder="Name" />
-      <input type="email" name="email" value={email} onChange={handleEmailChange} placeholder="Email" />
-      <input type="password" name="password" value={password} onChange={handlePasswordChange} placeholder="Password" />
-      <input
+        </div>
+        <div className="input-box-register">
+        <input type="email" name="email" value={email} onChange={handleEmailChange} placeholder="Email" />
+        </div>
+      <div className="input-box-register">
+          <input type="password" name="password" value={password} onChange={handlePasswordChange} placeholder="Password" />
+          </div>
+        <div className="input-box-register">
+        <input
         type="password"
         name="passwordRepeat"
         value={passwordRepeat}
         onChange={handlePasswordRepeatChange}
         placeholder="Password Repeat"
-      />
+          />
+          </div>
 
-      <div>
+      <div className="input-box-registe">
         <label>Choose Role : </label>
-        <select name="role" value={role} onChange={handleRoleChange}>
+        <select className="activity-option-register" name="role" value={role} onChange={handleRoleChange}>
           <option value={"admin"}>Admin</option>
           <option value={"user"}>User</option>
         </select>
       </div>
 
+      <div className="input-box-register">
       <input
         type="text"
         name="phoneNumber"
         value={phoneNumber}
         onChange={handlePhoneNumberChange}
         placeholder="Phone Number"
-      />
+        />
+        </div>
 
-      <div className="btn-reg">
+      <div className="btn-register">
         <button onClick={handleRegister} disabled={loading ? true : false}>
           {loading ? "Loading..." : "Register"}
         </button>
@@ -113,7 +127,8 @@ const Register = () => {
           Already have an account? <a href="/login">Login</a>
         </p>
       </div>
-    </div>
+      </div>
+      </div>
   );
 };
 
