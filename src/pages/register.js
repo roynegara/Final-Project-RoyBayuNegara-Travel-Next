@@ -113,7 +113,7 @@ const Register = () => {
           />
           </div>
 
-      <div className="input-box-registe">
+      <div className="input-box-register-option">
         <label>Choose Role : </label>
         <select className="option-register" name="role" value={role} onChange={handleRoleChange}>
           <option value={"admin"}>Admin</option>

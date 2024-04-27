@@ -616,6 +616,17 @@ backdrop-filter: blur(6px);
   margin: 30px 0;
 }
 
+.input-box-register-option {
+  position: relative;
+  width: 100%;
+  height: 65px;
+  margin-bottom: 40px;
+}
+
+.input-box-register-option label {
+ font-size: 15px;
+}
+
 .input-box-register input {
   width: 100%;
   height: 100%;
@@ -1024,7 +1035,7 @@ backdrop-filter: blur(6px);
 
 .users-title {
   margin-top: 100px;
-  margin-bottom: 70px;
+  /* margin-bottom: 70px; */
   font-size: 30px;
   width: 700px;
   /* background: transparent; */
@@ -1045,7 +1056,7 @@ backdrop-filter: blur(6px);
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(5, auto);
-  gap: 30px;
+  /* gap: 30px; */
 }
 
 .users-card {
@@ -1053,8 +1064,8 @@ backdrop-filter: blur(6px);
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
-  /* margin-top: 50px; */
+  /* padding: 20px; */
+  margin-top: 50px;
   width: 500px;
   /* background: rgb(56, 143, 188, 0.4); */
   background: rgba(4, 33, 73, 0.8);
@@ -1122,17 +1133,23 @@ backdrop-filter: blur(6px);
 
 
 .popup-edit-users {
-  width: 420px;
-  background: rgb(56, 143, 188, 0.4);
-  border: 2px solid rgba(255, 255, 255, 0.5);
-  padding: 30px;
+  width: 500px;
+  height: 500px;
+  /* background: rgb(56, 143, 188, 0.4); */
+  background: rgba(4, 33, 73, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  padding-top: 150px;
+  padding-bottom: 150px;
   border-radius: 15px;
   backdrop-filter: blur(15px);
-  position: absolute;
+  position: fixed;
   top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
   color: #e2e2e2;
 }
 
@@ -1142,7 +1159,70 @@ backdrop-filter: blur(6px);
   right: 10px;
   cursor: pointer;
   color: #e2e2e2;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
 }
+
+.role {
+  width: 32%;
+  height: 32%;
+  padding: 20px;
+  justify-content: center;
+  /* text-align: center;   */
+  background: transparent;
+  border: none;
+  outline: none;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 9px;
+  font-size: 15px;
+  color: #ededed;
+  /* padding: 20px 45px 20px 20px; */
+  cursor: pointer;
+  background: rgba(4, 33, 73, 1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.users-btn-change-role-popup button {
+  text-decoration: none;
+  padding: 20px;
+ color: #b3b3b3;
+ font-size: 30px;
+ font-weight: 500;  
+ background: rgba(255, 255, 255, 0.1);
+ border: 1px solid rgba(255, 255, 255, 0.2);
+ backdrop-filter: blur(15px);  
+ box-shadow: 0 0 10px rgba(0, 0, 0, 0, 0.2);
+ border: none;
+ border-radius: 4px;
+ font-size: 18px;
+ font-weight: 500;
+ padding: 4px;
+ margin: 10px;
+ width: 125px;
+ height: 40px;
+ color:#e2e2e2;
+}
+
+
+.users-btn-change-role-popup button:hover {
+  background: rgb(56, 143, 188, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0, 0.2);
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 .blur-users {
   filter: blur(5px); /* Atur tingkat blur sesuai kebutuhan */
