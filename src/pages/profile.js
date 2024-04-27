@@ -44,11 +44,16 @@ const Profile = () => {
     getLoggedUser();
   }
 
+  const updateProfileData = () => {
+    getLoggedUser();
+  }
+
   return (
       <div className="profile-main">
       <h1 className="profile-title">My Profile</h1>
       
-      <div className={`${buttonPopupImg ? 'blur' : ''}`} >
+      <div className={`${buttonPopupImg || buttonPopup ? 'blur' : ''}`} >
+ 
 
       <div className="profile-card">
         <div>
@@ -72,16 +77,18 @@ const Profile = () => {
 
         <div>
           <button onClick={() => setButtonPopup(true)}> Edit Profile</button>
-          <PopupProfil setUser={setUser} trigger={buttonPopup} setTrigger={setButtonPopup}></PopupProfil>
+         
         </div>
 
         <div>
           <button onClick={handleLogout}>Logout</button>
         </div>
         </div>
-      </div>
-      { buttonPopupImg && <PopupImg trigger={buttonPopupImg} setTrigger={setButtonPopupImg} updateImageData={updateImageData}/>}
     </div>
+      
+      { buttonPopupImg && <PopupImg trigger={buttonPopupImg} setTrigger={setButtonPopupImg} updateImageData={updateImageData}/>}
+      { buttonPopup && <PopupProfil  trigger={buttonPopup} setTrigger={setButtonPopup} updateProfileData={updateProfileData} />}
+      </div>
   );
 };
 

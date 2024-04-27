@@ -70,14 +70,17 @@ if(!name && !email && !phoneNumber){
         console.log('res', res)
         toast.success('Profile has been updated');
 
-        router.push(`/dashboard`, undefined, { shallow: false }).then((success) => {
-          if (success) {
-            setTimeout(() => {
+        // router.push(`/dashboard`, undefined, { shallow: false }).then((success) => {
+        //   if (success) {
+        //     setTimeout(() => {
               
-              window.location.reload(); 
-            },1000)
-          }
-        });
+        //       window.location.reload(); 
+        //     },1000)
+        //   }
+        // });
+        
+        // props.updateProfileData();
+        props.setTrigger(false);
 
       })
       .catch((err) => {
@@ -95,36 +98,36 @@ if(!name && !email && !phoneNumber){
   };
 
   return props.trigger ? (
-    <div className="popup">
-      <h1> Update Profile</h1>
-      <form>
-        <div>
-          <label>Name:</label>
-          <input type="text" name="name" value={name} onChange={handleNameChange} />
+    <div className="popup-profile-update-wrapper">
+
+      <div className="popup-profile-update">
+        
+        <h1> Update Profile</h1>
+        
+      
+        <div className="input-box-profil-update">
+          <input type="text" name="name" value={name} onChange={handleNameChange} placeholder="Name" />
         </div>
-        <div>
-          <label>Email:</label>
-          <input type="email" name="email" value={email} onChange={handleEmailChange} />
+
+        <div className="input-box-profil-update">
+          <input type="email" name="email" value={email} onChange={handleEmailChange} placeholder="Email" />
         </div>
-        <div>
-          <label>Phone Number:</label>
-          <input type="text" name="phoneNumber" value={phoneNumber} onChange={handlePhoneNumberChange} />
+
+        <div className="input-box-profil-update">
+          <input type="text" name="phoneNumber" value={phoneNumber} onChange={handlePhoneNumberChange} placeholder="Phone Number" />
         </div>
        
-        <div>
-         
+        <div className="btn-profile-update-popup">         
           <button type="button" onClick={handleSubmit}>
-            Update
+            Update Profile
           </button>
         </div>
-      </form>
+      
 
-      <button className="btn-close-popup" onClick={() => props.setTrigger(false)}>
-        {" "}
-        X{" "}
-      </button>
+      <span className="btn-close-profil-update-popup" onClick={() => props.setTrigger(false)}>&times;</span>
       {props.children}
-    </div>
+      </div>
+      </div>
   ) : (
     ""
   );
