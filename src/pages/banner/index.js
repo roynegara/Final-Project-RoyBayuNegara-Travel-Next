@@ -6,6 +6,10 @@ import PopupCreateBanner from "@/components/PopupCreateBanner";
 const Banner = () => {
   const [banners, setBanners] = useState([]);
   const [buttonPopupCreateBanner, setButtonPopupCreateBanner] = useState(false);
+  const [editingBanner, setEditingBanner] = useState(null);
+  const [deletingBanner, setDeletingBanner] = useState(null);
+  const [editName, setEditName] = useState("");
+  const [editImageUrl, setEditImageUrl] = useState("");
 
   const getBanners = () => {
     axios
@@ -28,7 +32,64 @@ const Banner = () => {
   }, []);
 
   const updateBannerData = () => {
-    getBanners(); // Panggil kembali fungsi getBanners untuk memperbarui data banner
+    getBanners();
+  };
+
+  const handleEditBanner = (banner) => {
+    setEditingBanner(banner);
+    setEditName(banner.name);
+    setEditImageUrl(banner.imageUrl);
+  };
+
+  const handleDeleteBanner = (banner) => {
+    setDeletingBanner(banner);
+  };
+
+  const confirmDelete = () => {
+    const accessToken = localStorage.getItem("access_token");
+    axios
+      .delete(`https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/delete-banner/${deletingBanner.id}`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
+        },
+      })
+      .then((res) => {
+        console.log("Delete success:", res);
+        setDeletingBanner(null);
+        updateBannerData();
+      })
+      .catch((err) => {
+        console.error("Delete error:", err);
+      });
+  };
+
+  const handleSaveEdit = () => {
+    const accessToken = localStorage.getItem("access_token");
+    axios
+      .post(
+        `https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/update-banner/${editingBanner.id}`,
+        {
+          name: editName,
+          imageUrl: editImageUrl,
+        },
+        {
+          headers: {
+            apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log("Edit success:", res);
+        setEditingBanner(null);
+        setEditName("");
+        setEditImageUrl("");
+        updateBannerData();
+      })
+      .catch((err) => {
+        console.error("Edit error:", err);
+      });
   };
 
   return (
@@ -39,32 +100,285 @@ const Banner = () => {
         <button onClick={() => setButtonPopupCreateBanner(true)}>Add Banner</button>
       </div>
 
-      <div className={`${buttonPopupCreateBanner ? 'blur' : ''}`} >
-
-     
-      <div className="banners">
-        {banners.map((banner, index) => (
-          <div key={index}>
-            <div className="banners-card">
-              <img src={banner.imageUrl} alt={banner.name} />
-              <p>{banner.name}</p>
-              <div>
-                <Link href={`/banner/${banner.id}`}>
-                  <button>Read More</button>
-                </Link>
+      <div className={`${buttonPopupCreateBanner ? 'blur' : ''}`}>
+        <div className="banners">
+          {banners.map((banner, index) => (
+            <div key={index}>
+              <div className="banners-card">
+                <img src={banner.imageUrl} alt={banner.name} />
+                <p>{banner.name}</p>
+                <div>
+                  <Link href={`/banner/${banner.id}`}>
+                    <button>Read More</button>
+                  </Link>
+                  <button onClick={() => handleEditBanner(banner)}>Edit</button>
+                  <button onClick={() => handleDeleteBanner(banner)}>Delete</button>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
         </div>
-        </div>
+      </div>
 
-      {buttonPopupCreateBanner && <PopupCreateBanner trigger={buttonPopupCreateBanner} setTrigger={setButtonPopupCreateBanner} updateBannerData={updateBannerData} />}
+      {/* Modal untuk edit banner */}
+      {editingBanner && (
+        <div className="modal">
+          <div className="modal-content">
+            <span className="close" onClick={() => setEditingBanner(null)}>×</span>
+            <h2>Edit Banner</h2>
+            <input
+              type="text"
+              value={editName}
+              onChange={(e) => setEditName(e.target.value)}
+              placeholder="Name"
+            />
+            <input
+              type="text"
+              value={editImageUrl}
+              onChange={(e) => setEditImageUrl(e.target.value)}
+              placeholder="Image URL"
+            />
+            <button onClick={handleSaveEdit}>Save</button>
+          </div>
+        </div>
+      )}
+
+      {/* Modal konfirmasi untuk hapus banner */}
+      {deletingBanner && (
+        <div className="modal">
+          <div className="modal-content">
+            <h2>Delete Banner</h2>
+            <p>Are you sure you want to delete this banner?</p>
+            <div>
+              <button onClick={confirmDelete}>Yes</button>
+              <button onClick={() => setDeletingBanner(null)}>No</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal untuk tambah banner */}
+      {buttonPopupCreateBanner && (
+        <PopupCreateBanner
+          trigger={buttonPopupCreateBanner}
+          setTrigger={setButtonPopupCreateBanner}
+          updateBannerData={updateBannerData}
+        />
+      )}
     </div>
   );
 };
 
 export default Banner;
+
+
+
+
+// // sudah benar editnya
+// import React, { useEffect, useState } from "react";
+// import axios from "axios";
+// import Link from "next/link";
+// import PopupCreateBanner from "@/components/PopupCreateBanner";
+
+// const Banner = () => {
+//   const [banners, setBanners] = useState([]);
+//   const [buttonPopupCreateBanner, setButtonPopupCreateBanner] = useState(false);
+//   const [editingBanner, setEditingBanner] = useState(null); // State untuk menyimpan data banner yang sedang diedit
+//   const [editName, setEditName] = useState(""); // State untuk menyimpan nilai nama banner yang diedit
+//   const [editImageUrl, setEditImageUrl] = useState(""); // State untuk menyimpan URL gambar banner yang diedit
+
+//   const getBanners = () => {
+//     axios
+//       .get("https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/banners", {
+//         headers: {
+//           apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
+//         },
+//       })
+//       .then((res) => {
+//         console.log("res", res);
+//         setBanners(res.data.data);
+//       })
+//       .catch((err) => {
+//         console.log("err", err);
+//       });
+//   };
+
+//   useEffect(() => {
+//     getBanners();
+//   }, []);
+
+//   const updateBannerData = () => {
+//     getBanners();
+//   };
+
+//   const handleEditBanner = (banner) => {
+//     setEditingBanner(banner);
+//     setEditName(banner.name);
+//     setEditImageUrl(banner.imageUrl);
+//   };
+
+//   const handleSaveEdit = () => {
+//     const accessToken = localStorage.getItem("access_token");
+//     axios
+//       .post(
+//         `https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/update-banner/${editingBanner.id}`,
+//         {
+//           name: editName,
+//           imageUrl: editImageUrl,
+//         },
+//         {
+//           headers: {
+//             apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
+//             Authorization: `Bearer ${accessToken}`,
+//           },
+//         }
+//       )
+//       .then((res) => {
+//         console.log("Edit success:", res);
+//         setEditingBanner(null);
+//         setEditName("");
+//         setEditImageUrl("");
+//         updateBannerData();
+//       })
+//       .catch((err) => {
+//         console.error("Edit error:", err);
+//       });
+//   };
+
+//   return (
+//     <div>
+//       <h1 className="banners-title">Banner Database</h1>
+
+//       <div className="banners-btn-popup-create">
+//         <button onClick={() => setButtonPopupCreateBanner(true)}>Add Banner</button>
+//       </div>
+
+//       <div className={`${buttonPopupCreateBanner ? 'blur' : ''}`}>
+//         <div className="banners">
+//           {banners.map((banner, index) => (
+//             <div key={index}>
+//               <div className="banners-card">
+//                 <img src={banner.imageUrl} alt={banner.name} />
+//                 <p>{banner.name}</p>
+//                 <div>
+//                   <Link href={`/banner/${banner.id}`}>
+//                     <button>Read More</button>
+//                   </Link>
+//                   <button onClick={() => handleEditBanner(banner)}>Edit</button>
+//                 </div>
+//               </div>
+//             </div>
+//           ))}
+//         </div>
+//       </div>
+
+//       {/* Modal untuk edit banner */}
+//       {editingBanner && (
+//         <div className="modal">
+//           <div className="modal-content">
+//             <span className="close" onClick={() => setEditingBanner(null)}>×</span>
+//             <h2>Edit Banner</h2>
+//             <input
+//               type="text"
+//               value={editName}
+//               onChange={(e) => setEditName(e.target.value)}
+//               placeholder="Name"
+//             />
+//             <input
+//               type="text"
+//               value={editImageUrl}
+//               onChange={(e) => setEditImageUrl(e.target.value)}
+//               placeholder="Image URL"
+//             />
+//             <button onClick={handleSaveEdit}>Save</button>
+//           </div>
+//         </div>
+//       )}
+
+//       {/* Modal untuk tambah banner */}
+//       {buttonPopupCreateBanner && (
+//         <PopupCreateBanner
+//           trigger={buttonPopupCreateBanner}
+//           setTrigger={setButtonPopupCreateBanner}
+//           updateBannerData={updateBannerData}
+//         />
+//       )}
+//     </div>
+//   );
+// };
+
+// export default Banner;
+
+
+
+// // sudah benar belum ditambah edit dan delete
+// import React, { useEffect, useState } from "react";
+// import axios from "axios";
+// import Link from "next/link";
+// import PopupCreateBanner from "@/components/PopupCreateBanner";
+
+// const Banner = () => {
+//   const [banners, setBanners] = useState([]);
+//   const [buttonPopupCreateBanner, setButtonPopupCreateBanner] = useState(false);
+
+//   const getBanners = () => {
+//     axios
+//       .get("https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/banners", {
+//         headers: {
+//           apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
+//         },
+//       })
+//       .then((res) => {
+//         console.log("res", res);
+//         setBanners(res.data.data);
+//       })
+//       .catch((err) => {
+//         console.log("err", err);
+//       });
+//   };
+
+//   useEffect(() => {
+//     getBanners();
+//   }, []);
+
+//   const updateBannerData = () => {
+//     getBanners(); // Panggil kembali fungsi getBanners untuk memperbarui data banner
+//   };
+
+//   return (
+//     <div>
+//       <h1 className="banners-title">Banner Database</h1>
+
+//       <div className="banners-btn-popup-create">
+//         <button onClick={() => setButtonPopupCreateBanner(true)}>Add Banner</button>
+//       </div>
+
+//       <div className={`${buttonPopupCreateBanner ? 'blur' : ''}`} >
+
+     
+//       <div className="banners">
+//         {banners.map((banner, index) => (
+//           <div key={index}>
+//             <div className="banners-card">
+//               <img src={banner.imageUrl} alt={banner.name} />
+//               <p>{banner.name}</p>
+//               <div>
+//                 <Link href={`/banner/${banner.id}`}>
+//                   <button>Read More</button>
+//                 </Link>
+//               </div>
+//             </div>
+//           </div>
+//         ))}
+//         </div>
+//         </div>
+
+//       {buttonPopupCreateBanner && <PopupCreateBanner trigger={buttonPopupCreateBanner} setTrigger={setButtonPopupCreateBanner} updateBannerData={updateBannerData} />}
+//     </div>
+//   );
+// };
+
+// export default Banner;
 
 
 
