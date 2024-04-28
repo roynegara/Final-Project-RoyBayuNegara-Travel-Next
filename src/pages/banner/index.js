@@ -108,9 +108,9 @@ const Banner = () => {
                 <img src={banner.imageUrl} alt={banner.name} />
                 <p>{banner.name}</p>
                 <div>
-                  <Link href={`/banner/${banner.id}`}>
+                  {/* <Link href={`/banner/${banner.id}`}>
                     <button>Read More</button>
-                  </Link>
+                  </Link> */}
                   <button onClick={() => handleEditBanner(banner)}>Edit</button>
                   <button onClick={() => handleDeleteBanner(banner)}>Delete</button>
                 </div>
