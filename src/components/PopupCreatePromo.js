@@ -66,7 +66,7 @@ const CreatePromo = (props) => {
       })
       .then((res) => {
         toast.success(`${title} has been created`);
-        props.updatePromosData(); // Update promo data in parent component
+        props.createPromosData(); // Update promo data in parent component
         props.setTrigger(false);
       })
       .catch((err) => {
