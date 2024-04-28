@@ -161,9 +161,9 @@ const Banner = () => {
 
       {/* Modal konfirmasi untuk hapus banner */}
       {deletingBanner && (
-                  <div className="input-box-create-banner"> 
+        <div className="input-box-create-banner"> 
 
-<div className="popup-delete-banner">
+          <div className="popup-delete-banner">
             {/* <h1>Delete Banner</h1> */}
             <p>Are you sure you want to delete this banner?</p>
             <div className="btn-create-banner-popup">

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import PopupCreatePromo from "@/components/PopupCreatePromo";
+import { toast } from "sonner";
 
 const Promo = () => {
   const [promos, setPromos] = useState([]);
@@ -53,9 +54,11 @@ const Promo = () => {
         console.log("Promo updated successfully:", res.data);
         updatePromosData();
         setSelectedPromo(null);
+        toast.success("Promo updated successfully");
       })
       .catch((err) => {
         console.log("Error updating promo:", err);
+        toast.error("Error updating promo");
       });
   };
 
@@ -82,9 +85,11 @@ const Promo = () => {
         console.log("Promo created successfully:", res.data);
         updatePromosData(); // Reload promos data
         setButtonPopupCreatePromo(false); // Close the modal
+        toast.success("Promo created successfully");
       })
       .catch((err) => {
         console.log("Error creating promo:", err);
+        toast.error("Error creating promo");
       });
   };
 
@@ -119,9 +124,11 @@ const Promo = () => {
           updatePromosData();
           setDeleteConfirmation(false);
           setSelectedPromo(null); // Set selectedPromo to null after deletion
+          toast.success("Promo deleted successfully");
         })
         .catch((err) => {
           console.log("Error deleting promo:", err);
+          toast.error("Error deleting promo");
         });
     }
   };
@@ -162,37 +169,59 @@ const Promo = () => {
       )}
 
       {deleteConfirmation && (
-        <div className="popup">
-          <div className="popup-inner">
-            <h2>Delete Promo</h2>
+        <div className="input-box-create-banner"> 
+          <div className="popup-delete-banner">
+            {/* <h2>Delete Promo</h2> */}
             <p>Are you sure you want to delete this promo?</p>
+            <div className="btn-create-banner-popup">
             <button onClick={deletePromo}>Yes</button>
-            <button onClick={() => setDeleteConfirmation(false)}>No</button>
+              <button onClick={() => setDeleteConfirmation(false)}>No</button>
+              </div>
           </div>
         </div>
       )}
 
       {/* Tampilkan modal selectedPromo hanya jika tidak sedang ada konfirmasi delete */}
       {selectedPromo && showSelectedPromoModal && (
-        <div className="popup">
-          <div className="popup-inner">
+        <div className="popup-create-banner-wrap">
+        <div className="popup-create-banner">
+            
             <h2>Edit Promo</h2>
-            <label>Title:</label>
+
+            <div className="input-box-create-banner"> 
             <input type="text" name="title" value={selectedPromo.title} onChange={(e) => setSelectedPromo({...selectedPromo, title: e.target.value})} />
-            <label>Description:</label>
-            <textarea name="description" value={selectedPromo.description} onChange={(e) => setSelectedPromo({...selectedPromo, description: e.target.value})}></textarea>
-            <label>Image URL:</label>
+            </div>
+            
+            <div className="input-box-create-banner"> 
+            <input name="text" value={selectedPromo.description} onChange={(e) => setSelectedPromo({...selectedPromo, description: e.target.value})}></input>
+            </div>
+            {/* <textarea name="description" value={selectedPromo.description} onChange={(e) => setSelectedPromo({...selectedPromo, description: e.target.value})}></textarea> */}
+
+            <div className="input-box-create-banner"> 
             <input type="text" name="imageUrl" value={selectedPromo.imageUrl} onChange={(e) => setSelectedPromo({...selectedPromo, imageUrl: e.target.value})} />
-            <label>Terms & Conditions:</label>
-            <textarea name="terms_condition" value={selectedPromo.terms_condition} onChange={(e) => setSelectedPromo({...selectedPromo, terms_condition: e.target.value})}></textarea>
-            <label>Promo Code:</label>
+            </div>
+            
+            <div className="input-box-create-banner"> 
+            <input name="terms_condition" value={selectedPromo.terms_condition} onChange={(e) => setSelectedPromo({...selectedPromo, terms_condition: e.target.value})}></input>
+            </div>
+
+            <div className="input-box-create-banner"> 
             <input type="text" name="promo_code" value={selectedPromo.promo_code} onChange={(e) => setSelectedPromo({...selectedPromo, promo_code: e.target.value})} />
-            <label>Promo Discount Price:</label>
+            </div>
+            
+            <div className="input-box-create-banner"> 
             <input type="number" name="promo_discount_price" value={selectedPromo.promo_discount_price} onChange={(e) => setSelectedPromo({...selectedPromo, promo_discount_price: e.target.value})} />
-            <label>Minimum Claim Price:</label>
+            </div>
+
+            <div className="input-box-create-banner"> 
             <input type="number" name="minimum_claim_price" value={selectedPromo.minimum_claim_price} onChange={(e) => setSelectedPromo({...selectedPromo, minimum_claim_price: e.target.value})} />
-            <button onClick={() => updatePromo(selectedPromo)}>Update Promo</button>
-            <button onClick={() => setSelectedPromo(null)}>Close</button>
+            </div>
+            
+            <div className="btn-create-banner-popup">
+              <button onClick={() => updatePromo(selectedPromo)}>Edit Promo</button>
+            </div>
+            
+            <span className="btn-close-popup-create-banner" onClick={() => setSelectedPromo(null)}>&times;</span>
           </div>
         </div>
       )}
