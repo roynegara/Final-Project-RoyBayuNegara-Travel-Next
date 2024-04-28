@@ -117,12 +117,12 @@ const Category = () => {
           {categories.map((category, index) => (
             <div className="categories-card" key={index}>
               <img src={category.imageUrl} alt={category.name} />
-              <p>{category.id}</p>
+              {/* <p>{category.id}</p> */}
               <p>{category.name}</p>
               <div>
-                <Link href={`/category/${category.id}`}>
+                {/* <Link href={`/category/${category.id}`}>
                   <button>Read More</button>
-                </Link>
+                </Link> */}
                 <button onClick={() => handleEditClick(category.id, category.name, category.imageUrl)}>Edit</button>
                 <button onClick={() => handleDeleteCategory(category.id)}>Delete</button>
               </div>

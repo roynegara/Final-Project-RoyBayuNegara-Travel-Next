@@ -3003,10 +3003,23 @@ background: rgba(4, 33, 73, 0.8);
 /* ========= Activity End ========= */
 
 /* ========= Footer Start ========= */
-.footer{
+/* .footer{
   background: linear-gradient(to right bottom,  #003e6b, #56b9e7);
   text-align: center;
+} */
+
+footer {
+  text-align: center;
+  background: transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  height: 50px;
+  padding: 10px;
+  backdrop-filter: blur(25px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0, 0.2);
+  display: fixed;
+  color: #e2e2e2;
 }
+
 /* ========= Footer End ========= */
 
 
@@ -3121,4 +3134,9 @@ body {
 
 .activity-by-categoryId {
   margin-top:  100px;
+}
+
+.popup-delete-banner {
+  position: fixed;
+  padding: 25px;
 }
