@@ -1,3 +1,4 @@
+// sudah benar tapi msh update url image manual
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import PopupCreatePromo from "@/components/PopupCreatePromo";
@@ -9,6 +10,7 @@ const Promo = () => {
   const [selectedPromo, setSelectedPromo] = useState(null);
   const [deleteConfirmation, setDeleteConfirmation] = useState(false);
   const [showSelectedPromoModal, setShowSelectedPromoModal] = useState(true); // State baru untuk mengontrol modal selectedPromo
+  
 
   const getPromos = () => {
     axios
@@ -96,9 +98,6 @@ const Promo = () => {
   const createPromosData = () => { 
     getPromos();
   }
-
-
- 
 
   const handleDeleteClick = (promo) => {
     setSelectedPromo(promo); // Set selectedPromo to the promo being deleted
@@ -233,6 +232,244 @@ const Promo = () => {
 };
 
 export default Promo;
+
+
+
+
+// // sudah benar tapi msh update url image manual
+// import React, { useState, useEffect } from "react";
+// import axios from "axios";
+// import PopupCreatePromo from "@/components/PopupCreatePromo";
+// import { toast } from "sonner";
+
+// const Promo = () => {
+//   const [promos, setPromos] = useState([]);
+//   const [buttonPopupCreatePromo, setButtonPopupCreatePromo] = useState(false);
+//   const [selectedPromo, setSelectedPromo] = useState(null);
+//   const [deleteConfirmation, setDeleteConfirmation] = useState(false);
+//   const [showSelectedPromoModal, setShowSelectedPromoModal] = useState(true); // State baru untuk mengontrol modal selectedPromo
+  
+
+//   const getPromos = () => {
+//     axios
+//       .get("https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/promos", {
+//         headers: {
+//           apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
+//         },
+//       })
+//       .then((res) => {
+//         setPromos(res.data.data);
+//       })
+//       .catch((err) => {
+//         console.log("err", err);
+//       });
+//   };
+
+//   useEffect(() => {
+//     getPromos();
+//   }, []);
+
+//   const updatePromosData = () => {
+//     getPromos();
+//   };
+
+//   const handleEditClick = (promo) => {
+//     setSelectedPromo(promo);
+//   };
+
+//   const updatePromo = (updatedPromo) => {
+//     const accessToken = localStorage.getItem("access_token");
+//     axios
+//       .post(
+//         `https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/update-promo/${updatedPromo.id}`,
+//         updatedPromo,
+//         {
+//           headers: {
+//             Authorization: `Bearer ${accessToken}`,
+//             apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
+//           },
+//         }
+//       )
+//       .then((res) => {
+//         console.log("Promo updated successfully:", res.data);
+//         updatePromosData();
+//         setSelectedPromo(null);
+//         toast.success("Promo updated successfully");
+//       })
+//       .catch((err) => {
+//         console.log("Error updating promo:", err);
+//         toast.error("Error updating promo");
+//       });
+//   };
+
+//   useEffect(() => {
+//     if (!selectedPromo) {
+//       setButtonPopupCreatePromo(false);
+//     }
+//   }, [selectedPromo]);
+
+//   const handleCreatePromo = (newPromo) => {
+//     const accessToken = localStorage.getItem("access_token");
+//     axios
+//       .post(
+//         "https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/promos",
+//         newPromo,
+//         {
+//           headers: {
+//             Authorization: `Bearer ${accessToken}`,
+//             apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
+//           },
+//         }
+//       )
+//       .then((res) => {
+//         console.log("Promo created successfully:", res.data);
+//         updatePromosData(); // Reload promos data
+//         setButtonPopupCreatePromo(false); // Close the modal
+//         toast.success("Promo created successfully");
+//       })
+//       .catch((err) => {
+//         console.log("Error creating promo:", err);
+//         toast.error("Error creating promo");
+//       });
+//   };
+
+//   const createPromosData = () => { 
+//     getPromos();
+//   }
+
+//   const handleDeleteClick = (promo) => {
+//     setSelectedPromo(promo); // Set selectedPromo to the promo being deleted
+//     setDeleteConfirmation(true);
+//     setShowSelectedPromoModal(false); // Sembunyikan modal selectedPromo saat tombol delete diklik
+//   };
+
+//   const deletePromo = () => {
+//     if (selectedPromo) {
+//       const accessToken = localStorage.getItem("access_token");
+//       axios
+//         .delete(
+//           `https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/delete-promo/${selectedPromo.id}`,
+//           {
+//             headers: {
+//               Authorization: `Bearer ${accessToken}`,
+//               apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
+//             },
+//           }
+//         )
+//         .then((res) => {
+//           console.log("Promo deleted successfully:", res.data);
+//           updatePromosData();
+//           setDeleteConfirmation(false);
+//           setSelectedPromo(null); // Set selectedPromo to null after deletion
+//           toast.success("Promo deleted successfully");
+//         })
+//         .catch((err) => {
+//           console.log("Error deleting promo:", err);
+//           toast.error("Error deleting promo");
+//         });
+//     }
+//   };
+
+//   return (
+//     <div>
+//       <h1 className="promos-title">Promo's Database</h1>
+
+//       <div className="promos-btn-popup-create">
+//         <button onClick={() => setButtonPopupCreatePromo(true)}>
+//           Add Promo
+//         </button>
+//       </div>
+
+//       <div className={`promos-container ${buttonPopupCreatePromo ? "blur" : ""}`}>
+//         <div className="promos">
+//           {promos.map((promo, index) => (
+//             <div className="promos-card" key={index}>
+//               <img src={promo.imageUrl} alt={promo.title} />
+//               <h1>{promo.title}</h1>
+//               {/* <p>{promo.description}</p> */}
+//               <p>Promo Code : {promo.promo_code}</p>
+//               <p>Discount : Rp {promo.promo_discount_price}</p>
+//               <p>Min Spend : Rp {promo.minimum_claim_price}</p>
+//               <div>
+//                 <button onClick={() => handleEditClick(promo)}>Edit</button>
+//                 <button onClick={() => handleDeleteClick(promo)}>Delete</button>
+//               </div>
+//             </div>
+//           ))}
+//         </div>
+//       </div>
+
+//       {buttonPopupCreatePromo && (
+//         <PopupCreatePromo
+//           trigger={buttonPopupCreatePromo}
+//           setTrigger={setButtonPopupCreatePromo}
+//           createPromo={handleCreatePromo}
+//           createPromosData={createPromosData}
+//         />
+//       )}
+
+//       {deleteConfirmation && (
+//         <div className="input-box-create-banner"> 
+//           <div className="popup-delete-banner">
+//             {/* <h2>Delete Promo</h2> */}
+//             <p>Are you sure you want to delete this promo?</p>
+//             <div className="btn-create-banner-popup">
+//             <button onClick={deletePromo}>Yes</button>
+//               <button onClick={() => setDeleteConfirmation(false)}>No</button>
+//               </div>
+//           </div>
+//         </div>
+//       )}
+
+//       {/* Tampilkan modal selectedPromo hanya jika tidak sedang ada konfirmasi delete */}
+//       {selectedPromo && showSelectedPromoModal && (
+//         <div className="popup-create-banner-wrap">
+//         <div className="popup-create-banner">
+            
+//             <h2>Edit Promo</h2>
+
+//             <div className="input-box-create-banner"> 
+//             <input type="text" name="title" value={selectedPromo.title} onChange={(e) => setSelectedPromo({...selectedPromo, title: e.target.value})} />
+//             </div>
+            
+//             <div className="input-box-create-banner"> 
+//             <input name="text" value={selectedPromo.description} onChange={(e) => setSelectedPromo({...selectedPromo, description: e.target.value})}></input>
+//             </div>
+//             {/* <textarea name="description" value={selectedPromo.description} onChange={(e) => setSelectedPromo({...selectedPromo, description: e.target.value})}></textarea> */}
+
+//             <div className="input-box-create-banner"> 
+//             <input type="text" name="imageUrl" value={selectedPromo.imageUrl} onChange={(e) => setSelectedPromo({...selectedPromo, imageUrl: e.target.value})} />
+//             </div>
+            
+//             <div className="input-box-create-banner"> 
+//             <input name="terms_condition" value={selectedPromo.terms_condition} onChange={(e) => setSelectedPromo({...selectedPromo, terms_condition: e.target.value})}></input>
+//             </div>
+
+//             <div className="input-box-create-banner"> 
+//             <input type="text" name="promo_code" value={selectedPromo.promo_code} onChange={(e) => setSelectedPromo({...selectedPromo, promo_code: e.target.value})} />
+//             </div>
+            
+//             <div className="input-box-create-banner"> 
+//             <input type="number" name="promo_discount_price" value={selectedPromo.promo_discount_price} onChange={(e) => setSelectedPromo({...selectedPromo, promo_discount_price: e.target.value})} />
+//             </div>
+
+//             <div className="input-box-create-banner"> 
+//             <input type="number" name="minimum_claim_price" value={selectedPromo.minimum_claim_price} onChange={(e) => setSelectedPromo({...selectedPromo, minimum_claim_price: e.target.value})} />
+//             </div>
+            
+//             <div className="btn-create-banner-popup">
+//               <button onClick={() => updatePromo(selectedPromo)}>Edit Promo</button>
+//             </div>
+            
+//             <span className="btn-close-popup-create-banner" onClick={() => setSelectedPromo(null)}>&times;</span>
+//           </div>
+//         </div>
+//       )}
+//     </div>
+//   );
+// };
+
+// export default Promo;
 
 
 // //sdh bner cm eror di add

@@ -69,8 +69,6 @@ if (!file) {
   toast.warning("Please select an image");
   return;
 }
-
-
     const formData = new FormData();
     formData.append("image", file);
 
