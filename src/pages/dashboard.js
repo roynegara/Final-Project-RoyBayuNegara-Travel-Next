@@ -89,12 +89,12 @@ const handleLogout = () => {
       {/* Kolom Kiri (Sidebar Navigasi) */}
       <div className="sidebar">
         <ul>
-          <li className='sidebar-position' onClick={handleProfileClick}>Profile</li>
-          <li className='sidebar-position' onClick={handleUsersClick}>Users</li>
-          <li className='sidebar-position' onClick={handleBannerClick}>Banner</li>
-          <li className='sidebar-position' onClick={handlePromoClick}>Promo</li>
-          <li className='sidebar-position' onClick={handleCategoryClick}>Category</li>
-          <li className='sidebar-position' onClick={handleActivityClick}>Destination</li>
+          <li className='sidebar-position' onClick={handleProfileClick}>  <i class="bi bi-file-person-fill"></i> Profile</li>
+          <li className='sidebar-position' onClick={handleUsersClick}> <i class="bi bi-person-check-fill"></i> Users</li>
+          <li className='sidebar-position' onClick={handleBannerClick}> <i class="bi bi-credit-card-2-front-fill"></i> Banner</li>
+          <li className='sidebar-position' onClick={handlePromoClick}><i class='bx bxs-discount' ></i> Promo</li>
+          <li className='sidebar-position' onClick={handleCategoryClick}><i class='bx bx-category'></i> Category</li>
+          <li className='sidebar-position' onClick={handleActivityClick}><i class='bx bxs-plane-alt'></i> Destination</li>
           <li className='sidebar-logout' onClick={handleLogout} >Logout</li>
         </ul>
       </div>

@@ -2,27 +2,19 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
 import PopupCreateActivity from "@/components/PopupCreateActivity";
+import FormEditActivity from "@/components/FormEditActivity";
+import FormDeleteActivity from "@/components/FormDeleteActivity";
+import { toast } from "sonner";
+import useDeleteActivity from "@/hooks/useDeleteActivity";
+import useEditActivity from "@/hooks/useEditActivity";
 
 const Activity = () => {
   const [activities, setActivities] = useState([]);
   const [buttonPopupCreateActivity, setButtonPopupCreateActivity] = useState(false);
-  const [editingActivity, setEditingActivity] = useState(''); // State to track the activity being edited
-  const [deletingActivity, setDeletingActivity] = useState(''); // State to track the activity being deleted
-  const [formData, setFormData] = useState({
-    categoryId: "",
-    title: "",
-    description: "",
-    imageUrls: [],
-    price: "",
-    price_discount: "",
-    rating: "",
-    total_reviews: "",
-    facilities: "",
-    address: "",
-    province: "",
-    city: "",
-    location_maps: "",
-  });
+  const [editActivity, setEditActivity] = useState(null);
+  const [deleteActivity, setDeleteActivity] = useState(null);
+  const { del, loading: deleteLoading } = useDeleteActivity();
+  const { pos, loading: editLoading } = useEditActivity();
 
   const getActivities = () => {
     const accessToken = localStorage.getItem("accessToken");
@@ -46,57 +38,82 @@ const Activity = () => {
     getActivities();
   }, []);
 
-  // Function to handle editing an activity
-  const handleEditActivity = (activity) => {
-    setEditingActivity(activity);
-    setFormData(activity); // Set form data to current activity
+  const handleDeleteActivity = () => {
+    del(`/delete-activity/${deleteActivity?.id}`)
+      .then((res) => {
+        toast.success(`${deleteActivity?.title} has been deleted`);
+        setActivities(prevActivities => prevActivities.filter(activity => activity.id !== deleteActivity.id));
+        setDeleteActivity(null);
+      })
+      .catch((err) => {
+        console.log("resDeleteActivityErr", err);
+        toast.error(err?.response?.data?.message);
+      });
   };
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+  const handleEditActivity = ({
+    categoryId,
+    title,
+    description,
+    imageUrls,
+    price,
+    price_discount,
+    rating,
+    total_reviews,
+    facilities,
+    address,
+    province,
+    city,
+    location_maps,
+  }) => {
+    pos(`/update-activity/${editActivity?.id}`, {
+      categoryId,
+      title,
+      description,
+      imageUrls,
+      price,
+      price_discount,
+      rating,
+      total_reviews,
+      facilities,
+      address,
+      province,
+      city,
+      location_maps,
+    })
+    .then ((res) => {
+      toast.success(`${editActivity?.title} has been updated`);
+      setActivities(prevActivities => {
+        const updatedActivities = prevActivities.map(activity => {
+          if (activity.id === editActivity.id) {
+            return { ...activity, title, description, imageUrls, price, price_discount, rating, total_reviews, facilities, address, province, city, location_maps };
+          }
+          return activity;
+        });
+        return updatedActivities;
+      });
+      setEditActivity(null);
+    })
+    .catch ((err) => {
+      console.log("resEditActivityErr", err);
+      if (
+        err?.response?.data?.errors &&
+        err?.response?.data?.errors.length > 0 &&
+        err.response.data.errors[0].message
+      ) {
+        toast.error(err.response.data.errors[0].message);
+      } else {
+        toast.error(err?.response?.data?.message);
+      }
+    })
+  }
+
+  const togglePopupEdit = () => {
+    setEditActivity(null);
   };
 
-  const handleSubmit = async () => {
-    try {
-      const accessToken = localStorage.getItem("accessToken");
-      await axios.post(
-        `https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/update-activity/${editingActivity.id}`,
-        formData,
-        {
-          headers: {
-            apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
-      );
-      console.log("Update successful");
-      getActivities(); // Refresh activities after update
-      setEditingActivity(null); // Clear editing activity
-    } catch (error) {
-      console.error("Update failed", error);
-    }
-  };
-
-  // Function to handle deleting an activity
-  const handleDeleteActivity = async () => {
-    try {
-      const accessToken = localStorage.getItem("accessToken");
-      await axios.delete(
-        `https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/delete-activity/${deletingActivity.id}`,
-        {
-          headers: {
-            apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
-      );
-      console.log("Delete successful");
-      getActivities(); // Refresh activities after deletion
-      setDeletingActivity(null); // Clear deleting activity
-    } catch (error) {
-      console.error("Delete failed", error);
-    }
+  const togglePopupDelete = () => {
+    setDeleteActivity(null);
   };
 
   return (
@@ -113,94 +130,56 @@ const Activity = () => {
             <div className="activities-card" key={index}>
               <h3>{activity.title}</h3>
               <img
-                src={
-                  activity.imageUrls?.[0] && activity.imageUrls?.[1]
-                    ? activity.imageUrls?.[1]
-                    : activity.imageUrls?.[0]
-                }
+                src={activity.imageUrls?.[0] && activity.imageUrls?.[1] ? activity.imageUrls?.[1] : activity.imageUrls?.[0]}
                 alt={activity.title}
               />
-              <h3>Activity id: {activity.id}</h3>
+              <h3>Activity id : {activity.id}</h3>
               <div>
                 <Link href={`/activity/${activity.id}`}>
                   <button>Read More</button>
                 </Link>
-                <button onClick={() => handleEditActivity(activity)}>Edit</button>
-                <button onClick={() => setDeletingActivity(activity)}>Delete</button> {/* Set deleting activity */}
+                <button onClick={() => setEditActivity(activity)}>Edit</button>
+                <button onClick={() => setDeleteActivity(activity)}>Delete</button>
               </div>
             </div>
           ))}
         </div>
       </div>
-      
-      {buttonPopupCreateActivity && (
-        <PopupCreateActivity
-          trigger={buttonPopupCreateActivity}
-          setTrigger={setButtonPopupCreateActivity}
-          PopupUpdateActivityData={getActivities} // Changed to function reference
-        />
-      )}
-
-      {/* Modal for updating activity */}
-      {editingActivity && (
-        <div className="popup">
-          <div className="popup-inner">
-            <h2>Edit Activity</h2>
-            <form>
-              <label>Category ID:</label>
-              <input type="text" name="categoryId" value={formData.categoryId} onChange={handleInputChange} />
-              
-              <label>Title:</label>
-              <input type="text" name="title" value={formData.title} onChange={handleInputChange} />
-              
-              <label>Description:</label>
-              <textarea name="description" value={formData.description} onChange={handleInputChange}></textarea>
-
-              <label>Image URLs:</label>
-              <input type="text" name="imageUrls" value={formData.imageUrls} onChange={handleInputChange} />
-
-              <label>Price:</label>
-              <input type="number" name="price" value={formData.price} onChange={handleInputChange} />
-              
-              <label>Price Discount:</label>
-              <input type="number" name="price_discount" value={formData.price_discount} onChange={handleInputChange} />
-              
-              <label>Rating:</label>
-              <input type="number" name="rating" value={formData.rating} onChange={handleInputChange} />
-              
-              <label>Total Reviews:</label>
-              <input type="number" name="total_reviews" value={formData.total_reviews} onChange={handleInputChange} />
-              
-              <label>Facilities:</label>
-              <textarea name="facilities" value={formData.facilities} onChange={handleInputChange}></textarea>
-              
-              <label>Address:</label>
-              <textarea name="address" value={formData.address} onChange={handleInputChange}></textarea>
-              
-              <label>Province:</label>
-              <input type="text" name="province" value={formData.province} onChange={handleInputChange} />
-              
-              <label>City:</label>
-              <input type="text" name="city" value={formData.city} onChange={handleInputChange} />
-              
-              <label>Location Maps:</label>
-              <textarea name="location_maps" value={formData.location_maps} onChange={handleInputChange}></textarea>
-              
-              <button type="button" onClick={handleSubmit}>Update</button>
-              <button type="button" onClick={() => setEditingActivity(null)}>Cancel</button>
-            </form>
-          </div>
+      {buttonPopupCreateActivity && <PopupCreateActivity trigger={buttonPopupCreateActivity} setTrigger={setButtonPopupCreateActivity} />}
+      {editActivity && (
+        <div className="popup-edit-activity">
+          <button className="btn-close-popup-edit-activity" onClick={togglePopupEdit}>X</button>
+          <FormEditActivity
+            defaultCategoryId={editActivity?.categoryId}
+            title={` Edit ${editActivity?.title} Destination ?`}
+            defaultName={editActivity?.title}
+            defaultDescription={editActivity?.description}
+            defaultImageUrls={editActivity?.imageUrls}
+            defaultPrice={editActivity?.price}
+            defaultPrice_Discount={editActivity?.price_discount}
+            defaultRating={editActivity?.rating}
+            defaultTotal_Reviews={editActivity?.total_reviews}
+            defaultFacilities={editActivity?.facilities}
+            defaultAddress={editActivity?.address}
+            defaultProvince={editActivity?.province}
+            defaultCity={editActivity?.city}
+            defaultLocation_Maps={editActivity?.location_maps}
+            onEdit={handleEditActivity}
+            loading={editLoading}
+          />
         </div>
       )}
-
-      {/* Modal for confirming delete */}
-      {deletingActivity && (
-        <div className="popup">
-          <div className="popup-inner">
-            <h2>Delete Activity</h2>
-            <p>Are you sure you want to delete this activity?</p>
-            <button onClick={handleDeleteActivity}>Yes</button>
-            <button onClick={() => setDeletingActivity(null)}>No</button>
+      {deleteActivity && (
+        <div className="popup-delete-activity">
+          <div></div>
+          <div>
+            <p>Are you sure you want to delete {deleteActivity?.title} ?</p>
+          </div>
+          <div className="popup-delete-activity-btn-yes">
+            <FormDeleteActivity title={`Yes`} onDelete={handleDeleteActivity} loading={deleteLoading} />
+          </div>
+          <div className="popup-delete-activity-btn-no">
+            <button onClick={togglePopupDelete}>Tidak</button>
           </div>
         </div>
       )}
@@ -209,6 +188,450 @@ const Activity = () => {
 };
 
 export default Activity;
+
+
+// // sdh benar masih router.push
+// import React, { useEffect, useState } from "react";
+// import axios from "axios";
+// import Link from "next/link";
+// import PopupCreateActivity from "@/components/PopupCreateActivity";
+// import FormEditActivity from "@/components/FormEditActivity";
+// import FormDeleteActivity from "@/components/FormDeleteActivity";
+// import { useRouter } from "next/router";
+// import { toast } from "sonner";
+// import useDeleteActivity from "@/hooks/useDeleteActivity";
+// import useEditActivity from "@/hooks/useEditActivity";
+
+// const Activity = () => {
+//   const [activities, setActivities] = useState([]);
+//   const [buttonPopupCreateActivity, setButtonPopupCreateActivity] = useState(false);
+//   const [editActivity, setEditActivity] = useState(null);
+//   const [deleteActivity, setDeleteActivity] = useState(null);
+//   const { del, loading: deleteLoading } = useDeleteActivity();
+//   const { pos, loading: editLoading } = useEditActivity();
+//   const router = useRouter();
+
+//   const getActivities = () => {
+//     const accessToken = localStorage.getItem("accessToken");
+//     axios
+//       .get("https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/activities", {
+//         headers: {
+//           apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
+//           Authorization: `Bearer ${accessToken}`,
+//         },
+//       })
+//       .then((res) => {
+//         console.log("res", res);
+//         setActivities(res.data.data);
+//       })
+//       .catch((err) => {
+//         console.log("err", err);
+//       });
+//   };
+
+//   useEffect(() => {
+//     getActivities();
+//   }, []);
+
+//   const handleDeleteActivity = () => {
+//     del(`/delete-activity/${deleteActivity?.id}`)
+//       .then((res) => {
+//         toast.success(`${deleteActivity?.title} has been deleted`);
+//         setTimeout(() => {
+//           router.push("/activity");
+//         }, 1000);
+//       })
+//       .catch((err) => {
+//         console.log("resDeleteActivityErr", err);
+//         toast.error(err?.response?.data?.message);
+//       });
+//   };
+
+//   const handleEditActivity = ({
+//     categoryId,
+//     title,
+//     description,
+//     imageUrls,
+//     price,
+//     price_discount,
+//     rating,
+//     total_reviews,
+//     facilities,
+//     address,
+//     province,
+//     city,
+//     location_maps,
+//   }) => {
+//     pos(`/update-activity/${editActivity?.id}`, {
+//       categoryId,
+//       title,
+//       description,
+//       imageUrls,
+//       price,
+//       price_discount,
+//       rating,
+//       total_reviews,
+//       facilities,
+//       address,
+//       province,
+//       city,
+//       location_maps,
+//     })
+//     .then ((res) => {
+//       toast.success(`${editActivity?.title} has been updated`);
+//       setTimeout(() => {
+//         router.push(`/activity/${editActivity?.id}`);
+//         setEditActivity(null);
+//       }, 1000);
+//     })
+//     .catch ((err) => {
+//       console.log("resEditActivityErr", err);
+//       if (
+//         err?.response?.data?.errors &&
+//         err?.response?.data?.errors.length > 0 &&
+//         err.response.data.errors[0].message
+//       ) {
+//         toast.error(err.response.data.errors[0].message);
+//       } else {
+//         toast.error(err?.response?.data?.message);
+//       }
+//     })
+//   }
+
+//   const togglePopupEdit = () => {
+//     setEditActivity(null);
+//   };
+
+//   const togglePopupDelete = () => {
+//     setDeleteActivity(null);
+//   };
+
+//   return (
+//     <div>
+//       <h1 className="activities-title">Destination Database</h1>
+      
+//       <div className="activities-btn-popup-create">
+//         <button onClick={() => setButtonPopupCreateActivity(true)}>Add Destination</button>
+//       </div>
+
+//       <div className={`${buttonPopupCreateActivity ? 'blur' : ''}`}>
+//         <div className="activities">
+//           {activities.map((activity, index) => (
+//             <div className="activities-card" key={index}>
+//               <h3>{activity.title}</h3>
+//               <img
+//                 src={activity.imageUrls?.[0] && activity.imageUrls?.[1] ? activity.imageUrls?.[1] : activity.imageUrls?.[0]}
+//                 alt={activity.title}
+//               />
+//               <h3>Activity id : {activity.id}</h3>
+//               <div>
+//                 <Link href={`/activity/${activity.id}`}>
+//                   <button>Read More</button>
+//                 </Link>
+//                 <button onClick={() => setEditActivity(activity)}>Edit</button>
+//                 <button onClick={() => setDeleteActivity(activity)}>Delete</button>
+//               </div>
+//             </div>
+//           ))}
+//         </div>
+//       </div>
+//       {buttonPopupCreateActivity && <PopupCreateActivity trigger={buttonPopupCreateActivity} setTrigger={setButtonPopupCreateActivity} />}
+//       {editActivity && (
+//         <div className="popup-edit-activity">
+//           <button className="btn-close-popup-edit-activity" onClick={togglePopupEdit}>X</button>
+//           <FormEditActivity
+//             defaultCategoryId={editActivity?.categoryId}
+//             title={` Edit ${editActivity?.title} Destination ?`}
+//             defaultName={editActivity?.title}
+//             defaultDescription={editActivity?.description}
+//             defaultImageUrls={editActivity?.imageUrls}
+//             defaultPrice={editActivity?.price}
+//             defaultPrice_Discount={editActivity?.price_discount}
+//             defaultRating={editActivity?.rating}
+//             defaultTotal_Reviews={editActivity?.total_reviews}
+//             defaultFacilities={editActivity?.facilities}
+//             defaultAddress={editActivity?.address}
+//             defaultProvince={editActivity?.province}
+//             defaultCity={editActivity?.city}
+//             defaultLocation_Maps={editActivity?.location_maps}
+//             onEdit={handleEditActivity}
+//             loading={editLoading}
+//           />
+//         </div>
+//       )}
+//       {deleteActivity && (
+//         <div className="popup-delete-activity">
+//           <div></div>
+//           <div>
+//             <p>Are you sure you want to delete {deleteActivity?.title} ?</p>
+//           </div>
+//           <div className="popup-delete-activity-btn-yes">
+//             <FormDeleteActivity title={`Yes`} onDelete={handleDeleteActivity} loading={deleteLoading} />
+//           </div>
+//           <div className="popup-delete-activity-btn-no">
+//             <button onClick={togglePopupDelete}>Tidak</button>
+//           </div>
+//         </div>
+//       )}
+//     </div>
+//   );
+// };
+
+// export default Activity;
+
+
+
+// // sdh jalan tp tidak eror 505
+// import React, { useEffect, useState } from "react";
+// import axios from "axios";
+// import Link from "next/link";
+// import PopupCreateActivity from "@/components/PopupCreateActivity";
+// import { toast } from "sonner";
+
+// const Activity = () => {
+//   const [activities, setActivities] = useState([]);
+//   const [buttonPopupCreateActivity, setButtonPopupCreateActivity] = useState(false);
+//   const [editingActivity, setEditingActivity] = useState(''); // State to track the activity being edited
+//   const [deletingActivity, setDeletingActivity] = useState(''); // State to track the activity being deleted
+//   const [formData, setFormData] = useState({
+//     categoryId: "",
+//     title: "",
+//     description: "",
+//     imageUrls: [],
+//     price: "",
+//     price_discount: "",
+//     rating: "",
+//     total_reviews: "",
+//     facilities: "",
+//     address: "",
+//     province: "",
+//     city: "",
+//     location_maps: "",
+//   });
+
+//   const getActivities = () => {
+//     const accessToken = localStorage.getItem("accessToken");
+//     axios
+//       .get("https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/activities", {
+//         headers: {
+//           apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
+//           Authorization: `Bearer ${accessToken}`,
+//         },
+//       })
+//       .then((res) => {
+//         console.log("res", res);
+//         setActivities(res.data.data);
+//       })
+//       .catch((err) => {
+//         console.log("err", err);
+//       });
+//   };
+
+//   useEffect(() => {
+//     getActivities();
+//   }, []);
+
+//   // Function to handle editing an activity
+//   const handleEditActivity = (activity) => {
+//     setEditingActivity(activity);
+//     setFormData(activity); // Set form data to current activity
+//   };
+
+//   const handleInputChange = (e) => {
+//     const { name, value } = e.target;
+//     setFormData({ ...formData, [name]: value });
+//   };
+
+//   const handleSubmit = async () => {
+//     try {
+//       const accessToken = localStorage.getItem("accessToken");
+//       await axios.post(
+//         `https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/update-activity/${editingActivity.id}`,
+//         formData,
+//         {
+//           headers: {
+//             apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
+//             Authorization: `Bearer ${accessToken}`,
+//           },
+//         }
+//       );
+//       console.log("Update successful");
+//       getActivities(); // Refresh activities after update
+//       setEditingActivity(null); // Clear editing activity
+//       toast.success("Activity updated successfully");
+//     } catch (error) {
+//       console.error("Update failed", error);
+//       toast.error("Failed to update activity");
+//     }
+//   };
+
+//   // Function to handle deleting an activity
+//   const handleDeleteActivity = async () => {
+//     try {
+//       const accessToken = localStorage.getItem("accessToken");
+//       await axios.delete(
+//         `https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/delete-activity/${deletingActivity.id}`,
+//         {
+//           headers: {
+//             apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
+//             Authorization: `Bearer ${accessToken}`,
+//           },
+//         }
+//       );
+//       console.log("Delete successful");
+//       getActivities(); // Refresh activities after deletion
+//       setDeletingActivity(null); // Clear deleting activity
+//       toast.success("Activity deleted successfully");
+
+//     } catch (error) {
+//       console.error("Delete failed", error);
+//       toast.error("Failed to delete activity");
+//     }
+//   };
+
+//   return (
+//     <div>
+//       <h1 className="activities-title">Destination Database</h1>
+      
+//       <div className="activities-btn-popup-create">
+//         <button onClick={() => setButtonPopupCreateActivity(true)}>Add Destination</button>
+//       </div>
+
+//       <div className={`${buttonPopupCreateActivity ? 'blur' : ''}`}>
+//         <div className="activities">
+//           {activities.map((activity, index) => (
+//             <div className="activities-card" key={index}>
+//               <h3>{activity.title}</h3>
+//               <img
+//                 src={
+//                   activity.imageUrls?.[0] && activity.imageUrls?.[1]
+//                     ? activity.imageUrls?.[1]
+//                     : activity.imageUrls?.[0]
+//                 }
+//                 alt={activity.title}
+//               />
+//               <h3>Activity id: {activity.id}</h3>
+//               <div>
+//                 {/* <Link href={`/activity/${activity.id}`}>
+//                   <button>Read More</button>
+//                 </Link> */}
+//                 <button onClick={() => handleEditActivity(activity)}>Edit</button>
+//                 <button onClick={() => setDeletingActivity(activity)}>Delete</button> {/* Set deleting activity */}
+//               </div>
+//             </div>
+//           ))}
+//         </div>
+//       </div>
+      
+//       {buttonPopupCreateActivity && (
+//         <PopupCreateActivity
+//           trigger={buttonPopupCreateActivity}
+//           setTrigger={setButtonPopupCreateActivity}
+//           PopupUpdateActivityData={getActivities} // Changed to function reference
+//         />
+//       )}
+
+//       {/* Modal for updating activity */}
+//       {editingActivity && (
+
+//         <div className="popup-create-activity-wrap">
+    
+//           <div className="popup-create-activity">
+            
+//             <h1>Edit Activity</h1>
+
+//             <div className="input-box-create-activity-separate"> 
+//               <div className="input-box-create-activity-7kiri">
+
+//               <div className="input-box-create-activity">
+//               <input type="text" name="categoryId" value={formData.categoryId} onChange={handleInputChange}  />
+//                 </div>
+                
+                  
+//               <div className="input-box-create-activity">
+//               <input type="text" name="title" value={formData.title} onChange={handleInputChange} />
+//                   </div>
+                  
+//               <div className="input-box-create-activity">
+//               {/* <textarea name="description" value={formData.description} onChange={handleInputChange}></textarea> */}
+//               <input name="description" value={formData.description} onChange={handleInputChange}></input>
+//                     </div>
+                    
+//               <div className="input-box-create-activity">
+//               <input type="text" name="imageUrls" value={formData.imageUrls} onChange={handleInputChange} />
+//                       </div>
+                      
+//               <div className="input-box-create-activity">
+//               <input type="number" name="price" value={formData.price} onChange={handleInputChange} />
+//                         </div>
+                        
+//               <div className="input-box-create-activity">
+//               <input type="number" name="price_discount" value={formData.price_discount} onChange={handleInputChange} />
+//                           </div>
+                          
+//               </div>
+
+//               <div className="input-box-create-activity-7kanan">
+                
+//               <div className="input-box-create-activity">
+//               <input type="number" name="rating" value={formData.rating} onChange={handleInputChange} />
+//                             </div>
+                            
+//               <div className="input-box-create-activity">
+//               <input type="number" name="total_reviews" value={formData.total_reviews} onChange={handleInputChange} />
+//                               </div>
+                              
+//               <div className="input-box-create-activity">
+//               <input name="facilities" value={formData.facilities} onChange={handleInputChange}></input>
+//                                 </div>
+                                
+//               <div className="input-box-create-activity">
+//               <input name="address" value={formData.address} onChange={handleInputChange}></input>
+//                                   </div>
+                                  
+//               <div className="input-box-create-activity">
+//               <input type="text" name="province" value={formData.province} onChange={handleInputChange} />
+//                                     </div>
+                                    
+//               <div className="input-box-create-activity">
+//               <input type="text" name="city" value={formData.city} onChange={handleInputChange} />
+//               </div>
+                                        
+//               <div className="input-box-create-activity">
+//               <input name="location_maps" value={formData.location_maps} onChange={handleInputChange}></input>
+//                                         </div>
+                                        
+//               </div>
+//             </div>
+                
+//               <div className="btn-create-activity-popup">
+//                 <button  onClick={handleSubmit}>Update</button>
+//               </div>
+              
+//               <span className="btn-close-popup-create-activity" onClick={() => setEditingActivity(null)}>&times;</span>
+//               {/* <button type="button" onClick={() => setEditingActivity(null)}>Cancel</button> */}
+//           </div>
+//         </div>
+//       )}
+
+//       {/* Modal for confirming delete */}
+//       {deletingActivity && (
+//         <div className="input-box-create-banner"> 
+//         <div className="popup-delete-banner">
+//             {/* <h2>Delete Activity</h2> */}
+//             <p>Are you sure you want to delete this activity?</p>
+//             <div className="btn-create-banner-popup">
+//             <button onClick={handleDeleteActivity}>Yes</button>
+//               <button onClick={() => setDeletingActivity(null)}>No</button>
+//               </div>
+//           </div>
+//         </div>
+//       )}
+//     </div>
+//   );
+// };
+
+// export default Activity;
 
 
 

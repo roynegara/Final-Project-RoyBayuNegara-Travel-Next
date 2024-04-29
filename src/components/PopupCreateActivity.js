@@ -229,7 +229,8 @@ const CreateActivity = (props) => {
         
       <h1>Add Destination</h1>
 
-        <div className="input-box-create-activity-separate">       
+        <div className="input-box-create-activity-separate">      
+          
         <div className="input-box-create-activity-7kiri">
         <select className="option-create-activity" name="categoryId" value={categoryId} onChange={handleCategoryIdChange}>
         <option value="">-- Select Category --</option>
