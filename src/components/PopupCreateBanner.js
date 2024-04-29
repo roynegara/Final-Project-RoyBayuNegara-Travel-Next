@@ -1,12 +1,52 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useRouter } from "next/router";
 import { toast } from "sonner";
 
 const CreateBanner = (props) => {
   const [name, setName] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
-  const router = useRouter();
+  const [file, setFile] = useState("");
+  const [imageUrlUpload, setImageUrlUpload] = useState("");
+
+
+  
+  const handleUploadImage = () => {
+    if (!file) {
+      toast.warning("Please select an image");
+      return;
+    }
+    
+    
+        const formData = new FormData();
+        formData.append("image", file);
+    
+        const config = {
+          headers: {
+            "content-type": "multipart/form-data",
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1pZnRhaGZhcmhhbkBnbWFpbC5jb20iLCJ1c2VySWQiOiI5NWE4MDNjMy1iNTFlLTQ3YTAtOTBkYi0yYzJmM2Y0ODE1YTkiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2Nzk4NDM0NDR9.ETsN6dCiC7isPReiQyHCQxya7wzj05wz5zruiFXLx0k`,
+            apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
+          },
+        };
+    
+        axios
+          .post(
+            "https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/upload-image",
+            formData,
+            config
+          )
+          .then((res) => {
+            console.log(res);
+            setImageUrlUpload(res?.data?.url);
+            // toast.success(res?.data?.message);
+           
+           
+    })
+          .catch((err) => {
+            console.log(err);
+            // toast.error(err?.response?.data?.message)
+          });
+      };
+  
+  
 
   const handleNameChange = (e) => {
     setName(e.target.value);
@@ -14,47 +54,61 @@ const CreateBanner = (props) => {
   };
 
   const handleImageUrlChange = (e) => {
-    setImageUrl(e.target.value);
+    setFile(e.target.files[0]);
     console.log("imageUrl", e.target.value);
   };
 
+
+
+
   const handleUpload = () => {
-    if (!name && !imageUrl) { 
-      toast.warning("Name and Image Url cannot be empty");
-      return;
-    } else if (!name) {
-      toast.warning("Name cannot be empty");
-      return;
-    } else if (!imageUrl) {
-      toast.warning("Image Url cannot be empty");
-      return;
+    // if (!name && !imageUrl) {
+    //   toast.warning("Name and Image Url cannot be empty");
+    //   return;
+    // } else if (!name) {
+    //   toast.warning("Name cannot be empty");
+    //   return;
+    // } else if (!imageUrl) {
+    //   toast.warning("Image Url cannot be empty");
+    //   return;
+    // }
+
+    if (imageUrlUpload) {
+
+      const payload = {
+        name: name,
+        imageUrl: imageUrlUpload,
+      };
+
+      const accessToken = localStorage.getItem("access_token");
+
+      axios
+        .post("https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/create-banner", payload, {
+          headers: {
+            apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
+            Authorization: `Bearer ${accessToken}`,
+          },
+        })
+        .then((res) => {
+          console.log("res", res);
+          toast.success(`${name} has been created`);
+          props.updateBannerData(); // Panggil fungsi updateBannerData dari props
+          props.setTrigger(false); // Tutup popup setelah berhasil menambahkan banner
+          setImageUrlUpload(res?.data?.url)
+        })
+        .catch((err) => {
+          console.log("err", err);
+          toast.error(err.response?.data?.message);
+        });
     }
-
-    const payload = {
-      name: name,
-      imageUrl: imageUrl,
-    };
-
-    const accessToken = localStorage.getItem("access_token");
-
-    axios
-      .post("https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/create-banner", payload, {
-        headers: {
-          apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
-          Authorization: `Bearer ${accessToken}`,
-        },
-      })
-      .then((res) => {
-        console.log("res", res);
-        toast.success(`${name} has been created`);
-        props.updateBannerData(); // Panggil fungsi updateBannerData dari props
-        props.setTrigger(false); // Tutup popup setelah berhasil menambahkan banner
-      })
-      .catch((err) => {
-        console.log("err", err);
-        toast.error(err.response?.data?.message);
-      });
   };
+
+    useEffect(() => {
+      handleUpload()
+    }, [imageUrlUpload])
+
+
+
 
   return props.trigger ? (
     <div className="popup-create-banner-wrap">
@@ -68,11 +122,11 @@ const CreateBanner = (props) => {
       </div>
         
       <div className="input-box-create-banner">          
-      <input type="text" name="imageUrl" value={imageUrl} onChange={handleImageUrlChange} placeholder="Banner Image Url" />
+      <input type="file"  onChange={handleImageUrlChange} placeholder="Banner Image Url" />
       </div>
 
       <div className="btn-create-banner-popup">
-      <button type="submit" onClick={handleUpload}>Add Banner</button>
+      <button type="submit" onClick={handleUploadImage}>Add Banner</button>
       </div>
         
       <span className="btn-close-popup-create-banner" onClick={() => props.setTrigger(false)}>&times;</span>
