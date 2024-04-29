@@ -13,8 +13,48 @@ const Category = () => {
   const [editCategoryImageUrl, setEditCategoryImageUrl] = useState("");
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [categoryIdToDelete, setCategoryIdToDelete] = useState(null);
+  const [file, setFile] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
+
+
+  const handleUpload = () => {
+    if (!file) {
+      toast.warning("Please select an image");
+      return;
+    }
+        const formData = new FormData();
+        formData.append("image", file);
+    
+        const config = {
+          headers: {
+            "content-type": "multipart/form-data",
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1pZnRhaGZhcmhhbkBnbWFpbC5jb20iLCJ1c2VySWQiOiI5NWE4MDNjMy1iNTFlLTQ3YTAtOTBkYi0yYzJmM2Y0ODE1YTkiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2Nzk4NDM0NDR9.ETsN6dCiC7isPReiQyHCQxya7wzj05wz5zruiFXLx0k`,
+            apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
+          },
+        };
+    
+        axios
+          .post(
+            "https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/upload-image",
+            formData,
+            config
+          )
+          .then((res) => {
+            console.log(res);
+            setImageUrl(res.data.url);
+            // toast.success(res?.data?.message);
+           
+           
+    })
+          .catch((err) => {
+            console.log(err);
+            // toast.error(err?.response?.data?.message)
+          });
+      };
+
 
   const getCategories = () => {
+    
     const accessToken = localStorage.getItem("access_token");
     axios
       .get("https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/categories", {
@@ -25,6 +65,7 @@ const Category = () => {
       })
       .then((res) => {
         setCategories(res.data.data);
+
       })
       .catch((err) => {
         console.log("err", err);
@@ -47,32 +88,39 @@ const Category = () => {
   };
 
   const handleUpdateCategory = () => {
-    const accessToken = localStorage.getItem("access_token");
-    axios
-      .post(
-        `https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/update-category/${editCategoryId}`,
-        {
-          name: editCategoryName,
-          imageUrl: editCategoryImageUrl,
-        },
-        {
-          headers: {
-            apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
-            Authorization: `Bearer ${accessToken}`,
+    if (imageUrl) {
+      const accessToken = localStorage.getItem("access_token");
+      axios
+        .post(
+          `https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/update-category/${editCategoryId}`,
+          {
+            name: editCategoryName,
+            imageUrl: imageUrl,
           },
-        }
-      )
-      .then((res) => {
-        console.log("Category updated successfully:", res.data);
-        updateCategoryData();
-        setEditModalOpen(false);
-        toast.success(res.data.message);
-      })
-      .catch((err) => {
-        console.error("Error updating category:", err);
-        toast.error(err.response.data.message);
-      });
+          {
+            headers: {
+              apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
+        )
+        .then((res) => {
+          console.log("Category updated successfully:", res.data);
+          updateCategoryData();
+          setEditModalOpen(false);
+          setImageUrl(res?.data?.url);
+          toast.success(res.data.message);
+        })
+        .catch((err) => {
+          console.error("Error updating category:", err);
+          toast.error(err.response.data.message);
+        });
+    }
   };
+
+  useEffect(() => {
+    handleUpdateCategory()
+  }, [imageUrl])
 
   const handleDeleteCategory = (categoryId) => {
     // Menampilkan modal konfirmasi penghapusan
@@ -153,15 +201,14 @@ const Category = () => {
 
               <div className="input-box-create-banner"> 
             <input
-              type="text"
+              type="file"
               placeholder="Image URL"
-              value={editCategoryImageUrl}
-              onChange={(e) => setEditCategoryImageUrl(e.target.value)}
+                onChange={(e) => setFile(e.target.files[0])}
             />
 </div>
               
             <div className="btn-create-banner-popup">
-            <button onClick={handleUpdateCategory}>Update</button>
+            <button onClick={handleUpload}>Update</button>
             </div>
 
             <span className="btn-close-popup-create-banner" onClick={() => setEditModalOpen(false)}>&times;</span>
