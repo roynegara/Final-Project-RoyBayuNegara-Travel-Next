@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Link from "next/link";
+import { toast } from "react-toastify"; // Menggunakan react-toastify
 import PopupCreateBanner from "@/components/PopupCreateBanner";
-import { toast } from "sonner";
+import Link from "next/link";
 
 const Banner = () => {
   const [banners, setBanners] = useState([]);
@@ -10,7 +10,42 @@ const Banner = () => {
   const [editingBanner, setEditingBanner] = useState(null);
   const [deletingBanner, setDeletingBanner] = useState(null);
   const [editName, setEditName] = useState("");
-  const [editImageUrl, setEditImageUrl] = useState("");
+  const [file, setFile] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
+
+  const handleUpload = () => {
+    if (!file) {
+      toast.warning("Please select an image");
+      return;
+    }
+    
+    const formData = new FormData();
+    formData.append("image", file);
+
+    const config = {
+      headers: {
+        "content-type": "multipart/form-data",
+        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1pZnRhaGZhcmhhbkBnbWFpbC5jb20iLCJ1c2VySWQiOiI5NWE4MDNjMy1iNTFlLTQ3YTAtOTBkYi0yYzJmM2Y0ODE1YTkiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2Nzk4NDM0NDR9.ETsN6dCiC7isPReiQyHCQxya7wzj05wz5zruiFXLx0k`,
+        apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
+      },
+    };
+
+    axios
+      .post(
+        "https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/upload-image",
+        formData,
+        config
+      )
+      .then((res) => {
+        console.log(res);
+        setImageUrl(res.data.url);
+        toast.success(res?.data?.message);
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error(err?.response?.data?.message);
+      });
+  };
 
   const getBanners = () => {
     axios
@@ -39,7 +74,6 @@ const Banner = () => {
   const handleEditBanner = (banner) => {
     setEditingBanner(banner);
     setEditName(banner.name);
-    setEditImageUrl(banner.imageUrl);
   };
 
   const handleDeleteBanner = (banner) => {
@@ -68,34 +102,42 @@ const Banner = () => {
   };
 
   const handleSaveEdit = () => {
-    const accessToken = localStorage.getItem("access_token");
-    axios
-      .post(
-        `https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/update-banner/${editingBanner.id}`,
-        {
-          name: editName,
-          imageUrl: editImageUrl,
-        },
-        {
-          headers: {
-            apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
-            Authorization: `Bearer ${accessToken}`,
+    if (imageUrl) {
+      const accessToken = localStorage.getItem("access_token");
+      axios
+        .post(
+          `https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/update-banner/${editingBanner.id}`,
+          {
+            name: editName,
+            imageUrl: imageUrl,
           },
-        }
-      )
-      .then((res) => {
-        console.log("Edit success:", res);
-        setEditingBanner(null);
-        setEditName("");
-        setEditImageUrl("");
-        updateBannerData();
-        toast.success(res.data.message);
-      })
-      .catch((err) => {
-        console.error("Edit error:", err);
-        toast.error(err.response.data.message);
-      });
+          {
+            headers: {
+              apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
+        )
+        .then((res) => {
+          console.log("Edit success:", res);
+          setEditingBanner(null);
+          setEditName("");
+          updateBannerData();
+          setImageUrl(res?.data?.url);
+          toast.success(res.data.message);
+        })
+        .catch((err) => {
+          console.error("Edit error:", err);
+          toast.error(err.response.data.message);
+        });
+    }
   };
+
+  useEffect(() => {
+    if (imageUrl) {
+      handleSaveEdit();
+    }
+  }, [imageUrl]);
 
   return (
     <div>
@@ -143,15 +185,14 @@ const Banner = () => {
 
           <div className="input-box-create-banner"> 
             <input
-              type="text"
-              value={editImageUrl}
-              onChange={(e) => setEditImageUrl(e.target.value)}
+              type="file"
+              onChange={(e) => setFile(e.target.files[0])}
               placeholder="Image URL"
               />
               </div>
 
             <div className="btn-create-banner-popup">
-            <button  onClick={handleSaveEdit}>Edit Banner</button>
+            <button  onClick={handleUpload}>Edit Banner</button>
             </div>
             
             <span className="btn-close-popup-create-banner" onClick={() => setEditingBanner(null)}>&times;</span>
@@ -161,10 +202,8 @@ const Banner = () => {
 
       {/* Modal konfirmasi untuk hapus banner */}
       {deletingBanner && (
-        <div className="input-box-create-banner"> 
-
-          <div className="popup-delete-banner">
-            {/* <h1>Delete Banner</h1> */}
+        <div className="popup-create-banner-wrap">
+          <div className="popup-create-banner">
             <p>Are you sure you want to delete this banner?</p>
             <div className="btn-create-banner-popup">
               <button onClick={confirmDelete}>Yes</button>
@@ -187,6 +226,198 @@ const Banner = () => {
 };
 
 export default Banner;
+
+
+// // sudah benar
+// import React, { useEffect, useState } from "react";
+// import axios from "axios";
+// import Link from "next/link";
+// import PopupCreateBanner from "@/components/PopupCreateBanner";
+// import { toast } from "sonner";
+
+// const Banner = () => {
+//   const [banners, setBanners] = useState([]);
+//   const [buttonPopupCreateBanner, setButtonPopupCreateBanner] = useState(false);
+//   const [editingBanner, setEditingBanner] = useState(null);
+//   const [deletingBanner, setDeletingBanner] = useState(null);
+//   const [editName, setEditName] = useState("");
+//   const [editImageUrl, setEditImageUrl] = useState("");
+
+//   const getBanners = () => {
+//     axios
+//       .get("https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/banners", {
+//         headers: {
+//           apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
+//         },
+//       })
+//       .then((res) => {
+//         console.log("res", res);
+//         setBanners(res.data.data);
+//       })
+//       .catch((err) => {
+//         console.log("err", err);
+//       });
+//   };
+
+//   useEffect(() => {
+//     getBanners();
+//   }, []);
+
+//   const updateBannerData = () => {
+//     getBanners();
+//   };
+
+//   const handleEditBanner = (banner) => {
+//     setEditingBanner(banner);
+//     setEditName(banner.name);
+//     setEditImageUrl(banner.imageUrl);
+//   };
+
+//   const handleDeleteBanner = (banner) => {
+//     setDeletingBanner(banner);
+//   };
+
+//   const confirmDelete = () => {
+//     const accessToken = localStorage.getItem("access_token");
+//     axios
+//       .delete(`https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/delete-banner/${deletingBanner.id}`, {
+//         headers: {
+//           Authorization: `Bearer ${accessToken}`,
+//           apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
+//         },
+//       })
+//       .then((res) => {
+//         console.log("Delete success:", res);
+//         setDeletingBanner(null);
+//         updateBannerData();
+//         toast.success(res.data.message);
+//       })
+//       .catch((err) => {
+//         console.error("Delete error:", err);
+//         toast.error(err.response.data.message);
+//       });
+//   };
+
+//   const handleSaveEdit = () => {
+//     const accessToken = localStorage.getItem("access_token");
+//     axios
+//       .post(
+//         `https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/update-banner/${editingBanner.id}`,
+//         {
+//           name: editName,
+//           imageUrl: editImageUrl,
+//         },
+//         {
+//           headers: {
+//             apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
+//             Authorization: `Bearer ${accessToken}`,
+//           },
+//         }
+//       )
+//       .then((res) => {
+//         console.log("Edit success:", res);
+//         setEditingBanner(null);
+//         setEditName("");
+//         setEditImageUrl("");
+//         updateBannerData();
+//         toast.success(res.data.message);
+//       })
+//       .catch((err) => {
+//         console.error("Edit error:", err);
+//         toast.error(err.response.data.message);
+//       });
+//   };
+
+//   return (
+//     <div>
+//       <h1 className="banners-title">Banner Database</h1>
+
+//       <div className="banners-btn-popup-create">
+//         <button onClick={() => setButtonPopupCreateBanner(true)}>Add Banner</button>
+//       </div>
+
+//       <div className={`${buttonPopupCreateBanner ? 'blur' : ''}`}>
+//         <div className="banners">
+//           {banners.map((banner, index) => (
+//             <div key={index}>
+//               <div className="banners-card">
+//                 <img src={banner.imageUrl} alt={banner.name} />
+//                 <p>{banner.name}</p>
+//                 <div>
+//                   {/* <Link href={`/banner/${banner.id}`}>
+//                     <button>Read More</button>
+//                   </Link> */}
+//                   <button onClick={() => handleEditBanner(banner)}>Edit</button>
+//                   <button onClick={() => handleDeleteBanner(banner)}>Delete</button>
+//                 </div>
+//               </div>
+//             </div>
+//           ))}
+//         </div>
+//       </div>
+
+//       {/* Modal untuk edit banner */}
+//       {editingBanner && (
+//          <div className="popup-create-banner-wrap">
+//             <div className="popup-create-banner">
+           
+//             <h2>Edit Banner</h2>
+
+//             <div className="input-box-create-banner"> 
+//             <input
+//               type="text"
+//               value={editName}
+//               onChange={(e) => setEditName(e.target.value)}
+//               placeholder="Name"
+//               />
+//               </div>
+
+//           <div className="input-box-create-banner"> 
+//             <input
+//               type="text"
+//               value={editImageUrl}
+//               onChange={(e) => setEditImageUrl(e.target.value)}
+//               placeholder="Image URL"
+//               />
+//               </div>
+
+//             <div className="btn-create-banner-popup">
+//             <button  onClick={handleSaveEdit}>Edit Banner</button>
+//             </div>
+            
+//             <span className="btn-close-popup-create-banner" onClick={() => setEditingBanner(null)}>&times;</span>
+//           </div>
+//         </div>
+//       )}
+
+//       {/* Modal konfirmasi untuk hapus banner */}
+//       {deletingBanner && (
+//         <div className="input-box-create-banner"> 
+
+//           <div className="popup-delete-banner">
+//             {/* <h1>Delete Banner</h1> */}
+//             <p>Are you sure you want to delete this banner?</p>
+//             <div className="btn-create-banner-popup">
+//               <button onClick={confirmDelete}>Yes</button>
+//               <button onClick={() => setDeletingBanner(null)}>No</button>
+//             </div>
+//           </div>
+//         </div>
+//       )}
+
+//       {/* Modal untuk tambah banner */}
+//       {buttonPopupCreateBanner && (
+//         <PopupCreateBanner
+//           trigger={buttonPopupCreateBanner}
+//           setTrigger={setButtonPopupCreateBanner}
+//           updateBannerData={updateBannerData}
+//         />
+//       )}
+//     </div>
+//   );
+// };
+
+// export default Banner;
 
 
 // // polosan

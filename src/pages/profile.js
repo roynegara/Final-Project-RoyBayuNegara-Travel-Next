@@ -38,7 +38,7 @@ const Profile = () => {
 
   useEffect(() => {
     getLoggedUser();
-  });
+  },[]);
 
   const updateImageData = () => {
     getLoggedUser();

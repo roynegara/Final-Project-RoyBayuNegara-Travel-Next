@@ -149,7 +149,10 @@ const Promo = () => {
             <div className="promos-card" key={index}>
               <img src={promo.imageUrl} alt={promo.title} />
               <h1>{promo.title}</h1>
-              <p>{promo.description}</p>
+              {/* <p>{promo.description}</p> */}
+              <p>Promo Code : {promo.promo_code}</p>
+              <p>Discount : Rp {promo.promo_discount_price}</p>
+              <p>Min Spend : Rp {promo.minimum_claim_price}</p>
               <div>
                 <button onClick={() => handleEditClick(promo)}>Edit</button>
                 <button onClick={() => handleDeleteClick(promo)}>Delete</button>
