@@ -195,12 +195,12 @@ const Promo = () => {
       </div>
 
       {editingPromo && (
-        <div className="popup-create-promo-wrap">
-          <div className="popup-create-promo">
+        <div className="popup-edit-promo-wrap">
+          <div className="popup-edit-promo">
             
             <h2>Edit Promo</h2>
 
-            <div className="input-box-create-promo">
+            <div className="input-box-edit-promo">
               <input
                 type="text"
                 value={editName}
@@ -209,7 +209,7 @@ const Promo = () => {
               />
             </div>
 
-            <div className="input-box-create-promo">
+            <div className="input-box-edit-promo">
               <input
                 type="file"
                 onChange={(e) => setFile(e.target.files[0])}
@@ -278,6 +278,8 @@ const Promo = () => {
             <div className="btn-create-promo-popup">
               <button onClick={handleUpload}>Edit Promo</button>
             </div>
+
+            <span className="btn-close-popup-edit-promo-" onClick={() => setEditingPromo(null)}>&times;</span>
 
           </div>
         </div>
