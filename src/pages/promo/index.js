@@ -245,19 +245,32 @@ const Promo = () => {
             </div>
 
             <div>
-              <input
-                type="text"
-                value={promo_discount_price}
-                onChange={(e) => setPromo_discount_price(e.target.value)}
-                placeholder="Promo Discount Price"
-              />
-            </div>
+            <input
+              type="number"
+              value={promo_discount_price}
+              onChange={(e) => {
+                const value = e.target.value;
+                // Validasi apakah nilai yang dimasukkan adalah nomor
+                if (!isNaN(value)) {
+                  setPromo_discount_price(parseFloat(value));
+                }
+              }}
+              placeholder="Promo Discount Price"
+            />
+          </div>
+
 
             <div>
               <input
-                type="text"
+                type="number"
                 value={minimum_claim_price}
-                onChange={(e) => setMinimum_claim_price(e.target.value)}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  // Validasi apakah nilai yang dimasukkan adalah nomor
+                  if (!isNaN(value)) {
+                    setMinimum_claim_price(parseFloat(value));
+                  }
+                }}
                 placeholder="Minimum Claim Price"
               />
             </div>
