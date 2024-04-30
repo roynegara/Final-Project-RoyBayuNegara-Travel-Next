@@ -51,6 +51,11 @@ defaultLocation_Maps,
         <h5>{title}</h5>
         <div>
           <input defaultValue={defaultCategoryId} name="categoryId" placeholder="Masukkan Category Id" />
+
+
+
+
+          
           <input defaultValue={defaultName} name="namaActivity" placeholder="Masukkan Nama Activity" />
           <input defaultValue={defaultDescription} name="deskripsiActivity" placeholder="Masukkan Deskripsi Activity" />
           <input defaultValue={defaultImageUrls} name="gambarActivity" placeholder="Masukkan Gambar Activity" />

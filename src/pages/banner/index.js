@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { toast } from "react-toastify"; // Menggunakan react-toastify
+import { toast } from "sonner"; // Menggunakan react-toastify
 import PopupCreateBanner from "@/components/PopupCreateBanner";
 import Link from "next/link";
 

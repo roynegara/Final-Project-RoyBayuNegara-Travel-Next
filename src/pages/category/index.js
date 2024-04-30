@@ -128,7 +128,7 @@ const Category = () => {
     setCategoryIdToDelete(categoryId);
   };
 
-  const onDeleteConfirmed = () => {
+  const onDeleteConfirmed = (delcat) => {
     const accessToken = localStorage.getItem("access_token");
     axios
       .delete(
