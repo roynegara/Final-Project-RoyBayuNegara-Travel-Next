@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import axios from "axios";
 import Cookies from "js-cookie";
+import { toast } from "sonner";
 // import LogInOut from "./LogInOut/LogInOut";
 
 export default function Navbar() {
@@ -37,11 +38,12 @@ export default function Navbar() {
 
   const handleLogout = () => {
     localStorage.removeItem("access_token");
-    router.push("/login", undefined, { shallow: true }).then((success) => {
+    toast.success("Logout Successfully");
+    router.push("/", undefined, { shallow: true }).then((success) => {
       if (success) {
         setTimeout(() => {
           window.location.reload();
-        });
+        },1500);
       }
     });
   };

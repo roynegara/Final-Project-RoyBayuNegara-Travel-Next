@@ -25,13 +25,14 @@ import { Toaster, toast } from "sonner";
 import store from "@/Redux/store";
 import { Provider } from "react-redux";
 
+import PrivateRoute from "@/Route/PrivatRoute";
 
 
 
 
 export default function App({ Component, pageProps }) {
   return (
-   
+   <PrivateRoute>
     <TravelLayout>
       <Provider store={store}>
         
@@ -41,7 +42,7 @@ export default function App({ Component, pageProps }) {
         
         </Provider>
     </TravelLayout>
-    
+    </PrivateRoute>
      
   );
 }

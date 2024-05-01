@@ -46,6 +46,32 @@ const Register = () => {
   };
 
   const handleRegister = () => {
+    const fields = [
+      { name: 'name', label: 'Name' },
+      { name: 'email', label: 'Email' },
+      { name: 'password', label: 'Password' },
+      { name: 'passwordRepeat', label: 'Password Repeat' },
+      { name: 'phoneNumber', label: 'Phone Number' }
+    ];
+    
+    let emptyFields = [];
+    fields.forEach(field => {
+      if (!eval(field.name)) { // Using eval here for simplicity, though it's generally not recommended
+        emptyFields.push(field.label);
+      }
+    });
+    
+    if (emptyFields.length > 0) {
+      toast.info(`Failed to register because ${emptyFields.join(', ')} ${emptyFields.length > 1 ? 'are' : 'is'} empty`);
+      return
+    } else if (password !== passwordRepeat) {
+      toast.info('Failed to register because passwords do not match');
+      return
+    } else {
+      // Registration successful
+    }
+    
+
     const payload = {
       name: name,
       email: email,
@@ -63,9 +89,10 @@ const Register = () => {
       })
       .then((res) => {
         console.log("response", res);
-        toast.success("Status : " + res?.data?.message);
+        // toast.success("Status : " + res?.data?.message);
+        toast.success('Register Successful, Please login to continue');
         setTimeout(() => {
-          router.push("/login");
+          router.push("/");
         }, 1500);
       })
       .catch((err) => {

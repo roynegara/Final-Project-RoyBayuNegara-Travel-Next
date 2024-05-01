@@ -95,7 +95,7 @@ const handleLogout = () => {
           <li className='sidebar-position' onClick={handlePromoClick}><i class='bx bxs-discount' ></i> Promo</li>
           <li className='sidebar-position' onClick={handleCategoryClick}><i class='bx bx-category'></i> Category</li>
           <li className='sidebar-position' onClick={handleActivityClick}><i class='bx bxs-plane-alt'></i> Destination</li>
-          <li className='sidebar-logout' onClick={handleLogout} >Logout</li>
+          {/* <li className='sidebar-logout' onClick={handleLogout} >Logout</li> */}
         </ul>
       </div>
 

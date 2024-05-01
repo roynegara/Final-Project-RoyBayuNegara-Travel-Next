@@ -4,23 +4,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 
 const Upload = (props) => {
-  const [file, setFile] = useState('');
+  const [file, setFile] = useState("");
   const [imageUrl, setImageUrl] = useState("");
 
   const router = useRouter();
   const dispatch = useDispatch();
-  const notification = useSelector(state => state.notification);
+  const notification = useSelector((state) => state.notification);
 
   const handleClick = () => {
-    dispatch({ type: 'SET_NOTIFICATION', payload: 'Profile picture has been updated' });
+    dispatch({ type: "SET_NOTIFICATION", payload: "Profile picture has been updated" });
   };
 
   const handleError = () => {
-    dispatch({ type: 'SET_NOTIFICATION', payload: 'Failed to update profile picture' });
-  }
+    dispatch({ type: "SET_NOTIFICATION", payload: "Failed to update profile picture" });
+  };
 
   const handleClose = () => {
-    dispatch({ type: 'SET_NOTIFICATION', payload: '' }); // Menghapus notifikasi saat tombol close diklik
+    dispatch({ type: "SET_NOTIFICATION", payload: "" }); // Menghapus notifikasi saat tombol close diklik
     props.setTrigger(false); // Menutup popup
   };
 
@@ -29,16 +29,12 @@ const Upload = (props) => {
       const payload = { profilePictureUrl: imageUrl };
       const accessToken = localStorage.getItem("access_token");
       axios
-        .post(
-          "https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/update-profile",
-          payload,
-          {
-            headers: {
-              apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
-              Authorization: `Bearer ${accessToken}`,
-            },
-          }
-        )
+        .post("https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/update-profile", payload, {
+          headers: {
+            apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
+            Authorization: `Bearer ${accessToken}`,
+          },
+        })
         .then((res) => {
           console.log("res", res);
           setImageUrl(res?.data?.url);
@@ -46,9 +42,8 @@ const Upload = (props) => {
           router.push(`/dashboard`, undefined, { shallow: false }).then((success) => {
             if (success) {
               setTimeout(() => {
-                
-                window.location.reload(); 
-              },1000)
+                window.location.reload();
+              }, 1000);
             }
           });
         })
@@ -69,7 +64,7 @@ const Upload = (props) => {
 
   const handleUpload = () => {
     if (!file) {
-      dispatch({ type: 'SET_NOTIFICATION', payload: 'Please select an image' });
+      dispatch({ type: "SET_NOTIFICATION", payload: "Please select an image" });
       return;
     }
 
@@ -85,11 +80,7 @@ const Upload = (props) => {
     };
 
     axios
-      .post(
-        "https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/upload-image",
-        formData,
-        config
-      )
+      .post("https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/upload-image", formData, config)
       .then((res) => {
         console.log(res);
         setImageUrl(res.data.url);
@@ -103,19 +94,26 @@ const Upload = (props) => {
     <div className="popup-update-image-wrap">
       <div className="popup-update-image">
         <h1>Edit Avatar</h1>
-        
- {notification && 
-  <p style={{borderRadius: '10px', background: 'rgba(0, 0, 0, 0.3)', color: notification.includes('Failed') ? 'red' : notification.includes('Please select') ? 'yellow' : 'green' }}>
-    {notification}
- </p>
-}
+
+        {notification && (
+          <p
+            style={{
+              borderRadius: "10px",
+              background: "rgba(0, 0, 0, 0.3)",
+              color: notification.includes("Failed") ? "red" : notification.includes("Please select") ? "orange" : "green",
+            }}>
+            {notification}
+          </p>
+        )}
         <div className="input-box-update-image">
           <input onChange={handleFileChange} type="file" />
         </div>
         <div className="btn-update-image-popup">
           <button onClick={handleUpload}>Upload</button>
         </div>
-        <span className="btn-close-popup-update-image" onClick={handleClose}>&times;</span>
+        <span className="btn-close-popup-update-image" onClick={handleClose}>
+          &times;
+        </span>
         {props.children}
       </div>
     </div>
@@ -124,28 +122,23 @@ const Upload = (props) => {
 
 export default Upload;
 
-
-
-// {notification && 
+// {notification &&
 //   <p style={{borderRadius: '10px', background: 'rgba(0, 0, 0, 0.4)', color: notification.includes('Failed') ? 'red' : notification.includes('Please select') ? 'yellow' : 'green' }}>
 //     {notification}
 //   </p>
 // }
 
-// // sudah oke 
+// // sudah oke
 // import React, { useState, useEffect } from "react";
 // import axios from "axios";
 
 // import { useRouter } from "next/router";
-
 
 // const Upload = (props) => {
 //   const [file, setFile] = useState('');
 //   const [imageUrl, setImageUrl] = useState("");
 
 //   const router = useRouter();
-
- 
 
 //   // const handleImageUrlChange = (e) => {
 //   //   setImageUrl(e.target.value);
@@ -169,7 +162,7 @@ export default Upload;
 //         .then((res) => {
 
 //           // setTimeout (() => {
-            
+
 //             props.setTrigger(false);
 //           //   props.updateImageData();
 //           // },100)
@@ -180,13 +173,13 @@ export default Upload;
 //           router.push(`/dashboard`, undefined, { shallow: false }).then((success) => {
 //             if (success) {
 //               setTimeout(() => {
-                
-//                 window.location.reload(); 
+
+//                 window.location.reload();
 //               },1000)
 //             }
 //           });
-//           // 
-          
+//           //
+
 //         })
 //         .catch((err) => {
 //           console.log("err", err);
@@ -229,8 +222,7 @@ export default Upload;
 //         console.log(res);
 //         setImageUrl(res.data.url);
 //         // toast.success(res?.data?.message);
-       
-       
+
 // })
 //       .catch((err) => {
 //         console.log(err);
@@ -242,18 +234,17 @@ export default Upload;
 //     <div className="popup-update-image-wrap">
 
 //       <div className="popup-update-image">
-        
+
 //         <h1>Edit Avatar</h1>
-        
+
 //         <div className="input-box-update-image">
 //         <input onChange={handleFileChange} type="file" />
 //         </div>
-        
+
 //         <div className="btn-update-image-popup">
 //       <button onClick={handleUpload}>Upload</button>
 // </div>
 
-      
 //       <span className="btn-close-popup-update-image" onClick={() => props.setTrigger(false)}>&times;</span>
 //       {props.children}
 //       </div>
@@ -265,20 +256,17 @@ export default Upload;
 
 // export default Upload;
 
-
 // // batas
 // import React, { useState } from "react";
 // import axios from "axios";
 
-
 // const UploadImage = (props) => {
 //   const [notif, setNotif] = useState("");
-//   const [selectFile, setSelectFile] = useState(''); 
- 
+//   const [selectFile, setSelectFile] = useState('');
 
 //   const handleFileChange = (e) => {
 //     setSelectFile(e.target.files[0]);
-//   };  
+//   };
 
 //   return props.trigger ? (
 //     <div className="popupImg">
@@ -287,7 +275,7 @@ export default Upload;
 //       <input type="file" onChange={handleFileChange} />
 
 //       {notif && <p style={{ color: notif === "Upload image success" ? "green" : "red" }}>{notif}</p>}
-      
+
 //       <button onClick={()=>{props.handleUpload(selectFile)}}>Upload</button>
 //       <button className="btn-close-popupImg" onClick={() => props.setTrigger(false)}>
 //         {" "}
