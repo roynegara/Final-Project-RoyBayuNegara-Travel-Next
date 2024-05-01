@@ -193,13 +193,13 @@ const Activity = () => {
 
   return (
     <div>
+      <div className={`${buttonPopupCreateActivity || deletingActivity || editingActivity ? "blur" : ""}`}>
       <h1 className="activities-title">Destination Database</h1>
 
       <div className="activities-btn-popup-create">
         <button onClick={() => setButtonPopupCreateActivity(true)}>Add Destination</button>
       </div>
 
-      <div className={`${buttonPopupCreateActivity ? "blur" : ""}`}>
         <div className="activities">
           {activities.map((activity,index) => (
             <div key={index}>
@@ -235,6 +235,7 @@ const Activity = () => {
           <div className="popup-edit-activity">
             <h2>Edit Destination</h2>
 
+           
             <div className="input-box-edit-activity">
               <input type="text" value={editName} onChange={(e) => setEditName(e.target.value)} placeholder="Destination Name" />
             </div>
@@ -308,14 +309,15 @@ const Activity = () => {
 
             <span className="btn-close-popup-edit-activity" onClick={() => setEditingActivity(null)}>&times;</span>
 
+            </div>
           </div>          
-        </div>
+       
       )}
 
       {deletingActivity && (
         <div className="popup-delete-activity-wrap">
           <div className="popup-delete-activity">
-            <p>Are you sure you want to delete this destination?</p>
+            <p>Are you sure you want to delete {deletingActivity?.title}?</p>
             <div className="btn-delete-activity-popup">
               <button onClick={confirmDelete}>Yes</button>
               <button onClick={() => setDeletingActivity(null)}>No</button>
