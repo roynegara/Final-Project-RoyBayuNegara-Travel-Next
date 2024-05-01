@@ -107,13 +107,13 @@ const CreatePromo = (props) => {
           .then((res) => {
             console.log(res);
             setImageUrl(res.data.url);
-            // toast.success(res?.data?.message);
+            toast.success(res?.data?.message);
            
            
     })
           .catch((err) => {
             console.log(err);
-            // toast.error(err?.response?.data?.message)
+            toast.error(err?.response?.data?.message)
           });
       };
 
@@ -122,18 +122,15 @@ const CreatePromo = (props) => {
     <div className="popup-create-promo-wrap">
       <div className="popup-create-promos">
         <h1>Add Promo</h1>
+        
+        <div className="input-promos">
+        <div className="input-box-create-promos-input">        
         <div className="input-box-create-promos">
           <input type="text" name="title" value={title} onChange={handleTitleChange} placeholder="Title" />
-        </div>
-        <div className="input-box-create-promos">
-          <input type="text" name="description" value={description} onChange={handleDescriptionChange} placeholder="Description" />
-        </div>
+        </div>        
         <div className="input-box-create-promos">
           <input type="file" name="imageUrl"  onChange={handleImageUrlChange} placeholder="Image Url" />
-        </div>
-        <div className="input-box-create-promos">
-          <input type="text" name="terms_condition" value={terms_condition} onChange={handleTerms_conditionChange} placeholder="Terms Condition" />
-        </div>
+        </div>      
         <div className="input-box-create-promos">
           <input type="text" name="promo_code" value={promo_code} onChange={handlePromo_codeChange} placeholder="Promo Code" />
         </div>
@@ -143,6 +140,19 @@ const CreatePromo = (props) => {
         <div className="input-box-create-promos">
           <input type="text" name="minimum_claim_price" value={minimum_claim_price} onChange={handleMinimum_claim_priceChange} placeholder="Minimum Claim Price" />
         </div>
+        </div>
+        
+        <div className="input-box-create-promos-textarea">
+        <div className="input-box-create-promos">
+          <textarea type="text" name="terms_condition" value={terms_condition} onChange={handleTerms_conditionChange} placeholder="Terms Condition" />
+            </div>
+            
+        <div className="input-box-create-promos">
+          <textarea type="text" id="textarea-create-promos-description" name="description" value={description} onChange={handleDescriptionChange} placeholder="Description Promo" />
+        </div>
+          </div>
+          </div>
+        
         <div className="btn-create-promos-popup">
           <button onClick={handleUpload}>Add Promo</button>
         </div>

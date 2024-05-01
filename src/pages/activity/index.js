@@ -2,192 +2,533 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
 import PopupCreateActivity from "@/components/PopupCreateActivity";
-import FormEditActivity from "@/components/FormEditActivity";
-import FormDeleteActivity from "@/components/FormDeleteActivity";
 import { toast } from "sonner";
-import useDeleteActivity from "@/hooks/useDeleteActivity";
-import useEditActivity from "@/hooks/useEditActivity";
 
 const Activity = () => {
   const [activities, setActivities] = useState([]);
   const [buttonPopupCreateActivity, setButtonPopupCreateActivity] = useState(false);
-  const [editActivity, setEditActivity] = useState(null);
-  const [deleteActivity, setDeleteActivity] = useState(null);
-  const { del, loading: deleteLoading } = useDeleteActivity();
-  const { pos, loading: editLoading } = useEditActivity();
+  const [editingActivity, setEditingActivity] = useState(null);
+  const [deletingActivity, setDeletingActivity] = useState(null);
+  const [categoryId, setCategoryId] = useState("");
+  const [editName, setEditName] = useState("");
+  const [description, setDescription] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
+  const [price, setPrice] = useState('');
+  const [price_discount, setPrice_discount] = useState('');
+  const [rating, setRating] = useState('');
+  const [total_reviews, setTotal_reviews] = useState('');
+  const [facilities, setFacilities] = useState('');
+  const [address, setAddress] = useState('');
+  const [province, setProvince] = useState('');
+  const [city, setCity] = useState('');
+  const [location_maps, setLocation_maps] = useState('');
+
+  const [file, setFile] = useState('');
+
+  const handleUpload = () => {
+    if (!file) {
+      toast.warning("Please select an image");
+      return;
+    }
+    const formData = new FormData();
+    formData.append("image", file);
+    const config = {
+      headers: {
+        "content-type": "multipart/form-data",
+        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1pZnRhaGZhcmhhbkBnbWFpbC5jb20iLCJ1c2VySWQiOiI5NWE4MDNjMy1iNTFlLTQ3YTAtOTBkYi0yYzJmM2Y0ODE1YTkiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2Nzk4NDM0NDR9.ETsN6dCiC7isPReiQyHCQxya7wzj05wz5zruiFXLx0k`,
+        apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
+      },
+    };
+    axios
+      .post("https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/upload-image", formData, config)
+      .then((res) => {
+        console.log(res);
+        setImageUrl(res.data.url);
+        toast.success(res?.data?.message);
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error(err?.response?.data?.message);
+      });
+  };
 
   const getActivities = () => {
+    axios
+    .get("https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/activities", {
+      headers: {
+        apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
+      }
+    }).then((res) => {
+      console.log('res activities', res)
+      setActivities(res.data.data)
+    }).catch((err) => {
+      console.log('err activities', err)
+    })
+  }
+  useEffect(() => {
+    getActivities()
+  }, [])
+  
+  const updateActivityData = () => {
+    getActivities()
+  }
+
+  const handleEditActivity = (activity) => {
+    setEditingActivity(activity);
+    setCategoryId(activity.categoryId);
+    setEditName(activity.title);
+    setDescription(activity.description);
+    setPrice(activity.price);
+    setPrice_discount(activity.price_discount);
+    setRating(activity.rating);
+    setTotal_reviews(activity.total_reviews);
+    setFacilities(activity.facilities);
+    setAddress(activity.address);
+    setProvince(activity.province);
+    setCity(activity.city);
+    setLocation_maps(activity.location_maps);
+  }
+
+  const handleDeleteActivity = (activity) => {
+    setDeletingActivity(activity);
+  }
+
+  const confirmDelete = () => {
     const accessToken = localStorage.getItem("accessToken");
     axios
-      .get("https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/activities", {
+      .delete(`https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/delete-activity/${deletingActivity.id}`, {
         headers: {
           apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
           Authorization: `Bearer ${accessToken}`,
-        },
+        }
+      }).then((res) => {
+        console.log('res delete activity', res)
+        setDeletingActivity(null);
+        updateActivityData();
+        toast.success(res?.data?.message);
+      }).catch((err) => {
+        console.log('err delete activity', err)
+        toast.error(err?.response?.data?.message);
       })
-      .then((res) => {
-        console.log("res", res);
-        setActivities(res.data.data);
-      })
-      .catch((err) => {
-        console.log("err", err);
-      });
+  }
+
+  const handleSaveEdit = () => {
+    if (imageUrl) {
+      const accessToken = localStorage.getItem("access_token");
+      axios
+        .post(
+          `https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/update-activity/${editingActivity.id}`,
+          {
+            categoryId: categoryId,
+            title: editName,
+            description: description,
+            imageUrls: [imageUrl],
+            price: price,
+            price_discount: price_discount,
+            rating: rating,
+            total_reviews: total_reviews,
+            facilities: facilities,
+            address: address,
+            province: province,
+            city: city,
+            location_maps: location_maps
+          },
+          {
+            headers: {
+              apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
+        )
+
+ 
+        .then((res) => {
+          console.log('edit activity success', res);
+          setEditingActivity(null);
+          setCategoryId("");
+          setEditName("");
+          setDescription("");
+          setPrice("");
+          setPrice_discount("");
+          setRating("");
+          setTotal_reviews("");
+          setFacilities("");
+          setAddress("");
+          setProvince("");
+          setCity("");
+          setLocation_maps("");
+          toast.success(res?.data?.message);
+        })
+        .catch((err) => {
+          console.log('edit activity failed', err);
+          toast.error(err?.response?.data?.message);
+        });
+    }
   };
 
   useEffect(() => {
-    getActivities();
-  }, []);
-
-  const handleDeleteActivity = () => {
-    del(`/delete-activity/${deleteActivity?.id}`)
-      .then((res) => {
-        toast.success(`${deleteActivity?.title} has been deleted`);
-        setActivities(prevActivities => prevActivities.filter(activity => activity.id !== deleteActivity.id));
-        setDeleteActivity(null);
-      })
-      .catch((err) => {
-        console.log("resDeleteActivityErr", err);
-        toast.error(err?.response?.data?.message);
-      });
-  };
-
-  const handleEditActivity = ({
-    categoryId,
-    title,
-    description,
-    imageUrls,
-    price,
-    price_discount,
-    rating,
-    total_reviews,
-    facilities,
-    address,
-    province,
-    city,
-    location_maps,
-  }) => {
-    pos(`/update-activity/${editActivity?.id}`, {
-      categoryId,
-      title,
-      description,
-      imageUrls,
-      price,
-      price_discount,
-      rating,
-      total_reviews,
-      facilities,
-      address,
-      province,
-      city,
-      location_maps,
-    })
-    .then ((res) => {
-      toast.success(`${editActivity?.title} has been updated`);
-      setActivities(prevActivities => {
-        const updatedActivities = prevActivities.map(activity => {
-          if (activity.id === editActivity.id) {
-            return { ...activity, title, description, imageUrls, price, price_discount, rating, total_reviews, facilities, address, province, city, location_maps };
-          }
-          return activity;
-        });
-        return updatedActivities;
-      });
-      setEditActivity(null);
-    })
-    .catch ((err) => {
-      console.log("resEditActivityErr", err);
-      if (
-        err?.response?.data?.errors &&
-        err?.response?.data?.errors.length > 0 &&
-        err.response.data.errors[0].message
-      ) {
-        toast.error(err.response.data.errors[0].message);
-      } else {
-        toast.error(err?.response?.data?.message);
-      }
-    })
-  }
-
-  const togglePopupEdit = () => {
-    setEditActivity(null);
-  };
-
-  const togglePopupDelete = () => {
-    setDeleteActivity(null);
-  };
+    if (imageUrl && editingActivity) {
+      handleSaveEdit();
+      setFile('')
+    }
+  }, [imageUrl])
+  
+  useEffect(() => {
+    if (!editingActivity) { 
+      setCategoryId("");
+      setEditName("");
+      setDescription("");
+      setPrice("");
+      setPrice_discount("");
+      setRating("");
+      setTotal_reviews("");
+      setFacilities("");
+      setAddress("");
+      setProvince("");
+      setCity("");
+      setLocation_maps("");
+      setImageUrl("");
+    }
+  }, [editingActivity])
 
   return (
     <div>
       <h1 className="activities-title">Destination Database</h1>
-      
+
       <div className="activities-btn-popup-create">
         <button onClick={() => setButtonPopupCreateActivity(true)}>Add Destination</button>
       </div>
 
-      <div className={`${buttonPopupCreateActivity ? 'blur' : ''}`}>
+      <div className={`${buttonPopupCreateActivity ? "blur" : ""}`}>
         <div className="activities">
-          {activities.map((activity, index) => (
-            <div className="activities-card" key={index}>
-              <h3>{activity.title}</h3>
+          {activities.map((activity,index) => (
+            <div key={index}>
+              <div className="activities-card">                
+              <h2>{activity.title.toUpperCase()}</h2>
               <img
                 src={activity.imageUrls?.[0] && activity.imageUrls?.[1] ? activity.imageUrls?.[1] : activity.imageUrls?.[0]}
                 alt={activity.title}
-              />
-              <h3>Activity id : {activity.id}</h3>
-              <div>
-                <Link href={`/activity/${activity.id}`}>
-                  <button>Read More</button>
-                </Link>
-                <button onClick={() => setEditActivity(activity)}>Edit</button>
-                <button onClick={() => setDeleteActivity(activity)}>Delete</button>
+                />
+                <p>CategoryId : {activity.categoryId}</p>
+                <p>{activity.description}</p>
+                <p>Normal Price : <span style={{textDecoration: 'line-through'}}> Rp {activity.price}</span></p>
+                <p>Discount Price : Rp {activity.price_discount}</p>
+                {/* <p>Rating: {activity.rating <= 5 ? String.fromCharCode(9733).repeat(Math.round(activity.rating)) : '★★★★★'}</p> */}
+                <p>Rating : {(String.fromCharCode(9733).repeat(Math.min(5, Math.round(activity.rating)))).padEnd(5, '☆')}</p>
+                <p>Total Reviews : ({activity.total_reviews})</p>
+                <p>Facilities : {activity.facilities}</p>
+                <p>Address : {activity.address}</p>
+                <p>Province : {activity.province}</p>
+                <p>City : {activity.city}</p>            
+                <div>
+                  <button onClick={() => handleEditActivity(activity)}>Edit</button>
+                  <button onClick={() => handleDeleteActivity(activity)}>Delete</button>
+                </div>
               </div>
             </div>
           ))}
         </div>
       </div>
-      {buttonPopupCreateActivity && <PopupCreateActivity trigger={buttonPopupCreateActivity} setTrigger={setButtonPopupCreateActivity} />}
-      {editActivity && (
-        <div className="popup-edit-activity">
-          <button className="btn-close-popup-edit-activity" onClick={togglePopupEdit}>X</button>
-          <FormEditActivity
-            defaultCategoryId={editActivity?.categoryId}
-            title={` Edit ${editActivity?.title} Destination ?`}
-            defaultName={editActivity?.title}
-            defaultDescription={editActivity?.description}
-            defaultImageUrls={editActivity?.imageUrls}
-            defaultPrice={editActivity?.price}
-            defaultPrice_Discount={editActivity?.price_discount}
-            defaultRating={editActivity?.rating}
-            defaultTotal_Reviews={editActivity?.total_reviews}
-            defaultFacilities={editActivity?.facilities}
-            defaultAddress={editActivity?.address}
-            defaultProvince={editActivity?.province}
-            defaultCity={editActivity?.city}
-            defaultLocation_Maps={editActivity?.location_maps}
-            onEdit={handleEditActivity}
-            loading={editLoading}
-          />
-        </div>
-      )}
-      {deleteActivity && (
-        <div className="popup-delete-activity">
-          <div></div>
-          <div>
-            <p>Are you sure you want to delete {deleteActivity?.title} ?</p>
-          </div>
-          <div className="popup-delete-activity-btn-yes">
-            <FormDeleteActivity title={`Yes`} onDelete={handleDeleteActivity} loading={deleteLoading} />
-          </div>
-          <div className="popup-delete-activity-btn-no">
-            <button onClick={togglePopupDelete}>Tidak</button>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-};
 
-export default Activity;
+      {editingActivity && (
+        <div className="popup-edit-activity-wrap">
+          <div className="popup-edit-activity">
+            <h2>Edit Destination</h2>
+
+            <div className="input-box-edit-activity">
+              <input type="text" value={editName} onChange={(e) => setEditName(e.target.value)} placeholder="Destination Name" />
+            </div>
+            
+            <div className="input-box-edit-activity">
+              <input type="file" onChange={(e) => setFile(e.target.files[0])} />
+            </div>
+
+            <div className="input-box-edit-activity">
+              <textarea type="text" value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Description" />
+            </div>
+
+            <div className="input-box-edit-activity">
+              <input
+                type="number"
+                value={price}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  if (!isNaN(value)) {
+                    setPrice(parseFloat(value));
+                  }
+                }}
+                placeholder="Price"
+              />
+            </div>
+
+            <div className="input-box-edit-activity">
+              <input
+                type="number"
+                value={price_discount}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  if (!isNaN(value)) {
+                    setPrice_discount(parseFloat(value));
+                  }
+                }}
+                placeholder="Price Discount" />
+            </div>
+
+            <div className="input-box-edit-activity">
+              <input type="text" value={rating} onChange={(e) => setRating(e.target.value)} placeholder="Rating" />
+            </div>
+
+            <div className="input-box-edit-activity">
+              <input type="text" value={total_reviews} onChange={(e) => setTotal_reviews(e.target.value)} placeholder="Total Reviews" />
+            </div>
+
+            <div className="input-box-edit-activity">
+              <input type="text" value={facilities} onChange={(e) => setFacilities(e.target.value)} placeholder="Facilities" />
+            </div>
+
+            <div className="input-box-edit-activity">
+              <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} placeholder="Address" />
+            </div>
+
+            <div className="input-box-edit-activity">
+              <input type="text" value={province} onChange={(e) => setProvince(e.target.value)} placeholder="Province" />
+            </div>
+
+            <div className="input-box-edit-activity">
+              <input type="text" value={city} onChange={(e) => setCity(e.target.value)} placeholder="City" />
+            </div>
+
+            <div className="input-box-edit-activity">
+              <input type="text" value={location_maps} onChange={(e) => setLocation_maps(e.target.value)} placeholder="Location Maps" />
+            </div>
+
+            <div className="btn-create-activity-popup">
+              <button onClick={handleUpload}>Edit Destination</button>
+            </div>
+
+            <span className="btn-close-popup-edit-activity" onClick={() => setEditingActivity(null)}>&times;</span>
+
+          </div>          
+        </div>
+      )}
+
+      {deletingActivity && (
+        <div className="popup-delete-activity-wrap">
+          <div className="popup-delete-activity">
+            <p>Are you sure you want to delete this destination?</p>
+            <div className="btn-delete-activity-popup">
+              <button onClick={confirmDelete}>Yes</button>
+              <button onClick={() => setDeletingActivity(null)}>No</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {buttonPopupCreateActivity && (
+        <PopupCreateActivity
+          trigger={buttonPopupCreateActivity}
+          setTrigger={setButtonPopupCreateActivity}
+          updateActivityData={updateActivityData}
+        />
+      )}
+
+    </div>
+  )
+}
+export default Activity
+
+
+// // sdh benar dari mas adhito saya bingung nganu imgurlnya
+// import React, { useEffect, useState } from "react";
+// import axios from "axios";
+// import Link from "next/link";
+// import PopupCreateActivity from "@/components/PopupCreateActivity";
+// import FormEditActivity from "@/components/FormEditActivity";
+// import FormDeleteActivity from "@/components/FormDeleteActivity";
+// import { toast } from "sonner";
+// import useDeleteActivity from "@/hooks/useDeleteActivity";
+// import useEditActivity from "@/hooks/useEditActivity";
+
+// const Activity = () => {
+//   const [activities, setActivities] = useState([]);
+//   const [buttonPopupCreateActivity, setButtonPopupCreateActivity] = useState(false);
+//   const [editActivity, setEditActivity] = useState(null);
+//   const [deleteActivity, setDeleteActivity] = useState(null);
+//   const { del, loading: deleteLoading } = useDeleteActivity();
+//   const { pos, loading: editLoading } = useEditActivity();
+
+//   const getActivities = () => {
+//     const accessToken = localStorage.getItem("accessToken");
+//     axios
+//       .get("https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/activities", {
+//         headers: {
+//           apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
+//           Authorization: `Bearer ${accessToken}`,
+//         },
+//       })
+//       .then((res) => {
+//         console.log("res", res);
+//         setActivities(res.data.data);
+//       })
+//       .catch((err) => {
+//         console.log("err", err);
+//       });
+//   };
+
+//   useEffect(() => {
+//     getActivities();
+//   }, []);
+
+//   const handleDeleteActivity = () => {
+//     del(`/delete-activity/${deleteActivity?.id}`)
+//       .then((res) => {
+//         toast.success(`${deleteActivity?.title} has been deleted`);
+//         setActivities(prevActivities => prevActivities.filter(activity => activity.id !== deleteActivity.id));
+//         setDeleteActivity(null);
+//       })
+//       .catch((err) => {
+//         console.log("resDeleteActivityErr", err);
+//         toast.error(err?.response?.data?.message);
+//       });
+//   };
+
+//   const handleEditActivity = ({
+//     categoryId,
+//     title,
+//     description,
+//     imageUrls,
+//     price,
+//     price_discount,
+//     rating,
+//     total_reviews,
+//     facilities,
+//     address,
+//     province,
+//     city,
+//     location_maps,
+//   }) => {
+//     pos(`/update-activity/${editActivity?.id}`, {
+//       categoryId,
+//       title,
+//       description,
+//       imageUrls,
+//       price,
+//       price_discount,
+//       rating,
+//       total_reviews,
+//       facilities,
+//       address,
+//       province,
+//       city,
+//       location_maps,
+//     })
+//     .then ((res) => {
+//       toast.success(`${editActivity?.title} has been updated`);
+//       setActivities(prevActivities => {
+//         const updatedActivities = prevActivities.map(activity => {
+//           if (activity.id === editActivity.id) {
+//             return { ...activity, title, description, imageUrls, price, price_discount, rating, total_reviews, facilities, address, province, city, location_maps };
+//           }
+//           return activity;
+//         });
+//         return updatedActivities;
+//       });
+//       setEditActivity(null);
+//     })
+//     .catch ((err) => {
+//       console.log("resEditActivityErr", err);
+//       if (
+//         err?.response?.data?.errors &&
+//         err?.response?.data?.errors.length > 0 &&
+//         err.response.data.errors[0].message
+//       ) {
+//         toast.error(err.response.data.errors[0].message);
+//       } else {
+//         toast.error(err?.response?.data?.message);
+//       }
+//     })
+//   }
+
+//   const togglePopupEdit = () => {
+//     setEditActivity(null);
+//   };
+
+//   const togglePopupDelete = () => {
+//     setDeleteActivity(null);
+//   };
+
+//   return (
+//     <div>
+//       <h1 className="activities-title">Destination Database</h1>
+      
+//       <div className="activities-btn-popup-create">
+//         <button onClick={() => setButtonPopupCreateActivity(true)}>Add Destination</button>
+//       </div>
+
+//       <div className={`${buttonPopupCreateActivity ? 'blur' : ''}`}>
+//         <div className="activities">
+//           {activities.map((activity, index) => (
+//             <div className="activities-card" key={index}>
+//               <h3>{activity.title}</h3>
+//               <img
+//                 src={activity.imageUrls?.[0] && activity.imageUrls?.[1] ? activity.imageUrls?.[1] : activity.imageUrls?.[0]}
+//                 alt={activity.title}
+//               />
+//               <h3>Activity id : {activity.id}</h3>
+//               <div>
+//                 <Link href={`/activity/${activity.id}`}>
+//                   <button>Read More</button>
+//                 </Link>
+//                 <button onClick={() => setEditActivity(activity)}>Edit</button>
+//                 <button onClick={() => setDeleteActivity(activity)}>Delete</button>
+//               </div>
+//             </div>
+//           ))}
+//         </div>
+//       </div>
+//       {buttonPopupCreateActivity && <PopupCreateActivity trigger={buttonPopupCreateActivity} setTrigger={setButtonPopupCreateActivity} />}
+//       {editActivity && (
+//         <div className="popup-edit-activity">
+//           <button className="btn-close-popup-edit-activity" onClick={togglePopupEdit}>X</button>
+//           <FormEditActivity
+//             defaultCategoryId={editActivity?.categoryId}
+//             title={` Edit ${editActivity?.title} Destination ?`}
+//             defaultName={editActivity?.title}
+//             defaultDescription={editActivity?.description}
+//             defaultImageUrls={editActivity?.imageUrls}
+//             defaultPrice={editActivity?.price}
+//             defaultPrice_Discount={editActivity?.price_discount}
+//             defaultRating={editActivity?.rating}
+//             defaultTotal_Reviews={editActivity?.total_reviews}
+//             defaultFacilities={editActivity?.facilities}
+//             defaultAddress={editActivity?.address}
+//             defaultProvince={editActivity?.province}
+//             defaultCity={editActivity?.city}
+//             defaultLocation_Maps={editActivity?.location_maps}
+//             onEdit={handleEditActivity}
+//             loading={editLoading}
+//           />
+//         </div>
+//       )}
+//       {deleteActivity && (
+//         <div className="popup-delete-activity">
+//           <div></div>
+//           <div>
+//             <p>Are you sure you want to delete {deleteActivity?.title} ?</p>
+//           </div>
+//           <div className="popup-delete-activity-btn-yes">
+//             <FormDeleteActivity title={`Yes`} onDelete={handleDeleteActivity} loading={deleteLoading} />
+//           </div>
+//           <div className="popup-delete-activity-btn-no">
+//             <button onClick={togglePopupDelete}>Tidak</button>
+//           </div>
+//         </div>
+//       )}
+//     </div>
+//   );
+// };
+
+// export default Activity;
 
 
 // // sdh benar masih router.push

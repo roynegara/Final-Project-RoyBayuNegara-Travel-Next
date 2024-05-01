@@ -14,14 +14,14 @@ const Promo = () => {
   const [promo_code, setPromo_code] = useState("");
   const [promo_discount_price, setPromo_discount_price] = useState("");
   const [minimum_claim_price, setMinimum_claim_price] = useState("");
-  const [file, setFile] = useState('');
+  const [file, setFile] = useState("");
   const [imageUrl, setImageUrl] = useState("");
 
   const handleUpload = () => {
     if (!file) {
       toast.warning("Please select an image");
       return;
-    }    
+    }
     const formData = new FormData();
     formData.append("image", file);
     const config = {
@@ -32,15 +32,13 @@ const Promo = () => {
       },
     };
     axios
-      .post(
-        "https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/upload-image",
-        formData,
-        config
-      ).then((res) => {
+      .post("https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/upload-image", formData, config)
+      .then((res) => {
         console.log(res);
         setImageUrl(res.data.url);
         toast.success(res?.data?.message);
-      }).catch((err) => {
+      })
+      .catch((err) => {
         console.log(err);
         toast.error(err?.response?.data?.message);
       });
@@ -54,7 +52,7 @@ const Promo = () => {
         },
       })
       .then((res) => {
-        console.log('res', res);
+        console.log("res", res);
         setPromos(res.data.data);
       })
       .catch((err) => {
@@ -67,7 +65,7 @@ const Promo = () => {
 
   const updatePromoData = () => {
     getPromos();
-  }
+  };
 
   const handleEditPromo = (promo) => {
     setEditingPromo(promo);
@@ -76,12 +74,12 @@ const Promo = () => {
     setTerms_condition(promo.terms_condition);
     setPromo_code(promo.promo_code);
     setPromo_discount_price(promo.promo_discount_price);
-    setMinimum_claim_price(promo.minimum_claim_price);   
-  }
+    setMinimum_claim_price(promo.minimum_claim_price);
+  };
 
   const handleDeletePromo = (promo) => {
     setDeletingPromo(promo);
-  }
+  };
 
   const confirmDelete = () => {
     const accessToken = localStorage.getItem("access_token");
@@ -92,17 +90,17 @@ const Promo = () => {
           apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
         },
       })
- .then((res) => {
-      console.log('promo delete success', res);
-      setDeletingPromo(null);
-      updatePromoData();
-      toast.success(res?.data?.message);
-    }).catch((err) => {
-      console.log('promo delete error', err);
-      toast.error(err?.response?.data?.message);
-    })
-  }
-
+      .then((res) => {
+        console.log("promo delete success", res);
+        setDeletingPromo(null);
+        updatePromoData();
+        toast.success(res?.data?.message);
+      })
+      .catch((err) => {
+        console.log("promo delete error", err);
+        toast.error(err?.response?.data?.message);
+      });
+  };
 
   const handleSaveEdit = () => {
     if (imageUrl) {
@@ -112,12 +110,12 @@ const Promo = () => {
           `https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/update-promo/${editingPromo.id}`,
           {
             title: editName,
-        imageUrl: imageUrl,
-        description: description,
-        terms_condition: terms_condition,
-        promo_code: promo_code,
-        promo_discount_price: promo_discount_price,
-        minimum_claim_price: minimum_claim_price,
+            imageUrl: imageUrl,
+            description: description,
+            terms_condition: terms_condition,
+            promo_code: promo_code,
+            promo_discount_price: promo_discount_price,
+            minimum_claim_price: minimum_claim_price,
           },
           {
             headers: {
@@ -127,30 +125,30 @@ const Promo = () => {
           }
         )
 
-
-.then((res) => {
-        console.log('promo edit success', res);
-        setEditingPromo(null);
-        setEditName("");
-        setDescription("");
-        setTerms_condition("");
-        setPromo_code("");
-        setPromo_discount_price("");
-        setMinimum_claim_price("");
-        setImageUrl("");
-        updatePromoData();
-        toast.success(res?.data?.message);
-      }).catch((err) => {
-        console.log('promo Edit error', err);
-        toast.error(err?.response?.data?.message);
-      })
+        .then((res) => {
+          console.log("promo edit success", res);
+          setEditingPromo(null);
+          setEditName("");
+          setDescription("");
+          setTerms_condition("");
+          setPromo_code("");
+          setPromo_discount_price("");
+          setMinimum_claim_price("");
+          setImageUrl("");
+          updatePromoData();
+          toast.success(res?.data?.message);
+        })
+        .catch((err) => {
+          console.log("promo Edit error", err);
+          toast.error(err?.response?.data?.message);
+        });
     }
-  }
+  };
 
   useEffect(() => {
-    if (imageUrl && editingPromo) { 
+    if (imageUrl && editingPromo) {
       handleSaveEdit();
-      setFile(''); // Reset file state after upload
+      setFile(""); // Reset file state after upload
     }
   }, [imageUrl]);
 
@@ -164,7 +162,7 @@ const Promo = () => {
       setPromo_discount_price("");
       setMinimum_claim_price("");
       setImageUrl("");
-      setFile('');
+      setFile("");
     }
   }, [editingPromo]);
 
@@ -176,7 +174,7 @@ const Promo = () => {
         <button onClick={() => setButtonPopupCreatePromo(true)}>Add Promo</button>
       </div>
 
-      <div className={`${buttonPopupCreatePromo ? 'blur' : ''}`}>
+      <div className={`${buttonPopupCreatePromo ? "blur" : ""}`}>
         <div className="promos">
           {promos.map((promo, index) => (
             <div key={index}>
@@ -197,28 +195,18 @@ const Promo = () => {
       {editingPromo && (
         <div className="popup-edit-promo-wrap">
           <div className="popup-edit-promo">
-            
             <h2>Edit Promo</h2>
 
             <div className="input-box-edit-promo">
-              <input
-                type="text"
-                value={editName}
-                onChange={(e) => setEditName(e.target.value)}
-                placeholder="Name"
-              />
+              <input type="text" value={editName} onChange={(e) => setEditName(e.target.value)} placeholder="Name" />
             </div>
 
             <div className="input-box-edit-promo">
-              <input
-                type="file"
-                onChange={(e) => setFile(e.target.files[0])}
-                placeholder="Image URL"
-              />
-            </div>  
+              <input type="file" onChange={(e) => setFile(e.target.files[0])} placeholder="Image URL" />
+            </div>
 
             <div>
-              <input
+              <textarea
                 type="text"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
@@ -245,20 +233,19 @@ const Promo = () => {
             </div>
 
             <div>
-            <input
-              type="number"
-              value={promo_discount_price}
-              onChange={(e) => {
-                const value = e.target.value;
-                // Validasi apakah nilai yang dimasukkan adalah nomor
-                if (!isNaN(value)) {
-                  setPromo_discount_price(parseFloat(value));
-                }
-              }}
-              placeholder="Promo Discount Price"
-            />
-          </div>
-
+              <input
+                type="number"
+                value={promo_discount_price}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  // Validasi apakah nilai yang dimasukkan adalah nomor
+                  if (!isNaN(value)) {
+                    setPromo_discount_price(parseFloat(value));
+                  }
+                }}
+                placeholder="Promo Discount Price"
+              />
+            </div>
 
             <div>
               <input
@@ -274,13 +261,14 @@ const Promo = () => {
                 placeholder="Minimum Claim Price"
               />
             </div>
-            
+
             <div className="btn-create-promo-popup">
               <button onClick={handleUpload}>Edit Promo</button>
             </div>
 
-            <span className="btn-close-popup-edit-promo-" onClick={() => setEditingPromo(null)}>&times;</span>
-
+            <span className="btn-close-popup-edit-promo-" onClick={() => setEditingPromo(null)}>
+              &times;
+            </span>
           </div>
         </div>
       )}
@@ -298,14 +286,16 @@ const Promo = () => {
       )}
 
       {buttonPopupCreatePromo && (
-        <PopupCreatePromo trigger={buttonPopupCreatePromo} setTrigger={setButtonPopupCreatePromo} updatePromosData={updatePromoData} />
+        <PopupCreatePromo
+          trigger={buttonPopupCreatePromo}
+          setTrigger={setButtonPopupCreatePromo}
+          updatePromosData={updatePromoData}
+        />
       )}
     </div>
-  )
-}
+  );
+};
 export default Promo;
-
-
 
 // // kode menyamkan dengan banner
 // import React, { useState, useEffect } from "react";
@@ -331,7 +321,7 @@ export default Promo;
 //     if (!file) {
 //       toast.warning("Please select an image");
 //       return;
-//     }    
+//     }
 //     const formData = new FormData();
 //     formData.append("image", file);
 //     const config = {
@@ -386,7 +376,7 @@ export default Promo;
 //     setTerms_condition(promo.terms_condition);
 //     setPromo_code(promo.promo_code);
 //     setPromo_discount_price(promo.promo_discount_price);
-//     setMinimum_claim_price(promo.minimum_claim_price);   
+//     setMinimum_claim_price(promo.minimum_claim_price);
 //   }
 
 //   const handleDeletePromo = (promo) => {
@@ -437,7 +427,7 @@ export default Promo;
 //         setPromo_code("");
 //         setPromo_discount_price("");
 //         setMinimum_claim_price("");
-//         setImageUrl("");        
+//         setImageUrl("");
 //         updatePromoData();
 //         setImageUrl(res?.data?.url);
 //         toast.success(res?.data?.message);
@@ -448,12 +438,11 @@ export default Promo;
 //     }
 //   }
 // useEffect(() => {
-//   if (imageUrl) { 
+//   if (imageUrl) {
 //     handleSaveEdit();
 //   }
 // },[imageUrl])
 
-  
 //   return (
 //     <div>
 //       <h1 className="promos-title">Promo Database</h1>
@@ -483,7 +472,7 @@ export default Promo;
 //       {editingPromo && (
 //         <div className="popup-create-promo-wrap">
 //           <div className="popup-create-promo">
-            
+
 //             <h2>Edit Promo</h2>
 
 //             <div className="input-box-create-promo">
@@ -501,7 +490,7 @@ export default Promo;
 //                 onChange={(e) => setFile(e.target.files[0])}
 //                 placeholder="Image URL"
 //               />
-//             </div>  
+//             </div>
 
 //             <div>
 //               <input
@@ -547,7 +536,7 @@ export default Promo;
 //                 placeholder="Minimum Claim Price"
 //               />
 //             </div>
-            
+
 //             <div className="btn-create-promo-popup">
 //               <button onClick={handleUpload}>Edit Promo</button>
 //             </div>
@@ -576,9 +565,7 @@ export default Promo;
 // }
 // export default Promo
 
-
-
-// // default 
+// // default
 // import React, { useState, useEffect } from "react";
 // import axios from "axios";
 // import Link from "next/link";
