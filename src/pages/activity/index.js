@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Link from "next/link";
 import PopupCreateActivity from "@/components/PopupCreateActivity";
 import { toast } from "sonner";
 
@@ -13,17 +12,17 @@ const Activity = () => {
   const [editName, setEditName] = useState("");
   const [description, setDescription] = useState("");
   const [imageUrl, setImageUrl] = useState("");
-  const [price, setPrice] = useState('');
-  const [price_discount, setPrice_discount] = useState('');
-  const [rating, setRating] = useState('');
-  const [total_reviews, setTotal_reviews] = useState('');
-  const [facilities, setFacilities] = useState('');
-  const [address, setAddress] = useState('');
-  const [province, setProvince] = useState('');
-  const [city, setCity] = useState('');
-  const [location_maps, setLocation_maps] = useState('');
+  const [price, setPrice] = useState("");
+  const [price_discount, setPrice_discount] = useState("");
+  const [rating, setRating] = useState("");
+  const [total_reviews, setTotal_reviews] = useState("");
+  const [facilities, setFacilities] = useState("");
+  const [address, setAddress] = useState("");
+  const [province, setProvince] = useState("");
+  const [city, setCity] = useState("");
+  const [location_maps, setLocation_maps] = useState("");
 
-  const [file, setFile] = useState('');
+  const [file, setFile] = useState("");
 
   const handleUpload = () => {
     if (!file) {
@@ -54,24 +53,26 @@ const Activity = () => {
 
   const getActivities = () => {
     axios
-    .get("https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/activities", {
-      headers: {
-        apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
-      }
-    }).then((res) => {
-      console.log('res activities', res)
-      setActivities(res.data.data)
-    }).catch((err) => {
-      console.log('err activities', err)
-    })
-  }
+      .get("https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/activities", {
+        headers: {
+          apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
+        },
+      })
+      .then((res) => {
+        console.log("res activities", res);
+        setActivities(res.data.data);
+      })
+      .catch((err) => {
+        console.log("err activities", err);
+      });
+  };
   useEffect(() => {
-    getActivities()
-  }, [])
-  
+    getActivities();
+  }, []);
+
   const updateActivityData = () => {
-    getActivities()
-  }
+    getActivities();
+  };
 
   const handleEditActivity = (activity) => {
     setEditingActivity(activity);
@@ -87,11 +88,11 @@ const Activity = () => {
     setProvince(activity.province);
     setCity(activity.city);
     setLocation_maps(activity.location_maps);
-  }
+  };
 
   const handleDeleteActivity = (activity) => {
     setDeletingActivity(activity);
-  }
+  };
 
   const confirmDelete = () => {
     const accessToken = localStorage.getItem("accessToken");
@@ -100,17 +101,19 @@ const Activity = () => {
         headers: {
           apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
           Authorization: `Bearer ${accessToken}`,
-        }
-      }).then((res) => {
-        console.log('res delete activity', res)
+        },
+      })
+      .then((res) => {
+        console.log("res delete activity", res);
         setDeletingActivity(null);
         updateActivityData();
         toast.success(res?.data?.message);
-      }).catch((err) => {
-        console.log('err delete activity', err)
-        toast.error(err?.response?.data?.message);
       })
-  }
+      .catch((err) => {
+        console.log("err delete activity", err);
+        toast.error(err?.response?.data?.message);
+      });
+  };
 
   const handleSaveEdit = () => {
     if (imageUrl) {
@@ -131,7 +134,7 @@ const Activity = () => {
             address: address,
             province: province,
             city: city,
-            location_maps: location_maps
+            location_maps: location_maps,
           },
           {
             headers: {
@@ -141,11 +144,10 @@ const Activity = () => {
           }
         )
 
- 
         .then((res) => {
-          console.log('edit activity success', res);
+          console.log("edit activity success", res);
           setEditingActivity(null);
-          setCategoryId("");
+          // setCategoryId("");
           setEditName("");
           setDescription("");
           setPrice("");
@@ -157,10 +159,11 @@ const Activity = () => {
           setProvince("");
           setCity("");
           setLocation_maps("");
+          updateActivityData();
           toast.success(res?.data?.message);
         })
         .catch((err) => {
-          console.log('edit activity failed', err);
+          console.log("edit activity failed", err);
           toast.error(err?.response?.data?.message);
         });
     }
@@ -169,13 +172,13 @@ const Activity = () => {
   useEffect(() => {
     if (imageUrl && editingActivity) {
       handleSaveEdit();
-      setFile('')
+      setFile("");
     }
-  }, [imageUrl])
-  
+  }, [imageUrl]);
+
   useEffect(() => {
-    if (!editingActivity) { 
-      setCategoryId("");
+    if (!editingActivity) {
+      // setCategoryId("");
       setEditName("");
       setDescription("");
       setPrice("");
@@ -189,37 +192,48 @@ const Activity = () => {
       setLocation_maps("");
       setImageUrl("");
     }
-  }, [editingActivity])
+  }, [editingActivity]);
 
   return (
     <div>
       <div className={`${buttonPopupCreateActivity || deletingActivity || editingActivity ? "blur" : ""}`}>
-      <h1 className="activities-title">Destination Database</h1>
+        <h1 className="activities-title">Destination Database</h1>
 
-      <div className="activities-btn-popup-create">
-        <button onClick={() => setButtonPopupCreateActivity(true)}>Add Destination</button>
-      </div>
+        <div className="activities-btn-popup-create">
+          <button onClick={() => setButtonPopupCreateActivity(true)}>Add Destination</button>
+        </div>
 
         <div className="activities">
-          {activities.map((activity,index) => (
+          {activities.map((activity, index) => (
             <div key={index}>
-              <div className="activities-card">                
-              <h2>{activity.title.toUpperCase()}</h2>
-              <img
-                src={activity.imageUrls?.[0] && activity.imageUrls?.[1] ? activity.imageUrls?.[1] : activity.imageUrls?.[0]}
-                alt={activity.title}
+              <div className="activities-card">
+                <h2>{activity.title.toUpperCase()}</h2>
+                <img
+                  src={
+                    activity.imageUrls?.[0] && activity.imageUrls?.[1]
+                      ? activity.imageUrls?.[1]
+                      : activity.imageUrls?.[0]
+                  }
+                  alt={activity.title}
                 />
                 <p>CategoryId : {activity.categoryId}</p>
                 <p>{activity.description}</p>
-                <p>Normal Price : <span style={{textDecoration: 'line-through'}}> Rp {activity.price}</span></p>
+                <p>
+                  Normal Price : <span style={{ textDecoration: "line-through" }}> Rp {activity.price}</span>
+                </p>
                 <p>Discount Price : Rp {activity.price_discount}</p>
                 {/* <p>Rating: {activity.rating <= 5 ? String.fromCharCode(9733).repeat(Math.round(activity.rating)) : '★★★★★'}</p> */}
-                <p>Rating : {(String.fromCharCode(9733).repeat(Math.min(5, Math.round(activity.rating)))).padEnd(5, '☆')}</p>
+                <p>
+                  Rating :{" "}
+                  {String.fromCharCode(9733)
+                    .repeat(Math.min(5, Math.round(activity.rating)))
+                    .padEnd(5, "☆")}
+                </p>
                 <p>Total Reviews : ({activity.total_reviews})</p>
                 <p>Facilities : {activity.facilities}</p>
                 <p>Address : {activity.address}</p>
                 <p>Province : {activity.province}</p>
-                <p>City : {activity.city}</p>            
+                <p>City : {activity.city}</p>
                 <div>
                   <button onClick={() => handleEditActivity(activity)}>Edit</button>
                   <button onClick={() => handleDeleteActivity(activity)}>Delete</button>
@@ -235,17 +249,26 @@ const Activity = () => {
           <div className="popup-edit-activity">
             <h2>Edit Destination</h2>
 
-           
             <div className="input-box-edit-activity">
-              <input type="text" value={editName} onChange={(e) => setEditName(e.target.value)} placeholder="Destination Name" />
+              <input
+                type="text"
+                value={editName}
+                onChange={(e) => setEditName(e.target.value)}
+                placeholder="Destination Name"
+              />
             </div>
-            
+
             <div className="input-box-edit-activity">
               <input type="file" onChange={(e) => setFile(e.target.files[0])} />
             </div>
 
             <div className="input-box-edit-activity">
-              <textarea type="text" value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Description" />
+              <textarea
+                type="text"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                placeholder="Description"
+              />
             </div>
 
             <div className="input-box-edit-activity">
@@ -272,7 +295,8 @@ const Activity = () => {
                     setPrice_discount(parseFloat(value));
                   }
                 }}
-                placeholder="Price Discount" />
+                placeholder="Price Discount"
+              />
             </div>
 
             <div className="input-box-edit-activity">
@@ -280,11 +304,21 @@ const Activity = () => {
             </div>
 
             <div className="input-box-edit-activity">
-              <input type="text" value={total_reviews} onChange={(e) => setTotal_reviews(e.target.value)} placeholder="Total Reviews" />
+              <input
+                type="text"
+                value={total_reviews}
+                onChange={(e) => setTotal_reviews(e.target.value)}
+                placeholder="Total Reviews"
+              />
             </div>
 
             <div className="input-box-edit-activity">
-              <input type="text" value={facilities} onChange={(e) => setFacilities(e.target.value)} placeholder="Facilities" />
+              <input
+                type="text"
+                value={facilities}
+                onChange={(e) => setFacilities(e.target.value)}
+                placeholder="Facilities"
+              />
             </div>
 
             <div className="input-box-edit-activity">
@@ -292,7 +326,12 @@ const Activity = () => {
             </div>
 
             <div className="input-box-edit-activity">
-              <input type="text" value={province} onChange={(e) => setProvince(e.target.value)} placeholder="Province" />
+              <input
+                type="text"
+                value={province}
+                onChange={(e) => setProvince(e.target.value)}
+                placeholder="Province"
+              />
             </div>
 
             <div className="input-box-edit-activity">
@@ -300,18 +339,23 @@ const Activity = () => {
             </div>
 
             <div className="input-box-edit-activity">
-              <input type="text" value={location_maps} onChange={(e) => setLocation_maps(e.target.value)} placeholder="Location Maps" />
+              <input
+                type="text"
+                value={location_maps}
+                onChange={(e) => setLocation_maps(e.target.value)}
+                placeholder="Location Maps"
+              />
             </div>
 
             <div className="btn-create-activity-popup">
               <button onClick={handleUpload}>Edit Destination</button>
             </div>
 
-            <span className="btn-close-popup-edit-activity" onClick={() => setEditingActivity(null)}>&times;</span>
-
-            </div>
-          </div>          
-       
+            <span className="btn-close-popup-edit-activity" onClick={() => setEditingActivity(null)}>
+              &times;
+            </span>
+          </div>
+        </div>
       )}
 
       {deletingActivity && (
@@ -333,12 +377,10 @@ const Activity = () => {
           updateActivityData={updateActivityData}
         />
       )}
-
     </div>
-  )
-}
-export default Activity
-
+  );
+};
+export default Activity;
 
 // // sdh benar dari mas adhito saya bingung nganu imgurlnya
 // import React, { useEffect, useState } from "react";
@@ -462,7 +504,7 @@ export default Activity
 //   return (
 //     <div>
 //       <h1 className="activities-title">Destination Database</h1>
-      
+
 //       <div className="activities-btn-popup-create">
 //         <button onClick={() => setButtonPopupCreateActivity(true)}>Add Destination</button>
 //       </div>
@@ -531,7 +573,6 @@ export default Activity
 // };
 
 // export default Activity;
-
 
 // // sdh benar masih router.push
 // import React, { useEffect, useState } from "react";
@@ -652,7 +693,7 @@ export default Activity
 //   return (
 //     <div>
 //       <h1 className="activities-title">Destination Database</h1>
-      
+
 //       <div className="activities-btn-popup-create">
 //         <button onClick={() => setButtonPopupCreateActivity(true)}>Add Destination</button>
 //       </div>
@@ -721,8 +762,6 @@ export default Activity
 // };
 
 // export default Activity;
-
-
 
 // // sdh jalan tp tidak eror 505
 // import React, { useEffect, useState } from "react";
@@ -835,7 +874,7 @@ export default Activity
 //   return (
 //     <div>
 //       <h1 className="activities-title">Destination Database</h1>
-      
+
 //       <div className="activities-btn-popup-create">
 //         <button onClick={() => setButtonPopupCreateActivity(true)}>Add Destination</button>
 //       </div>
@@ -865,7 +904,7 @@ export default Activity
 //           ))}
 //         </div>
 //       </div>
-      
+
 //       {buttonPopupCreateActivity && (
 //         <PopupCreateActivity
 //           trigger={buttonPopupCreateActivity}
@@ -878,79 +917,78 @@ export default Activity
 //       {editingActivity && (
 
 //         <div className="popup-create-activity-wrap">
-    
+
 //           <div className="popup-create-activity">
-            
+
 //             <h1>Edit Activity</h1>
 
-//             <div className="input-box-create-activity-separate"> 
+//             <div className="input-box-create-activity-separate">
 //               <div className="input-box-create-activity-7kiri">
 
 //               <div className="input-box-create-activity">
 //               <input type="text" name="categoryId" value={formData.categoryId} onChange={handleInputChange}  />
 //                 </div>
-                
-                  
+
 //               <div className="input-box-create-activity">
 //               <input type="text" name="title" value={formData.title} onChange={handleInputChange} />
 //                   </div>
-                  
+
 //               <div className="input-box-create-activity">
 //               {/* <textarea name="description" value={formData.description} onChange={handleInputChange}></textarea> */}
 //               <input name="description" value={formData.description} onChange={handleInputChange}></input>
 //                     </div>
-                    
+
 //               <div className="input-box-create-activity">
 //               <input type="text" name="imageUrls" value={formData.imageUrls} onChange={handleInputChange} />
 //                       </div>
-                      
+
 //               <div className="input-box-create-activity">
 //               <input type="number" name="price" value={formData.price} onChange={handleInputChange} />
 //                         </div>
-                        
+
 //               <div className="input-box-create-activity">
 //               <input type="number" name="price_discount" value={formData.price_discount} onChange={handleInputChange} />
 //                           </div>
-                          
+
 //               </div>
 
 //               <div className="input-box-create-activity-7kanan">
-                
+
 //               <div className="input-box-create-activity">
 //               <input type="number" name="rating" value={formData.rating} onChange={handleInputChange} />
 //                             </div>
-                            
+
 //               <div className="input-box-create-activity">
 //               <input type="number" name="total_reviews" value={formData.total_reviews} onChange={handleInputChange} />
 //                               </div>
-                              
+
 //               <div className="input-box-create-activity">
 //               <input name="facilities" value={formData.facilities} onChange={handleInputChange}></input>
 //                                 </div>
-                                
+
 //               <div className="input-box-create-activity">
 //               <input name="address" value={formData.address} onChange={handleInputChange}></input>
 //                                   </div>
-                                  
+
 //               <div className="input-box-create-activity">
 //               <input type="text" name="province" value={formData.province} onChange={handleInputChange} />
 //                                     </div>
-                                    
+
 //               <div className="input-box-create-activity">
 //               <input type="text" name="city" value={formData.city} onChange={handleInputChange} />
 //               </div>
-                                        
+
 //               <div className="input-box-create-activity">
 //               <input name="location_maps" value={formData.location_maps} onChange={handleInputChange}></input>
 //                                         </div>
-                                        
+
 //               </div>
 //             </div>
-                
+
 //               <div className="btn-create-activity-popup">
 //                 <button  onClick={handleSubmit}>Update</button>
 //               </div>
-              
+
 //               <span className="btn-close-popup-create-activity" onClick={() => setEditingActivity(null)}>&times;</span>
 //               {/* <button type="button" onClick={() => setEditingActivity(null)}>Cancel</button> */}
 //           </div>
@@ -959,7 +997,7 @@ export default Activity
 
 //       {/* Modal for confirming delete */}
 //       {deletingActivity && (
-//         <div className="input-box-create-banner"> 
+//         <div className="input-box-create-banner">
 //         <div className="popup-delete-banner">
 //             {/* <h2>Delete Activity</h2> */}
 //             <p>Are you sure you want to delete this activity?</p>
@@ -975,8 +1013,6 @@ export default Activity
 // };
 
 // export default Activity;
-
-
 
 // // benar manual
 // import React, { useEffect, useState } from "react";
@@ -1014,11 +1050,11 @@ export default Activity
 //   const PopupUpdateActivityData = () => {
 //     getActivities();
 //   }
-  
+
 //   return (
 //     <div>
 //       <h1 className="activities-title">Destination Database</h1>
-      
+
 //       <div className="activities-btn-popup-create" >
 //         <button onClick={() => setButtonPopupCreateActivity(true)}>Add Destination</button>
 //       </div>
@@ -1036,19 +1072,17 @@ export default Activity
 //               }
 //               alt={activity.title}
 //             />
-          
 
 //             <h3>Activity id : {activity.id}</h3>
-            
+
 //             <div>
 //               <Link href={`/activity/${activity.id}`}>
 //                 <button>Read More</button>
-//               </Link>              
+//               </Link>
 //             </div>
-           
+
 //           </div>
 
-          
 //         ))}
 //         </div>
 //         </div>
@@ -1059,13 +1093,6 @@ export default Activity
 // };
 
 // export default Activity;
-
-
-
-
-
-
-
 
 //kurang form field update
 // import React, { useEffect, useState } from "react";
@@ -1161,7 +1188,7 @@ export default Activity
 //   return (
 //     <div>
 //       <h1 className="activities-title">Destination Database</h1>
-      
+
 //       <div className="activities-btn-popup-create">
 //         <button onClick={() => setButtonPopupCreateActivity(true)}>Add Destination</button>
 //       </div>
@@ -1180,7 +1207,7 @@ export default Activity
 //               />
 
 //               <h3>Activity id : {activity.id}</h3>
-              
+
 //               <div>
 //                 <Link href={`/activity/${activity.id}`}>
 //                   <button>Read More</button>
@@ -1220,10 +1247,6 @@ export default Activity
 
 // export default Activity;
 
-
-
-
-
 // // bagus tanpa edit dan delete
 // import React, { useEffect, useState } from "react";
 // import axios from "axios";
@@ -1260,11 +1283,11 @@ export default Activity
 //   const PopupUpdateActivityData = () => {
 //     getActivities();
 //   }
-  
+
 //   return (
 //     <div>
 //       <h1 className="activities-title">Destination Database</h1>
-      
+
 //       <div className="activities-btn-popup-create" >
 //         <button onClick={() => setButtonPopupCreateActivity(true)}>Add Destination</button>
 //       </div>
@@ -1282,19 +1305,17 @@ export default Activity
 //               }
 //               alt={activity.title}
 //             />
-          
 
 //             <h3>Activity id : {activity.id}</h3>
-            
+
 //             <div>
 //               <Link href={`/activity/${activity.id}`}>
 //                 <button>Read More</button>
-//               </Link>              
+//               </Link>
 //             </div>
-           
+
 //           </div>
 
-          
 //         ))}
 //         </div>
 //         </div>
@@ -1305,10 +1326,6 @@ export default Activity
 // };
 
 // export default Activity;
-
-
-
-
 
 // ////berhasil hide belakang jika popup dilakukan
 // import React, { useEffect, useState } from "react";
@@ -1397,10 +1414,6 @@ export default Activity
 
 // export default Activity;
 
-
-
-
-
 //sudah distyling tapi masih menutupi popup
 // import React, { useEffect, useState } from "react";
 // import axios from "axios";
@@ -1434,7 +1447,6 @@ export default Activity
 //     getActivities();
 //   }, []);
 
-  
 //   return (
 //     <div>
 //       <div >
@@ -1454,14 +1466,13 @@ export default Activity
 //               }
 //               alt={activity.title}
 //             />
-          
 
 //             <h3>Activity id : {activity.id}</h3>
-            
+
 //             <div>
 //               <Link href={`/activity/${activity.id}`}>
 //                 <button>Detail Activity By Id</button>
-//               </Link>              
+//               </Link>
 //             </div>
 //             <div>
 //               <Link href={`/activities-by-category/${activity.categoryId}`}><button>Detail Activities By Category Id</button></Link>
@@ -1508,7 +1519,6 @@ export default Activity
 //     getActivities();
 //   }, []);
 
-  
 //   return (
 //     <div>
 //       <div>
@@ -1537,7 +1547,7 @@ export default Activity
 //             <div>
 //               <Link href={`/activity/${activity.id}`}>
 //                 <button>Detail Activity By Id</button>
-//               </Link>              
+//               </Link>
 //             </div>
 //             <div>
 //               <Link href={`/activities-by-category/${activity.categoryId}`}><button>Detail Activities By Category Id</button></Link>
@@ -1550,7 +1560,6 @@ export default Activity
 // };
 
 // export default Activity;
-
 
 // // benar ori tanpa category id tp menggunakannya diluar
 // import React, { useEffect, useState } from "react";
@@ -1613,7 +1622,7 @@ export default Activity
 //             <div>
 //               <Link href={`/activity/${activity.id}`}>
 //                 <button>Detail Activity By Id</button>
-//               </Link>              
+//               </Link>
 //             </div>
 //             <div>
 //               <Link href={`/activities-by-category/${activity.categoryId}`}><button>Detail Activities By Category Id</button></Link>

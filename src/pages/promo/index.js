@@ -168,13 +168,13 @@ const Promo = () => {
 
   return (
     <div>
+      <div className={`${buttonPopupCreatePromo || editingPromo || deletingPromo ? "blur" : ""}`}>
       <h1 className="promos-title">Promo Database</h1>
 
       <div className="promos-btn-popup-create">
         <button onClick={() => setButtonPopupCreatePromo(true)}>Add Promo</button>
       </div>
 
-      <div className={`${buttonPopupCreatePromo ? "blur" : ""}`}>
         <div className="promos">
           {promos.map((promo, index) => (
             <div key={index}>
@@ -276,7 +276,7 @@ const Promo = () => {
       {deletingPromo && (
         <div className="popup-delete-promo-wrap">
           <div className="popup-delete-promo">
-            <p>Are you sure you want to delete this promo?</p>
+            <p>Are you sure you want to delete {deletingPromo.title}?</p>
             <div className="btn-delete-promo-popup">
               <button onClick={confirmDelete}>Yes</button>
               <button onClick={() => setDeletingPromo(null)}>No</button>
