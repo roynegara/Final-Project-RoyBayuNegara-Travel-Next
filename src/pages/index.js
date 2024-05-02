@@ -103,8 +103,8 @@ export default function Home() {
         <h1>Discover amazing places with promo prices and luxury experience</h1>
         
         <div className="home-title-btn" >
-        <Link className="home-title-btn-inner" href="/login">Login</Link>
-        <Link className="home-title-btn-inner" href="/register">Register</Link>
+        <a className="home-title-btn-inner" href="/login">Login</a>
+        <a className="home-title-btn-inner" href="/register">Register</a>
         </div>
 </div>
     <div className="home">

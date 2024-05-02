@@ -39,13 +39,18 @@ export default function Navbar() {
   const handleLogout = () => {
     localStorage.removeItem("access_token");
     toast.success("Logout Successfully");
-    router.push("/", undefined, { shallow: true }).then((success) => {
-      if (success) {
-        setTimeout(() => {
-          window.location.reload();
-        },1500);
-      }
-    });
+    // router.push("/", undefined, { shallow: true }).then((success) => {
+    //   if (success) {
+    //     setTimeout(() => {
+    //       window.location.reload();
+    //     },1500);
+    //   }
+    // });
+
+    setTimeout(() => {
+      router.push('/')
+      window.location.reload();
+    },1500)
   };
 
   const toggleDropdown = () => {

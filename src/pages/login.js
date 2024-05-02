@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
-import {toast} from 'sonner'
+import { toast } from 'sonner'
+
 
 
 const Login = () => {
@@ -51,6 +52,7 @@ const Login = () => {
         toast.success('Login Successfully')
         const token = res?.data?.token;
         localStorage.setItem("access_token", token);
+        
 
         setTimeout(() => {
           router.push("/dashboard", undefined, { shallow: true }).then((success) => {
