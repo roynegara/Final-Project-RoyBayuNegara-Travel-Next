@@ -3040,6 +3040,7 @@ footer {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0, 0.2);
   display: fixed;
   color: #e2e2e2;
+
 }
 
 /* ========= Footer End ========= */
@@ -3086,7 +3087,7 @@ body {
 .dashboard {
   display: flex;
   /* margin-top: 75px; */
-  min-height: 87vh;
+  min-height: 100vh;
   /* background: linear-gradient(to right bottom,  #003e6b, #56b9e7); */
   background: rgba(4, 33, 73, 0.8);
 }
