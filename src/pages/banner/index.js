@@ -139,13 +139,24 @@ const Banner = () => {
     }
   }, [imageUrl]);
 
+
+  
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  useEffect(() => {
+    // Memeriksa apakah pengguna sudah login
+    const token = localStorage.getItem("access_token");
+    setIsLoggedIn(!!token);
+  }, []);
+
   return (
     <div>
       <h1 className="banners-title">Banner Database</h1>
 
+      {isLoggedIn && (
       <div className="banners-btn-popup-create">
         <button onClick={() => setButtonPopupCreateBanner(true)}>Add Banner</button>
       </div>
+      )}
 
       <div className={`${buttonPopupCreateBanner ? 'blur' : ''}`}>
         <div className="banners">
@@ -154,13 +165,12 @@ const Banner = () => {
               <div className="banners-card">
                 <img src={banner.imageUrl} alt={banner.name} />
                 <p>{banner.name}</p>
-                <div>
-                  {/* <Link href={`/banner/${banner.id}`}>
-                    <button>Read More</button>
-                  </Link> */}
+                {isLoggedIn && (
+                  <div>                  
                   <button onClick={() => handleEditBanner(banner)}>Edit</button>
                   <button onClick={() => handleDeleteBanner(banner)}>Delete</button>
                 </div>
+                )}
               </div>
             </div>
           ))}

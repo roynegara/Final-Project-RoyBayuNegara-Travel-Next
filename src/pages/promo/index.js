@@ -200,7 +200,7 @@ const Promo = () => {
           {promos.map((promo, index) => (
             <div key={index}>
               <div className="promos-card">
-                <img onclick="window.location.href='/promo/${promo.id}'" src={promo.imageUrl} alt={promo.title} />
+                <img  src={promo.imageUrl} alt={promo.title} />
                 <p>{promo.title}</p>
                 <p>{promo.description}</p>
                 {isLoggedIn && (

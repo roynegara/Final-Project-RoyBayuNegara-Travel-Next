@@ -1,5 +1,3 @@
-// redux/actions.js
-
 import { ADD_NOTIFICATION } from "@/Redux/actionTypes";
 
 export const addNotification = (notification) => ({
