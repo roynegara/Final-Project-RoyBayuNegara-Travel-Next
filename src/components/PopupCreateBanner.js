@@ -5,11 +5,11 @@ import { toast } from "sonner";
 const CreateBanner = (props) => {
   const [name, setName] = useState("");
   const [file, setFile] = useState("");
-  const [imageUrlUpload, setImageUrlUpload] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
 
 
   
-  const handleUploadImage = () => {
+  const handleUpload = () => {
     if (!file) {
       toast.warning("Please select an image");
       return;
@@ -35,7 +35,7 @@ const CreateBanner = (props) => {
           )
           .then((res) => {
             console.log(res);
-            setImageUrlUpload(res?.data?.url);
+            setImageUrl(res?.data?.url);
             // toast.success(res?.data?.message);
            
            
@@ -61,7 +61,7 @@ const CreateBanner = (props) => {
 
 
 
-  const handleUpload = () => {
+  const handleSubmit = () => {
     // if (!name && !imageUrl) {
     //   toast.warning("Name and Image Url cannot be empty");
     //   return;
@@ -73,11 +73,11 @@ const CreateBanner = (props) => {
     //   return;
     // }
 
-    if (imageUrlUpload) {
+    if (imageUrl) {
 
       const payload = {
         name: name,
-        imageUrl: imageUrlUpload,
+        imageUrl: imageUrl,
       };
 
       const accessToken = localStorage.getItem("access_token");
@@ -94,7 +94,7 @@ const CreateBanner = (props) => {
           toast.success(`${name} has been created`);
           props.updateBannerData(); // Panggil fungsi updateBannerData dari props
           props.setTrigger(false); // Tutup popup setelah berhasil menambahkan banner
-          setImageUrlUpload(res?.data?.url)
+          setImageUrl(res?.data?.url)
         })
         .catch((err) => {
           console.log("err", err);
@@ -104,8 +104,8 @@ const CreateBanner = (props) => {
   };
 
     useEffect(() => {
-      handleUpload()
-    }, [imageUrlUpload])
+      handleSubmit()
+    }, [imageUrl])
 
 
 
@@ -126,7 +126,7 @@ const CreateBanner = (props) => {
       </div>
 
       <div className="btn-create-banner-popup">
-      <button type="submit" onClick={handleUploadImage}>Add Banner</button>
+      <button type="submit" onClick={handleUpload}>Add Banner</button>
       </div>
         
       <span className="btn-close-popup-create-banner" onClick={() => props.setTrigger(false)}>&times;</span>
