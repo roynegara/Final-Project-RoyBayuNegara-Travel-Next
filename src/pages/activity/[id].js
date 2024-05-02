@@ -122,6 +122,7 @@ export default function ActivityById({ activity }) {
     setPopupOpenDelete(!isPopupOpenDelete);
   };
 
+  
 
   return (
     <div className="activity">
@@ -195,6 +196,9 @@ export default function ActivityById({ activity }) {
             </div>
         )}
         {/* {notif && <p style={{ color: notif === "Activity deleted successfully" ? "green" : "red" }}>{notif}</p>} */}
+      </div>
+      <div>
+        <button onClick={() => router.back()}>Back</button>        
       </div>
     </div>
   );

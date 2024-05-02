@@ -169,6 +169,7 @@ const Category = () => {
 
   return (
     <div>
+      <div className={`${buttonPopupCreateCategory || editModalOpen || deleteModalOpen ? 'blur' : ''}`}>
       <h1 className="categories-title">Category Database</h1>
 
       {isLoggedIn && (
@@ -178,11 +179,12 @@ const Category = () => {
       )}
 
     
-      <div className={`${buttonPopupCreateCategory ? 'blur' : ''}`}>
         <div className="categories">
           {categories.map((category, index) => (
             <div className="categories-card" key={index}>
-              <img src={category.imageUrl} alt={category.name} />
+              <Link href={`/category/${category.id}`}>
+                <img src={category.imageUrl} alt={category.name} />
+                </Link>
               {/* <p>{category.id}</p> */}
               <p>{category.name}</p>
 

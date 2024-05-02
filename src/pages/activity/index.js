@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import PopupCreateActivity from "@/components/PopupCreateActivity";
 import { toast } from "sonner";
+import Link from "next/link";
 
 const Activity = () => {
   const [activities, setActivities] = useState([]);
@@ -219,6 +220,8 @@ const Activity = () => {
             <div key={index}>
               <div className="activities-card">
                 <h2>{activity.title.toUpperCase()}</h2>
+
+                <Link href={`/activity/${activity.id}`}>
                 <img
                   src={
                     activity.imageUrls?.[0] && activity.imageUrls?.[1]
@@ -226,7 +229,8 @@ const Activity = () => {
                       : activity.imageUrls?.[0]
                   }
                   alt={activity.title}
-                />
+                  />
+                </Link>
                 <p>CategoryId : {activity.categoryId}</p>
                 <p>{activity.description}</p>
                 <p>

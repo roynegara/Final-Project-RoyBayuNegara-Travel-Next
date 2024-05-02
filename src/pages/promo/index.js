@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import PopupCreatePromo from "@/components/PopupCreatePromo";
 import { toast } from "sonner";
+import Link from "next/link";
 
 const Promo = () => {
   const [promos, setPromos] = useState([]);
@@ -200,7 +201,9 @@ const Promo = () => {
           {promos.map((promo, index) => (
             <div key={index}>
               <div className="promos-card">
-                <img  src={promo.imageUrl} alt={promo.title} />
+              <Link href={`/promo/${promo.id}`}>
+                  <img src={promo.imageUrl} alt={promo.title} />
+                  </Link>
                 <p>{promo.title}</p>
                 <p>{promo.description}</p>
                 {isLoggedIn && (

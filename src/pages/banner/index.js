@@ -3,6 +3,7 @@ import axios from "axios";
 import { toast } from "sonner"; // Menggunakan react-toastify
 import PopupCreateBanner from "@/components/PopupCreateBanner";
 import Link from "next/link";
+import {handleActivityClick} from "@/pages/dashboard";
 
 const Banner = () => {
   const [banners, setBanners] = useState([]);
@@ -150,6 +151,7 @@ const Banner = () => {
 
   return (
     <div>
+      <div className={`${buttonPopupCreateBanner || deletingBanner || editingBanner ? 'blur' : ''}`}>
       <h1 className="banners-title">Banner Database</h1>
 
       {isLoggedIn && (
@@ -158,12 +160,13 @@ const Banner = () => {
       </div>
       )}
 
-      <div className={`${buttonPopupCreateBanner ? 'blur' : ''}`}>
         <div className="banners">
           {banners.map((banner, index) => (
             <div key={index}>
               <div className="banners-card">
-                <img src={banner.imageUrl} alt={banner.name} />
+                <Link href={`/banner/${banner.id}`} >
+                  <img src={banner.imageUrl} alt={banner.name} />
+                  </Link>
                 <p>{banner.name}</p>
                 {isLoggedIn && (
                   <div>                  

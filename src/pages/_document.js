@@ -8,7 +8,7 @@ export default function Document() {
       <Head />
       <body>
         <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
-        // bootstrap saya gunakan untuk ICON (syarat bootstrap)
+        {/* bootstrap saya gunakan untuk ICON (syarat bootstrap) */}
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"/>
         <Main />
         <NextScript />

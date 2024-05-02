@@ -147,6 +147,9 @@ export default function CategoryById({ category }) {
         )}
         {/* {notif && <p style={{ color: notif === "Category deleted successfully" ? "green" : "red" }}>{notif}</p>} */}
       </div>
+      <div>
+        <button onClick={() => router.back()}>Back</button>        
+      </div>
     </div>
   );
 }
