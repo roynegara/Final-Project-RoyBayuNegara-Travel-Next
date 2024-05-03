@@ -823,12 +823,8 @@ backdrop-filter: blur(6px);
 
 /* ========== Profile Start ========== */
 .profile-main {
-  justify-content: center;
-  align-items: center;
   text-align: center;
   min-height: 95vh;
-  background-size: cover;
-  background-position: center;
   padding: 20px 10%;
   
 }
@@ -836,9 +832,7 @@ backdrop-filter: blur(6px);
 .profile-title{
   margin-top: 100px;
   font-size: 30px;
-  width: 500px;
-  /* background: transparent; */
-  /* background: rgb(56, 143, 188, 0.4); */
+  width: 500px; 
   background: rgba(4, 33, 73, 0.8);
   border: 1px solid rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(25px);  
@@ -853,13 +847,9 @@ backdrop-filter: blur(6px);
 .profile-card {
   margin-top: 50px;
   width: 500px;
-  /* background: transparent; */
-  /* background: rgb(56, 143, 188, 0.4); */
-  background: rgba(4, 33, 73, 0.8);
+   background: rgba(4, 33, 73, 0.8);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(15px);
-  /* filter: blur(1px); */
-  
+  backdrop-filter: blur(15px);  
   box-shadow: 0 0 10px rgba(0, 0, 0, 0, 0.2);
   color: #ededed;
   border-radius: 10px;
@@ -877,18 +867,12 @@ backdrop-filter: blur(6px);
   margin-right: auto;
   border: 15px solid rgb(56, 143, 188, 0.1);  
   transition: transform 0.3s ease;
-  
-
-
-  
 }
 
 .image-profile:hover{
   cursor: pointer;
   transform: scale(1.1);
-  
-}
-
+  }
 
 .profile-user {
   display: block;
@@ -909,15 +893,10 @@ backdrop-filter: blur(6px);
 }
 
 .btn-profile button {
-  text-decoration: none;
-  /* color: #333;
-  background: #ededed; */
- 
+  text-decoration: none; 
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(15px);
-  /* filter: blur(1px); */
-  
   box-shadow: 0 0 10px rgba(0, 0, 0, 0, 0.2);
   border: none;
   border-radius: 4px;
@@ -935,6 +914,24 @@ backdrop-filter: blur(6px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(15px); 
   box-shadow: 0 0 10px rgba(0, 0, 0, 0, 0.2);
+}
+
+@media screen and (max-width: 908px) {
+  .profile-main {
+  }
+  .sidebar {
+    width: 10%;
+  }
+
+  .profile-main {
+    margin-left: 15px; 
+  }
+  .profile-card {    
+    width: 400px;   
+  }
+.profile-title{
+  width: 400px;
+}
 }
 
 .popup-update-image-wrap {
@@ -1040,9 +1037,6 @@ backdrop-filter: blur(6px);
   align-items: center;
   justify-items: center;
 }
-
-
-
 .popup-profile-update-wrapper {
   display: flex;
   justify-content: center;
@@ -3107,7 +3101,7 @@ background: rgba(4, 33, 73, 0.8);
 }
 
 .newsletter-form input[type="email"] {
-  width: 46%;
+  width: 100%;
   height: 100%;
   background: transparent;
   border: none;
@@ -3117,7 +3111,6 @@ background: rgba(4, 33, 73, 0.8);
   font-size: 15px;
   color: #ededed;
   padding: 10px 45px 10px 20px;
-margin-left: 170px;
 }
 
 .newsletter-form button {
@@ -3159,6 +3152,16 @@ margin-left: 170px;
 
 .footer-bottom {
 text-align: center;
+}
+
+@media (max-width: 911px) {
+  .footer {
+    flex-direction: column;
+    align-items: center;
+  }
+  .footer-column {
+    margin-bottom: 20px;
+  }
 }
 
 /* ========= Footer End ========= */
@@ -3302,6 +3305,15 @@ padding :10px;
 
   .sidebar-logout{
     border: none;
+  }
+
+  .content {
+    margin-left: 0px;
+  }
+}
+@media (max-width: 908px) {
+  .content {
+    margin-left: 0px;
   }
 }
 
