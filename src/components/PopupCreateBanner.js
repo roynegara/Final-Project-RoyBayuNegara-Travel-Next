@@ -10,11 +10,16 @@ const CreateBanner = (props) => {
 
   
   const handleUpload = () => {
-    if (!file) {
-      toast.warning("Please select an image");
+    if (!file && !name) {
+      toast.info("Empty name and image not selected");
+      return;
+    } else if (!name) {
+      toast.info("Empty name");
+      return;
+    } else if (!file) { 
+      toast.info("Select an image");
       return;
     }
-    
     
         const formData = new FormData();
         formData.append("image", file);

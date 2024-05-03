@@ -16,8 +16,14 @@ const Banner = () => {
   const [imageUrl, setImageUrl] = useState('');
 
   const handleUpload = () => {
-    if (!file) {
-      toast.warning("Please select an image");
+    if (!file && !editName) {
+      toast.info("Empty name and image not selected");
+      return;
+    } else if (!editName) {
+      toast.info("Empty name ");
+      return;
+    } else if (!file) { 
+      toast.info("Select an image");
       return;
     }
     
@@ -41,11 +47,11 @@ const Banner = () => {
       .then((res) => {
         console.log(res);
         setImageUrl(res.data.url);
-        toast.success(res?.data?.message);
+        // toast.success(res?.data?.message);
       })
       .catch((err) => {
         console.log(err);
-        toast.error(err?.response?.data?.message);
+        // toast.error(err?.response?.data?.message);
       });
   };
 
@@ -103,7 +109,7 @@ const Banner = () => {
       });
   };
 
-  const handleSaveEdit = () => {
+  const handleSaveEdit = () => {    
     if (imageUrl) {
       const accessToken = localStorage.getItem("access_token");
       axios
@@ -126,11 +132,11 @@ const Banner = () => {
           setEditName("");
           updateBannerData();
           setImageUrl(res?.data?.url);
-          toast.success(res.data.message);
+          toast.success(`${editingBanner.name} has been updated`);
         })
         .catch((err) => {
           console.error("Edit error:", err);
-          toast.error(err.response.data.message);
+          // toast.error(err.response.data.message);
         });
     }
   };
