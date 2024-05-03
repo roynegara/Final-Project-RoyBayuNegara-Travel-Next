@@ -18,10 +18,22 @@ const Category = () => {
 
 
   const handleUpload = () => {
-    if (!file) {
-      toast.warning("Please select an image");
+    if (!file && !editCategoryName) {
+      toast.info("Empty name and image not selected");
+      return;
+    } else if (!editCategoryName) {
+      toast.info("Empty name ");
+      return;
+    } else if (!file) { 
+      toast.info("Select an image");
       return;
     }
+
+
+    // if (!file) {
+    //   toast.info("Please select an image");
+    //   return;
+    // }
         const formData = new FormData();
         formData.append("image", file);
     

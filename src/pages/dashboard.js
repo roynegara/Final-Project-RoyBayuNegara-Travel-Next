@@ -6,6 +6,7 @@ import Promo from '@/pages/promo';
 import Category from '@/pages/category';
 import Activity from '@/pages/activity';
 import { useRouter } from 'next/router';
+import { toast } from 'sonner';
 
 
 const Dashboard = () => {
@@ -19,11 +20,13 @@ const [showActivity, setShowActivity] = useState(false);
   
 const handleLogout = () => {
   localStorage.removeItem("access_token");
+  toast.success("Logout successfully");
   router.push("/login", undefined, { shallow: true }).then((success) => {
     if (success) {
       setTimeout(() => {
-        window.location.reload();
-      });
+        router.push('/')
+        window.location.reload()
+      },1500);
     }
   });
   };
@@ -95,7 +98,7 @@ const handleLogout = () => {
           <li className='sidebar-position' onClick={handlePromoClick}><i class='bx bxs-discount' ></i> Promo</li>
           <li className='sidebar-position' onClick={handleCategoryClick}><i class='bx bx-category'></i> Category</li>
           <li className='sidebar-position' onClick={handleActivityClick}><i class='bx bxs-plane-alt'></i> Destination</li>
-          {/* <li className='sidebar-logout' onClick={handleLogout} >Logout</li> */}
+          <li className='sidebar-logout' onClick={handleLogout} ><i class="bi bi-box-arrow-right"></i> Logout</li>
         </ul>
       </div>
 

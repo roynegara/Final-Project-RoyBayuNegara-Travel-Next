@@ -195,7 +195,7 @@ const CreateActivity = (props) => {
       { name: 'categories', label: 'categories' },
       { name: 'title', label: 'title' },
       { name: 'description', label: 'description' },
-      { name: 'imageUrls', label: 'image' },
+      
       { name: 'price', label: 'price' },
       { name: 'price_discount', label: 'price discount' },
       { name: 'rating', label: 'rating' },
@@ -205,6 +205,7 @@ const CreateActivity = (props) => {
       { name: 'province', label: 'Province' },
       { name: 'city', label: 'City' },
       { name: 'location_maps', label: 'maps' },
+      { name: 'file', label: 'image' },
     ];
 
     let emptyFields = [];
@@ -311,7 +312,7 @@ const CreateActivity = (props) => {
           />
           </div>
           <div className="input-box-create-activity">
-      <input type="text" name="rating" value={rating} onChange={handleRatingChange} placeholder="Rating" />
+      <input type="number" name="rating" value={rating} onChange={handleRatingChange} placeholder="Rating" />
      </div>
                
     </div>

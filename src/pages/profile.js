@@ -31,13 +31,13 @@ const Profile = () => {
       });
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem("access_token");
-    toast.success("Logout Successfully");
-    setTimeout(() => {
-      router.push("/");
-    }, 1500);
-  };
+  // const handleLogout = () => {
+  //   localStorage.removeItem("access_token");
+  //   toast.success("Logout Successfully");
+  //   setTimeout(() => {
+  //     router.push("/");
+  //   }, 1500);
+  // };
 
   useEffect(() => {
     getLoggedUser();
@@ -84,9 +84,9 @@ const Profile = () => {
          
         </div>
 
-        <div>
+        {/* <div>
           <button onClick={handleLogout}>Logout</button>
-        </div>
+        </div> */}
         </div>
     </div>
       

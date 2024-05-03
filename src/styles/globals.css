@@ -3122,8 +3122,11 @@ body {
 
 
 .sidebar-logout {
-  position: fixed;
-  bottom: 30px;
+  /* position: end; */
+  /* margin-top: 250%; */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 9px;
+  /* text-align: center; */
 }
 
 .sidebar ul {

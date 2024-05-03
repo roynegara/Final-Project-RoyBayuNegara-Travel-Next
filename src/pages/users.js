@@ -6,8 +6,8 @@ const Users = () => {
     const [users, setUsers] = useState([]);
     const [currentPage, setCurrentPage] = useState(1); // Track current page
     const [totalPages, setTotalPages] = useState(0); // Track total pages
-    const itemsPerPage = 15; // Number of items per page
-    const paginationRange = 10; // Number of page buttons to display
+    const itemsPerPage = 6; // Number of items per page
+    const paginationRange = 5; // Number of page buttons to display
     const [role, setRole] = useState("");
    
     const [selectedUserId, setSelectedUserId] = useState(null); // Track selected user for role change

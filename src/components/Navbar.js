@@ -38,7 +38,7 @@ export default function Navbar() {
 
   const handleLogout = () => {
     localStorage.removeItem("access_token");
-    toast.success("Logout Successfully");
+    toast.success("Logout successfully");
     // router.push("/", undefined, { shallow: true }).then((success) => {
     //   if (success) {
     //     setTimeout(() => {
@@ -75,7 +75,7 @@ export default function Navbar() {
   return (
     <nav className="navbar">
       <div className="logo">
-        <a href="/">Luxury Travel</a>
+        <Link href="/">Luxury Travel</Link>
       </div>
       <div className={`navbar-nav ${isOpen ? "active" : ""}`}>
         <Link href="/">Home</Link>
