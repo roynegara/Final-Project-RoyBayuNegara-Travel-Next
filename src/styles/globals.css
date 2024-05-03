@@ -217,7 +217,6 @@ padding-right: 10px;
 margin-left: 50px;
 border-radius: 15px;
 
-
 }
 
 .dropdown-content-navbar a:hover {
@@ -254,7 +253,7 @@ border-radius: 15px;
   display: none;
 }
 
-@media screen and (max-width: 837px) {
+@media screen and (max-width: 768px) {
   .navbar-nav {
     display: none;
 
@@ -263,7 +262,7 @@ border-radius: 15px;
     top: 105%;
     left: 15%;
     border: 2px solid rgba(255, 255, 255, 0.2);
-    width: 500px;  
+    width: 80%;  
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     align-items: center;
     backdrop-filter: blur(25px);
@@ -294,8 +293,13 @@ border-radius: 15px;
   }
 
   .dropdown-content-navbar {
-
 text-align: center;  }
+}
+
+@media screen and (max-width: 605px) {
+.navbar-nav {
+  width: 80%;
+}
 }
 
 /* Navbar toggle end */
@@ -916,7 +920,7 @@ backdrop-filter: blur(6px);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0, 0.2);
 }
 
-@media screen and (max-width: 908px) {
+@media screen and (max-width: 768px) {
   .profile-main {
   }
   .sidebar {
@@ -924,15 +928,24 @@ backdrop-filter: blur(6px);
   }
 
   .profile-main {
-    margin-left: 15px; 
+    /* margin-left: 15px;  */
   }
   .profile-card {    
-    width: 400px;   
+    width: 110%;   
   }
 .profile-title{
-  width: 400px;
+  width: 110%;
 }
 }
+
+/* @media screen and (max-width: 768px) {
+  .profile-card {    
+    width: 300px;   
+  }
+.profile-title{
+  width: 300px;
+}
+} */
 
 .popup-update-image-wrap {
   display: flex;
@@ -1136,7 +1149,17 @@ backdrop-filter: blur(6px);
   justify-items: center;
 }
 
+@media (max-width: 768px) {
+  .popup-update-image {
+    width: 300px;
+    
+  }
+  .popup-profile-update {
+    width: 300px;
+    
+  }
 
+}
 
 /* ========== Profile End ========== */
 
@@ -1144,14 +1167,6 @@ backdrop-filter: blur(6px);
 
 
 /* ========== Users Start ========== */
-.users {
-  /* display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  text-align: center; */
-}
-/* ========== Users End ==========  */
 
 
 .users {
@@ -1172,7 +1187,7 @@ backdrop-filter: blur(6px);
   margin-top: 100px;
   /* margin-bottom: 70px; */
   font-size: 30px;
-  width: 700px;
+  width: 50%;
   /* background: transparent; */
   /* background: rgb(56, 143, 188, 0.4); */
   background: rgba(4, 33, 73, 0.8);
@@ -1261,8 +1276,6 @@ backdrop-filter: blur(6px);
 }
 
 
-
-
 .popup-edit-users {
   width: 500px;
   height: 250px;
@@ -1343,21 +1356,44 @@ backdrop-filter: blur(6px);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0, 0.2);
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
 .blur-users {
   filter: blur(5px); /* Atur tingkat blur sesuai kebutuhan */
 }
+
+@media screen and (max-width: 1752px) {
+  .users-content {
+    grid-template-columns: repeat(2, 1fr);
+      }
+ 
+}
+
+@media screen and (max-width: 1247px) {
+  .users-content {
+    grid-template-columns: repeat(1, 1fr);
+      }
+}
+
+@media screen and (max-width: 1008px) {
+  .user-title {
+    margin-top: 100px;
+  /* margin-bottom: 70px; */
+  font-size: 20px;
+  width: 700px;
+  /* background: transparent; */
+  /* background: rgb(56, 143, 188, 0.4); */
+  background: rgba(4, 33, 73, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(25px);
+  
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0, 0.2);
+  color: #e2e2e2;
+  border-radius: 10px;
+  /* padding: 30px 40px; */
+  /* margin-left: auto; */
+  /* margin-right: auto; */
+  }
+}
+
 
 /* ========== Users End ========== */
 
@@ -1924,8 +1960,6 @@ color: #ededed;
   justify-items: center;
 }
 
-
-
 .popup-edit-promo,
 .popup-delete-promo {
   width: 420px;
@@ -2110,6 +2144,8 @@ margin-top: 40px;
   backdrop-filter: blur(15px);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0, 0.2);
 }
+
+
 
 
 
@@ -3275,9 +3311,7 @@ body {
 text-align: center;
   }
 
-  .dashboard-text {
-    /* display: none;     */
-  }
+ 
 
   .sidebar-logout{
     border: none;
@@ -3309,13 +3343,10 @@ padding :10px;
 
   .content {
     margin-left: 0px;
+    
   }
 }
-@media (max-width: 908px) {
-  .content {
-    margin-left: 0px;
-  }
-}
+
 
 /* ========= Dashboard End ========= */
 

@@ -50,7 +50,7 @@ const BannerCarousel = () => {
               </Link>
               <p>{banner.name}</p>
               <div className="banner-overlay">
-                <a href={`/banner/${banner.id}`}>Discover more about {banner.name}</a>
+                <Link href={`/banner/${banner.id}`}>Discover more about {banner.name}</Link>
               </div>
             </div>
           ))}
