@@ -92,13 +92,15 @@ const handleLogout = () => {
       {/* Kolom Kiri (Sidebar Navigasi) */}
       <div className="sidebar">
         <ul>
-          <li className='sidebar-position' onClick={handleProfileClick}>  <i class="bi bi-file-person-fill"></i> Profile</li>
-          <li className='sidebar-position' onClick={handleUsersClick}> <i class="bi bi-person-check-fill"></i> Users</li>
-          <li className='sidebar-position' onClick={handleBannerClick}> <i class="bi bi-credit-card-2-front-fill"></i> Banner</li>
-          <li className='sidebar-position' onClick={handlePromoClick}><i class='bx bxs-discount' ></i> Promo</li>
-          <li className='sidebar-position' onClick={handleCategoryClick}><i class='bx bx-category'></i> Category</li>
-          <li className='sidebar-position' onClick={handleActivityClick}><i class='bx bxs-plane-alt'></i> Destination</li>
-          <li className='sidebar-logout' onClick={handleLogout} ><i class="bi bi-box-arrow-right"></i> Logout</li>
+          <li className='sidebar-position' onClick={handleProfileClick}>  <i class="bi bi-file-person-fill"></i> <a className='dashboard-text'>Profile</a></li>
+          <li className='sidebar-position' onClick={handleUsersClick}> <i class="bi bi-person-check-fill"></i> <a className='dashboard-text'>Users</a></li>
+          <li className='sidebar-position' onClick={handleBannerClick}> <i class="bi bi-credit-card-2-front-fill"></i> <a className='dashboard-text'>Banner</a></li>
+          <li className='sidebar-position' onClick={handlePromoClick}><i class='bx bxs-discount' ></i> <a className='dashboard-text'>Promo</a></li>
+          <li className='sidebar-position' onClick={handleCategoryClick}><i class='bx bx-category'></i> <a className='dashboard-text'>Category</a></li>
+          <li className='sidebar-position' onClick={handleActivityClick}><i class='bx bxs-plane-alt'></i> <a className='dashboard-text'>Destination</a></li>
+        </ul>
+        <ul>
+        <li className='sidebar-logout' onClick={handleLogout} ><i class="bi bi-box-arrow-right"></i> <a className='dashboard-text'>Logout</a></li>
         </ul>
       </div>
 
