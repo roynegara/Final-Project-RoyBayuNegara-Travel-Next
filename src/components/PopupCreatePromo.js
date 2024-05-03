@@ -48,13 +48,13 @@ const CreatePromo = (props) => {
 
   const handleUpload = () => {
     const fields = [
-      { name: "title", label: "Title" },
-      { name: "file", label: "Image" },
-      { name: "description", label: "Description" },
-      { name: "terms_condition", label: "Terms and Conditions" },
-      { name: "promo_code", label: "Promo Code" },
-      { name: "promo_discount_price", label: "Promo Discount Price" },
-      { name: "minimum_claim_price", label: "Minimum Claim Price" },
+      { name: "title", label: "name" },
+      { name: "file", label: "image" },
+      { name: "description", label: "description" },
+      { name: "terms_condition", label: "terms and conditions" },
+      { name: "promo_code", label: "promo code" },
+      { name: "promo_discount_price", label: "promo discount price" },
+      { name: "minimum_claim_price", label: "minimum claim price" },
     ];
 
     let emptyFields = [];

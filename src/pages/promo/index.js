@@ -19,10 +19,38 @@ const Promo = () => {
   const [imageUrl, setImageUrl] = useState("");
 
   const handleUpload = () => {
-    if (!file) {
-      toast.warning("Please select an image");
+    const fields = [
+      { name: "editName", label: "name" },
+      { name: "file", label: "image" },
+      { name: "description", label: "description" },
+      { name: "terms_condition", label: "terms and conditions" },
+      { name: "promo_code", label: "promo code" },
+      { name: "promo_discount_price", label: "promo discount price" },
+      { name: "minimum_claim_price", label: "minimum claim price" },
+    ];
+
+    let emptyFields = [];
+    fields.forEach((field) => {
+      if (!eval(field.name)) {
+        // Using eval here for simplicity, though it's generally not recommended
+        emptyFields.push(field.label);
+      }
+    });
+
+    if (emptyFields.length > 0) {
+      toast.info(
+        `Failed to edit promo because ${emptyFields.join(", ")} ${emptyFields.length > 1 ? "are" : "is"} empty`
+      );
       return;
+    } else if (!file) {
+      toast.info("Please select an image");
+      return;
+    } else {
+      // Edit promo successful
     }
+
+
+
     const formData = new FormData();
     formData.append("image", file);
     const config = {
@@ -37,11 +65,11 @@ const Promo = () => {
       .then((res) => {
         console.log(res);
         setImageUrl(res.data.url);
-        toast.success(res?.data?.message);
+        // toast.success(res?.data?.message);
       })
       .catch((err) => {
         console.log(err);
-        toast.error(err?.response?.data?.message);
+        // toast.error(err?.response?.data?.message);
       });
   };
 
@@ -137,11 +165,11 @@ const Promo = () => {
           setMinimum_claim_price("");
           setImageUrl("");
           updatePromoData();
-          toast.success(res?.data?.message);
+          toast.success(`Updated ${editingPromo.title}  successfully`);
         })
         .catch((err) => {
           console.log("promo Edit error", err);
-          toast.error(err?.response?.data?.message);
+          // toast.error(err?.response?.data?.message);
         });
     }
   };
