@@ -248,11 +248,11 @@ const Category = () => {
       )}
       {/* Modal konfirmasi penghapusan */}
       {deleteModalOpen && (
-         <div className="input-box-create-banner"> 
-           <div className="popup-delete-banner">
+         <div className="popup-delete-category-wrap"> 
+           <div className="popup-delete-category">
             {/* <h2>Confirm Deletion</h2> */}
             <p>Are you sure you want to delete this category?</p>
-            <div className="btn-create-banner-popup">
+            <div className="btn-delete-category-popup">
               <button onClick={onDeleteConfirmed}>Yes</button>
               <button onClick={onCancelDelete}>No</button>
             </div>

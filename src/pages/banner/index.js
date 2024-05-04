@@ -101,7 +101,7 @@ const Banner = () => {
         console.log("Delete success:", res);
         setDeletingBanner(null);
         updateBannerData();
-        toast.success(res.data.message);
+        toast.success(`${deletingBanner.name} has been deleted`);
       })
       .catch((err) => {
         console.error("Delete error:", err);
@@ -222,10 +222,10 @@ const Banner = () => {
 
       {/* Modal konfirmasi untuk hapus banner */}
       {deletingBanner && (
-        <div className="popup-create-banner-wrap">
-          <div className="popup-create-banner">
+        <div className="popup-delete-banner-wrap">
+          <div className="popup-delete-banner">
             <p>Are you sure you want to delete this banner?</p>
-            <div className="btn-create-banner-popup">
+            <div className="btn-delete-banner-popup">
               <button onClick={confirmDelete}>Yes</button>
               <button onClick={() => setDeletingBanner(null)}>No</button>
             </div>

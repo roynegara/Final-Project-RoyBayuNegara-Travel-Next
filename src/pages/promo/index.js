@@ -248,36 +248,19 @@ const Promo = () => {
 
       {editingPromo && (
         <div className="popup-edit-promo-wrap">
-          <div className="popup-edit-promo">
-            <h2>Edit Promo</h2>
+          <div className="popup-edit-promos">
+            <h1>Edit Promo</h1>
 
-            <div className="input-box-edit-promo">
+            <div className="input-editpromos">
+              <div className="input-box-edit-promos-input">
+            <div className="input-box-edit-promos">
               <input type="text" value={editName} onChange={(e) => setEditName(e.target.value)} placeholder="Name" />
             </div>
-
-            <div className="input-box-edit-promo">
+            <div className="input-box-edit-promos">
               <input type="file" onChange={(e) => setFile(e.target.files[0])} placeholder="Image URL" />
             </div>
-
-            <div>
-              <textarea
-                type="text"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                placeholder="Description"
-              />
-            </div>
-
-            <div>
-              <input
-                type="text"
-                value={terms_condition}
-                onChange={(e) => setTerms_condition(e.target.value)}
-                placeholder="Terms and Condition"
-              />
-            </div>
-
-            <div>
+          
+            <div className="input-box-edit-promos">
               <input
                 type="text"
                 value={promo_code}
@@ -285,8 +268,7 @@ const Promo = () => {
                 placeholder="Promo Code"
               />
             </div>
-
-            <div>
+            <div className="input-box-edit-promos">
               <input
                 type="number"
                 value={promo_discount_price}
@@ -301,7 +283,7 @@ const Promo = () => {
               />
             </div>
 
-            <div>
+            <div className="input-box-edit-promos">
               <input
                 type="number"
                 value={minimum_claim_price}
@@ -314,13 +296,36 @@ const Promo = () => {
                 }}
                 placeholder="Minimum Claim Price"
               />
+              </div>
             </div>
+                
+            <div className="input-box-edit-promos-textarea">
+              <div className="input-box-edit-promos">
+              <textarea
+                type="text"
+                value={terms_condition}
+                onChange={(e) => setTerms_condition(e.target.value)}
+                placeholder="Terms and Condition"
+              />
+                </div>
+                
+              <div className="input-box-edit-promos">
+              <textarea
+                type="text"
+                    value={description}
+                    id="textarea-edit-promos-description"
+                onChange={(e) => setDescription(e.target.value)}
+                placeholder="Description"
+              />
+              </div>            
+            </div>
+          </div>
 
-            <div className="btn-create-promo-popup">
+            <div className="btn-edit-promos-popup">
               <button onClick={handleUpload}>Edit Promo</button>
             </div>
 
-            <span className="btn-close-popup-edit-promo-" onClick={() => setEditingPromo(null)}>
+            <span className="btn-close-popup-edit-promos" onClick={() => setEditingPromo(null)}>
               &times;
             </span>
           </div>

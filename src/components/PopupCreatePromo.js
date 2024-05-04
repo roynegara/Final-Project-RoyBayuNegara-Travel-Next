@@ -150,11 +150,11 @@ const CreatePromo = (props) => {
   }, [imageUrl]);
 
   return props.trigger ? (
-    <div className="popup-create-promo-wrap">
+    <div className="popup-create-promos-wrap">
       <div className="popup-create-promos">
         <h1>Add Promo</h1>
 
-        <div className="input-promos">
+        <div className="input-addpromos">
           <div className="input-box-create-promos-input">
             <div className="input-box-create-promos">
               <input type="text" name="title" value={title} onChange={handleTitleChange} placeholder="Title" />
@@ -218,7 +218,7 @@ const CreatePromo = (props) => {
         <div className="btn-create-promos-popup">
           <button onClick={handleUpload}>Add Promo</button>
         </div>
-        <span className="btn-close-popup-create-promo" onClick={() => props.setTrigger(false)}>
+        <span className="btn-close-popup-create-promos" onClick={() => props.setTrigger(false)}>
           &times;
         </span>
       </div>
