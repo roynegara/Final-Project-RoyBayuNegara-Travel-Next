@@ -135,7 +135,7 @@ const Activity = () => {
         console.log("res delete activity", res);
         setDeletingActivity(null);
         updateActivityData();
-        toast.success(res?.data?.message);
+        toast.success(`${deletingActivity.title} has been deleted`);
       })
       .catch((err) => {
         console.log("err delete activity", err);

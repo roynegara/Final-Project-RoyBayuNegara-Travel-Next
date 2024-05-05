@@ -151,6 +151,8 @@ const CreateActivity = (props) => {
           console.log("res", res);
           toast.success(`${title} has been created`);
           setImageUrls(res?.data?.url);
+          props.updateActivityData();
+        props.setTrigger(false);
         })
         .catch((err) => {
           console.log("err", err);

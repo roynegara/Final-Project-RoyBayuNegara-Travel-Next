@@ -28,12 +28,7 @@ const Category = () => {
       toast.info("Select an image");
       return;
     }
-
-
-    // if (!file) {
-    //   toast.info("Please select an image");
-    //   return;
-    // }
+    
         const formData = new FormData();
         formData.append("image", file);
     
@@ -54,13 +49,11 @@ const Category = () => {
           .then((res) => {
             console.log(res);
             setImageUrl(res.data.url);
-            // toast.success(res?.data?.message);
            
            
     })
           .catch((err) => {
             console.log(err);
-            // toast.error(err?.response?.data?.message)
           });
       };
 
@@ -121,7 +114,7 @@ const Category = () => {
           updateCategoryData();
           setEditModalOpen(false);
           setImageUrl(res?.data?.url);
-          toast.success(res.data.message);
+          toast.success(`Category updated successfully`);
         })
         .catch((err) => {
           console.error("Error updating category:", err);
@@ -135,7 +128,6 @@ const Category = () => {
   }, [imageUrl])
 
   const handleDeleteCategory = (categoryId) => {
-    // Menampilkan modal konfirmasi penghapusan
     setDeleteModalOpen(true);
     setCategoryIdToDelete(categoryId);
   };
@@ -155,9 +147,8 @@ const Category = () => {
       .then((res) => {
         console.log("Category deleted successfully:", res.data);
         updateCategoryData();
-        // Menutup modal setelah penghapusan selesai
         setDeleteModalOpen(false);
-        toast.success(res.data.message);
+        toast.success(`Category ${categoryToDelete && categoryToDelete.name} deleted successfully`);
       })
       .catch((err) => {
         console.error("Error deleting category:", err);
@@ -166,18 +157,15 @@ const Category = () => {
   };
 
   const onCancelDelete = () => {
-    // Menutup modal tanpa melakukan penghapusan
     setDeleteModalOpen(false);
     setCategoryIdToDelete(null);
   };
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  useEffect(() => {
-    // Memeriksa apakah pengguna sudah login
+  useEffect(() => {    
     const token = localStorage.getItem("access_token");
     setIsLoggedIn(!!token);
   }, []);
-
 
   const categoryToDelete = categories.find(category => category.id === categoryIdToDelete);
   return (
@@ -190,7 +178,6 @@ const Category = () => {
           <button onClick={() => setButtonPopupCreateCategory(true)}>Add Category</button>
         </div>
       )}
-
     
         <div className="categories">
           {categories.map((category, index) => (
@@ -247,7 +234,7 @@ const Category = () => {
           </div>
         </div>
       )}
-      {/* Modal konfirmasi penghapusan */}
+     
       {deleteModalOpen && (
          <div className="popup-delete-category-wrap"> 
            <div className="popup-delete-category">
