@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-
 import FormDeleteCategory from "@/components/FormDeleteCategory";
 import { useRouter } from "next/router";
 import useDeleteCategory from "@/hooks/useDeleteCategory";
-
 import FormEditCategory from "@/components/FormEditCategory";
 import useEditCategory from "@/hooks/useEditCategory";
-
 import { toast } from "sonner";
 
 export async function getServerSideProps(context) {
@@ -28,9 +25,7 @@ export async function getServerSideProps(context) {
 export default function CategoryById({ category }) {
   const { del, loading } = useDeleteCategory();
   const { pos, loadingEditCategory } = useEditCategory();
-
   const router = useRouter();
-  // const [notif, setNotif] = useState(null);
 
   const handleDeleteCategory = () => {
     del(`/delete-category/${category?.id}`)
@@ -43,7 +38,6 @@ export default function CategoryById({ category }) {
       })
       .catch((err) => {
         console.log("resDeleteCategoryErr", err);
-        // setNotif(err?.response?.data?.message);
         toast.error(err?.response?.data?.message);
       });
   };
@@ -52,19 +46,13 @@ export default function CategoryById({ category }) {
     pos(`/update-category/${category?.id}`, { name, imageUrl })
       .then((res) => {
         toast.success(`${category?.name} has been edited`);
-
         router.push(`/category/${category?.id}`, undefined, { shallow: false }).then((success) => {
           if (success) {
             setTimeout(() => {
-              
-              window.location.reload(); // Refresh halaman jika perpindahan halaman berhasil
-            },1000)
+              window.location.reload();
+            }, 1000);
           }
         });
-
-
-
-        
       })
       .catch((err) => {
         console.log("resEditCategoryErr", err);
@@ -95,7 +83,6 @@ export default function CategoryById({ category }) {
       <div className="categoryid-card-home">
         <h1>This is {category?.name} Category</h1>
         <img src={category?.imageUrl} alt={category?.name} />
-        {/* <h3>{category?.id}</h3> */}
       </div>
 
       <div>
@@ -125,30 +112,22 @@ export default function CategoryById({ category }) {
               <div>
                 <p>Are you sure you want to delete {category?.name} ?</p>
               </div>
-            
 
-            <div className="popup-delete-category-btn-yes">
-              <FormDeleteCategory
-                title={`Ya`}
-                onDelete={handleDeleteCategory}
-                loading={loading}
-              />
-            </div>
-
-            <div className="popup-delete-category-btn-no">
-              <button className="btn-close-popup-delete-category" onClick={togglePopupDelete}>
-                Tidak
-              </button>
+              <div className="popup-delete-category-btn-yes">
+                <FormDeleteCategory title={`Ya`} onDelete={handleDeleteCategory} loading={loading} />
               </div>
-              
 
+              <div className="popup-delete-category-btn-no">
+                <button className="btn-close-popup-delete-category" onClick={togglePopupDelete}>
+                  Tidak
+                </button>
+              </div>
             </div>
-            </div>
+          </div>
         )}
-        {/* {notif && <p style={{ color: notif === "Category deleted successfully" ? "green" : "red" }}>{notif}</p>} */}
       </div>
       <div>
-        <button onClick={() => router.back()}>Back</button>        
+        <button onClick={() => router.back()}>Back</button>
       </div>
     </div>
   );

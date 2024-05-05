@@ -1,18 +1,16 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
-import {toast} from 'sonner'
+import { toast } from "sonner";
 
 const Register = () => {
   const router = useRouter();
-  // const [notif, setNotif] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordRepeat, setPasswordRepeat] = useState("");
   const [role, setRole] = useState("admin");
   const [phoneNumber, setPhoneNumber] = useState("");
-
   const [loading, setLoading] = useState(false);
 
   const handleNameChange = (e) => {
@@ -47,30 +45,29 @@ const Register = () => {
 
   const handleRegister = () => {
     const fields = [
-      { name: 'name', label: 'Name' },
-      { name: 'email', label: 'Email' },
-      { name: 'password', label: 'Password' },
-      { name: 'passwordRepeat', label: 'Password Repeat' },
-      { name: 'phoneNumber', label: 'Phone Number' }
+      { name: "name", label: "Name" },
+      { name: "email", label: "Email" },
+      { name: "password", label: "Password" },
+      { name: "passwordRepeat", label: "Password Repeat" },
+      { name: "phoneNumber", label: "Phone Number" },
     ];
-    
+
     let emptyFields = [];
-    fields.forEach(field => {
-      if (!eval(field.name)) { // Using eval here for simplicity, though it's generally not recommended
+    fields.forEach((field) => {
+      if (!eval(field.name)) {
         emptyFields.push(field.label);
       }
     });
-    
+
     if (emptyFields.length > 0) {
-      toast.info(`Failed to register because ${emptyFields.join(', ')} ${emptyFields.length > 1 ? 'are' : 'is'} empty`);
-      return
+      toast.info(`Failed to register because ${emptyFields.join(", ")} ${emptyFields.length > 1 ? "are" : "is"} empty`);
+      return;
     } else if (password !== passwordRepeat) {
-      toast.info('Failed to register because passwords do not match');
-      return
+      toast.info("Failed to register because passwords do not match");
+      return;
     } else {
       // Registration successful
     }
-    
 
     const payload = {
       name: name,
@@ -90,15 +87,13 @@ const Register = () => {
       .then((res) => {
         console.log("response", res);
         // toast.success("Status : " + res?.data?.message);
-        toast.success('Register Successful, Please login to continue');
+        toast.success("Register Successful, Please login to continue");
         setTimeout(() => {
           router.push("/");
         }, 1500);
       })
       .catch((err) => {
         console.log("error", err.response);
-        // toast.error("Status : " + err?.response?.data?.message);
-
         if (
           err?.response?.data?.errors &&
           err?.response?.data?.errors.length > 0 &&
@@ -108,231 +103,68 @@ const Register = () => {
         } else {
           toast.error(err?.response?.data?.message);
         }
-
       });
   };
 
   return (
-
     <div className="register-wrap">
-
-  
-    <div className="register">
-      <h1>Register</h1>
-      {/* {notif && <p style={{ color: notif === "Status : User Created" ? "green" : "red" }}>{notif}</p>} */}
+      <div className="register">
+        <h1>Register</h1>
+        {/* {notif && <p style={{ color: notif === "Status : User Created" ? "green" : "red" }}>{notif}</p>} */}
         <div className="input-box-register">
-          
-      <input type="text" name="name" value={name} onChange={handleNameChange} placeholder="Name" />
+          <input type="text" name="name" value={name} onChange={handleNameChange} placeholder="Name" />
         </div>
         <div className="input-box-register">
-        <input type="email" name="email" value={email} onChange={handleEmailChange} placeholder="Email" />
+          <input type="email" name="email" value={email} onChange={handleEmailChange} placeholder="Email" />
         </div>
-      <div className="input-box-register">
-          <input type="password" name="password" value={password} onChange={handlePasswordChange} placeholder="Password" />
-          </div>
         <div className="input-box-register">
-        <input
-        type="password"
-        name="passwordRepeat"
-        value={passwordRepeat}
-        onChange={handlePasswordRepeatChange}
-        placeholder="Password Repeat"
+          <input
+            type="password"
+            name="password"
+            value={password}
+            onChange={handlePasswordChange}
+            placeholder="Password"
           />
-          </div>
-
-      <div className="input-box-register-option">
-        <label>Choose Role : </label>
-        <select className="option-register" name="role" value={role} onChange={handleRoleChange}>
-          <option value={"admin"}>Admin</option>
-          <option value={"user"}>User</option>
-        </select>
-      </div>
-
-      <div className="input-box-register">
-      <input
-        type="text"
-        name="phoneNumber"
-        value={phoneNumber}
-        onChange={handlePhoneNumberChange}
-        placeholder="Phone Number"
-        />
+        </div>
+        <div className="input-box-register">
+          <input
+            type="password"
+            name="passwordRepeat"
+            value={passwordRepeat}
+            onChange={handlePasswordRepeatChange}
+            placeholder="Password Repeat"
+          />
         </div>
 
-      <div className="btn-register">
-        <button onClick={handleRegister} disabled={loading ? true : false}>
-          {loading ? "Loading..." : "Register"}
-        </button>
-        <p>
-          Already have an account? <a href="/login">Login</a>
-        </p>
+        <div className="input-box-register-option">
+          <label>Choose Role : </label>
+          <select className="option-register" name="role" value={role} onChange={handleRoleChange}>
+            <option value={"admin"}>Admin</option>
+            <option value={"user"}>User</option>
+          </select>
+        </div>
+
+        <div className="input-box-register">
+          <input
+            type="text"
+            name="phoneNumber"
+            value={phoneNumber}
+            onChange={handlePhoneNumberChange}
+            placeholder="Phone Number"
+          />
+        </div>
+
+        <div className="btn-register">
+          <button onClick={handleRegister} disabled={loading ? true : false}>
+            {loading ? "Loading..." : "Register"}
+          </button>
+          <p>
+            Already have an account? <a href="/login">Login</a>
+          </p>
+        </div>
       </div>
-      </div>
-      </div>
+    </div>
   );
 };
 
 export default Register;
-
-// import React, { useState } from "react";
-// import { useRouter } from "next/router";
-// import { registerUser } from "@/api/authentication";
-
-// const Register = () => {
-//   const router = useRouter();
-//   const [formData, setFormData] = useState({
-//     name: "",
-//     email: "",
-//     password: "",
-//     passwordRepeat: "",
-//     role: "",
-//     profilPictureUrl: "",
-//     phoneNumber: "",
-//   });
-//   //   const [errors, setErrors] = useState("");
-//   const [showNotification, setShowNotification] = useState("");
-
-//   const handleChange = (e) => {
-//     setFormData({
-//       ...formData,
-//       [e.target.name]: e.target.value,
-//     });
-//   };
-
-//     const handleSubmit = async (e) => {
-//       e.preventDefault();
-//       try {
-//         const res = await registerUser(formData);
-//         console.log(res.data);
-//         //   router.push("/authentication/login");
-//          setShowNotification("Status : " + res?.message + " Successfully");
-//         setTimeout(() => {
-//           router.push("/authentication/login");
-//         }, 3000);
-//       } catch (eror) {
-//         console.error(eror);
-
-//         setShowNotification("Status : " + eror?.message);
-//       }
-//     };
-
-//   return (
-
-//       <div>
-//         <h1>Register</h1>
-//         <form onSubmit={handleSubmit}>
-//           <div>
-//             <label>Name:</label>
-//             <input type="text" name="name" value={formData.name} onChange={handleChange} />
-//           </div>
-//           <div>
-//             <label>Email:</label>
-//             <input type="email" name="email" value={formData.email} onChange={handleChange} />
-//           </div>
-//           <div>
-//             <label>Password:</label>
-//             <input type="password" name="password" value={formData.password} onChange={handleChange} />
-//           </div>
-//           <div>
-//             <label>Password Repeat:</label>
-//             <input type="password" name="passwordRepeat" value={formData.passwordRepeat} onChange={handleChange} />
-//           </div>
-//           <div>
-//             <label>Role:</label>
-//             <input type="text" name="role" value={formData.role} onChange={handleChange} />
-//           </div>
-//           <div>
-//             <label>Profil Picture Url:</label>
-//             <input type="text" name="profilPictureUrl" value={formData.profilPictureUrl} onChange={handleChange} />
-//           </div>
-//           <div>
-//             <label>Phone Number:</label>
-//             <input type="text" name="phoneNumber" value={formData.phoneNumber} onChange={handleChange} />
-//           </div>
-
-//           {showNotification && <p style={{ color: "red" }}>{showNotification}</p>}
-//           <button type="submit">Register</button>
-//         </form>
-//       </div>
-
-//   );
-// };
-
-// export default Register;
-
-// import React, { useState } from "react";
-// import { useRouter } from "next/router";
-// import { registerUser } from "@/api/authentication";
-
-// const Register = () => {
-//   const router = useRouter();
-//   const [formData, setFormData] = useState({
-//     name: "",
-//     email: "",
-//     password: "",
-//     passwordRepeat: "",
-//     role: "",
-//     profilPictureUrl: "",
-//     phoneNumber: "",
-//   });
-//   const [errors, setErrors] = useState("");
-
-//   const handleChange = (e) => {
-//     setFormData({
-//       ...formData,
-//       [e.target.name]: e.target.value,
-//     });
-//   };
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     try {
-//       const res = await registerUser(formData);
-//       console.log(res.data);
-//       router.push("/authentication/login");
-//     } catch (error) {
-//       console.error(error.data.status);
-//       setErrors(error.message);
-//     }
-//   };
-
-//   return (
-//     <div>
-//       <h1>Register</h1>
-//       <form onSubmit={handleSubmit}>
-//         <div>
-//           <label>Name:</label>
-//           <input type="text" name="name" value={formData.name} onChange={handleChange} />
-//         </div>
-//         <div>
-//           <label>Email:</label>
-//           <input type="email" name="email" value={formData.email} onChange={handleChange} />
-//         </div>
-//         <div>
-//           <label>Password:</label>
-//           <input type="password" name="password" value={formData.password} onChange={handleChange} />
-//         </div>
-//         <div>
-//           <label>Password Repeat:</label>
-//           <input type="password" name="passwordRepeat" value={formData.passwordRepeat} onChange={handleChange} />
-//         </div>
-//         <div>
-//           <label>Role:</label>
-//           <input type="text" name="role" value={formData.role} onChange={handleChange} />
-//         </div>
-//         <div>
-//           <label>Profil Picture Url:</label>
-//           <input type="text" name="profilPictureUrl" value={formData.profilPictureUrl} onChange={handleChange} />
-//         </div>
-//         <div>
-//           <label>Phone Number:</label>
-//           <input type="text" name="phoneNumber" value={formData.phoneNumber} onChange={handleChange} />
-//         </div>
-
-//         {errors && <p style={{ color: "red" }}>{errors}</p>}
-//         <button type="submit">Register</button>
-//       </form>
-//     </div>
-//   );
-// };
-
-// export default Register;

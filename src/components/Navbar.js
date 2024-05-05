@@ -3,13 +3,10 @@ import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import axios from "axios";
-import Cookies from "js-cookie";
 import { toast } from "sonner";
-// import LogInOut from "./LogInOut/LogInOut";
 
 export default function Navbar() {
   const router = useRouter();
-
   const [user, setUser] = useState({});
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -29,7 +26,7 @@ export default function Navbar() {
       })
       .then((res) => {
         console.log("res", res);
-        setUser(res.data.data); //menampilkan user yang sudah login
+        setUser(res.data.data);
       })
       .catch((err) => {
         console.log("err", err.message);
@@ -39,18 +36,10 @@ export default function Navbar() {
   const handleLogout = () => {
     localStorage.removeItem("access_token");
     toast.success("Logout successfully");
-    // router.push("/", undefined, { shallow: true }).then((success) => {
-    //   if (success) {
-    //     setTimeout(() => {
-    //       window.location.reload();
-    //     },1500);
-    //   }
-    // });
-
     setTimeout(() => {
-      router.push('/')
+      router.push("/");
       window.location.reload();
-    },1500)
+    }, 1500);
   };
 
   const toggleDropdown = () => {
@@ -62,7 +51,6 @@ export default function Navbar() {
   };
 
   console.log("user", user);
-  // const accessToken = localStorage.getItem("access_token");
   const isLoggedIn = user && Object.keys(user).length > 0;
 
   const [isOpen, setIsOpen] = useState(false);
@@ -70,7 +58,6 @@ export default function Navbar() {
     setIsOpen(!isOpen);
     console.log(isOpen);
   };
-
 
   return (
     <nav className="navbar">
@@ -81,19 +68,19 @@ export default function Navbar() {
         <Link href="/">Home</Link>
         <Link href="/promo">Promo</Link>
         <Link href="/activity">Destination</Link>
-        {!isLoggedIn ?(null) :(<Link href={'/dashboard'}>Dashboard</Link>)}
-        
+        {!isLoggedIn ? null : <Link href={"/dashboard"}>Dashboard</Link>}
+
         {!isLoggedIn ? (
           <a href="/register">Register</a>
         ) : (
-          <div className="dropdown" onMouseEnter={toggleDropdown} onMouseLeave={closeDropdown}>            
-            <div className="profile-navbar">              
+          <div className="dropdown" onMouseEnter={toggleDropdown} onMouseLeave={closeDropdown}>
+            <div className="profile-navbar">
               <img className="image-profile-navbar" src={user.profilePictureUrl} alt={user.name} />{" "}
               <a className="name-profil-navbar">{user.name}</a>
             </div>
             {isDropdownOpen && (
-                <div className="dropdown-content-navbar">
-                  <a href="/profile">Profile</a>
+              <div className="dropdown-content-navbar">
+                <a href="/profile">Profile</a>
                 <a onClick={handleLogout}>Logout</a>
               </div>
             )}
@@ -101,82 +88,9 @@ export default function Navbar() {
         )}
       </div>
 
-
       <button className="navbar-toggle" onClick={toggleMenu}>
         <span className="toggle-icon">&#9776;</span>
       </button>
-
-
     </nav>
   );
 }
-
-// import { useState } from "react";
-// import { useRouter } from "next/router";
-// import Link from "next/link";
-// import LogInOut from "./LogInOut/LogInOut";
-
-// export default function Navbar() {
-//   // const router = useRouter();
-//   const [isOpen, setIsOpen] = useState(false);
-
-//   const toggleMenu = () => {
-//     setIsOpen(!isOpen);
-//     console.log("open", isOpen);
-//   };
-
-//   return (
-//     <nav className="navbar">
-//       <div className="logo">
-//         <a href="/">Luxury Travel</a>
-//       </div>
-//       <div className={`navbar-nav ${isOpen ? "active" : ""}`}>
-//         <Link active href="/">
-//           Home
-//         </Link>
-//         <Link href="/promo">Promo</Link>
-//         <Link href="/activity">Destination</Link>
-//       {/* <LogInOut /> */}
-//       </div>
-//       <button className="navbar-toggle" onClick={toggleMenu}>
-//         <span className="toggle-icon">&#9776;</span>
-//       </button>
-
-//     </nav>
-//   );
-// }
-
-////Benar
-// import { useState } from "react";
-// import { useRouter } from "next/router";
-// import Link from "next/link";
-// import LogInOut from "./LogInOut/LogInOut";
-
-// export default function Navbar() {
-//   // const router = useRouter();
-//   const [isOpen, setIsOpen] = useState(false);
-
-//   const toggleMenu = () => {
-//     setIsOpen(!isOpen);
-//     console.log("open", isOpen);
-//   };
-
-//   return (
-//     <nav className="navbar">
-//       <div className="logo">
-//         <a href="/">Luxury Travel</a>
-//       </div>
-//       <div className={`navbar-nav ${isOpen ? "active" : ""}`}>
-//         <Link active href="/">
-//           Home
-//         </Link>
-//         <Link href="/promo">Promo</Link>
-//       <LogInOut />
-//       </div>
-//       <button className="navbar-toggle" onClick={toggleMenu}>
-//         <span className="toggle-icon">&#9776;</span>
-//       </button>
-
-//     </nav>
-//   );
-// }

@@ -1,15 +1,15 @@
-import { useDispatch } from 'react-redux';
-import { addNotification } from './actions';
+import { useDispatch } from "react-redux";
+import { addNotification } from "./actions";
 
 function ReduxNotif() {
   const dispatch = useDispatch();
 
   const handleUploadSuccess = () => {
-    dispatch(addNotification({ type: 'success', message: 'Image uploaded successfully' }));
+    dispatch(addNotification({ type: "success", message: "Image uploaded successfully" }));
   };
 
   const handleProfileUpdate = () => {
-    dispatch(addNotification({ type: 'success', message: 'Profile has been updated' }));
+    dispatch(addNotification({ type: "success", message: "Profile has been updated" }));
   };
 
   return (

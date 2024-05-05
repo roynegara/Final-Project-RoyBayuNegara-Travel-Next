@@ -1,4 +1,3 @@
-// sdh bener, REDUX untuk notif change avatar/profil image saja (syarat REDUX hehe)
 const initialState = {
     notification: ''
 };

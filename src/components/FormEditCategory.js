@@ -12,19 +12,17 @@ export default function FormEditCategory({ title, defaultName, defaultImageUrl, 
   return (
     <form onSubmit={handleEditCategory}>
       <div className="form-edit-category">
-      <h5>{title}</h5>
-          <div>
-        
-        <input defaultValue={defaultName} name="namaCategory" placeholder="Masukkan Nama Category" />
-        <input defaultValue={defaultImageUrl} name="gambarCategory" placeholder="Masukkan Gambar Category" />
+        <h5>{title}</h5>
+        <div>
+          <input defaultValue={defaultName} name="namaCategory" placeholder="Masukkan Nama Category" />
+          <input defaultValue={defaultImageUrl} name="gambarCategory" placeholder="Masukkan Gambar Category" />
+        </div>
+        <div>
+          <button type="onSubmit" disabled={loadingEditCategory}>
+            {loadingEditCategory ? "Loading..." : title}
+          </button>
+        </div>
       </div>
-      <div>
-        <button type="onSubmit" disabled={loadingEditCategory}>
-          {loadingEditCategory ? "Loading..." : title}
-        </button>
-      </div>
-      </div>
-    
     </form>
   );
 }

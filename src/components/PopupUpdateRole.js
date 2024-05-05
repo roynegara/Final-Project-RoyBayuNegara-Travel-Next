@@ -30,17 +30,16 @@ const UpdateRole = (props) => {
     getUsers();
   }, []);
 
-  return props.trigger ? ( 
+  return props.trigger ? (
     <div className="popup">
-
       <label>Update Role {user.name} </label>
       <form>
-              <select name="role" value={role} onChange={(e) => setRole(e.target.value)}>
-                <option value="">-- Change Role--</option>
-                <option value={"admin"}>Admin</option>
-                <option value={"user"}>User</option>
-              </select>
-              <button onClick={() => handleChangeUserRole(user.id, role)}>Change Role</button>
+        <select name="role" value={role} onChange={(e) => setRole(e.target.value)}>
+          <option value="">-- Change Role--</option>
+          <option value={"admin"}>Admin</option>
+          <option value={"user"}>User</option>
+        </select>
+        <button onClick={() => handleChangeUserRole(user.id, role)}>Change Role</button>
       </form>
       <button className="btn-close-popup" onClick={() => props.setTrigger(false)}>
         {" "}
@@ -48,15 +47,9 @@ const UpdateRole = (props) => {
       </button>
       {props.children}
     </div>
-     
-  ) : ('')
-}
+  ) : (
+    ""
+  );
+};
 
-export default UpdateRole
-
-
-
-
-
-
-
+export default UpdateRole;

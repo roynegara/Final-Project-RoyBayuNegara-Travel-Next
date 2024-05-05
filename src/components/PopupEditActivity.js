@@ -24,7 +24,6 @@ const PopupEditActivity = (props) => {
 
   const router = useRouter();
 
-  // Mengambil detail aktivitas untuk diedit
   const getActivityDetails = (activityId) => {
     const accessToken = localStorage.getItem("accessToken");
     axios
@@ -67,14 +66,9 @@ const PopupEditActivity = (props) => {
     setCategoryId(e.target.value);
   };
 
-  // Implementasi fungsi handle lainnya sesuai kebutuhan
-
-  const handleUpload = () => {
-    // Implementasi fungsi upload gambar
-  };
+  const handleUpload = () => {};
 
   const handleSubmit = () => {
-    // Implementasi logika submit update aktivitas
     const payload = {
       categoryId: categoryId,
       title: title,
@@ -120,10 +114,6 @@ const PopupEditActivity = (props) => {
   return props.trigger ? (
     <div className="popup-create-activity">
       <h1>Update Activity</h1>
-
-      {/* Form input fields for activity details */}
-      {/* Implement input fields for activity details similar to PopupCreateActivity */}
-
       <button onClick={handleUpload}>Upload Image</button>
 
       <div>
