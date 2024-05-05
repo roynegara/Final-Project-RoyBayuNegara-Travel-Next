@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Profile from '@/pages/profile';
 import Users from '@/pages/users';
 import Banner from '@/pages/banner';
@@ -9,6 +9,7 @@ import { useRouter } from 'next/router';
 import { toast } from 'sonner';
 
 
+
 const Dashboard = () => {
   const [showProfile, setShowProfile] = useState(true); // Ubah nilai awal menjadi true
   const [showUsers, setShowUsers] = useState(false);
@@ -17,6 +18,14 @@ const Dashboard = () => {
   const [showCategory, setShowCategory] = useState(false);
 const [showActivity, setShowActivity] = useState(false);
   const router = useRouter();
+
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem('access_token');
+    if (!accessToken) {
+      router.push('/login');
+    }
+  }, []);
   
 const handleLogout = () => {
   localStorage.removeItem("access_token");

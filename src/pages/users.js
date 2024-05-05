@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { toast } from "sonner";
+import { useRouter } from "next/router";
 
 const Users = () => {
     const [users, setUsers] = useState([]);
@@ -12,6 +13,15 @@ const Users = () => {
    
     const [selectedUserId, setSelectedUserId] = useState(null); // Track selected user for role change
     const [isModalOpen, setIsModalOpen] = useState(false); // Track modal visibility
+    const router = useRouter();
+    
+    useEffect(() => {
+        const accessToken = localStorage.getItem('access_token');
+        if (!accessToken) {
+          router.push('/login');
+        }
+      }, []);
+
 
     useEffect(() => {
         const getUsers = async () => {

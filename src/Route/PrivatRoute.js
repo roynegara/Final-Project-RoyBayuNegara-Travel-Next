@@ -11,8 +11,8 @@ const PrivateRoute = ({ children }) => {
 
     if (accessToken && (isLoginPage || isRegisterPage)) {
       router.push('/dashboard'); // Jika pengguna telah memiliki akses token dan mencoba mengakses halaman login atau registrasi, arahkan ke dashboard
-    } else if (!accessToken && !(isLoginPage || isRegisterPage)) {
-      router.push('/login'); // Jika pengguna tidak memiliki akses token dan mencoba mengakses halaman lain, arahkan ke halaman login
+    }  else if (!accessToken && (isLoginPage || isRegisterPage)) {
+      router.push('/'); // Jika pengguna tidak memiliki akses token dan mencoba mengakses halaman login atau registrasi, arahkan ke halaman login
     }
   }, []);
 

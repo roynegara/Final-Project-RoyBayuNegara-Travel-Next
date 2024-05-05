@@ -5,12 +5,21 @@ import PopupImg from "@/components/PopupImg";
 import { toast } from "sonner";
 import { useRouter } from "next/router";
 
+
 const Profile = () => {
   const [user, setUser] = useState({});
   const [buttonPopup, setButtonPopup] = useState(false);
   const [buttonPopupImg, setButtonPopupImg] = useState(false);
 
   const router = useRouter();
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem('access_token');
+    if (!accessToken) {
+      router.push('/login');
+    }
+  }, []);
+
 
   const getLoggedUser = () => {
     const accessToken = localStorage.getItem("access_token");
