@@ -39,7 +39,7 @@ const BannerCarousel = () => {
       getBanners();
     }, []);
   return (
-    <div className="banners-home">
+    <div className="banners-home" >
       <h1>From Indonesia To The World</h1>
       <div className="banners-container-home">
         <Slider {...settings}>
@@ -56,6 +56,7 @@ const BannerCarousel = () => {
           ))}
         </Slider>
       </div>
+      
     </div>
   );
 };
