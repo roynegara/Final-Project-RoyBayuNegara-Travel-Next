@@ -3161,6 +3161,7 @@ justify-items: center;
 
 .popup-create-activity {
   width: 1000px;
+  height: 80%;
   background: rgba(4, 33, 73, 0.8);
   border: 1px solid rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(15px);
@@ -3621,6 +3622,20 @@ justify-items: center;
     margin-top: 125px;
     text-align: center;
   }
+
+  .popup-create-activity-wrap {
+    margin-top: 120px;
+  }
+  .popup-create-activity, .popup-edit-activity {
+    width: 500px;
+    height: 70%;
+    overflow: scroll;    
+  }
+ 
+  .input-box-create-activity-separate,.input-box-edit-activity-separate {
+    display: block;        
+  }
+    
 }
 
 @media screen and (max-width: 768px) {
@@ -3630,14 +3645,39 @@ justify-items: center;
   .activities-card {
     width: 87%;
   }
-  .popup-create-activity {
-    width: 300px;
+
+  .popup-create-activity-wrap {
+    margin-top: 120px;
+  }  
+  .popup-create-activity, .popup-edit-activity {
+    width: 400px;
+    height: 80%;
+    overflow: scroll;    
   }
+  .input-box-create-activity, .input-box-edit-activity {
+    position: relative;
+    width: 300px;
+    height: 50px;
+    margin: 20px;
+    padding: 20px;
+  }
+   
+  .option-create-activity {
+    width: 74%;
+    height: 8%;
+    padding: 10px;
+    margin: 0;
+  }
+  .upload-image-create-activity,.upload-image-edit-activity {
+    width: 74%;
+    height: 8%;
+    padding: 10px;
+    margin-top: 20px;
+  }
+
   .popup-delete-activity {
     width: 300px;
   }
-
-
 
 
   .activities-home-wrapper{
@@ -3673,6 +3713,40 @@ justify-items: center;
   .activityid-card-home h3 { 
     font-size: 10px;
   }
+
+  .popup-create-activity-wrap {
+    margin-top: 120px;
+  }
+
+  
+  .popup-create-activity,.popup-edit-activity {
+    width: 350px;
+    height: 80%;
+    overflow: scroll;    
+  }
+  .input-box-create-activity, .input-box-edit-activity {
+    position: relative;
+    width: 300px;
+    height: 50px;
+    margin: 20px;
+    padding: 20px;
+  }
+   
+  .option-create-activity, .option-edit-activity {
+    width: 88%;
+    height: 8%;
+    padding: 10px;
+    margin-left: 40px;
+  }
+  .upload-image-create-activity, .upload-image-edit-activity {
+    width: 88%;
+    height: 8%;
+    padding-left: 20px;
+    margin-top: 20px;
+    margin-left: 40px;
+  }
+
+
 }
 /* Activity home style End */
 

@@ -10,9 +10,9 @@ const PrivateRoute = ({ children }) => {
     const isRegisterPage = router.pathname === '/register';
 
     if (accessToken && (isLoginPage || isRegisterPage)) {
-      router.push('/dashboard'); // Jika pengguna telah memiliki akses token dan mencoba mengakses halaman login atau registrasi, arahkan ke dashboard
+      router.push('/dashboard'); 
     }  else if (!accessToken && (isLoginPage || isRegisterPage)) {
-      router.push('/'); // Jika pengguna tidak memiliki akses token dan mencoba mengakses halaman login atau registrasi, arahkan ke halaman login
+      router.push('/'); 
     }
   }, []);
 
