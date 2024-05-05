@@ -63,11 +63,9 @@ const Promo = () => {
       .then((res) => {
         console.log(res);
         setImageUrl(res.data.url);
-        // toast.success(res?.data?.message);
       })
       .catch((err) => {
         console.log(err);
-        // toast.error(err?.response?.data?.message);
       });
   };
 
@@ -320,7 +318,7 @@ const Promo = () => {
       {deletingPromo && (
         <div className="popup-delete-promo-wrap">
           <div className="popup-delete-promo">
-          <p>Are you sure you want to delete {deletingPromo.id}?</p>
+          <p>Are you sure you want to delete {deletingPromo.title}?</p>
             <div className="btn-delete-promo-popup">
               <button onClick={confirmDelete}>Yes</button>
               <button onClick={() => setDeletingPromo(null)}>No</button>
