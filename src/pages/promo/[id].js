@@ -100,13 +100,14 @@ export default function PromoById({ promo }) {
   return (
     <div className="promoid">
       <div className="promoid-card-home">
-      <div>
+        <div>
         <h1>{promo.title}</h1>
         <img src={promo?.imageUrl} alt={promo?.title} />
-        <h1>This is {promo?.title} Promo</h1>
+        <p>{promo?.description}</p>
+        {/* <h2>This is {promo?.title} Promo</h2> */}
       </div>
       <div>
-        <h1>Promo Code : {promo.promo_code}</h1>
+        <h2>Promo Code : {promo.promo_code}</h2>
       </div>
       <div>
         <h2> Minimum Claim Price : {promo.minimum_claim_price}</h2>
@@ -116,7 +117,7 @@ export default function PromoById({ promo }) {
         <h2>Read The Term and Condition : {promo.terms_condition}</h2>
       </div>
       <div>
-        <p>{promo?.description}</p>
+        
         </div>
         </div>
 
