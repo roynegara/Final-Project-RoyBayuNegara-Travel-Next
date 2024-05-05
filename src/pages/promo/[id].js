@@ -98,7 +98,8 @@ export default function PromoById({ promo }) {
   };
 
   return (
-    <div className="promo">
+    <div className="promoid">
+      <div className="promoid-card-home">
       <div>
         <h1>{promo.title}</h1>
         <img src={promo?.imageUrl} alt={promo?.title} />
@@ -116,10 +117,12 @@ export default function PromoById({ promo }) {
       </div>
       <div>
         <p>{promo?.description}</p>
-      </div>
+        </div>
+        </div>
 
+        
       <div>
-        <button onClick={togglePopupEdit}> Edit Promo {promo?.title}</button>
+        {/* <button onClick={togglePopupEdit}> Edit Promo {promo?.title}</button> */}
         {isPopupOpenEdit && (
           <div className="popup-edit-promo">
             <button className="btn-close-popup-edit-promo" onClick={togglePopupEdit}>
@@ -142,7 +145,7 @@ export default function PromoById({ promo }) {
       </div>
 
       <div>
-        <button onClick={togglePopupDelete}>Delete {promo?.title}</button>
+        {/* <button onClick={togglePopupDelete}>Delete {promo?.title}</button> */}
         {isPopupOpenDelete && (
           <div>
             <div className="popup-delete-promo">

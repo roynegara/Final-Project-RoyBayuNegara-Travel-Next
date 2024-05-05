@@ -91,15 +91,15 @@ export default function CategoryById({ category }) {
   };
 
   return (
-    <div className="category">
-      <div>
-        <img src={category?.imageUrl} alt={category?.name} />
-        <h3>{category?.id}</h3>
+    <div className="categoryid">
+      <div className="categoryid-card-home">
         <h1>This is {category?.name} Category</h1>
+        <img src={category?.imageUrl} alt={category?.name} />
+        {/* <h3>{category?.id}</h3> */}
       </div>
 
       <div>
-        <button onClick={togglePopupEdit}>Edit Category {category?.name}</button>
+        {/* <button onClick={togglePopupEdit}>Edit Category {category?.name}</button> */}
         {isPopupOpenEdit && (
           <div className="popup-edit-category">
             <button className="btn-close-popup-edit-category" onClick={togglePopupEdit}>
@@ -117,7 +117,7 @@ export default function CategoryById({ category }) {
       </div>
 
       <div>
-        <button onClick={togglePopupDelete}>Delete {category?.name}</button>
+        {/* <button onClick={togglePopupDelete}>Delete {category?.name}</button> */}
         {isPopupOpenDelete && (
           <div>
             <div className="popup-delete-category">

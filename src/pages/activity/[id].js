@@ -125,20 +125,22 @@ export default function ActivityById({ activity }) {
   
 
   return (
-    <div className="activity">
-      <div>
+    <div className="activityid">
+      <div className="activityid-card-home">
+      <div >
+        <h1>{activity.title}</h1>
         <img
           src={activity.imageUrls?.[0] && activity.imageUrls?.[1] ? activity.imageUrls?.[1] : activity.imageUrls?.[0]}
           alt={activity.name}
           />
-          <h1>{activity.title}</h1>
       </div>
 
       {/* {activity.imageUrls.map((url, index) => (
         <img key={index} src={url} alt={`Image ${index.title}`} />
       ))} */}
 
-      <div><h3>{activity.description}</h3>
+      <div>
+        <h3>{activity.description}</h3>
       <h2>Address : {activity.address}</h2>
       <h2>City : {activity.city}</h2>
       <h2>Facilities : {activity.facilities}</h2>
@@ -146,10 +148,11 @@ export default function ActivityById({ activity }) {
       <h2> Proce Discount : {activity.price_discount}</h2>
       <h2> Rating : {activity.rating}</h2>
         <h2>Total Review : {activity.total_reviews}</h2>
-      </div>
+        </div>
+        </div>
       
       <div>
-        <button onClick={togglePopupEdit}>Edit Destination {activity?.title}</button>
+        {/* <button onClick={togglePopupEdit}>Edit Destination {activity?.title}</button> */}
         {isPopupOpenEdit && (
           <div className="popup-edit-activity">
             <button className="btn-close-popup-edit-activity" onClick={togglePopupEdit}>X</button>
@@ -177,7 +180,7 @@ export default function ActivityById({ activity }) {
 
 
       <div>
-        <button onClick={togglePopupDelete}>Delete {activity?.title}</button>
+        {/* <button onClick={togglePopupDelete}>Delete {activity?.title}</button> */}
         {isPopupOpenDelete && (
           <div className="popup-delete-activity">
             <div></div>
