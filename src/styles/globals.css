@@ -302,6 +302,8 @@ button {
 /* ========== Navbar End ========== */
 
 /* Home Start */
+
+/* title start */
 .home {
   display: flex;
   flex-direction: column;
@@ -382,6 +384,44 @@ button {
   backdrop-filter: blur(15px);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0, 0.2);
 }
+
+@media screen and (max-width: 1024px) {
+  
+.home-title h1 {
+  font-size: 20px;
+}
+
+.home-title-main {
+  font-weight: 800;
+  font-size: 50px;
+}
+}
+
+@media screen and (max-width: 768px) {
+.home-title {
+  margin-top: 12px;
+}
+
+  .home-title h1 {
+    font-size: 15px;
+  }
+  
+  .home-title-main {
+    font-size: 30px;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  
+  .home-title h1 {
+    font-size: 10px;
+  }
+  
+  .home-title-main {
+    font-size: 20px;
+  }
+}
+/* title end */
 
 /* Banner Component Home Start */
 /* Container for the entire carousel */
@@ -488,7 +528,61 @@ button {
   border-radius: 10px;
 }
 
-/* Banner Component Home End */
+/* banner id home  start */
+.bannerid {
+  margin-top: 100px;
+min-height: 70vh;
+}
+
+.bannerid-card-home{
+  text-align: center;
+}
+
+.bannerid-card-home img{
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.bannerid-card-home button{
+  text-decoration: none;
+  padding: 20px;
+  color: #b3b3b3;
+  font-size: 30px;
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0, 0.2);
+  border: none;
+  border-radius: 4px;
+  font-size: 18px;
+  font-weight: 500;
+  padding: 4px;
+  margin: 10px;
+  width: 125px;
+  height: 40px;
+  color: #e2e2e2;
+}
+
+.bannerid-card-home button:hover{
+  background: rgb(56, 143, 188, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0, 0.2);
+}
+
+
+@media (max-width: 768px) {
+  .banners-home h1 {
+    font-size: 30px;
+  }
+}
+/* banner id home end */
+
+
+/* ====== Banner Component Home End ====== */
 
 .link-home {
   margin: 25px;
@@ -1879,8 +1973,187 @@ button {
 }
 
 /* popupeditpromo */
+.popup-edit-promos-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: rgba(4, 33, 73, 1);
+  background-size: cover;
+  background-position: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
 
+.popup-edit-promos {
+  width: 800px;
+  /* background: transparent; */
+  background: rgba(4, 33, 73, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0, 0.2);
+  color: #ededed;
+  border-radius: 10px;
+  padding: 25px;
+  /* position: fixed; */
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+  color: #e2e2e2;
+}
+
+.popup-edit-promos h1 {
+  text-align: center;
+  font-size: 36px;
+}
+
+.input-box-edit-promos {
+  position: relative;
+  width: 100%;
+  height: 50px;
+  margin: 30px 0;
+}
+
+.input-editpromos {
+  display: flex;
+  flex: wrap;
+}
+
+.input-box-edit-promos textarea {
+  width: 170%;
+  height: 150%;
+  padding: 10px;
+  margin-left: 15px;
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 9px;
+  font-size: 15px;
+  color: #ededed;
+}
+
+#textarea-edit-promos-description {
+  height: 350%;
+}
+
+.input-box-edit-promos input {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 9px;
+  font-size: 15px;
+  color: #ededed;
+  padding: 20px 45px 20px 20px;
+}
+
+.input-box-edit-promos input::placeholder {
+  color: #b4b4b4;
+}
+
+.btn-edit-promos-popup button {
+  text-decoration: none;
+  padding: 20px;
+  color: #b3b3b3;
+  font-size: 30px;
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0, 0.2);
+  border: none;
+  border-radius: 4px;
+  font-size: 18px;
+  font-weight: 500;
+  padding: 4px;
+  margin: 10px;
+  width: 125px;
+  height: 40px;
+  color: #e2e2e2;
+}
+
+.btn-edit-promos-popup button:hover {
+  background: rgb(56, 143, 188, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0, 0.2);
+}
+
+.btn-close-popup-edit-promos {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  color: #e2e2e2;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+}
+
+/* popupdeletepromo */
+.popup-delete-promo-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: rgba(4, 33, 73, 1);
+  background-size: cover;
+  background-position: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.popup-delete-promo {
+  width: 420px;
+  background: rgba(4, 33, 73, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0, 0.2);
+  color: #ededed;
+  border-radius: 10px;
+  padding: 25px;
+  position: fixed;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+  color: #e2e2e2;
+}
+
+.btn-delete-promo-popup button {
+  text-decoration: none;
+  padding: 20px;
+  color: #b3b3b3;
+  font-size: 30px;
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0, 0.2);
+  border: none;
+  border-radius: 4px;
+  font-size: 18px;
+  font-weight: 500;
+  padding: 4px;
+  margin: 10px;
+  width: 125px;
+  height: 40px;
+  color: #e2e2e2;
+}
+
+.btn-delete-promo-popup button:hover {
+  background: rgb(56, 143, 188, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0, 0.2);
+}
 
 /* Promo home style Start */
 .promos-home-wrapper {
@@ -1995,6 +2268,15 @@ button {
   .popup-delete-promo {
     width: 300px;
   }
+
+
+  .promos-home-wrapper{
+    text-align: center;
+  }
+  .promos-container-home {    
+    grid-template-columns: 1fr;    
+  }
+
 }
 /* Promo End */
 
@@ -2210,6 +2492,10 @@ button {
 }
 
 
+
+
+
+
 .popup-delete-category-wrap {
   display: flex;
   justify-content: center;
@@ -2326,6 +2612,17 @@ button {
   padding: 5px;
   margin: 0;
   border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+  .categories-home-wrapper {
+    text-align: center;
+  }
+
+  .categories-container-home {
+    grid-template-columns: 1fr;
+  }
+  
 }
 
 /* Categories home style End */
@@ -2585,6 +2882,134 @@ button {
   /* justify-content: center; */
 }
 
+/* edit activity start */
+.popup-edit-activity-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: rgba(4, 33, 73, 1);
+  background-size: cover;
+  background-position: center;
+  position: fixed;
+  top: 53%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.popup-edit-activity {
+  width: 1000px;
+  background: rgba(4, 33, 73, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0, 0.2);
+  color: #ededed;
+  border-radius: 10px;
+  padding: 25px;
+  position: fixed;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+  color: #e2e2e2;
+}
+
+.popup-edit-activity h1 {
+  text-align: center;
+  font-size: 36px;
+}
+
+.upload-image-edit-activity {
+  width: 75%;
+  height: 12%;
+  padding: 20px;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  outline: none;
+  border-radius: 9px;
+  font-size: 15px;
+  color: #ededed;
+  cursor: pointer;
+  background: rgba(4, 33, 73, 1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.upload-image-edit-activity:hover {
+  cursor: pointer;
+}
+
+.input-box-edit-activity {
+  position: relative;
+  width: 400px;
+  height: 50px;
+  margin: 30px;
+  padding: 30px;
+}
+
+.input-box-edit-activity input {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  outline: none;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 9px;
+  font-size: 15px;
+  color: #ededed;
+  padding: 20px 45px 20px 20px;
+}
+
+.input-box-edit-activity input::placeholder {
+  color: #b4b4b4;
+}
+
+
+
+
+.btn-edit-activity-popup button {
+  text-decoration: none;
+  padding: 20px;
+  color: #b3b3b3;
+  font-size: 30px;
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0, 0.2);
+  border: none;
+  border-radius: 4px;
+  font-size: 18px;
+  font-weight: 500;
+  padding: 4px;
+  margin: 10px;
+  width: 185px;
+  height: 40px;
+  color: #e2e2e2;
+}
+
+.btn-edit-activity-popup button:hover {
+  background: rgb(56, 143, 188, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0, 0.2);
+}
+
+.btn-close-popup-edit-activity {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  color: #e2e2e2;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+}
+
+.input-box-edit-activity-separate {
+  display: flex;
+  /* justify-content: center; */
+}
+/* edit activity end */
 
 .popup-delete-activity-wrap {
   display: flex;
@@ -2703,18 +3128,24 @@ button {
   text-align: end;
 }
 
+@media screen and (max-width: 768px) {
+  .activities-home-wrapper{
+    text-align: center;
+  }
+  .activities-container-home {    
+    grid-template-columns: 1fr;    
+  }
+}
 /* Activity home style End */
 
 /* activitybyCategory start */
 .activity-by-categoryId {
   max-width: 100%;
   margin: 0 auto;
-
-  padding: 5px 300px;
-
+  padding: 5px 200px;
   background: rgba(4, 33, 73, 0.8);
   /* background: rgb(56, 143, 188, 0.4); */
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.2);  
   backdrop-filter: blur(25px);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0, 0.2);
   color: #e2e2e2;
@@ -2722,6 +3153,10 @@ button {
   margin-left: auto;
   margin-right: auto;
   justify-content: center;
+}
+
+.activity-by-categoryId ul {
+  list-style-type: none;
 }
 
 .activity-option {
@@ -2798,6 +3233,50 @@ button {
 
 .activity-option-card-description {
   color: #e2e2e2;
+}
+
+@media (max-width: 1664px) {
+  .activity-option-wrapper {
+    grid-template-columns: repeat(2, minmax(auto, 1fr));  
+  }
+}
+@media (max-width: 1268px) {
+  .activity-option-wrapper {
+    grid-template-columns: repeat(1, minmax(auto, 1fr));  
+  }
+}
+
+@media (max-width: 768px) {
+  .activity-by-categoryId {
+   padding: 5px;
+    padding-right: 20%;
+    padding-left: 20%;   
+  }
+
+  .activity-option-wrapper {
+    grid-template-columns: repeat(1, minmax(auto, 1fr));  
+    font-size: 10px;
+  }
+
+
+  .activity-option-card {
+      padding: 5px 7px;
+  
+  }
+  
+  .activity-option-card img {
+    width: 150px;
+    height: 150px;
+    
+  }
+  
+  .activity-option-card-body {
+    width: 50%;    
+    padding: 5px 7px;    
+  }
+
+
+
 }
 /* activitybyCategory end */
 

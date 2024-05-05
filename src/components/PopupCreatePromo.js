@@ -155,10 +155,13 @@ const CreatePromo = (props) => {
         <h1>Add Promo</h1>
 
         <div className="input-addpromos">
+
           <div className="input-box-create-promos-input">
+
             <div className="input-box-create-promos">
               <input type="text" name="title" value={title} onChange={handleTitleChange} placeholder="Title" />
             </div>
+            
             <div className="input-box-create-promos">
               <input type="file" name="imageUrl" onChange={handleImageUrlChange} placeholder="Image Url" />
             </div>

@@ -174,7 +174,7 @@ const Banner = () => {
                 <Link href={`/banner/${banner.id}`} >
                   <img src={banner.imageUrl} alt={banner.name} />
                   </Link>
-                <p>{banner.name}</p>
+                <h2>{banner.name.toUpperCase()}</h2>
                 {isLoggedIn && (
                   <div>                  
                   <button onClick={() => handleEditBanner(banner)}>Edit</button>
@@ -224,7 +224,7 @@ const Banner = () => {
       {deletingBanner && (
         <div className="popup-delete-banner-wrap">
           <div className="popup-delete-banner">
-            <p>Are you sure you want to delete this banner?</p>
+            <p>Are you sure you want to delete {deletingBanner.name}?</p>
             <div className="btn-delete-banner-popup">
               <button onClick={confirmDelete}>Yes</button>
               <button onClick={() => setDeletingBanner(null)}>No</button>

@@ -154,8 +154,8 @@ const CreateActivity = (props) => {
         // setNotif("Status : Activity Created");
         toast.success(`${title} has been created`);
         setImageUrls(res?.data?.url);
-        props.updateActivityData();
-        props.setTrigger(false);
+        // props.updateActivityData();
+        // props.setTrigger(false);
        
 
         // setTimeout(() => {
@@ -195,7 +195,6 @@ const CreateActivity = (props) => {
       { name: 'categories', label: 'categories' },
       { name: 'title', label: 'title' },
       { name: 'description', label: 'description' },
-      
       { name: 'price', label: 'price' },
       { name: 'price_discount', label: 'price discount' },
       { name: 'rating', label: 'rating' },
@@ -270,7 +269,8 @@ const CreateActivity = (props) => {
 
         <div className="input-box-create-activity-separate">      
           
-        <div className="input-box-create-activity-7kiri">
+          <div className="input-box-create-activity-7kiri">
+            
         <select className="option-create-activity" name="categoryId" value={categoryId} onChange={handleCategoryIdChange}>
         <option value="">-- Select Category --</option>
         {categories.map((category, index) => (
@@ -313,8 +313,7 @@ const CreateActivity = (props) => {
           </div>
           <div className="input-box-create-activity">
       <input type="number" name="rating" value={rating} onChange={handleRatingChange} placeholder="Rating" />
-     </div>
-               
+     </div>               
     </div>
           
           <div className="input-box-create-activity-7kanan">

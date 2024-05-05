@@ -179,6 +179,7 @@ const Category = () => {
   }, []);
 
 
+  const categoryToDelete = categories.find(category => category.id === categoryIdToDelete);
   return (
     <div>
       <div className={`${buttonPopupCreateCategory || editModalOpen || deleteModalOpen ? 'blur' : ''}`}>
@@ -198,7 +199,7 @@ const Category = () => {
                 <img src={category.imageUrl} alt={category.name} />
                 </Link>
               {/* <p>{category.id}</p> */}
-              <p>{category.name}</p>
+              <h2>{category.name.toUpperCase()}</h2>
 
               {isLoggedIn && (
                  <div>
@@ -251,7 +252,8 @@ const Category = () => {
          <div className="popup-delete-category-wrap"> 
            <div className="popup-delete-category">
             {/* <h2>Confirm Deletion</h2> */}
-            <p>Are you sure you want to delete this category?</p>
+            {/* <p>Are you sure you want to delete {deleteModalOpen.name}?</p> */}
+            <p>Are you sure you want to delete {categoryToDelete && categoryToDelete.name}?</p>
             <div className="btn-delete-category-popup">
               <button onClick={onDeleteConfirmed}>Yes</button>
               <button onClick={onCancelDelete}>No</button>

@@ -97,14 +97,17 @@ export default function BannerById({ banner }) {
 
 
 
- 
+  let bannerName = `This is ${banner?.name} Banner`;
+  let upperCaseBannerName = bannerName.toUpperCase();
 
   return (
-    <div className="banner">
-      <div>
+    <div className="bannerid">
+      <div className="bannerid-card-home">
         
+        <h1>{upperCaseBannerName}</h1>
         <img src={banner?.imageUrl} alt={banner?.name} />
-        <h1>This is {banner?.name} Banner</h1>
+        
+        {/* <h1>This is {banner?.name} Banner</h1> */}
       </div>
 
       {/* <div>
@@ -113,7 +116,7 @@ export default function BannerById({ banner }) {
       </div> */}
 
       <div>
-        <button onClick={togglePopupEdit}>Edit Banner {banner?.name}</button>
+        {/* <button onClick={togglePopupEdit}>Edit Banner {banner?.name}</button> */}
         {isPopupOpenEdit && (
           <div className="popup-edit-banner">
             <button className="btn-close-popup-edit-banner" onClick={togglePopupEdit}>
@@ -145,7 +148,7 @@ export default function BannerById({ banner }) {
 
       <div>
         
-        <button onClick={togglePopupDelete}>Delete {banner?.name}</button>
+        {/* <button onClick={togglePopupDelete}>Delete {banner?.name}</button> */}
         {isPopupOpenDelete && (
           <div>
           
@@ -173,7 +176,7 @@ export default function BannerById({ banner }) {
           
         )}
       </div>
-      <div>
+      <div className="bannerid-card-home">
       <button onClick={() => router.back()}>Back</button>       
       </div>
     </div>

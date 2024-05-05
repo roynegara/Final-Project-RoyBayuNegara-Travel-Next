@@ -232,7 +232,7 @@ const Promo = () => {
               <Link href={`/promo/${promo.id}`}>
                   <img src={promo.imageUrl} alt={promo.title} />
                   </Link>
-                <p>{promo.title}</p>
+                <h2>{promo.title.toUpperCase()}</h2>
                 <p>{promo.description}</p>
                 {isLoggedIn && (
                   <div>
@@ -247,15 +247,18 @@ const Promo = () => {
       </div>
 
       {editingPromo && (
-        <div className="popup-edit-promo-wrap">
+        <div className="popup-edit-promos-wrap">
           <div className="popup-edit-promos">
             <h1>Edit Promo</h1>
 
-            <div className="input-editpromos">
+          <div className="input-editpromos">
+
               <div className="input-box-edit-promos-input">
+                
             <div className="input-box-edit-promos">
               <input type="text" value={editName} onChange={(e) => setEditName(e.target.value)} placeholder="Name" />
             </div>
+                
             <div className="input-box-edit-promos">
               <input type="file" onChange={(e) => setFile(e.target.files[0])} placeholder="Image URL" />
             </div>
@@ -335,7 +338,7 @@ const Promo = () => {
       {deletingPromo && (
         <div className="popup-delete-promo-wrap">
           <div className="popup-delete-promo">
-            <p>Are you sure you want to delete {deletingPromo.title}?</p>
+          <p>Are you sure you want to delete {deletingPromo.id}?</p>
             <div className="btn-delete-promo-popup">
               <button onClick={confirmDelete}>Yes</button>
               <button onClick={() => setDeletingPromo(null)}>No</button>

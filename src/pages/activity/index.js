@@ -301,9 +301,17 @@ const Activity = () => {
 
       {editingActivity && (
         <div className="popup-edit-activity-wrap">
-          <div className="popup-edit-activity">
-            <h2>Edit Destination</h2>
 
+          <div className="popup-edit-activity">
+
+            <h1>Edit Destination</h1>
+            
+            <div className="input-box-edit-activity-separate">   
+
+              <div className="input-box-edit-activity-7kiri">
+
+             
+                
             <div className="input-box-edit-activity">
               <input
                 type="text"
@@ -312,19 +320,8 @@ const Activity = () => {
                 placeholder="Destination Name"
               />
             </div>
-
-            <div className="input-box-edit-activity">
-              <input type="file" onChange={(e) => setFile(e.target.files[0])} />
-            </div>
-
-            <div className="input-box-edit-activity">
-              <textarea
-                type="text"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                placeholder="Description"
-              />
-            </div>
+           
+           
 
             <div className="input-box-edit-activity">
               <input
@@ -338,7 +335,8 @@ const Activity = () => {
                 }}
                 placeholder="Price"
               />
-            </div>
+                </div>
+                
 
             <div className="input-box-edit-activity">
               <input
@@ -352,9 +350,9 @@ const Activity = () => {
                 }}
                 placeholder="Price Discount"
               />
-            </div>
+                </div>
 
-            <div className="input-box-edit-activity">
+                <div className="input-box-edit-activity">
               <input type="text" value={rating} onChange={(e) => setRating(e.target.value)} placeholder="Rating" />
             </div>
 
@@ -375,6 +373,14 @@ const Activity = () => {
                 placeholder="Facilities"
               />
             </div>
+          
+              </div>
+              
+              
+
+              <div className="input-box-edit-activity-7kanan">
+                
+                         
 
             <div className="input-box-edit-activity">
               <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} placeholder="Address" />
@@ -391,6 +397,16 @@ const Activity = () => {
 
             <div className="input-box-edit-activity">
               <input type="text" value={city} onChange={(e) => setCity(e.target.value)} placeholder="City" />
+                </div>
+                
+                <div className="input-box-edit-activity">
+              <input
+                type="text"
+                    value={description}
+                    id="textarea-edit-activity-description"
+                onChange={(e) => setDescription(e.target.value)}
+                placeholder="Description"
+              />
             </div>
 
             <div className="input-box-edit-activity">
@@ -400,9 +416,12 @@ const Activity = () => {
                 onChange={(e) => setLocation_maps(e.target.value)}
                 placeholder="Location Maps"
               />
+                </div>
+                <input className="upload-image-edit-activity" type="file" onChange={(e) => setFile(e.target.files[0])} />
+            </div>
             </div>
 
-            <div className="btn-create-activity-popup">
+            <div className="btn-edit-activity-popup">
               <button onClick={handleUpload}>Edit Destination</button>
             </div>
 
