@@ -95,7 +95,7 @@ export default function Home() {
 
   return (
     <div>
-<div className="home-title">
+<div className="home-title" >
         <a className="home-title-main">Luxury Travel</a>
         <br/>
         <h1>With Us Travel Everywere Place To Visit</h1>

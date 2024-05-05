@@ -157,7 +157,7 @@ const Banner = () => {
   }, []);
 
   return (
-    <div>
+    <div className="banners-main">
       <div className={`${buttonPopupCreateBanner || deletingBanner || editingBanner ? 'blur' : ''}`}>
       <h1 className="banners-title">Banner Database</h1>
 

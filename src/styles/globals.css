@@ -309,19 +309,31 @@ button {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  /* text-align: center; */
-  /* background: url("https://img.freepik.com/free-photo/mesmerizing-green-forest-full-different-kinds-unique-plants-yakushima-japan_181624-36812.jpg?t=st=1709945766~exp=1709949366~hmac=66c4f9a8be4f9976e111b33d8085882ac64096877ef13875986dac1d50aa521d&w=1380")
-    no-repeat; */
-
-  /* background: linear-gradient(to right bottom, #56b9e7,  #003e6b); */
-  /* background: linear-gradient(to right bottom, #32abe2,  #003e6b); */
+  min-height: 100vh; 
   background: #fff;
-  /* background: linear-gradient(195deg, #79CAF0 31%, transparent 31%); */
   background-size: cover;
   background-position: center;
   padding: 20px 10%;
   background: #042149;
+}
+
+.home::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  animation: showRight 1s ease forwards;
+  animation-delay: 0.1s;
+  border-radius: 25px;
+}
+
+@keyframes showRight {
+  100% {
+    width: 0;
+  }
 }
 
 .home-title {
@@ -533,6 +545,25 @@ button {
 .bannerid {
   margin-top: 100px;
 min-height: 70vh;
+}
+
+.bannerid::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  animation: showRight 1s ease forwards;
+  animation-delay: 0.1s;
+  border-radius: 25px;
+}
+
+@keyframes showRight {
+  100% {
+    width: 0;
+  }
 }
 
 .bannerid-card-home{
@@ -908,6 +939,25 @@ min-height: 70vh;
   padding: 20px 10%;
 }
 
+.profile-main::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  animation: showRight 1s ease forwards;
+  animation-delay: 0.1s;
+  border-radius: 25px;
+}
+
+@keyframes showRight {
+  100% {
+    width: 0;
+  }
+}
+
 .profile-title {
   margin-top: 100px;
   font-size: 30px;
@@ -1244,14 +1294,28 @@ min-height: 70vh;
   align-items: center;
   text-align: center;
   min-height: 100vh;
-  /* background: linear-gradient(to right bottom, #208cbe,  #002946);  */
-  /* background: url('https://img.freepik.com/free-photo/tranquil-bay-with-azure-waters-palmfringed-sands-is-hidden-by-green-hills_91128-4562.jpg?t=st=1713874971~exp=1713878571~hmac=3e92a893bcf52c58f81f02f0b37da4e77a643cc293f2053ff2191445724c6083&w=1800'), no-repeat; */
-  /* background-size: cover; */
-  /* background-position: center; */
-  /* padding: 20px 10%; */
-  /* padding : 0; */
   display: block;
 }
+
+.users::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  animation: showRight 1s ease forwards;
+  animation-delay: 0.1s;
+  border-radius: 25px;
+}
+
+@keyframes showRight {
+  100% {
+    width: 0;
+  }
+}
+
 
 .users-title {
   margin-top: 100px;
@@ -1454,6 +1518,25 @@ min-height: 70vh;
 /* ========== Users End ========== */
 
 /* Banner Start */
+.banners::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  animation: showRight 1s ease forwards;
+  animation-delay: 0.1s;
+  border-radius: 25px;
+}
+
+@keyframes showRight {
+  100% {
+    width: 0;
+  }
+}
+
 .banners-title {
   margin-top: 100px;
   font-size: 30px;
@@ -1806,8 +1889,27 @@ min-height: 70vh;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(5, auto);
-  /* gap: 5px;; */
 }
+
+.promos::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  animation: showRight 1s ease forwards;
+  animation-delay: 0.1s;
+  border-radius: 25px;
+}
+
+@keyframes showRight {
+  100% {
+    width: 0;
+  }
+}
+
 
 .promos-card {
   display: flex;
@@ -2264,6 +2366,27 @@ min-height: 70vh;
   margin-top: 90px;
   text-align: center;
 }
+
+.promoid::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  animation: showRight 1s ease forwards;
+  animation-delay: 0.1s;
+  border-radius: 25px;
+}
+
+@keyframes showRight {
+  100% {
+    width: 0;
+  }
+}
+
+
 .promoid-card-home  {
 text-align: center;
 justify-content: center;
@@ -2439,6 +2562,25 @@ justify-items: center;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(5, auto);
+}
+
+.categories::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  animation: showRight 1s ease forwards;
+  animation-delay: 0.1s;
+  border-radius: 25px;
+}
+
+@keyframes showRight {
+  100% {
+    width: 0;
+  }
 }
 
 .categories-card {
@@ -2728,6 +2870,25 @@ justify-items: center;
   text-align: center
 }
 
+.categoryid::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  animation: showRight 1s ease forwards;
+  animation-delay: 0.1s;
+  border-radius: 25px;
+}
+
+@keyframes showRight {
+  100% {
+    width: 0;
+  }
+}
+
 .categoryid-card-home {
   text-align: center;
   justify-content: center;
@@ -2849,6 +3010,25 @@ justify-items: center;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(5, auto);
+}
+
+.activities::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  animation: showRight 1s ease forwards;
+  animation-delay: 0.1s;
+  border-radius: 25px;
+}
+
+@keyframes showRight {
+  100% {
+    width: 0;
+  }
 }
 
 .activities-card {
@@ -3301,6 +3481,27 @@ justify-items: center;
   margin-top: 90px;
   text-align: center;
 }
+.activityid::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  animation: showRight 1s ease forwards;
+  animation-delay: 0.1s;
+  border-radius: 25px;
+}
+
+@keyframes showRight {
+  100% {
+    width: 0;
+  }
+}
+
+
+
 .activityid-card-home  {
 text-align: center;
 justify-content: center;
@@ -3720,6 +3921,25 @@ body {
   display: flex;
   min-height: 100vh;
   background: rgba(4, 33, 73, 0.8);
+}
+
+.dashboard::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  animation: showRight 1s ease forwards;
+  animation-delay: 0.1s;
+  border-radius: 25px;
+}
+
+@keyframes showRight {
+  100% {
+    width: 0;
+  }
 }
 
 .sidebar {

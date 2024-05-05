@@ -181,7 +181,7 @@ const Category = () => {
 
   const categoryToDelete = categories.find(category => category.id === categoryIdToDelete);
   return (
-    <div>
+    <div className="categories-page">
       <div className={`${buttonPopupCreateCategory || editModalOpen || deleteModalOpen ? 'blur' : ''}`}>
       <h1 className="categories-title">Category Database</h1>
 
