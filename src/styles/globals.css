@@ -3175,6 +3175,7 @@ justify-items: center;
   align-items: center;
   justify-items: center;
   color: #e2e2e2;
+  overflow: scroll;  
 }
 
 .popup-create-activity h1 {
@@ -3316,6 +3317,7 @@ justify-items: center;
   align-items: center;
   justify-items: center;
   color: #e2e2e2;
+  overflow: scroll;  
 }
 
 .popup-edit-activity h1 {
@@ -3624,7 +3626,7 @@ justify-items: center;
   }
 
   .popup-create-activity-wrap {
-    margin-top: 120px;
+    /* margin-top: 120px; */
   }
   .popup-create-activity, .popup-edit-activity {
     width: 500px;
@@ -3647,7 +3649,7 @@ justify-items: center;
   }
 
   .popup-create-activity-wrap {
-    margin-top: 120px;
+    /* margin-top: 120px; */
   }  
   .popup-create-activity, .popup-edit-activity {
     width: 400px;
@@ -3715,7 +3717,7 @@ justify-items: center;
   }
 
   .popup-create-activity-wrap {
-    margin-top: 120px;
+    /* margin-top: 120px; */
   }
 
   
